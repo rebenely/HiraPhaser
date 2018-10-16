@@ -1,33 +1,28 @@
-var BattleScene = new Phaser.Class({
-    Extends: Phaser.Scene,
+class BattleScene extends Phaser.Scene {
 
-    initialize:
-
-    function BattleScene ()
-    {
-        Phaser.Scene.call(this, { key: 'BattleScene' });
+    constructor () {
+        super('BattleScene');
         this.STATE_VALUE = {"idle":0, "attack":1, "animate":2, "hit":3}
         Object.freeze(this.STATE_VALUE);
-    },
-    preload: function ()
-    {
+    }
+
+    preload () {
         /* initialized once in the main game, to be reused by all scenes */
         /* to keep the attributes in between scenes */
 
         this.load.image('BG', this.dungeon.battleBackground);
         this.load.spritesheet('minion', this.dungeon.minionSprite, { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('boss', this.dungeon.bossSprite, { frameWidth: 32, frameHeight: 32 });
+    }
 
-
-    },
-    init: function (data)
-    {
+    init (data) {
         this.dungeon = data.dungeon;
         this.difficulty = data.difficulty;
         this.player = data.player;
         this.boss = data.boss;
-    },
-    typedKeys: function (e) {
+    }
+
+    typedKeys (e) {
         if(this.state === this.STATE_VALUE.attack)
         {
             if (e.keyCode >= 65 && e.keyCode <= 90)
@@ -61,9 +56,9 @@ var BattleScene = new Phaser.Class({
                 }
             }
         }
-    },
-    create: function ()
-    {
+    }
+
+    create () {
         this.scene.bringToTop();
         this.anims.remove('idle');
         this.anims.remove('minionidle');
@@ -155,11 +150,9 @@ var BattleScene = new Phaser.Class({
         var line1 = new Phaser.Curves.Line([  720/2, 480/3, 120, 320 ]);
         this.path.add(line1);
 
+    }
 
-
-    },
-    update: function ()
-    {
+    update () {
         if(this.player.hp <= 0)
         {
             this.scene.stop('BattleScene');
@@ -203,9 +196,9 @@ var BattleScene = new Phaser.Class({
             this.path.getPoint(this.follower.t, this.follower.vec);
             this.projectile.sprite.setPosition(this.follower.vec.x, this.follower.vec.y);
         }
-    },
-    answerFailed: function()
-    {
+    }
+
+    answerFailed () {
         console.log('time ends');
         this.timedEvent.remove(false);
         this.timerDisplay.setText('Times up!');
@@ -230,8 +223,6 @@ var BattleScene = new Phaser.Class({
                this.player.hp -=1;
            }
        }, this);
-   },
+   }
 
-
-
-});
+}

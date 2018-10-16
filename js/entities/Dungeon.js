@@ -1,8 +1,6 @@
-var Dungeon = new Phaser.Class({
+class Dungeon {
 
-    initialize:
-
-    function Dungeon(name, characterPool, wordPool, level, detail, minion, boss, background, battleBackground) {
+    constructor(name, characterPool, wordPool, level, detail, minion, boss, background, battleBackground) {
         this.name = name;
         this.level = level;
         this.characterPool = characterPool;
@@ -18,4 +16,4 @@ var Dungeon = new Phaser.Class({
         this.minionName = minion;
         this.bossName = boss;
     }
-});
+}

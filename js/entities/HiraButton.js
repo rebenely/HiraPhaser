@@ -1,8 +1,6 @@
-var HiraButton = new Phaser.Class({
-    Extends: Phaser.GameObjects.Text,
-    initialize:
+class HiraButton extends Phaser.GameObjects.Text {
 
-    function HiraButton(x, y, text ) {
-
+    constructor(scene, x, y, text, style) {
+        super( scene, x, y, text, style);
     }
-});
+}

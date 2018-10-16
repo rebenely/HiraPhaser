@@ -1,14 +1,10 @@
-var DungeonScene = new Phaser.Class({
-    Extends: Phaser.Scene,
+class DungeonScene extends Phaser.Scene {
 
-    initialize:
+    constructor () {
+        super('DungeonScene');
+    }
 
-    function DungeonScene ()
-    {
-        Phaser.Scene.call(this, { key: 'DungeonScene' });
-    },
-    preload: function ()
-    {
+    preload () {
         var titleStyle = { font: "32px Courier", fill: "#00ff44", align: "center" };
         var loadingText = this.add.text(720/2, 480/2, "Loading",titleStyle);
         loadingText.setOrigin(0.5);
@@ -21,15 +17,15 @@ var DungeonScene = new Phaser.Class({
         this.load.image('crosshair', 'assets/images/target.png');
 
         this.load.bitmapFont('hira', 'assets/font/font.png', 'assets/font/font.fnt');
-    },
-    init: function (data)
-    {
+    }
+
+    init (data) {
         this.dungeon = data.dungeon;
         this.difficulty = data.difficulty;
         this.player = data.player;
-    },
-    create: function ()
-    {
+    }
+
+    create () {
 
         var bg = this.add.sprite(720/2, 480/2, 'dungeonBG');
         this.playerHP = this.player.hp;
@@ -52,7 +48,7 @@ var DungeonScene = new Phaser.Class({
             console.log('fuck go back');
             this.cancelButton.setStyle({  fill: "#00ff44"});
             var enemyCleared = [];
-            for(i = 0; i < this.cleared; i++) {
+            for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
                     enemyCleared.push({name: this.dungeon.bossName, exp: 50});
                 } else {
@@ -85,9 +81,9 @@ var DungeonScene = new Phaser.Class({
 
         // var txt = this.add.bitmapText(720/2, 480/2, 'hira', 'あか');
 
-    },
-    update : function ()
-    {
+    }
+
+    update () {
         // if player is damaged from battle
 
         if(this.playerHP > this.player.hp) {
@@ -111,7 +107,7 @@ var DungeonScene = new Phaser.Class({
         }
         if(this.player.hp <= 0) {
             var enemyCleared = [];
-            for(i = 0; i < this.cleared; i++) {
+            for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
                     enemyCleared.push({name: this.dungeon.bossName, exp: 50});
                 } else {
@@ -122,7 +118,7 @@ var DungeonScene = new Phaser.Class({
         }
         if(this.cleared >= 4) {
             var enemyCleared = [];
-            for(i = 0; i < this.cleared; i++) {
+            for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
                     enemyCleared.push({name: this.dungeon.bossName, exp: 50});
                 } else {
@@ -131,10 +127,10 @@ var DungeonScene = new Phaser.Class({
             }
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4});
         }
-    },
-    onBattleFinish: function ()
-    {
+    }
+
+    onBattleFinish () {
         console.log('tapos');
         this.cleared += 1;
     }
-});
+}

@@ -1,26 +1,22 @@
-var ResultScene = new Phaser.Class({
-    Extends: Phaser.Scene,
+class ResultScene extends Phaser.Scene {
 
-    initialize:
+    constructor () {
+        super('ResultScene');
+    }
 
-    function ResultScene ()
-    {
-        Phaser.Scene.call(this, { key: 'ResultScene' });
-    },
-    init: function (data)
-    {
+    init (data) {
         this.enemy = data.enemy;
         this.player = data.player;
         this.cleared = data.cleared;
         this.success = data.success;
         this.flee = data.flee;
-    },
-    preload: function ()
-    {
+    }
+
+    preload () {
         this.load.image('gameover', 'assets/images/gameover.png');
-    },
-    create: function ()
-    {
+    }
+
+    create () {
         this.scene.bringToTop();
 
         let graphics = this.add.graphics();
@@ -66,7 +62,7 @@ var ResultScene = new Phaser.Class({
 
         this.enemyNames = [];
         this.enemyExp = [];
-        for(i = 0; i < this.enemy.length; i++){
+        for(var i = 0; i < this.enemy.length; i++){
             this.enemyNames.push(this.add.text(720/3, 480/3 + 50*(i+1), this.enemy[i].name, style));
             this.enemyNames[i].setOrigin(0.5);
             this.enemyExp.push(this.add.text(2*720/3, 480/3 + 50*(i+1), this.enemy[i].exp, style));
@@ -84,20 +80,19 @@ var ResultScene = new Phaser.Class({
 
         this.player.hp = this.player.maxHp; /* restore player health */
 
+    }
 
-    },
-    typedKeys : function (e)
-    {
+    typedKeys (e) {
         this.state++;
-    },
-    update: function ()
-    {
+    }
+
+    update () {
         this.progressBar.clear();
         this.progressBar.fillStyle(0xffffff, 1);
         this.progressBar.fillRect(2*720/3 - 60, 480/3 - 4, this.player.exp/this.player.maxExp * 120, 8);
 
         if(this.state === 1 && (this.success || this.enemyNames.length > 0)) {
-            for(i = 0; i < this.enemyNames.length; i++) {
+            for(var i = 0; i < this.enemyNames.length; i++) {
                 if(this.enemy[i].exp > 0) {
                     this.player.exp += 1 * this.expMultiplier;
                     this.enemy[i].exp--;
@@ -116,4 +111,4 @@ var ResultScene = new Phaser.Class({
         }
     }
 
-});
+}

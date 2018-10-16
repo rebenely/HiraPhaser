@@ -1,27 +1,27 @@
-var Projectile = new Phaser.Class({
+class Projectile  {
 
-    initialize:
-
-    function Projectile(x, y, characterPool) {
+    constructor(x, y, characterPool) {
         this.x = x;
         this.y = y;
         this.characterPool = characterPool;
         this.currentChar = '';
         this.sprite = null;
         this.chars = [];
-    },
-    getRandomCharacter: function () {
+    }
+
+    getRandomCharacter () {
         var i = Math.floor((Math.random() * this.characterPool.length));
         this.currentChar = this.characterPool[i];
         this.chars = this.currentChar.split('-');
         this.currentChar = this.currentChar.replace(/-/g, '');
         console.log('new char', this.currentChar);
         return this.currentChar;
-    },
-    getHiragana: function () {
+    }
+
+    getHiragana () {
         var charString = '';
 
-        for( i = 0; i < this.chars.length; i++ ){
+        for( var i = 0; i < this.chars.length; i++ ){
             switch(this.chars[i]) {
                 case 'A':
                     charString = charString.concat(String.fromCharCode(12354));
@@ -57,6 +57,5 @@ var Projectile = new Phaser.Class({
         }
         console.log('yikes ', charString);
         return charString;
-
     }
-});
+}

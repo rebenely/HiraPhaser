@@ -1,26 +1,18 @@
-var MainScene = new Phaser.Class({
+class MainScene extends Phaser.Scene {
 
-    Extends: Phaser.Scene,
+    constructor () {
+        super('MainScene');
+    }
 
-    initialize:
-
-    function MainScene ()
-    {
-        Phaser.Scene.call(this, { key: 'MainScene' });
-    },
-    init: function (data)
-    {
+    init (data) {
         this.player = data.player;
-    },
+    }
 
-    preload: function ()
-    {
+    preload () {
 
+    }
 
-    },
-
-    create: function ()
-    {
+    create () {
         /* background */
         var grassland = this.add.sprite(0, 0, 'grassland');
         grassland.setScale(3);
@@ -44,30 +36,30 @@ var MainScene = new Phaser.Class({
 
         Phaser.Display.Align.To.TopCenter(caveName, this.dungeonK.sprite, 0, 0);
 
-    },
+    }
 
-    update: function () {
+    update () {
 
-    },
+    }
 
-    onClick: function () {
+    onClick () {
         console.log('ayie ', this.dungeon.detail);
         this.name.visible = false;
         this.gamecontext.scene.pause('MainScene');
         this.gamecontext.scene.launch('DungeonDetailScene', {player: this.gamecontext.player, dungeon: this.dungeon})
         //this.gamecontext.scene.launch('BattleScene', {enemy: 'Trial0', difficulty: 'easy', player: this.gamecontext.player});
-    },
+    }
 
-    onHover: function () {
+    onHover () {
         this.gamecontext.hoverCount += 1;
 
         console.log('ayie ', this.gamecontext.hoverCount);
         this.name.visible = true;
-    },
+    }
 
-    onHoverOut: function () {
+    onHoverOut () {
         console.log('awo');
         this.name.visible = false;
     }
 
-});
+}

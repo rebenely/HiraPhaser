@@ -1,8 +1,6 @@
-var Unit = new Phaser.Class({
+class Unit  {
 
-    initialize:
-
-    function Unit(scene, x, y, type, hp, damage) {
+    constructor(scene, x, y, type, hp, damage) {
         console.log('i received ', hp);
         this.type = type;
         this.maxHp = this.hp = hp;
@@ -13,8 +11,9 @@ var Unit = new Phaser.Class({
         this.exp = 0;
         this.level = 1;
         this.maxExp = 100;
-    },
-    levelUp: function () {
+    }
+
+    levelUp () {
         if (this.exp >= this.maxExp) {
             this.level++;
             this.exp = 0;
@@ -24,4 +23,5 @@ var Unit = new Phaser.Class({
             return false;
         }
     }
-});
+    
+}

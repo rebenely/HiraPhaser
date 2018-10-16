@@ -1,18 +1,13 @@
-var DungeonDetailScene = new Phaser.Class({
-    Extends: Phaser.Scene,
-
-    initialize:
-
-    function DungeonDetailScene ()
-    {
-        Phaser.Scene.call(this, { key: 'DungeonDetailScene' });
-    },
-    init: function (data)
-    {
+class DungeonDetailScene extends Phaser.Scene {
+    
+    constructor () {
+        super('DungeonDetailScene');
+    }
+    init (data) {
         this.player = data.player;
         this.dungeon = data.dungeon;
-    },
-    create: function () {
+    }
+    create () {
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x003366 , 1);
         this.graphics.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
@@ -23,9 +18,10 @@ var DungeonDetailScene = new Phaser.Class({
         var caveDesc = this.add.text(60, 130, this.dungeon.detail, style);
         var charSetDisplay = this.add.text(60, 90, this.dungeon.characterPool.toString(), style);
 
-        this.cancelButton = this.add.text(720 - 60 - 30 - 60 - 30, 420, "Cancel", style);
+        this.cancelButton = new HiraButton(this, 720 - 60 - 30 - 60 - 30, 420, "Cancel", style);
+        this.add.existing(this.cancelButton);
         this.cancelButton.setOrigin(0.5);
-        this.cancelButton.setInteractive().on('pointerdown', function () {
+        this.cancelButton.setInteractive().on('pointerup', function () {
             console.log('fuck go back');
             this.scene.wake('MainScene');
             this.scene.stop('DungeonDetailScene');
@@ -44,4 +40,4 @@ var DungeonDetailScene = new Phaser.Class({
         .on('pointerout', function () { this.enterButton.setStyle({  fill: "#00ff44"});}, this );
 
     }
-});
+}
