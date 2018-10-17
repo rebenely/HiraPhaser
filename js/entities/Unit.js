@@ -1,6 +1,7 @@
 class Unit  {
 
     constructor(scene, x, y, type, hp, damage) {
+        /* not a sprite since it will not be always drawn in scenes that have it */
         console.log('i received ', hp);
         this.type = type;
         this.maxHp = this.hp = hp;
@@ -23,5 +24,12 @@ class Unit  {
             return false;
         }
     }
-    
+
+    createSprite (scene, sprite, anim, x, y, scale) {
+        this.sprite = scene.physics.add.sprite(x, y, sprite);
+        this.sprite.setScale(scale);
+        this.sprite.anchor = 0.5;
+        this.sprite.anims.play(anim, true);
+    }
+
 }

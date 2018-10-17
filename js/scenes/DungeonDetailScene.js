@@ -28,7 +28,7 @@ class DungeonDetailScene extends Phaser.Scene {
         this.enterButton = new HiraButton(this, 720  - 60 - 30, 420, "Enter", style, () => {
             console.log('upgrade');
             this.scene.sleep('MainScene');
-            this.scene.start('DungeonScene', {player: this.player, dungeon: this.dungeon, difficulty: 'easy'})
+            this.scene.start('DungeonScene', {player: this.player, dungeon: this.dungeon, difficulty: game.global.EASY})
         }, this);
         this.add.existing(this.enterButton);
 

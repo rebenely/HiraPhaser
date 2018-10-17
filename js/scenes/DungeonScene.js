@@ -35,10 +35,12 @@ class DungeonScene extends Phaser.Scene {
         this.crosshair = this.add.sprite(720/5, 480/2, 'crosshair');
         this.crosshair.setOrigin(0.5);
 
+        /* display, to be changed since positions are hardcoded */
         this.minionGroup = this.add.group([ { key: 'minionFace', frame: 0, repeat: 2, setXY: { x: 720/5 + 1 , y:  480/2, stepX: 720/5 }, setScale: { x: 3, y: 3}, setOrigin: {x: 0.5, y: 0.5}  },
          { key: 'bossFace', frame: 0, setXY: { x: 4*720/5 + 1 , y:  480/2 }, setScale: { x: 3, y: 3}, setAnchor: 0.5 } ]);
 
 
+         /* buttons */
 
         var style = { font: "16px Courier", fill: "#00ff44", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
 
@@ -61,13 +63,13 @@ class DungeonScene extends Phaser.Scene {
             this.battleButton.setStyle({  fill: "#00ff44"});
             this.scene.sleep('DungeonScene');
 
-            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: game.global.HARD, boss: this.cleared === 3 });
+            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3 });
         }, this);
         this.add.existing(this.battleButton);
 
+        /* listen events from BattleScene */
         this.events.on('BattleFinish', this.onBattleFinish, this);
 
-        /* listen events from BattleScene */
         let battle = this.scene.get('BattleScene');
         battle.events.removeListener('battleFinish');
         battle.events.on('battleFinish', this.onBattleFinish, this);
@@ -77,12 +79,12 @@ class DungeonScene extends Phaser.Scene {
 
     update () {
         // if player is damaged from battle
-
         if(this.playerHP > this.player.hp) {
             var hearts = this.playerHealthDisplay.getChildren();
             hearts[hearts.length - 1].destroy();
             this.playerHP -=1;
         }
+        /* move crosshar */
         switch(this.cleared) {
             case 0:
                 this.crosshair.setPosition(720/5, 480/2);
@@ -97,6 +99,8 @@ class DungeonScene extends Phaser.Scene {
                 this.crosshair.setPosition(4*720/5, 480/2);
             break;
         }
+
+        /* if player died, no anims for now but will probably add later */
         if(this.player.hp <= 0) {
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
@@ -108,6 +112,8 @@ class DungeonScene extends Phaser.Scene {
             }
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared === 4});
         }
+
+        /* if dungeon is cleared, no anims for now but will probably add later */
         if(this.cleared >= 4) {
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {

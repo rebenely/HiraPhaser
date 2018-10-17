@@ -1,12 +1,17 @@
-class Projectile  {
+class Projectile extends Phaser.GameObjects.BitmapText {
 
-    constructor(x, y, characterPool) {
+    constructor(scene, x, y, font, characterPool) {
+        super(scene, x, y, font, '');
+
+        console.log('created!');
         this.x = x;
         this.y = y;
         this.characterPool = characterPool;
         this.currentChar = '';
-        this.sprite = null;
         this.chars = [];
+        this.setOrigin(0.5);
+        this.visible = false;
+        this.getRandomCharacter();
     }
 
     getRandomCharacter () {

@@ -60,45 +60,48 @@ class BattleScene extends Phaser.Scene {
 
     create () {
         this.scene.bringToTop();
+        /* remove existing anims since this scene will be reused */
         this.anims.remove('idle');
         this.anims.remove('minionidle');
 
+        /* initalize enemy */
         this.enemy = new Unit(this,720 - 120, 480 - 480/3, "EnemyBoi", this.boss ? 4 : 2, 1);
-        this.enemy.maxExp = 10;
-        console.log('player health set ', this.player.maxHp);
-        this.projectile = new Projectile(0, 0, this.dungeon.wordPool);
+        this.enemy.maxExp = this.boss ? this.dungeon.bossExp : this.dungeon.minionExp;
+        this.enemy.hp += this.difficulty;
 
+        /* set default state */
         this.state = this.STATE_VALUE.idle;
-        console.log('dungeon:', this.dungeon.name);
 
-
+        /* draw bg */
         var bg = this.add.sprite(720/2, 480/2, 'BG');
         bg.setScale(1);
         bg.setOrigin(0.5);
 
+        /* draw hud */
         var style = { font: "16px Courier", fill: "#00ff44" };
 
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
         this.enemyHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: (this.boss ? 3 : 1) + this.difficulty, setXY: { x: 720 - (720/2 - 680/2), y:  480/2 - 440/2, stepX: -32 } });
 
-        this.enemy.hp += this.difficulty;
-
+        /* draw 'inputbox' */
         this.inputText = '';
         this.inputTextDisplay = this.add.text(720/2, 480/2, this.inputText, style);
         this.inputTextDisplay.setOrigin(0.5);
 
+        /* add attack button */
         this.attackButton = new HiraButton(this, 720/2, 480/2, "Attack!", style, () =>  {
             if(this.state === this.STATE_VALUE.idle) {
                 this.timedEvent = this.time.addEvent({ delay: 5000, callback: this.answerFailed, callbackScope: this }, this);
                 console.log('state has been changed');
                 this.projectile.getRandomCharacter();
                 this.projectile.getHiragana();
-                this.projectile.sprite.setText(this.projectile.getHiragana());
+                this.projectile.setText(this.projectile.getHiragana());
                 this.state = this.STATE_VALUE.attack
             }
         }, this);
         this.add.existing(this.attackButton);
 
+        /* create anims */
         this.anims.create({
             key: 'idle',
             frames: this.anims.generateFrameNumbers('player', { frames: [ 0, 1 ] }),
@@ -112,21 +115,14 @@ class BattleScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.player.sprite = this.physics.add.sprite(120, 320, 'player');
-        this.player.sprite.setScale(2);
-        this.player.sprite.anchor = 0.5;
-        this.player.sprite.anims.play('idle', true);
+        this.player.createSprite(this, 'player', 'idle', 120, 320, 2);
 
-        this.enemy.sprite = this.physics.add.sprite(720 - 120, 480 - 480/3, 'minion', 0);
-        this.enemy.sprite.setScale(2);
-        this.enemy.sprite.anchor = 0.5;
-        this.enemy.sprite.anims.play('minionidle');
+        this.enemy.createSprite(this, 'minion', 'idle', 720 - 120, 480 - 480/3, 2);
         this.enemy.sprite.setFlipX(true);
 
-        this.projectile.getRandomCharacter();
-        this.projectile.sprite = this.add.bitmapText(720/2, 480/2, 'hira', this.projectile.getHiragana());
-        this.projectile.sprite.setOrigin(0.5);
-        this.projectile.sprite.visible = false;
+        /* projectile */
+        this.projectile = new Projectile(this, 720/2, 480/2, 'hira', this.dungeon.wordPool);
+        this.add.existing(this.projectile);
 
         this.input.keyboard.on('keydown', this.typedKeys, this);
         this.input.keyboard.addKey(8);
@@ -149,59 +145,54 @@ class BattleScene extends Phaser.Scene {
     }
 
     update () {
-        if(this.player.hp <= 0)
-        {
+        /* if player died or enemy died,  probably will add animations later */
+        if(this.player.hp <= 0) {
             this.scene.stop('BattleScene');
             this.scene.wake('DungeonScene');
-        } else if (this.enemy.hp <= 0)
-        {
+        } else if (this.enemy.hp <= 0) {
             this.events.emit('battleFinish');
             this.scene.stop('BattleScene');
             this.scene.wake('DungeonScene');
         }
-        if(this.state === this.STATE_VALUE.idle)
-        {
 
+        /* game state */
+        if (this.state === this.STATE_VALUE.idle) {
             this.player.sprite.anims.play('idle', true);
             this.inputText = '';
             this.inputTextDisplay.visible = false;
             this.attackButton.visible = true;
-            this.projectile.sprite.visible = false;
+            this.projectile.visible = false;
             this.timerDisplay.visible = false;
             this.follower.t = 0;
             this.follower.vec.x = 720/2;
             this.follower.vec.y = 480/3;
-
-
-        }
-        else if (this.state === this.STATE_VALUE.attack)
-        {
+        } else if (this.state === this.STATE_VALUE.attack) {
             this.inputTextDisplay.setText(this.inputText);
             this.inputTextDisplay.visible = true;
-            this.projectile.sprite.visible = true;
+            this.projectile.visible = true;
 
-            this.projectile.sprite.setPosition(this.follower.vec.x, this.follower.vec.y);
+            this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
 
             this.attackButton.visible = false;
             this.timerDisplay.visible = true;
             this.timerDisplay.setText(this.timedEvent.getElapsedSeconds().toString().substr(0, 4));
-
-        }
-        else if (this.state === this.STATE_VALUE.animate) {
+        } else if (this.state === this.STATE_VALUE.animate) {
 
             this.path.getPoint(this.follower.t, this.follower.vec);
-            this.projectile.sprite.setPosition(this.follower.vec.x, this.follower.vec.y);
+            this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
         }
     }
 
     answerFailed () {
+        /* failed, time's up or wrong anser */
         console.log('time ends');
         this.timedEvent.remove(false);
         this.timerDisplay.setText('Times up!');
 
-
+        /* change state while animating */
         this.state = this.STATE_VALUE.animate;
 
+        /* move projectile */
         this.tweens.add({
            targets: this.follower,
            t: 1,
