@@ -87,11 +87,8 @@ class BattleScene extends Phaser.Scene {
         this.inputTextDisplay = this.add.text(720/2, 480/2, this.inputText, style);
         this.inputTextDisplay.setOrigin(0.5);
 
-        this.attackButton = this.add.text(720/2, 480/2, "Attack!", style);
-        this.attackButton.setOrigin(0.5);
-        this.attackButton.setInteractive().on('pointerdown', function () {
-            if(this.state === this.STATE_VALUE.idle)
-            {
+        this.attackButton = new HiraButton(this, 720/2, 480/2, "Attack!", style, () =>  {
+            if(this.state === this.STATE_VALUE.idle) {
                 this.timedEvent = this.time.addEvent({ delay: 5000, callback: this.answerFailed, callbackScope: this }, this);
                 console.log('state has been changed');
                 this.projectile.getRandomCharacter();
@@ -99,9 +96,8 @@ class BattleScene extends Phaser.Scene {
                 this.projectile.sprite.setText(this.projectile.getHiragana());
                 this.state = this.STATE_VALUE.attack
             }
-        }, this)
-        .on('pointerover', function () { this.attackButton.setStyle({ fill: '#F00'});}, this )
-        .on('pointerout', function () { this.attackButton.setStyle({  fill: "#00ff44"});}, this );;
+        }, this);
+        this.add.existing(this.attackButton);
 
         this.anims.create({
             key: 'idle',

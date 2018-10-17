@@ -1,5 +1,5 @@
 class DungeonDetailScene extends Phaser.Scene {
-    
+
     constructor () {
         super('DungeonDetailScene');
     }
@@ -18,26 +18,20 @@ class DungeonDetailScene extends Phaser.Scene {
         var caveDesc = this.add.text(60, 130, this.dungeon.detail, style);
         var charSetDisplay = this.add.text(60, 90, this.dungeon.characterPool.toString(), style);
 
-        this.cancelButton = new HiraButton(this, 720 - 60 - 30 - 60 - 30, 420, "Cancel", style);
-        this.add.existing(this.cancelButton);
-        this.cancelButton.setOrigin(0.5);
-        this.cancelButton.setInteractive().on('pointerup', function () {
+        this.cancelButton = new HiraButton(this, 720 - 60 - 30 - 60 - 30, 420, "Cancel", style, () => {
             console.log('fuck go back');
             this.scene.wake('MainScene');
             this.scene.stop('DungeonDetailScene');
-        }, this)
-        .on('pointerover', function () { this.cancelButton.setStyle({ fill: '#F00'});}, this )
-        .on('pointerout', function () { this.cancelButton.setStyle({  fill: "#00ff44"});}, this );
+        }, this);
+        this.add.existing(this.cancelButton);
 
-        this.enterButton = this.add.text(720  - 60 - 30, 420, "Enter", style);
-        this.enterButton.setOrigin(0.5);
-        this.enterButton.setInteractive().on('pointerdown', function () {
+        this.enterButton = new HiraButton(this, 720  - 60 - 30, 420, "Enter", style, () => {
             console.log('upgrade');
             this.scene.sleep('MainScene');
             this.scene.start('DungeonScene', {player: this.player, dungeon: this.dungeon, difficulty: 'easy'})
-        }, this)
-        .on('pointerover', function () { this.enterButton.setStyle({ fill: '#F00'});}, this )
-        .on('pointerout', function () { this.enterButton.setStyle({  fill: "#00ff44"});}, this );
+        }, this);
+        this.add.existing(this.enterButton);
+
 
     }
 }

@@ -42,9 +42,7 @@ class DungeonScene extends Phaser.Scene {
 
         var style = { font: "16px Courier", fill: "#00ff44", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
 
-        this.cancelButton = this.add.text(60 + 30 , 420, "Run away", style);
-        this.cancelButton.setOrigin(0.5);
-        this.cancelButton.setInteractive().on('pointerdown', function () {
+        this.cancelButton = new HiraButton(this, 60 + 30 , 420, "Run away", style, () => {
             console.log('fuck go back');
             this.cancelButton.setStyle({  fill: "#00ff44"});
             var enemyCleared = [];
@@ -56,30 +54,24 @@ class DungeonScene extends Phaser.Scene {
                 }
             }
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true});
-        }, this)
-        .on('pointerover', function () { this.cancelButton.setStyle({ fill: '#F00'});}, this )
-        .on('pointerout', function () { this.cancelButton.setStyle({  fill: "#00ff44"});}, this );
+        }, this);
+        this.add.existing(this.cancelButton);
 
-
-        this.battleButton = this.add.text(720 - 60 - 30 , 420, "To Battle!", style);
-        this.battleButton.setOrigin(0.5);
-        this.battleButton.setInteractive().on('pointerdown', function () {
+        this.battleButton = new HiraButton(this, 720 - 60 - 30 , 420, "To Battle!", style, () => {
             this.battleButton.setStyle({  fill: "#00ff44"});
             this.scene.sleep('DungeonScene');
 
-            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: game.global.HARD, boss: this.cleared === 3 })
-            //this.gamecontext.scene.launch('BattleScene', {enemy: 'Trial0', difficulty: 'easy', player: this.gamecontext.player});
-        }, this)
-        .on('pointerover', function () { this.battleButton.setStyle({ fill: '#F00'});}, this )
-        .on('pointerout', function () { this.battleButton.setStyle({  fill: "#00ff44"});}, this );
+            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: game.global.HARD, boss: this.cleared === 3 });
+        }, this);
+        this.add.existing(this.battleButton);
 
         this.events.on('BattleFinish', this.onBattleFinish, this);
 
+        /* listen events from BattleScene */
         let battle = this.scene.get('BattleScene');
         battle.events.removeListener('battleFinish');
         battle.events.on('battleFinish', this.onBattleFinish, this);
 
-        // var txt = this.add.bitmapText(720/2, 480/2, 'hira', 'あか');
 
     }
 
