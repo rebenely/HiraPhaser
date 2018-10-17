@@ -15,7 +15,7 @@ class DungeonDetailScene extends Phaser.Scene {
         var titleStyle = { font: "32px Courier", fill: "#00ff44", align: "left" };
         var style = { font: "16px Courier", fill: "#00ff44", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
         var caveName = this.add.text(60, 60, this.dungeon.name , titleStyle);
-        var caveDesc = this.add.text(60, 130, this.dungeon.detail, style);
+        var caveDesc = this.add.text(60, 130, this.dungeon.description, style);
         var charSetDisplay = this.add.text(60, 90, this.dungeon.characterPool.toString(), style);
 
         this.cancelButton = new HiraButton(this, 720 - 60 - 30 - 60 - 30, 420, "Cancel", style, () => {
