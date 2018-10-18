@@ -117,7 +117,7 @@ class BattleScene extends Phaser.Scene {
 
         this.player.createSprite(this, 'player', 'idle', 120, 320, 2);
 
-        this.enemy.createSprite(this, 'minion', 'idle', 720 - 120, 480 - 480/3, 2);
+        this.enemy.createSprite(this, 'minion', 'minionidle', 720 - 120, 480 - 480/3, 2);
         this.enemy.sprite.setFlipX(true);
 
         /* projectile */
