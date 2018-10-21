@@ -74,6 +74,20 @@ class DungeonScene extends Phaser.Scene {
         battle.events.removeListener('battleFinish');
         battle.events.on('battleFinish', this.onBattleFinish, this);
 
+        this.difficultyButton = new HiraButton(this, 720/2, 480/5, 'Easy', style, () => {
+            if (this.difficultyButton.text === 'Easy') {
+                this.difficultyButton.setText('Normal');
+                this.difficulty = game.global.NORMAL;
+            } else if (this.difficultyButton.text === 'Normal') {
+                this.difficultyButton.setText('Hard');
+                this.difficulty = game.global.HARD;
+            } else if (this.difficultyButton.text === 'Hard') {
+                this.difficultyButton.setText('Easy');
+                this.difficulty = game.global.EASY;
+            }
+        }, this);
+        this.add.existing(this.difficultyButton);
+
 
     }
 
