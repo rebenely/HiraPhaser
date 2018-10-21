@@ -42,6 +42,17 @@ class MainScene extends Phaser.Scene {
          );
         this.add.existing(this.level1);
 
+        this.trainLevel1 = new StoryLevel(this,
+            'K-invasion: Training',
+            {name: 'level', x: 230, y: 240},
+            '',
+            {sizeX: 12, sizeY: 12},
+            () => {
+                this.scene.pause('MainScene');
+                this.scene.launch('TrainScene', {player: this.player, characterPool: ['KA','KI','KU','KE','KO']});
+            }
+        );
+        this.add.existing(this.trainLevel1);
 
 
     }

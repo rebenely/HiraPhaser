@@ -6,8 +6,12 @@ class HiraButton extends Phaser.GameObjects.Text {
             // cursor changes
             callback();
         })
-        .on('pointerover', function () { this.setStyle({ fill: '#F00'});})
-        .on('pointerout', function () { this.setStyle({  fill: "#00ff44"});} );
+        .on('pointerover', function () { this.setColor('#F00');})
+        .on('pointerout', function () { this.setColor( "#00ff44");} );
         this.setOrigin(0.5);
+    }
+
+    getText() {
+        return this.text;
     }
 }
