@@ -1,0 +1,83 @@
+{
+    "images" : {
+        "bg": "assets/images/battlebackground.png",
+        "npc_smile": "assets/dialogs/level1/fm2happy.png",
+        "npc_sad": "assets/dialogs/level1/fm2sad.png",
+        "npc_upset": "assets/dialogs/level1/fm2upset.png",
+        "npc_surprised": "assets/dialogs/level1/fm2surprised.png"
+    },
+
+    "dialog": [
+    {
+        "image" : "npc_smile",
+        "name" : "Ai",
+        "message": "Hello! I am glad seeing you here, but ..."
+    },
+    {
+        "image": "npc_sad",
+        "name" : "Ai",
+        "message": "the goblins are also here again."
+    },
+    {
+        "image": "npc_sad",
+        "name" : "Ai",
+        "message": "(word wrap test uwu fdasjd asmdgok sadf a fsdfasf fdsf fdsf asf af d fsda sdfdfdf)"
+    },
+    {
+        "image": "npc_upset",
+        "name" : "Ai",
+        "message": "You still remember your vowels, right?"
+    },
+    {
+        "image": "npc_upset",
+        "name" : "You",
+        "message": "Yes."
+    },
+    {
+        "image": "npc_smile",
+        "name": "Ai",
+        "message": "Then good! I'll teach you your next characters!"
+    },
+    {
+        "text": "KA",
+        "name": "Ai",
+        "message": "This is read as 'ka'."
+    },
+    {
+        "text": "KI",
+        "name": "Ai",
+        "message": "This is read as 'ki'."
+    },
+    {
+        "text": "KU",
+        "name": "Ai",
+        "message": "This is read as 'ku'."
+    },
+    {
+        "text": "KE",
+        "name": "Ai",
+        "message": "This is read as 'ke'."
+    },
+    {
+        "text": "KO",
+        "name": "Ai",
+        "message": "This is read as 'ko'."
+    },
+    {
+        "image": "npc_surprised",
+        "name": "Ai",
+        "message": "Can you remember them all?"
+    },
+    {
+        "image": "npc_upset",
+        "name": "You",
+        "message": "No."
+    }
+    ],
+
+    "image": {
+        "x": "300",
+        "y": "480",
+        "scale": "0.4"
+    }
+}

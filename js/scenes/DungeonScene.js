@@ -16,7 +16,6 @@ class DungeonScene extends Phaser.Scene {
         this.load.image('bossFace', this.dungeon.bossFace);
         this.load.image('crosshair', 'assets/images/target.png');
 
-        this.load.bitmapFont('hira', 'assets/font/font.png', 'assets/font/font.fnt');
     }
 
     init (data) {

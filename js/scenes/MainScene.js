@@ -30,6 +30,19 @@ class MainScene extends Phaser.Scene {
          );
         this.add.existing(this.dungeonK);
 
+        this.level1 = new StoryLevel(this,
+             'The K-invasion',
+             {name: 'level', x: 200, y: 240},
+             'level1.json',
+             {sizeX: 16, sizeY:16},
+             () => {
+                 this.scene.pause('MainScene');
+                 this.scene.launch('CutLoaderScene', {jsonFile: 'level1.json'});
+             }
+         );
+        this.add.existing(this.level1);
+
+
 
     }
 

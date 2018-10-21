@@ -29,7 +29,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
 
         /* display name */
         var style = { font: "16px Courier", fill: "#00ff44" };
-        var caveName = scene.add.text(0, 0, "Kweba", style);
+        var caveName = scene.add.text(0, 0, this.name, style);
         caveName.visible = false;
         caveName.setOrigin(0.5);
         Phaser.Display.Align.To.TopCenter(caveName, this, 0, 0);
