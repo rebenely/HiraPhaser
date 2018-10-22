@@ -26,6 +26,7 @@ class Unit  {
     }
 
     createSprite (scene, sprite, anim, x, y, scale) {
+        console.log(this.sprite);
         this.sprite = scene.physics.add.sprite(x, y, sprite);
         this.sprite.setScale(scale);
         this.sprite.anchor = 0.5;

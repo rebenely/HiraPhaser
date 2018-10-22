@@ -62,7 +62,7 @@ class DungeonScene extends Phaser.Scene {
             this.battleButton.setStyle({  fill: "#00ff44"});
             this.scene.sleep('DungeonScene');
 
-            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3 });
+            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3, simulate: false });
         }, this);
         this.add.existing(this.battleButton);
 

@@ -9,17 +9,30 @@ class BattleScene extends Phaser.Scene {
     preload () {
         /* initialized once in the main game, to be reused by all scenes */
         /* to keep the attributes in between scenes */
-
         this.load.image('BG', this.dungeon.battleBackground);
         this.load.spritesheet('minion', this.dungeon.minionSprite, { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('boss', this.dungeon.bossSprite, { frameWidth: 32, frameHeight: 32 });
+        console.log(this.dungeon.minionSprite);
     }
 
     init (data) {
-        this.dungeon = data.dungeon;
-        this.difficulty = data.difficulty;
+        if(data.dungeon !== undefined) {
+            this.dungeon = data.dungeon;
+            this.boss = data.boss;
+            this.difficulty = data.difficulty;
+        } else if (data.simulate) {
+            this.dungeon = {
+                minionSprite: 'assets/spritesheets/trainingdummy.png',
+                battleBackground: 'assets/images/battlebackground.png',
+                minionExp: 0,
+                wordPool: data.wordPool
+            };
+            this.boss = false;
+            this.difficulty = 0;
+        }
+        this.simulate = data.simulate;
+
         this.player = data.player;
-        this.boss = data.boss;
     }
 
     typedKeys (e) {
@@ -43,9 +56,12 @@ class BattleScene extends Phaser.Scene {
                 {
                     this.cameras.main.flash(300);
                     this.state = this.STATE_VALUE.idle;
-                    var hearts = this.enemyHealthDisplay.getChildren();
-                    hearts[hearts.length - 1].destroy();
-                    this.enemy.hp -=1;
+                    if(!this.simulate){
+                        var hearts = this.enemyHealthDisplay.getChildren();
+                        hearts[hearts.length - 1].destroy();
+
+                        this.enemy.hp -=1;
+                    }
                     this.timedEvent.remove(false);
 
                 }
@@ -81,7 +97,9 @@ class BattleScene extends Phaser.Scene {
         var style = { font: "16px Courier", fill: "#00ff44" };
 
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
-        this.enemyHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: (this.boss ? 3 : 1) + this.difficulty, setXY: { x: 720 - (720/2 - 680/2), y:  480/2 - 440/2, stepX: -32 } });
+        if(!this.simulate){
+            this.enemyHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: (this.boss ? 3 : 1) + this.difficulty, setXY: { x: 720 - (720/2 - 680/2), y:  480/2 - 440/2, stepX: -32 } });
+        }
 
         /* draw 'inputbox' */
         this.inputText = '';
@@ -142,6 +160,15 @@ class BattleScene extends Phaser.Scene {
         var line1 = new Phaser.Curves.Line([  720/2, 480/3, 120, 320 ]);
         this.path.add(line1);
 
+        /* back button */
+        this.backButton = new HiraButton(this, 720/2, 480/2 + 100, "Back", style, () =>  {
+            if(this.state === this.STATE_VALUE.idle) {
+                this.scene.wake('MainScene');
+                this.scene.stop('BattleScene');
+            }
+        }, this);
+        this.add.existing(this.backButton);
+        console.log('quingina');
     }
 
     update () {
@@ -157,7 +184,7 @@ class BattleScene extends Phaser.Scene {
 
         /* game state */
         if (this.state === this.STATE_VALUE.idle) {
-            this.player.sprite.anims.play('idle', true);
+            // this.player.sprite.anims.play('idle', true);   why does this run first before create?
             this.inputText = '';
             this.inputTextDisplay.visible = false;
             this.attackButton.visible = true;

@@ -32,7 +32,7 @@ class MainScene extends Phaser.Scene {
 
         this.level1 = new StoryLevel(this,
              'The K-invasion',
-             {name: 'level', x: 200, y: 240},
+             {name: 'level', x: 220, y: 180},
              'level1.json',
              {sizeX: 16, sizeY:16},
              () => {
@@ -44,7 +44,7 @@ class MainScene extends Phaser.Scene {
 
         this.trainLevel1 = new StoryLevel(this,
             'K-invasion: Training',
-            {name: 'level', x: 230, y: 240},
+            {name: 'level', x: 260, y: 220},
             '',
             {sizeX: 12, sizeY: 12},
             () => {
@@ -54,7 +54,17 @@ class MainScene extends Phaser.Scene {
         );
         this.add.existing(this.trainLevel1);
 
-
+        this.simulateLevel1 = new StoryLevel(this,
+            'K-invasion: Simulate Battle',
+            {name: 'level', x: 300, y: 240},
+            '',
+            {sizeX: 12, sizeY: 12},
+            () => {
+                this.scene.pause('MainScene');
+                this.scene.launch('BattleScene', {player: this.player, simulate: true, wordPool: ['KA','KI','KU','KE','KO','A','I','U','E','O']});
+            }
+        );
+        this.add.existing(this.simulateLevel1);
     }
 
     update () {
