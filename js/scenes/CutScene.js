@@ -17,12 +17,16 @@ class CutScene extends Phaser.Scene {
             if (this.jsonFile['images'].hasOwnProperty(property)) {
                 this.load.image(property.toString(),  this.jsonFile['images'][property]);
                 console.log(property.toString(), this.jsonFile['images'][property]);
+                if(property.toString().search("_bg") != -1) {
+                    console.log(property.toString());
+                    this.bgKey = property.toString(); /* what if multiple bg */
+                }
             }
         }
     }
 
     create() {
-        var bg = this.add.sprite(720/2, 480/2, 'bg');
+        var bg = this.add.sprite(720/2, 480/2, this.bgKey);
         console.log(this.jsonFile.image.x, this.jsonFile.image.y);
         this.npc = this.add.sprite(parseInt(this.jsonFile.image.x, 10), parseInt(this.jsonFile.image.y, 10), this.jsonFile['dialog'][0].image);
         this.npc.setScale(Number(this.jsonFile.image.scale));

@@ -1,6 +1,6 @@
 {
     "images" : {
-        "bg": "assets/images/battlebackground.png",
+        "guild_bg": "assets/images/guild_bg.png",
         "npc_smile": "assets/dialogs/level1/fm2happy.png",
         "npc_sad": "assets/dialogs/level1/fm2sad.png",
         "npc_upset": "assets/dialogs/level1/fm2upset.png",

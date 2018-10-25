@@ -9,10 +9,12 @@ class BattleScene extends Phaser.Scene {
     preload () {
         /* initialized once in the main game, to be reused by all scenes */
         /* to keep the attributes in between scenes */
-        this.load.image('BG', this.dungeon.battleBackground);
-        this.load.spritesheet('minion', this.dungeon.minionSprite, { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('boss', this.dungeon.bossSprite, { frameWidth: 32, frameHeight: 32 });
-        console.log(this.dungeon.minionSprite);
+        this.load.image(this.dungeon.battleBackgroundName, this.dungeon.battleBackground);
+        this.load.spritesheet(this.dungeon.minionName, this.dungeon.minionSprite, { frameWidth: 32, frameHeight: 32 });
+        if(this.dungeon.bossName != undefined){
+            this.load.spritesheet(this.dungeon.bossName, this.dungeon.bossSprite, { frameWidth: 32, frameHeight: 32 });
+        }
+
     }
 
     init (data) {
@@ -22,8 +24,10 @@ class BattleScene extends Phaser.Scene {
             this.difficulty = data.difficulty;
         } else if (data.simulate) {
             this.dungeon = {
+                minionName: 'trainingdummy',
                 minionSprite: 'assets/spritesheets/trainingdummy.png',
-                battleBackground: 'assets/images/battlebackground.png',
+                battleBackground: 'assets/images/dojo.jpg',
+                battleBackgroundName: 'dojo',
                 minionExp: 0,
                 wordPool: data.wordPool
             };
@@ -41,7 +45,7 @@ class BattleScene extends Phaser.Scene {
             if (e.keyCode >= 65 && e.keyCode <= 90)
             {
                 e.preventDefault();
-                this.inputText += e.key;
+                this.inputText += e.key.toUpperCase();
                 console.log('you typed ', this.inputText);
             }
             else if (e.keyCode === 8) //backspace
@@ -63,6 +67,7 @@ class BattleScene extends Phaser.Scene {
                         this.enemy.hp -=1;
                     }
                     this.timedEvent.remove(false);
+                    this.player.sprite.play('player_attack', false);
 
                 }
                 else
@@ -78,7 +83,9 @@ class BattleScene extends Phaser.Scene {
         this.scene.bringToTop();
         /* remove existing anims since this scene will be reused */
         this.anims.remove('idle');
-        this.anims.remove('minionidle');
+        this.anims.remove('enemyidle');
+        this.anims.remove('player_attack');
+        this.anims.remove('player_hurt');
 
         /* initalize enemy */
         this.enemy = new Unit(this,720 - 120, 480 - 480/3, "EnemyBoi", this.boss ? 4 : 2, 1);
@@ -89,7 +96,7 @@ class BattleScene extends Phaser.Scene {
         this.state = this.STATE_VALUE.idle;
 
         /* draw bg */
-        var bg = this.add.sprite(720/2, 480/2, 'BG');
+        var bg = this.add.sprite(720/2, 480/2, this.dungeon.battleBackgroundName);
         bg.setScale(1);
         bg.setOrigin(0.5);
 
@@ -127,15 +134,30 @@ class BattleScene extends Phaser.Scene {
             repeat: -1
         });
         this.anims.create({
-            key: 'minionidle',
-            frames: this.anims.generateFrameNumbers(this.boss ? 'boss' : 'minion' , { frames: [ 0, 1 ] }),
+            key: 'enemyidle',
+            frames: this.anims.generateFrameNumbers(this.boss ? this.dungeon.bossName : this.dungeon.minionName , { frames: [ 0, 1 ] }),
             frameRate: 2,
             repeat: -1
         });
 
+        this.anims.create({
+            key: 'player_hurt',
+            frames: this.anims.generateFrameNumbers('player_hurt', { frames: [ 0, 1, 2] }),
+            frameRate: 7,
+            repeat: 0
+        });
+
+        var player_attack = {
+            key: 'player_attack',
+            frames: this.anims.generateFrameNumbers('player_attack', { frames: [ 0, 1, 2, 3, 4, 5, 6 ] }),
+            frameRate: 7,
+            repeat: 0
+        };
+        this.anims.create(player_attack);
+
         this.player.createSprite(this, 'player', 'idle', 120, 320, 2);
 
-        this.enemy.createSprite(this, 'minion', 'minionidle', 720 - 120, 480 - 480/3, 2);
+        this.enemy.createSprite(this, this.boss ? this.dungeon.bossName : this.dungeon.minionName  , 'enemyidle', 720 - 120, 480 - 480/3, 2);
         this.enemy.sprite.setFlipX(true);
 
         /* projectile */
@@ -167,8 +189,19 @@ class BattleScene extends Phaser.Scene {
                 this.scene.stop('BattleScene');
             }
         }, this);
+        this.backButton.visible = false;
         this.add.existing(this.backButton);
         console.log('quingina');
+
+        this.player.sprite.on('animationcomplete', this.animComplete, this);
+    }
+
+    animComplete(animation, frame){
+        console.log(animation.key);
+        if(animation.key === 'player_attack' || animation.key === 'player_hurt'){
+            console.log('finish anim');
+            this.player.sprite.play('idle', true);
+        }
     }
 
     update () {
@@ -184,7 +217,7 @@ class BattleScene extends Phaser.Scene {
 
         /* game state */
         if (this.state === this.STATE_VALUE.idle) {
-            // this.player.sprite.anims.play('idle', true);   why does this run first before create?
+            // this.player.sprite.play('idle', true);   //why does this run first before create?
             this.inputText = '';
             this.inputTextDisplay.visible = false;
             this.attackButton.visible = true;
@@ -193,18 +226,20 @@ class BattleScene extends Phaser.Scene {
             this.follower.t = 0;
             this.follower.vec.x = 720/2;
             this.follower.vec.y = 480/3;
+            if(this.simulate){
+                this.backButton.visible = true;
+            }
         } else if (this.state === this.STATE_VALUE.attack) {
             this.inputTextDisplay.setText(this.inputText);
             this.inputTextDisplay.visible = true;
             this.projectile.visible = true;
-
+            this.backButton.visible = false;
             this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
 
             this.attackButton.visible = false;
             this.timerDisplay.visible = true;
             this.timerDisplay.setText(this.timedEvent.getElapsedSeconds().toString().substr(0, 4));
         } else if (this.state === this.STATE_VALUE.animate) {
-
             this.path.getPoint(this.follower.t, this.follower.vec);
             this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
         }
@@ -235,6 +270,7 @@ class BattleScene extends Phaser.Scene {
                var hearts = this.playerHealthDisplay.getChildren();
                hearts[hearts.length - 1].destroy();
                this.player.hp -=1;
+               this.player.sprite.play('player_hurt', false);
            }
        }, this);
    }

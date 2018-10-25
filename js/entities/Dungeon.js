@@ -22,6 +22,8 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         this.bossFace = 'assets/images/' + enemies.boss.name + 'face.png';
         this.background = 'assets/images/' + dungeonSprite.dungeonBG;
         this.battleBackground = 'assets/images/' + dungeonSprite.battleBG;
+        this.battleBackgroundName = dungeonSprite.battleBG.split('.')[0];
+        console.log(this.battleBackgroundName);
         this.minionName = enemies.minion.name;
         this.bossName = enemies.boss.name;
         this.minionExp = enemies.minion.exp;
