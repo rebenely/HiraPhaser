@@ -12,6 +12,7 @@ class Unit  {
         this.exp = 0;
         this.level = 1;
         this.maxExp = 100;
+        this.characterPool = ['A', 'I', 'U', 'E', 'O'];
     }
 
     levelUp () {
@@ -31,6 +32,10 @@ class Unit  {
         this.sprite.setScale(scale);
         this.sprite.anchor = 0.5;
         this.sprite.anims.play(anim, true);
+    }
+
+    learnNewCharacters(newChars){
+        this.characterPool = this.characterPool.concat(newChars);
     }
 
 }

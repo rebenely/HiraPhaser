@@ -10,7 +10,7 @@ var config = {
             gravity: { y: 0 }
         }
     },
-    scene: [ BootScene, MainScene, BattleScene, ResultScene, DetailScene, DungeonScene, CutScene, CutLoaderScene, TrainScene, MultipleChoiceScene, MatchingTypeScene ]
+    scene: [ BootScene, MainScene, BattleScene, ResultScene, DetailScene, DungeonScene, CutScene, CutLoaderScene, TrainScene, MultipleChoiceScene, MatchingTypeScene, HintScene ]
 };
 var game = new Phaser.Game(config);
 game.global = {

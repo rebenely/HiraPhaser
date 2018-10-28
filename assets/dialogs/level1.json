@@ -1,10 +1,10 @@
 {
     "images" : {
-        "guild_bg": "assets/images/guild_bg.png",
-        "npc_smile": "assets/dialogs/level1/fm2happy.png",
-        "npc_sad": "assets/dialogs/level1/fm2sad.png",
-        "npc_upset": "assets/dialogs/level1/fm2upset.png",
-        "npc_surprised": "assets/dialogs/level1/fm2surprised.png"
+        "guild_bg": "assets/dialogs/images/guild_bg.png",
+        "npc_smile": "assets/dialogs/images/fm2happy.png",
+        "npc_sad": "assets/dialogs/images/fm2sad.png",
+        "npc_upset": "assets/dialogs/images/fm2upset.png",
+        "npc_surprised": "assets/dialogs/images/fm2surprised.png"
     },
 
     "dialog": [
@@ -79,5 +79,6 @@
         "x": "300",
         "y": "480",
         "scale": "0.4"
-    }
+    },
+    "teach": ["KA", "KI", "KU", "KE", "KO"]
 }

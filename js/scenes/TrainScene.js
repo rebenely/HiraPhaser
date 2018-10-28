@@ -29,7 +29,7 @@ class TrainScene extends Phaser.Scene {
         }, this);
         this.add.existing(mulchoButton);
 
-        var matchingButton = new HiraButton(this, 2*((720 - 680)/2 + 680)/3, 480/2, "Matching Choice!", style, () => {
+        var matchingButton = new HiraButton(this, 2*((720 - 680)/2 + 680)/3, 480/2, "Matching Type!", style, () => {
             console.log('yeman');
             this.scene.pause('TrainScene');
             this.scene.launch('MatchingTypeScene', {player: this.player, characterPool: this.characterPool});

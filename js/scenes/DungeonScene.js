@@ -65,7 +65,6 @@ class DungeonScene extends Phaser.Scene {
         this.add.existing(this.battleButton);
 
         /* listen events from BattleScene */
-        this.events.on('BattleFinish', this.onBattleFinish, this);
 
         let battle = this.scene.get('BattleScene');
         battle.events.removeListener('battleFinish');
@@ -102,8 +101,8 @@ class DungeonScene extends Phaser.Scene {
         this.add.existing(this.hardButton);
 
         this.hintButton = new HiraButton(this, 720/2 , 420, 'Hint!', style, () => {
-
-
+            this.scene.pause('DungeonScene');
+            this.scene.launch('HintScene', {player: this.player, characterPool: this.player.characterPool});
         }, this);
         this.add.existing(this.hintButton);
 

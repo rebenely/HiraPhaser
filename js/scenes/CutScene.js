@@ -9,7 +9,7 @@ class CutScene extends Phaser.Scene {
     }
 
     preload () {
-        var titleStyle = { font: "32px Courier", fill: "#00ff44", align: "center" };
+        var titleStyle = { font: "32px manaspc", fill: "#00ff44", align: "center" };
         var loadingText = this.add.text(720/2, 480/2, "Loading",titleStyle);
         loadingText.setOrigin(0.5);
 
@@ -32,7 +32,9 @@ class CutScene extends Phaser.Scene {
         this.npc.setScale(Number(this.jsonFile.image.scale));
         this.npc.setOrigin(0.5);
 
-        var style = { font: "16px Courier", fill: "#00ff44", align: "left", wordWrap: { width: 660, useAdvancedWrap: true} };
+        var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 660, useAdvancedWrap: true} };
+        var titleStyle = { font: "32px manaspc", fill: "#00ff44", align: "center" };
+
 
         this.hiraText = this.add.bitmapText(720/2, 480/2, 'hira', '');
         this.hiraText.setOrigin(0.5);
@@ -42,8 +44,14 @@ class CutScene extends Phaser.Scene {
         this.dialogBox.fillStyle(0x003366 , 0.7);
         this.dialogBox.fillRect(10, 480 - 120, 700, 100);
 
+        this.nameBox = this.add.graphics();
+        this.nameBox.fillStyle(0xffffff , 0.3);
+        this.nameBox.fillRect(10, 480 - 145, 100, 48);
+
         console.log(this.jsonFile['dialog'][0]['message']);
-        this.dialogName = this.add.text(40, 480 - 105, this.jsonFile['dialog'][0]['name'], style);
+        this.dialogName = this.add.text(60, 480 -120, this.jsonFile['dialog'][0]['name'], titleStyle);
+        this.dialogName.setOrigin(0.5);
+
         this.dialogText = this.add.text(40, 480 - 80, this.jsonFile['dialog'][0]['message'], style);
         this.dialogIterator = 1; this.maxIterator = this.jsonFile['dialog'].length;
 
@@ -69,9 +77,11 @@ class CutScene extends Phaser.Scene {
                     this.hiraText.setOrigin(0.5);
                     this.hiraText.setText([this.getHiragana(this.jsonFile['dialog'][this.dialogIterator]['text'])]);
                 }
+                this.dialogName.setOrigin(0.5);
                 console.log(this.dialogIterator, 'vs', this.maxIterator);
                 this.dialogIterator++;
             } else {
+                this.events.emit('learnedNewCharacters', this.jsonFile.teach);
                 this.scene.stop('CutScene');
                 this.scene.wake('MainScene');
             }

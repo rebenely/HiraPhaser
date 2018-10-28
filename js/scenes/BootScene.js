@@ -29,6 +29,8 @@ class BootScene extends Phaser.Scene {
 
         this.load.on('progress', this.onLoadProgress, this);
         this.load.on('complete', this.onLoadComplete, this);
+
+        this.load.json('main_world', 'assets/config/main_world.json');
     }
 
     onLoadProgress(progress) {
@@ -43,13 +45,18 @@ class BootScene extends Phaser.Scene {
 
         console.debug('completed: ', totalComplete);
         console.debug('failed: ', totalFailed);
-        this.loaded = true;
     }
-
+    create () {
+        this.worldJson = this.cache.json.get('main_world');
+        console.log(this.worldJson);
+        if(this.worldJson) {
+            this.loaded = true;
+        }
+    }
     update () {
         console.log(this.loaded);
         if(this.loaded){
-            this.scene.start("MainScene", {player: this.player});
+            this.scene.start("MainScene", {player: this.player, world: this.worldJson});
         }
     }
 }

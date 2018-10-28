@@ -6,6 +6,7 @@ class MainScene extends Phaser.Scene {
 
     init (data) {
         this.player = data.player;
+        this.world = data.world;
     }
 
     preload () {
@@ -19,7 +20,8 @@ class MainScene extends Phaser.Scene {
 
         this.cameras.main.setBounds(0, 0, 2048, 1024);
 
-
+        console.log(this.world);
+        
         var cursors = this.input.keyboard.createCursorKeys();
 
         var controlConfig = {
@@ -105,10 +107,20 @@ class MainScene extends Phaser.Scene {
         );
         this.add.existing(this.simulateLevel1);
 
+        let learn = this.scene.get('CutScene');
+
+        learn.events.removeListener('learnedNewCharacters');
+        learn.events.on('learnedNewCharacters', this.onLearnedNewCharacters, this);
+
     }
 
     update (time, delta) {
         this.controls.update(delta);
+    }
+
+    onLearnedNewCharacters(data){
+        this.player.learnNewCharacters(data);
+        console.log('received', data);
     }
 
 
