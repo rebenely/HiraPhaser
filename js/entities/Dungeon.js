@@ -3,6 +3,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
     constructor(scene, dungeonContent, dungeonSprite, enemies, optionals, callback) {
         /* initiate sprite */
         super(scene, dungeonSprite.x, dungeonSprite.y, dungeonSprite.spriteName);
+        console.log(dungeonSprite.spriteName);
         this.setOrigin(0.5);
         this.setDisplaySize(optionals.sizeX, optionals.sizeY);
         this.setSize(optionals.sizeX, optionals.sizeY);

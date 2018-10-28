@@ -23,6 +23,13 @@ class CutScene extends Phaser.Scene {
                 }
             }
         }
+
+        this.dialogIterator = 1; this.maxIterator = this.jsonFile['dialog'].length;
+
+        this.messageArray = [];
+        for(let i = 0; i < this.maxIterator; i++){
+            this.messageArray.push(this.jsonFile['dialog'][i]);
+        }
     }
 
     create() {
@@ -56,6 +63,8 @@ class CutScene extends Phaser.Scene {
         this.dialogIterator = 1; this.maxIterator = this.jsonFile['dialog'].length;
 
         this.input.keyboard.on('keyup', this.typedKeys, this);
+
+
     }
 
     typedKeys (e) {
@@ -64,18 +73,17 @@ class CutScene extends Phaser.Scene {
         } else if (e.keyCode === 13 || e.keyCode === 32) { //enter
             e.preventDefault();
             if(this.dialogIterator < this.maxIterator) {
-                console.log(this.jsonFile['dialog'][this.dialogIterator]['message']);
-                this.dialogName.setText(this.jsonFile['dialog'][this.dialogIterator]['name']);
-                this.dialogText.setText(this.jsonFile['dialog'][this.dialogIterator]['message']);
-                if (this.jsonFile['dialog'][this.dialogIterator]['image'] !== undefined) {
-                    this.npc.setTexture(this.jsonFile['dialog'][this.dialogIterator]['image']);
+                this.dialogName.setText(this.messageArray[this.dialogIterator].name);
+                this.dialogText.setText(this.messageArray[this.dialogIterator].message);
+                if (this.messageArray[this.dialogIterator].image !== undefined) {
+                    this.npc.setTexture(this.messageArray[this.dialogIterator].image);
                     this.hiraText.visible = false;
                     this.npc.visible = true;
-                } else if (this.jsonFile['dialog'][this.dialogIterator]['text'] !== undefined) {
+                } else if (this.messageArray[this.dialogIterator].text !== undefined) {
                     this.npc.visible = false;
                     this.hiraText.visible = true;
                     this.hiraText.setOrigin(0.5);
-                    this.hiraText.setText([this.getHiragana(this.jsonFile['dialog'][this.dialogIterator]['text'])]);
+                    this.hiraText.setText([Projectile.convertToHiragana(this.messageArray[this.dialogIterator].text)]);
                 }
                 this.dialogName.setOrigin(0.5);
                 console.log(this.dialogIterator, 'vs', this.maxIterator);
@@ -92,44 +100,4 @@ class CutScene extends Phaser.Scene {
 
     }
 
-    getHiragana (charInput) {
-        var charString = '';
-
-        for( var i = 0; i < charInput.length; i++ ){
-            switch(charInput[i]) {
-                case 'A':
-                    charString = charString.concat(String.fromCharCode(12354));
-                break;
-                case 'I':
-                    charString = charString.concat(String.fromCharCode(12356));
-                break;
-                case 'U':
-                    charString = charString.concat(String.fromCharCode(12358));
-                break;
-                case 'E':
-                    charString = charString.concat(String.fromCharCode(12360));
-                break;
-                case 'O':
-                    charString = charString.concat(String.fromCharCode(12362));
-                break;
-                case 'KA':
-                    charString = charString.concat(String.fromCharCode(12363));
-                break;
-                case 'KI':
-                    charString = charString.concat(String.fromCharCode(12365));
-                break;
-                case 'KU':
-                    charString = charString.concat(String.fromCharCode(12367));
-                break;
-                case 'KE':
-                    charString = charString.concat(String.fromCharCode(12369));
-                break;
-                case 'KO':
-                    charString = charString.concat(String.fromCharCode(12371));
-                break;
-            }
-        }
-        console.log('yikes ', charString);
-        return charString;
-    }
 }

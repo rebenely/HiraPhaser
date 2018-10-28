@@ -1,32 +1,96 @@
 {
     "dungeons" : [
         {
+            "name": "V-dungeon" ,
+            "level": 1,
+            "description":  "Test for loop!",
+            "charSet": ["A","I","U","E","O"],
+            "wordPool": ["A","I","U","E","O"],
+            "sprites":    {
+                "x": 740, "y": 240, "name": "k_cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblinidle.png", "exp": 10,
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinbossidle.png", "exp": 50,
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 90, "sizeY": 64}
+        },
+        {
             "name": "K-dungeon" ,
             "level": 2,
             "description":  "This dungeon is the first dungeon ever made in this game! Easter egg dungeons will be added later. I just need to test the word wrap on this.",
             "charSet": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["A-KA", "KO-A", "KA-KI", "KU-O-KE", "KI-KU", "KO-O", "KE-KE", "KO-KO", "KI-KU"],
             "sprites":    {
-                "x": 360, "y": 240, "spriteName": "k_cave",
+                "x": 360, "y": 240, "name": "k_cave",
                 "dungeonBG": {
                     "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
                     "battleBG": {
                         "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
                     }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblinidle.png", "exp": 10,
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
                 },
-                "enemies": {
-                    "minion": {
-                        "name": "goblin", "path": "assets/spritesheets/enemies/goblinidle.png", "exp": 10,
-                        "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
-                    },
-                    "boss": {
-                        "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinbossidle.png", "exp": 50,
-                        "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
-                    }
-                },
-                "optionals" : {"sizeX": 90, "sizeY": 64},
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinbossidle.png", "exp": 50,
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 90, "sizeY": 64}
 
+        }
+    ],
 
+    "storyLevels": [
+        {
+            "name": "The K-invasion",
+            "sprite": {"name": "level", "x": 220, "y": 180},
+            "json": "level1.json",
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "details" : {
+                "title": "Chapter I: Wtf",
+                "subtitle": "You will learn vowels.",
+                "desc": "This is a place holder!"
+            },
+            "type":"CutScene"
+        },
+        {
+            "name": "The K-invasion: Training",
+            "sprite": {"name": "level",  "x": 260, "y": 220},
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "details" : {
+                "title": "Chapter I: Wtf",
+                "subtitle": "this should work",
+                "desc": "You will learn vowels."
+            },
+            "type":"TrainScene",
+             "characterPool": ["KA","KI","KU","KE","KO"]
+        },
+        {
+            "name": "The K-invasion: Practice Battle",
+            "sprite": {"name": "level",  "x": 300, "y": 240},
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "details" : {
+                "title": "Chapter I: Wtf",
+                "subtitle": "You will learn vowels.",
+                "desc": "yikes"
+            },
+            "type":"BattleScene",
+            "wordPool": ["KA","KI","KU","KE","KO","A","I","U","E","O"]
         }
     ]
 }
