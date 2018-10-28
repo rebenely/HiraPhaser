@@ -5,7 +5,7 @@ class DungeonScene extends Phaser.Scene {
     }
 
     preload () {
-        var titleStyle = { font: "32px Courier", fill: "#00ff44", align: "center" };
+        var titleStyle = { font: "32px manaspc", fill: "#00ff44", align: "center" };
         var loadingText = this.add.text(720/2, 480/2, "Loading",titleStyle);
         loadingText.setOrigin(0.5);
         console.log(this.dungeon.background);
@@ -41,7 +41,7 @@ class DungeonScene extends Phaser.Scene {
 
          /* buttons */
 
-        var style = { font: "16px Courier", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
+        var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
 
         this.cancelButton = new HiraButton(this, 60 + 30 , 420, "Run away", style, () => {
             console.log('fuck go back');

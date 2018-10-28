@@ -34,8 +34,8 @@ class ResultScene extends Phaser.Scene {
         this.progressBar.fillRect(2*720/3 - 60, 480/3 - 4, this.player.exp/this.player.maxExp * 120, 8);
 
 
-        var header = { font: "32px Courier", fill: "#00ff44" };
-        var style = { font: "16px Courier", fill: "#00ff44" };
+        var header = { font: "32px manaspc", fill: "#00ff44" };
+        var style = { font: "16px manaspc", fill: "#00ff44" };
 
         var gob = this.add.sprite(720/2, 480/2, 'gameover'); gob.setOrigin(0.5); gob.setScale(0.8);
         gob.visible = false;

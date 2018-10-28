@@ -104,7 +104,7 @@ class BattleScene extends Phaser.Scene {
         bg.setOrigin(0.5);
 
         /* draw hud */
-        var style = { font: "16px Courier", fill: "#00ff44" };
+        var style = { font: "16px manaspc", fill: "#00ff44" };
 
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
         if(!this.simulate){
@@ -124,7 +124,8 @@ class BattleScene extends Phaser.Scene {
                 this.projectile.getRandomCharacter();
                 this.projectile.getHiragana();
                 this.projectile.setText(this.projectile.getHiragana());
-                this.state = this.STATE_VALUE.attack
+                this.state = this.STATE_VALUE.attack;
+                console.log(this.projectile);
             }
         }, this);
         this.add.existing(this.attackButton);

@@ -77,6 +77,7 @@ class MainScene extends Phaser.Scene {
             }
         );
         this.add.existing(this.simulateLevel1);
+
     }
 
     update () {

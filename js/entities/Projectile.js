@@ -63,4 +63,44 @@ class Projectile extends Phaser.GameObjects.BitmapText {
         console.log('yikes ', charString);
         return charString;
     }
+    static convertToHiragana (text) {
+        var charString = '';
+
+    
+        switch(text) {
+            case 'A':
+                charString = charString.concat(String.fromCharCode(12354));
+            break;
+            case 'I':
+                charString = charString.concat(String.fromCharCode(12356));
+            break;
+            case 'U':
+                charString = charString.concat(String.fromCharCode(12358));
+            break;
+            case 'E':
+                charString = charString.concat(String.fromCharCode(12360));
+            break;
+            case 'O':
+                charString = charString.concat(String.fromCharCode(12362));
+            break;
+            case 'KA':
+                charString = charString.concat(String.fromCharCode(12363));
+            break;
+            case 'KI':
+                charString = charString.concat(String.fromCharCode(12365));
+            break;
+            case 'KU':
+                charString = charString.concat(String.fromCharCode(12367));
+            break;
+            case 'KE':
+                charString = charString.concat(String.fromCharCode(12369));
+            break;
+            case 'KO':
+                charString = charString.concat(String.fromCharCode(12371));
+            break;
+        }
+
+        console.log('yikes ', charString);
+        return charString;
+    }
 }
