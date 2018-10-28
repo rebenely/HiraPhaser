@@ -106,8 +106,9 @@ class ResultScene extends Phaser.Scene {
             }
 
         } else if (this.state >= 1) {
-            this.scene.stop('ResultScene');
+            console.log('gising na bata');
             this.scene.wake('MainScene', {player: this.player});
+            this.scene.stop('ResultScene');
         }
     }
 

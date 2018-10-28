@@ -2,7 +2,7 @@ class BattleScene extends Phaser.Scene {
 
     constructor () {
         super('BattleScene');
-        this.STATE_VALUE = {"idle":0, "attack":1, "animate":2, "hit":3}
+        this.STATE_VALUE = {"idle":0, "attack":1, "animate":2, "hit":3, "death": 4, "close": 5}
         Object.freeze(this.STATE_VALUE);
     }
 
@@ -58,7 +58,7 @@ class BattleScene extends Phaser.Scene {
                 e.preventDefault();
                 if(this.inputText === this.projectile.currentChar)
                 {
-                    this.cameras.main.flash(300);
+                    this.cameras.main.flash(100);
                     this.state = this.STATE_VALUE.idle;
                     if(!this.simulate){
                         var hearts = this.enemyHealthDisplay.getChildren();
@@ -68,6 +68,7 @@ class BattleScene extends Phaser.Scene {
                     }
                     this.timedEvent.remove(false);
                     this.player.sprite.play('player_attack', false);
+                    this.showSlash(this.enemy.sprite.x, this.enemy.sprite.y, true);
 
                 }
                 else
@@ -86,6 +87,8 @@ class BattleScene extends Phaser.Scene {
         this.anims.remove('enemyidle');
         this.anims.remove('player_attack');
         this.anims.remove('player_hurt');
+        this.anims.remove('slash');
+
 
         /* initalize enemy */
         this.enemy = new Unit(this,720 - 120, 480 - 480/3, "EnemyBoi", this.boss ? 4 : 2, 1);
@@ -143,7 +146,7 @@ class BattleScene extends Phaser.Scene {
         this.anims.create({
             key: 'player_hurt',
             frames: this.anims.generateFrameNumbers('player_hurt', { frames: [ 0, 1, 2] }),
-            frameRate: 7,
+            frameRate: 20,
             repeat: 0
         });
 
@@ -155,10 +158,22 @@ class BattleScene extends Phaser.Scene {
         };
         this.anims.create(player_attack);
 
-        this.player.createSprite(this, 'player', 'idle', 120, 320, 2);
+        this.anims.create({
+            key: 'slash',
+            frames: this.anims.generateFrameNumbers('kidlatslash', { frames: [ 0, 1, 2, 3, 4, 5, 6] }),
+            frameRate: 20,
+            repeat: 0
+        });
 
+        this.player.createSprite(this, 'player', 'idle', 120, 320, 2);
         this.enemy.createSprite(this, this.boss ? this.dungeon.bossName : this.dungeon.minionName  , 'enemyidle', 720 - 120, 480 - 480/3, 2);
         this.enemy.sprite.setFlipX(true);
+        this.slash = this.add.sprite(0,0, 'kidlatslash');
+        this.slash.setScale(2);
+        this.slash.setOrigin(0.5);
+        this.slash.visible = false;
+        this.slash.anims.play('slash');
+
 
         /* projectile */
         this.projectile = new Projectile(this, 720/2, 480/2, 'hira', this.dungeon.wordPool);
@@ -194,6 +209,25 @@ class BattleScene extends Phaser.Scene {
         console.log('quingina');
 
         this.player.sprite.on('animationcomplete', this.animComplete, this);
+        this.slash.on('animationcomplete', this.animCompleteSlash, this);
+
+        this.cameras.main.once('camerafadeoutcomplete', function (camera) {
+            if(this.player.hp <= 0) {
+                this.scene.stop('BattleScene');
+                this.scene.wake('DungeonScene');
+            } else {
+                this.events.emit('battleFinish');
+                this.scene.stop('BattleScene');
+                this.scene.wake('DungeonScene');
+            }
+        }, this);
+
+        this.events.once('closeScreen', this.closeScreen, this);
+
+    }
+
+    animCompleteSlash(animation, frame){
+        this.slash.visible = false;
     }
 
     animComplete(animation, frame){
@@ -202,17 +236,45 @@ class BattleScene extends Phaser.Scene {
             console.log('finish anim');
             this.player.sprite.play('idle', true);
         }
+        /* handle death anim to change scene */
+    }
+
+    closeScreen() {
+        if(this.enemy.hp <= 0){
+            this.tweens.add({
+              targets: this.enemy.sprite,
+              ease: 'Sine.easeInOut',
+              duration: 1000,
+              delay: 0,
+              alpha: 0,
+              onComplete: () => {
+                  this.cameras.main.fadeOut(1000);
+
+              }
+            }, this);
+        } else {
+            this.tweens.add({
+              targets: this.player.sprite,
+              ease: 'Sine.easeInOut',
+              duration: 1000,
+              delay: 0,
+              alpha: 0,
+              onComplete: () => {
+                  this.cameras.main.fadeOut(1000);
+
+              }
+            }, this);
+        }
     }
 
     update () {
         /* if player died or enemy died,  probably will add animations later */
-        if(this.player.hp <= 0) {
-            this.scene.stop('BattleScene');
-            this.scene.wake('DungeonScene');
-        } else if (this.enemy.hp <= 0) {
-            this.events.emit('battleFinish');
-            this.scene.stop('BattleScene');
-            this.scene.wake('DungeonScene');
+        if(this.player.hp <= 0 || this.enemy.hp <= 0) {
+            /* play death anim here */
+            console.log('fade out');
+            this.events.emit('closeScreen');
+            this.state = this.STATE_VALUE.close;
+
         }
 
         /* game state */
@@ -264,15 +326,25 @@ class BattleScene extends Phaser.Scene {
            repeat: 0,
            onComplete: () => {
                /* duplicate */
-               this.cameras.main.shake(300);
+               this.cameras.main.shake(100);
                this.state = this.STATE_VALUE.idle;
                console.log('burado');
-               var hearts = this.playerHealthDisplay.getChildren();
-               hearts[hearts.length - 1].destroy();
-               this.player.hp -=1;
+               if(!this.simulate){
+                   var hearts = this.playerHealthDisplay.getChildren();
+                   hearts[hearts.length - 1].destroy();
+                   this.player.hp -=1;
+               }
                this.player.sprite.play('player_hurt', false);
+               this.showSlash(this.player.sprite.x, this.player.sprite.y, false);
            }
        }, this);
    }
 
+   showSlash(posX, posY, flip) {
+       this.slash.visible = true;
+       this.slash.x = posX;
+       this.slash.y = posY;
+       this.slash.play('slash', false);
+       this.slash.setFlipX(flip);
+   }
 }

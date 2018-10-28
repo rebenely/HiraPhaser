@@ -25,7 +25,7 @@ class MainScene extends Phaser.Scene {
             {sizeX: 90, sizeY: 64},
             () => {
                 this.scene.pause('MainScene');
-                this.scene.launch('DungeonDetailScene', {player: this.player, dungeon: this.dungeonK});
+                this.scene.launch('DetailScene', {player: this.player, dungeon: this.dungeonK, startScene: 'DungeonScene', passData: {player: this.player, dungeon: this.dungeonK, difficulty: game.global.EASY}});
             }
          );
         this.add.existing(this.dungeonK);
@@ -37,7 +37,11 @@ class MainScene extends Phaser.Scene {
              {sizeX: 16, sizeY:16},
              () => {
                  this.scene.pause('MainScene');
-                 this.scene.launch('CutLoaderScene', {jsonFile: 'level1.json'});
+                 this.scene.launch('DetailScene', {player: this.player, content: {
+                     title: "Chapter I: Wtf",
+                     subtitle: "this should work",
+                     desc: "This is a place holder!"
+                 }, startScene: 'CutLoaderScene', passData: {jsonFile: 'level1.json'}});
              }
          );
         this.add.existing(this.level1);
@@ -49,7 +53,11 @@ class MainScene extends Phaser.Scene {
             {sizeX: 12, sizeY: 12},
             () => {
                 this.scene.pause('MainScene');
-                this.scene.launch('TrainScene', {player: this.player, characterPool: ['KA','KI','KU','KE','KO']});
+                this.scene.launch('DetailScene', {player: this.player, content: {
+                    title: "Chapter I: Wtf",
+                    subtitle: "Training",
+                    desc: "This is a place holder!"
+                }, startScene: 'TrainScene', passData: {player: this.player, characterPool: ['KA','KI','KU','KE','KO']}});
             }
         );
         this.add.existing(this.trainLevel1);
@@ -61,7 +69,11 @@ class MainScene extends Phaser.Scene {
             {sizeX: 12, sizeY: 12},
             () => {
                 this.scene.pause('MainScene');
-                this.scene.launch('BattleScene', {player: this.player, simulate: true, wordPool: ['KA','KI','KU','KE','KO','A','I','U','E','O']});
+                this.scene.launch('DetailScene', {player: this.player, content: {
+                    title: "Chapter I: Wtf",
+                    subtitle: "Simulate Battle",
+                    desc: "Dummy battle"
+                }, startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: ['KA','KI','KU','KE','KO','A','I','U','E','O']}});
             }
         );
         this.add.existing(this.simulateLevel1);

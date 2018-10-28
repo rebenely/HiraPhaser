@@ -123,6 +123,7 @@ class DungeonScene extends Phaser.Scene {
                     enemyCleared.push({name: this.dungeon.minionName, exp: 10});
                 }
             }
+            /* some anim before starting next scene */
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared === 4});
         }
 
@@ -136,6 +137,7 @@ class DungeonScene extends Phaser.Scene {
                     enemyCleared.push({name: this.dungeon.minionName, exp: 10});
                 }
             }
+            /* success screen, related to story probably cutscene */
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4});
         }
     }

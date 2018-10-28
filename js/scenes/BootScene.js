@@ -11,11 +11,15 @@ class BootScene extends Phaser.Scene {
 
         this.load.image('grassland', 'assets/images/grass.png');
 
+
         this.load.image('heart', 'assets/images/heart.png');
 
         this.load.spritesheet('player', 'assets/spritesheets/miniIdle.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('player_attack', 'assets/spritesheets/punchrightmini.png', { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet('player_hurt', 'assets/spritesheets/player_hurt.png', { frameWidth: 32, frameHeight: 32 });
+
+        this.load.spritesheet('kidlatslash', 'assets/spritesheets/kidlatslash.png',  { frameWidth: 32, frameHeight: 32 });
+
 
 
         this.player = new Unit(this, 120, 320, "TestBoi", 5, 1);
