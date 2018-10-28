@@ -41,11 +41,10 @@ class DungeonScene extends Phaser.Scene {
 
          /* buttons */
 
-        var style = { font: "16px Courier", fill: "#00ff44", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
+        var style = { font: "16px Courier", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
 
         this.cancelButton = new HiraButton(this, 60 + 30 , 420, "Run away", style, () => {
             console.log('fuck go back');
-            this.cancelButton.setStyle({  fill: "#00ff44"});
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
@@ -59,7 +58,6 @@ class DungeonScene extends Phaser.Scene {
         this.add.existing(this.cancelButton);
 
         this.battleButton = new HiraButton(this, 720 - 60 - 30 , 420, "To Battle!", style, () => {
-            this.battleButton.setStyle({  fill: "#00ff44"});
             this.scene.sleep('DungeonScene');
 
             this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3, simulate: false });

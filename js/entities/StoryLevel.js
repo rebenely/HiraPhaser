@@ -9,7 +9,7 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         this.setSize(optionals.sizeX, optionals.sizeY);
 
         /* display name */
-        var style = { font: "16px Courier", fill: "#00ff44" };
+        var style = { font: "16px manaspc", fill: "#ffffff" };
         var levelName = scene.add.text(0, 0, this.name, style);
         levelName.visible = false;
         levelName.setOrigin(0.5);

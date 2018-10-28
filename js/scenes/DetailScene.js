@@ -26,9 +26,9 @@ class DetailScene extends Phaser.Scene {
         this.graphics.fillStyle(0x003366 , 1);
         this.graphics.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
 
-        var titleStyle = { font: "32px Courier", fill: "#00ff44", align: "left" };
-        var style = { font: "16px Courier", fill: "#00ff44", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
-        var caveName = this.add.text(60, 60, this.content.title , titleStyle);
+        var titleStyle = { font: "32px manaspc", fill: "#ffffff", align: "left" };
+        var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
+        var caveName = this.add.text(58, 60, this.content.title , titleStyle);
         var caveDesc = this.add.text(60, 130, this.content.desc, style);
         var charSetDisplay = this.add.text(60, 90, this.content.subtitle, style);
 
