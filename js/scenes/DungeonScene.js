@@ -8,13 +8,13 @@ class DungeonScene extends Phaser.Scene {
         var titleStyle = { font: "32px manaspc", fill: "#00ff44", align: "center" };
         var loadingText = this.add.text(720/2, 480/2, "Loading",titleStyle);
         loadingText.setOrigin(0.5);
-        console.log(this.dungeon.background);
+        console.log(this.dungeon.background, this.dungeon.backgroundPath);
 
         /* load images and spritesheets */
-        this.load.image('dungeonBG', this.dungeon.background);
-        this.load.image('minionFace', this.dungeon.minionFace);
-        this.load.image('bossFace', this.dungeon.bossFace);
-        this.load.image('crosshair', 'assets/images/target.png');
+        this.load.image(this.dungeon.background, this.dungeon.backgroundPath);
+        this.load.image(this.dungeon.minionFace, this.dungeon.minionFacePath);
+        this.load.image(this.dungeon.bossFace, this.dungeon.bossFacePath);
+        this.load.image('crosshair', 'assets/images/globals/target.png');
 
     }
 
@@ -26,7 +26,7 @@ class DungeonScene extends Phaser.Scene {
 
     create () {
 
-        var bg = this.add.sprite(720/2, 480/2, 'dungeonBG');
+        var bg = this.add.sprite(720/2, 480/2, this.dungeon.background);
         this.playerHP = this.player.hp;
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
 
@@ -35,8 +35,8 @@ class DungeonScene extends Phaser.Scene {
         this.crosshair.setOrigin(0.5);
 
         /* display, to be changed since positions are hardcoded */
-        this.minionGroup = this.add.group([ { key: 'minionFace', frame: 0, repeat: 2, setXY: { x: 720/5 + 1 , y:  480/2, stepX: 720/5 }, setScale: { x: 3, y: 3}, setOrigin: {x: 0.5, y: 0.5}  },
-         { key: 'bossFace', frame: 0, setXY: { x: 4*720/5 + 1 , y:  480/2 }, setScale: { x: 3, y: 3}, setAnchor: 0.5 } ]);
+        this.minionGroup = this.add.group([ { key: this.dungeon.minionFace, frame: 0, repeat: 2, setXY: { x: 720/5 + 1 , y:  480/2, stepX: 720/5 }, setScale: { x: 3, y: 3}, setOrigin: {x: 0.5, y: 0.5}  },
+         { key: this.dungeon.bossFace, frame: 0, setXY: { x: 4*720/5 + 1 , y:  480/2 }, setScale: { x: 3, y: 3}, setAnchor: 0.5 } ]);
 
 
          /* buttons */
@@ -71,20 +71,41 @@ class DungeonScene extends Phaser.Scene {
         battle.events.removeListener('battleFinish');
         battle.events.on('battleFinish', this.onBattleFinish, this);
 
-        this.difficultyButton = new HiraButton(this, 720/2, 480/5, 'Easy', style, () => {
-            if (this.difficultyButton.text === 'Easy') {
-                this.difficultyButton.setText('Normal');
-                this.difficulty = game.global.NORMAL;
-            } else if (this.difficultyButton.text === 'Normal') {
-                this.difficultyButton.setText('Hard');
-                this.difficulty = game.global.HARD;
-            } else if (this.difficultyButton.text === 'Hard') {
-                this.difficultyButton.setText('Easy');
-                this.difficulty = game.global.EASY;
-            }
-        }, this);
-        this.add.existing(this.difficultyButton);
+        this.easyButton = new HiraButton(this, 720/4, 480/5, 'Easy', style, () => {
+            this.difficulty = game.global.EASY;
+            this.easyButton.setStroke('#00ff44', 3);
+            this.normalButton.setStroke('#00ff44', 0);
+            this.hardButton.setStroke('#00ff44', 0);
 
+        }, this);
+        this.add.existing(this.easyButton);
+        this.easyButton.setStroke('#00ff44', 3);
+
+
+        this.normalButton = new HiraButton(this, 2*720/4, 480/5, 'Normal', style, () => {
+            this.difficulty = game.global.NORMAL;
+            this.normalButton.setStroke('#00ff44', 3);
+            this.easyButton.setStroke('#00ff44', 0);
+            this.hardButton.setStroke('#00ff44', 0);
+
+
+        }, this);
+        this.add.existing(this.normalButton);
+
+        this.hardButton = new HiraButton(this, 3*720/4, 480/5, 'Hard', style, () => {
+            this.difficulty = game.global.HARD;
+            this.hardButton.setStroke('#00ff44', 3);
+            this.easyButton.setStroke('#00ff44', 0);
+            this.normalButton.setStroke('#00ff44', 0);
+
+        }, this);
+        this.add.existing(this.hardButton);
+
+        this.hintButton = new HiraButton(this, 720/2 , 420, 'Hint!', style, () => {
+
+
+        }, this);
+        this.add.existing(this.hintButton);
 
     }
 

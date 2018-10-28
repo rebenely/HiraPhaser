@@ -17,4 +17,5 @@ class HiraButton extends Phaser.GameObjects.Text {
     getText() {
         return this.text;
     }
+
 }

@@ -16,14 +16,24 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         this.description = dungeonContent.description;
 
         /* other sprite values */
-        this.minionSprite = 'assets/spritesheets/' + enemies.minion.name + 'idle.png'
-        this.bossSprite = 'assets/spritesheets/' + enemies.boss.name + 'idle.png'
-        this.minionFace = 'assets/images/' + enemies.minion.name + 'face.png';
-        this.bossFace = 'assets/images/' + enemies.boss.name + 'face.png';
-        this.background = 'assets/images/' + dungeonSprite.dungeonBG;
-        this.battleBackground = 'assets/images/' + dungeonSprite.battleBG;
-        this.battleBackgroundName = dungeonSprite.battleBG.split('.')[0];
-        console.log(this.battleBackgroundName);
+        this.minionSprite = enemies.minion.name;
+        this.minionSpritePath = enemies.minion.path;
+
+        this.bossSprite = enemies.boss.name;
+        this.bossSpritePath = enemies.boss.path;
+
+        this.minionFace = enemies.minion.face.name;
+        this.minionFacePath = enemies.minion.face.path;
+
+        this.bossFace = enemies.boss.face.name;
+        this.bossFacePath = enemies.boss.face.path;
+
+        this.background = dungeonSprite.dungeonBG.name;
+        this.backgroundPath = dungeonSprite.dungeonBG.path;
+
+        this.battleBackground = dungeonSprite.battleBG.name;
+        this.battleBackgroundPath = dungeonSprite.battleBG.path;
+
         this.minionName = enemies.minion.name;
         this.bossName = enemies.boss.name;
         this.minionExp = enemies.minion.exp;
@@ -50,6 +60,6 @@ class Dungeon extends Phaser.GameObjects.Sprite {
             caveName.visible = false;
         }, caveName);
 
-
+        console.log(this);
     }
 }

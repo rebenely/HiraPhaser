@@ -5,20 +5,18 @@ class BootScene extends Phaser.Scene {
     }
 
     preload () {
-        // load resources
-        this.load.image('cave', 'assets/images/cave.png');
-        this.load.image('level', 'assets/images/level.png');
+        /* Preload dungeon icons, level icons, player sprite */
+        this.load.image('k_cave', 'assets/images/k_dungeon/cave.png');
+        this.load.image('level', 'assets/images/globals/level.png');
 
-        this.load.image('grassland', 'assets/images/grass.png');
+        this.load.image('world_map', 'assets/images/globals/world_map.jpg');
+        this.load.image('heart', 'assets/images/globals/heart.png');
 
+        this.load.spritesheet('player', 'assets/spritesheets/player/miniIdle.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('player_attack', 'assets/spritesheets/player/punchrightmini.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('player_hurt', 'assets/spritesheets/player/player_hurt.png', { frameWidth: 32, frameHeight: 32 });
 
-        this.load.image('heart', 'assets/images/heart.png');
-
-        this.load.spritesheet('player', 'assets/spritesheets/miniIdle.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('player_attack', 'assets/spritesheets/punchrightmini.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.spritesheet('player_hurt', 'assets/spritesheets/player_hurt.png', { frameWidth: 32, frameHeight: 32 });
-
-        this.load.spritesheet('kidlatslash', 'assets/spritesheets/kidlatslash.png',  { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('kidlatslash', 'assets/spritesheets/effects/kidlatslash.png',  { frameWidth: 32, frameHeight: 32 });
 
 
 

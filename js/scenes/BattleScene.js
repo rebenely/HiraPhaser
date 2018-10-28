@@ -9,10 +9,12 @@ class BattleScene extends Phaser.Scene {
     preload () {
         /* initialized once in the main game, to be reused by all scenes */
         /* to keep the attributes in between scenes */
-        this.load.image(this.dungeon.battleBackgroundName, this.dungeon.battleBackground);
-        this.load.spritesheet(this.dungeon.minionName, this.dungeon.minionSprite, { frameWidth: 32, frameHeight: 32 });
+        console.log(this.dungeon);
+        this.load.image(this.dungeon.battleBackground, this.dungeon.battleBackgroundPath);
+        console.log(this.dungeon.minionName, this.dungeon.minionSpritePath);
+        this.load.spritesheet(this.dungeon.minionName, this.dungeon.minionSpritePath, { frameWidth: 32, frameHeight: 32 });
         if(this.dungeon.bossName != undefined){
-            this.load.spritesheet(this.dungeon.bossName, this.dungeon.bossSprite, { frameWidth: 32, frameHeight: 32 });
+            this.load.spritesheet(this.dungeon.bossName, this.dungeon.bossSpritePath, { frameWidth: 32, frameHeight: 32 });
         }
 
     }
@@ -25,9 +27,9 @@ class BattleScene extends Phaser.Scene {
         } else if (data.simulate) {
             this.dungeon = {
                 minionName: 'trainingdummy',
-                minionSprite: 'assets/spritesheets/trainingdummy.png',
-                battleBackground: 'assets/images/dojo.jpg',
-                battleBackgroundName: 'dojo',
+                minionSpritePath: 'assets/spritesheets/enemies/trainingdummy.png',
+                battleBackgroundPath: 'assets/images/globals/dojo.jpg',
+                battleBackground: 'dojo',
                 minionExp: 0,
                 wordPool: data.wordPool
             };
@@ -99,7 +101,7 @@ class BattleScene extends Phaser.Scene {
         this.state = this.STATE_VALUE.idle;
 
         /* draw bg */
-        var bg = this.add.sprite(720/2, 480/2, this.dungeon.battleBackgroundName);
+        var bg = this.add.sprite(720/2, 480/2, this.dungeon.battleBackground);
         bg.setScale(1);
         bg.setOrigin(0.5);
 
@@ -137,6 +139,7 @@ class BattleScene extends Phaser.Scene {
             frameRate: 2,
             repeat: -1
         });
+        console.log(this.boss ? this.dungeon.bossName : this.dungeon.minionName );
         this.anims.create({
             key: 'enemyidle',
             frames: this.anims.generateFrameNumbers(this.boss ? this.dungeon.bossName : this.dungeon.minionName , { frames: [ 0, 1 ] }),

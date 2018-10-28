@@ -14,14 +14,41 @@ class MainScene extends Phaser.Scene {
 
     create () {
         /* background */
-        var grassland = this.add.sprite(0, 0, 'grassland');
-        grassland.setScale(3);
+        var grassland = this.add.sprite(0, 0, 'world_map').setOrigin(0);
+        // grassland.setScale(3);
+
+        this.cameras.main.setBounds(0, 0, 2048, 1024);
+
+
+        var cursors = this.input.keyboard.createCursorKeys();
+
+        var controlConfig = {
+            camera: this.cameras.main,
+            left: cursors.left,
+            right: cursors.right,
+            up: cursors.up,
+            down: cursors.down,
+            acceleration: 0.02,
+            drag: 0.0005,
+            maxSpeed: 1.0
+        };
+
+        this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
         /* ka dungeon */
         this.dungeonK = new Dungeon(this,
-            {name: 'K-Dungeon', level: 2, description:  'This dungeon is the first dungeon ever made in this game! Easter egg dungeons will be added later. I just need to test the word wrap on this.', charSet: ['KA','KI','KU','KE','KO','A','I','U','E','O'], wordPool: ['A-KA', 'KO-A', 'KA-KI', 'KU-O-KE', 'KI-KU', 'KO-O', 'KE-KE', 'KO-KO', 'KI-KU'] },
-            { x: 360, y: 240, spriteName: 'cave', dungeonBG: 'wall_texture.jpg', battleBG: 'battlebackground.png'},
-            { minion: { name: 'goblin', exp: 10} , boss: {name:'goblinboss', exp: 50}},
+            { name: 'K-Dungeon', level: 2, description:  'This dungeon is the first dungeon ever made in this game! Easter egg dungeons will be added later. I just need to test the word wrap on this.', charSet: ['KA','KI','KU','KE','KO','A','I','U','E','O'], wordPool: ['A-KA', 'KO-A', 'KA-KI', 'KU-O-KE', 'KI-KU', 'KO-O', 'KE-KE', 'KO-KO', 'KI-KU'] },
+            { x: 360, y: 240, spriteName: 'k_cave', dungeonBG: {name: 'dungeon_wall', path: 'assets/images/k_dungeon/wall_texture.jpg'}, battleBG: {name: 'battleK', path: 'assets/images/k_dungeon/battlebackground.png'}},
+            {
+                minion: {
+                    name: 'goblin', path: 'assets/spritesheets/enemies/goblinidle.png', exp: 10,
+                    face: { name: 'goblinFace', path: 'assets/images/globals/goblinface.png'}
+                },
+                boss: {
+                    name:'goblinboss', path: 'assets/spritesheets/enemies/goblinbossidle.png', exp: 50,
+                    face: { name: 'goblinBossFace', path: 'assets/images/globals/goblinbossface.png'}
+                }
+            },
             {sizeX: 90, sizeY: 64},
             () => {
                 this.scene.pause('MainScene');
@@ -80,8 +107,8 @@ class MainScene extends Phaser.Scene {
 
     }
 
-    update () {
-
+    update (time, delta) {
+        this.controls.update(delta);
     }
 
 
