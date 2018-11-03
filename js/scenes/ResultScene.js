@@ -107,6 +107,9 @@ class ResultScene extends Phaser.Scene {
 
         } else if (this.state >= 1) {
             console.log('gising na bata');
+            if(this.success) { /* update story level */
+                this.events.emit('finishedDungeon');
+            }
             this.scene.wake('MainScene', {player: this.player});
             this.scene.stop('ResultScene');
         }

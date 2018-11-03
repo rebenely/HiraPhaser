@@ -150,7 +150,7 @@ class BattleScene extends Phaser.Scene {
         this.anims.create({
             key: 'player_hurt',
             frames: this.anims.generateFrameNumbers('player_hurt', { frames: [ 0, 1, 2] }),
-            frameRate: 20,
+            frameRate: 14,
             repeat: 0
         });
 

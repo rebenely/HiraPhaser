@@ -39,29 +39,29 @@
         "message": "Then good! I'll teach you your next characters!"
     },
     {
-        "text": "KA",
+        "text": "A",
         "name": "Ai",
-        "message": "This is read as 'ka'."
+        "message": "This is read as 'a'."
     },
     {
-        "text": "KI",
+        "text": "I",
         "name": "Ai",
-        "message": "This is read as 'ki'."
+        "message": "This is read as 'i'."
     },
     {
-        "text": "KU",
+        "text": "U",
         "name": "Ai",
-        "message": "This is read as 'ku'."
+        "message": "This is read as 'u'."
     },
     {
-        "text": "KE",
+        "text": "E",
         "name": "Ai",
-        "message": "This is read as 'ke'."
+        "message": "This is read as 'e'."
     },
     {
-        "text": "KO",
+        "text": "O",
         "name": "Ai",
-        "message": "This is read as 'ko'."
+        "message": "This is read as 'o'."
     },
     {
         "image": "npc_surprised",
@@ -80,5 +80,5 @@
         "y": "380",
         "scale": "1"
     },
-    "teach": ["KA", "KI", "KU", "KE", "KO"]
+    "teach": ["A", "I", "U", "E", "O"]
 }

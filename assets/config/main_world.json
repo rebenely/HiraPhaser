@@ -1,17 +1,17 @@
 {
     "dungeons" : [
         {
-            "name": "V-dungeon" ,
+            "name": "V-dungeon REE" ,
             "level": 1,
             "description":  "Test for loop!",
             "charSet": ["A","I","U","E","O"],
             "wordPool": ["A","I","U","E","O"],
             "sprites":    {
-                "x": 740, "y": 240, "name": "k_cave",
+                "x": 530, "y": 220, "name": "k_cave",
                 "dungeonBG": {
-                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "name": "v_dungeon", "path": "assets/images/v_dungeon/cave_pj.png"},
                     "battleBG": {
-                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                        "name": "v_wall", "path": "assets/images/v_dungeon/dungeon_wall.png"
                     }
             },
             "enemies": {
@@ -57,9 +57,49 @@
 
     "storyLevels": [
         {
+            "name": "V start",
+            "sprite": {"name": "level", "x": 622, "y": 124},
+            "json": "level0.json",
+            "level": 0,
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "details" : {
+                "title": "Chapter 0: Vowels 4 u",
+                "subtitle": "You will learn vowels.",
+                "desc": "This is a place holder!"
+            },
+            "type":"CutScene"
+        },
+        {
+            "name": "V start: Training",
+            "sprite": {"name": "level",  "x": 596, "y": 159},
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "level": 1,
+            "details" : {
+                "title": "Chapter 0: Vowels 4 u",
+                "subtitle": "You will learn vowels.",
+                "desc": "This is a place holder!"
+            },
+            "type":"TrainScene",
+             "characterPool": ["A","I","U","E","O"]
+        },
+        {
+            "name": "The K-invasion: Practice Battle",
+            "sprite": {"name": "level",  "x": 574, "y": 186},
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "level": 1,
+            "details" : {
+                "title": "Chapter 0: Vowels 4 u",
+                "subtitle": "You will learn vowels.",
+                "desc": "This is a place holder!"
+            },
+            "type":"BattleScene",
+            "wordPool": ["A","I","U","E","O"]
+        },
+        {
             "name": "The K-invasion",
-            "sprite": {"name": "level", "x": 220, "y": 180},
+            "sprite": {"name": "level", "x": 485, "y": 230},
             "json": "level1.json",
+            "level": 2,
             "optionals" : {"sizeX": 16, "sizeY":16},
             "details" : {
                 "title": "Chapter I: Wtf",
@@ -70,8 +110,9 @@
         },
         {
             "name": "The K-invasion: Training",
-            "sprite": {"name": "level",  "x": 260, "y": 220},
+            "sprite": {"name": "level",  "x": 447, "y": 237},
             "optionals" : {"sizeX": 16, "sizeY":16},
+            "level": 3,
             "details" : {
                 "title": "Chapter I: Wtf",
                 "subtitle": "this should work",
@@ -82,8 +123,9 @@
         },
         {
             "name": "The K-invasion: Practice Battle",
-            "sprite": {"name": "level",  "x": 300, "y": 240},
+            "sprite": {"name": "level",  "x": 409, "y": 241},
             "optionals" : {"sizeX": 16, "sizeY":16},
+            "level": 3,
             "details" : {
                 "title": "Chapter I: Wtf",
                 "subtitle": "You will learn vowels.",

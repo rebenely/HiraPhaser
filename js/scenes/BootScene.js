@@ -6,6 +6,8 @@ class BootScene extends Phaser.Scene {
 
     preload () {
         /* Preload dungeon icons, level icons, player sprite */
+        var style = { font: "1px manaspc", fill: "#ffffff" };
+        var caveName = this.add.text(0, 0, 'load', style);
         this.load.image('k_cave', 'assets/images/k_dungeon/cave.png');
         this.load.image('level', 'assets/images/globals/level.png');
 

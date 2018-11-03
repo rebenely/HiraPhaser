@@ -34,7 +34,7 @@ class CutScene extends Phaser.Scene {
 
     create() {
         var bg = this.add.sprite(720/2, 480/2, this.bgKey);
-        console.log(this.jsonFile.image.x, this.jsonFile.image.y);
+        console.log('image resize', this.jsonFile.image.x, this.jsonFile.image.y, this.jsonFile.image.scale);
         this.npc = this.add.sprite(parseInt(this.jsonFile.image.x, 10), parseInt(this.jsonFile.image.y, 10), this.jsonFile['dialog'][0].image);
         this.npc.setScale(Number(this.jsonFile.image.scale));
         this.npc.setOrigin(0.5);
@@ -76,10 +76,14 @@ class CutScene extends Phaser.Scene {
                 this.dialogName.setText(this.messageArray[this.dialogIterator].name);
                 this.dialogText.setText(this.messageArray[this.dialogIterator].message);
                 if (this.messageArray[this.dialogIterator].image !== undefined) {
+                    console.log('start ', this.messageArray[this.dialogIterator].image);
+
                     this.npc.setTexture(this.messageArray[this.dialogIterator].image);
                     this.hiraText.visible = false;
                     this.npc.visible = true;
                 } else if (this.messageArray[this.dialogIterator].text !== undefined) {
+                    console.log('start ', this.messageArray[this.dialogIterator].text);
+
                     this.npc.visible = false;
                     this.hiraText.visible = true;
                     this.hiraText.setOrigin(0.5);

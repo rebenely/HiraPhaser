@@ -12,7 +12,8 @@ class Unit  {
         this.exp = 0;
         this.level = 1;
         this.maxExp = 100;
-        this.characterPool = ['A', 'I', 'U', 'E', 'O'];
+        this.characterPool = [];
+        this.story = 0;
     }
 
     levelUp () {

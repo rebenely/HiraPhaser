@@ -9,6 +9,7 @@ class CutLoaderScene extends Phaser.Scene {
     }
 
     preload () {
+        this.cache.json.remove('dialog');
         this.load.json('dialog', 'assets/dialogs/'+this.fileName);
 
     }

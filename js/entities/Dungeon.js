@@ -51,10 +51,13 @@ class Dungeon extends Phaser.GameObjects.Sprite {
 
         this.setInteractive().
         on('pointerup', () => {
-            caveName.visible = false;
-            callback();
+            if(this.enabled){
+                caveName.visible = false;
+                callback();
+            }
         }).
         on('pointerover', () => {
+            caveName.setDepth(1);
             caveName.visible = true;
         }, caveName).
         on('pointerout', () => {
@@ -62,5 +65,18 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         }, caveName);
 
         console.log(this);
+        this.enabled = false;
+    }
+
+
+    comparePlayerLevel(level) {
+        console.log('level',level,'this level',this.level);
+        if (level >= this.level) {
+            this.enabled = true;
+            this.clearTint();
+        } else {
+            this.enabled = false;
+            this.setTint(0x585858);
+        }
     }
 }

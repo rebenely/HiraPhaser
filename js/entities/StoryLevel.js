@@ -4,6 +4,8 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         super(scene, sprite.x, sprite.y, sprite.name);
         this.fileName = levelContent;
         this.name = name;
+        this.level = optionals.level;
+        this.setOrigin(0.5);
 
         this.setDisplaySize(optionals.sizeX, optionals.sizeY);
         this.setSize(optionals.sizeX, optionals.sizeY);
@@ -17,8 +19,10 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
 
         this.setInteractive().
         on('pointerup', () => {
-            levelName.visible = false;
-            callback();
+            if(this.enabled){
+                levelName.visible = false;
+                callback();
+            }
         }).
         on('pointerover', () => {
             levelName.visible = true;
@@ -26,6 +30,20 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         on('pointerout', () => {
             levelName.visible = false;
         }, levelName);
+
+        this.enabled = false;
+    }
+
+    comparePlayerLevel(level) {
+        console.log('level',level,'this level',this.level);
+
+        if (level >= this.level) {
+            this.enabled = true;
+            this.clearTint();
+        } else {
+            this.enabled = false;
+            this.setTint(0x585858);
+        }
     }
 
 }
