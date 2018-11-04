@@ -168,8 +168,9 @@ class MainScene extends Phaser.Scene {
 
     onFinishedDungeon(data){
         console.log(data.success);
+        this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: data.dataCapture });
+
         if(data.success) {
-            this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message });
             this.player.story++;
             this.compareStoryLevels();
         }

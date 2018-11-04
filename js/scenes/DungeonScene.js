@@ -143,7 +143,7 @@ class DungeonScene extends Phaser.Scene {
 
         /* if player died, no anims for now but will probably add later */
         if(this.player.hp <= 0) {
-            this.packCapturedData(false);
+            this.packCapturedData(false, false);
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
@@ -160,7 +160,7 @@ class DungeonScene extends Phaser.Scene {
 
         /* if dungeon is cleared, no anims for now but will probably add later */
         if(this.cleared >= 4) {
-            this.packCapturedData(true);
+            this.packCapturedData(true, false);
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
