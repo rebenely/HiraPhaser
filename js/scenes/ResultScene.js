@@ -11,6 +11,7 @@ class ResultScene extends Phaser.Scene {
         this.success = data.success;
         this.flee = data.flee;
         this.progress = data.progress;
+        this.dataCapture = data.dataCapture;
     }
 
     preload () {
@@ -47,7 +48,7 @@ class ResultScene extends Phaser.Scene {
 
 
         if(this.success) {
-            this.message.setText(this.player.type + ' was victorious!');
+            this.message.setText(this.player.name + ' was victorious!');
         } else  if (this.flee) {
             this.message.setText('You fleed!');
         } else {
@@ -70,7 +71,7 @@ class ResultScene extends Phaser.Scene {
             this.enemyExp[i].setOrigin(0.5);
         }
 
-        this.playerName = this.add.text(720/3, 480/3, this.player.type, style);
+        this.playerName = this.add.text(720/3, 480/3, this.player.name, style);
         this.playerName.setOrigin(0.5);
 
         this.levelUpMessage = this.add.text(720/3 - 100, 480/3, 'level up!', style);
@@ -108,9 +109,9 @@ class ResultScene extends Phaser.Scene {
 
         } else if (this.state >= 1) {
             console.log('gising na bata');
-            if(this.success) { /* update story level */
-                this.events.emit('finishedDungeon', {progress: this.progress, message : {title: "#1 Victory Royale!", message:"You have successfully finished this dungeon!"}});
-            }
+
+            this.events.emit('finishedDungeon', {success: this.success, dataCapture: this.dataCapture, progress: this.progress, message : {title: "#1 Victory Royale!", message:"You have successfully finished this dungeon!"}});
+
             this.scene.wake('MainScene', {player: this.player});
             this.scene.stop('ResultScene');
         }

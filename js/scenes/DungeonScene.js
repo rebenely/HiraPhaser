@@ -25,7 +25,15 @@ class DungeonScene extends Phaser.Scene {
     }
 
     create () {
-        console.log('recreate boii');
+        this.dataCapture = {
+            player: this.player.name,
+            name: this.dungeon.name,
+            timestamp: new Date(),
+            accuracy: 0,
+            battles: []
+        }
+        this.hintChecked = false;
+        console.log('recreate boii', this.dataCapture);
         var bg = this.add.sprite(720/2, 480/2, this.dungeon.background);
         this.playerHP = this.player.hp;
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
@@ -45,6 +53,7 @@ class DungeonScene extends Phaser.Scene {
 
         this.cancelButton = new HiraButton(this, 60 + 30 , 420, "Run away", style, () => {
             console.log('fuck go back');
+            this.packCapturedData(false, true);
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
@@ -53,7 +62,7 @@ class DungeonScene extends Phaser.Scene {
                     enemyCleared.push({name: this.dungeon.minionName, exp: 10});
                 }
             }
-            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true});
+            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true, dataCapture: this.dataCapture});
         }, this);
         this.add.existing(this.cancelButton);
 
@@ -101,6 +110,7 @@ class DungeonScene extends Phaser.Scene {
         this.add.existing(this.hardButton);
 
         this.hintButton = new HiraButton(this, 720/2 , 420, 'Hint!', style, () => {
+            this.hintChecked = true;
             this.scene.pause('DungeonScene');
             this.scene.launch('HintScene', {player: this.player, characterPool: this.player.characterPool});
         }, this);
@@ -133,6 +143,7 @@ class DungeonScene extends Phaser.Scene {
 
         /* if player died, no anims for now but will probably add later */
         if(this.player.hp <= 0) {
+            this.packCapturedData(false);
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
@@ -143,13 +154,13 @@ class DungeonScene extends Phaser.Scene {
             }
             /* some anim before starting next scene */
             this.scene.stop();
-            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared === 4});
+            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture});
             this.cleared = 0;
         }
 
         /* if dungeon is cleared, no anims for now but will probably add later */
         if(this.cleared >= 4) {
-            console.log('tapos na', this.cleared);
+            this.packCapturedData(true);
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
@@ -160,13 +171,30 @@ class DungeonScene extends Phaser.Scene {
             }
             /* success screen, related to story probably cutscene */
             this.scene.stop('DungeonScene');
-            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, progress: this.player.story <= this.dungeon.level});
+            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, progress: this.player.story <= this.dungeon.level, dataCapture: this.dataCapture});
             this.cleared = 0; /* this is a solution to a bug, maybe due to timing? if i remove this, dungeon will be cleared before it is even loaded */
         }
     }
 
-    onBattleFinish () {
-        console.log('tapos');
-        this.cleared += 1;
+    onBattleFinish (data) {
+        if(data.success){
+            console.log('tapos');
+            this.cleared += 1;
+        }
+        data.dataCapture.hint_checked = this.hintChecked;
+        this.dataCapture.battles.push(data.dataCapture);
+        this.hintChecked = false;
+    }
+
+    packCapturedData(success, flee){
+        this.dataCapture.success = success;
+        if(flee === true) {
+            this.dataCapture.flee = flee;
+        }
+        console.log('tapos na', this.dataCapture);
+        for(let i = 0; i < this.dataCapture.battles.length; i++){
+            this.dataCapture.accuracy += this.dataCapture.battles[i].accuracy;
+        }
+        this.dataCapture.accuracy /= this.dataCapture.battles.length;
     }
 }

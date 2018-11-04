@@ -3,7 +3,7 @@ class Unit  {
     constructor(scene, x, y, type, hp, damage) {
         /* not a sprite since it will not be always drawn in scenes that have it */
         console.log('i received ', hp);
-        this.type = type;
+        this.name = type;
         this.maxHp = this.hp = hp;
         this.damage = damage; // default damage
         this.sprite = null;
@@ -13,7 +13,7 @@ class Unit  {
         this.level = 1;
         this.maxExp = 100;
         this.characterPool = [];
-        this.story = 5;
+        this.story = 0;
     }
 
     levelUp () {

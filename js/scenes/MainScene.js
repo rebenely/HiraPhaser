@@ -14,9 +14,13 @@ class MainScene extends Phaser.Scene {
     }
 
     create () {
-
-
-
+        this.scene.launch('WorldNavScene', {camera: this.cameras.main});
+        this.events.on('pause', function(){
+            this.scene.sleep('WorldNavScene');
+        }, this);
+        this.events.on('wake', function(){
+            this.scene.wake('WorldNavScene');
+        }, this);
         /* background */
         var grassland = this.add.sprite(0, 0, 'world_map').setOrigin(0);
         // grassland.setScale(3);
@@ -163,8 +167,8 @@ class MainScene extends Phaser.Scene {
     }
 
     onFinishedDungeon(data){
-        console.log(data);
-        if(data) {
+        console.log(data.success);
+        if(data.success) {
             this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message });
             this.player.story++;
             this.compareStoryLevels();

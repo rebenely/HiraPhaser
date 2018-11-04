@@ -58,8 +58,15 @@ class BattleScene extends Phaser.Scene {
             else if (e.keyCode === 13) //enter
             {
                 e.preventDefault();
+                let stats = {
+                    word: this.projectile.currentChar,
+                    answer: this.inputText,
+                    time: parseFloat(this.timerDisplay.text)
+                };
+
                 if(this.inputText === this.projectile.currentChar)
                 {
+                    stats.correct = true;
                     this.cameras.main.flash(100);
                     this.state = this.STATE_VALUE.idle;
                     if(!this.simulate){
@@ -75,14 +82,26 @@ class BattleScene extends Phaser.Scene {
                 }
                 else
                 {
+                    stats.correct = false;
                     this.timedEvent.remove(this.answerFailed());
 
                 }
+                this.battleCapture.questions.push(stats);
             }
         }
     }
 
     create () {
+        this.battleCapture = {
+            difficulty: this.difficulty,
+            enemy_health: this.boss ? 4 : 2 + this.difficulty,
+            asked: 0,
+            total_time: this.time.now/1000,
+            questions: []
+        };
+
+        console.log('ayo mark time', this.battleCapture.total_time);
+
         this.scene.bringToTop();
         /* remove existing anims since this scene will be reused */
         this.anims.remove('idle');
@@ -128,6 +147,8 @@ class BattleScene extends Phaser.Scene {
                 this.projectile.setText(this.projectile.getHiragana());
                 this.state = this.STATE_VALUE.attack;
                 console.log(this.projectile);
+                this.battleCapture.asked++;
+
             }
         }, this);
         this.add.existing(this.attackButton);
@@ -216,14 +237,23 @@ class BattleScene extends Phaser.Scene {
         this.slash.on('animationcomplete', this.animCompleteSlash, this);
 
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
-            if(this.player.hp <= 0) {
-                this.scene.stop('BattleScene');
-                this.scene.wake('DungeonScene');
-            } else {
-                this.events.emit('battleFinish');
-                this.scene.stop('BattleScene');
-                this.scene.wake('DungeonScene');
+            this.battleCapture.total_time = this.time.now/1000 - this.battleCapture.total_time;
+            let correct = 0;
+            let time_answer = 0;
+            for(let i = 0; i < this.battleCapture.questions.length; i++){
+                if(this.battleCapture.questions[i].correct) {
+                    correct++;
+                }
+                time_answer += this.battleCapture.questions[i].time;
             }
+            this.battleCapture.accuracy = correct/this.battleCapture.asked;
+            this.battleCapture.time_answering = time_answer;
+
+            this.events.emit('battleFinish', {success: this.player.hp > 0, dataCapture: this.battleCapture});
+            this.scene.stop('BattleScene');
+            this.scene.wake('DungeonScene');
+
+            console.log('return this my nibba', this.battleCapture);
         }, this);
 
         this.events.once('closeScreen', this.closeScreen, this);
@@ -272,6 +302,7 @@ class BattleScene extends Phaser.Scene {
     }
 
     update () {
+
         /* if player died or enemy died,  probably will add animations later */
         if(this.player.hp <= 0 || this.enemy.hp <= 0) {
             /* play death anim here */
