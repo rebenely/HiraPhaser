@@ -10,6 +10,7 @@ class ResultScene extends Phaser.Scene {
         this.cleared = data.cleared;
         this.success = data.success;
         this.flee = data.flee;
+        this.progress = data.progress;
     }
 
     preload () {
@@ -108,7 +109,7 @@ class ResultScene extends Phaser.Scene {
         } else if (this.state >= 1) {
             console.log('gising na bata');
             if(this.success) { /* update story level */
-                this.events.emit('finishedDungeon');
+                this.events.emit('finishedDungeon', {progress: this.progress, message : {title: "#1 Victory Royale!", message:"You have successfully finished this dungeon!"}});
             }
             this.scene.wake('MainScene', {player: this.player});
             this.scene.stop('ResultScene');

@@ -65,7 +65,7 @@ class HintScene extends Phaser.Scene {
         this.verticalCamera.ignore([this.cancelButton]);
         this.container.fillStyle(0x000d1a, 1);
         this.container.fillRect(720/2 - 680/2, 0, 640,  j*100 + 100);
-        this.verticalCamera.setBounds(0, 0, 720, j*100 + 100);
+        this.verticalCamera.setBounds(0, 0, 680, j*100 + 100);
 
     }
 

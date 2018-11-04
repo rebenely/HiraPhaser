@@ -48,7 +48,5 @@ class DetailScene extends Phaser.Scene {
             }
         }, this);
         this.add.existing(this.enterButton);
-
-
     }
 }

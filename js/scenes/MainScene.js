@@ -21,7 +21,7 @@ class MainScene extends Phaser.Scene {
         var grassland = this.add.sprite(0, 0, 'world_map').setOrigin(0);
         // grassland.setScale(3);
 
-        this.cameras.main.setBounds(0, 0, 2048, 1024);
+        this.cameras.main.setBounds(0, 0, 2048, 981);
 
         console.log(this.world);
 
@@ -34,8 +34,8 @@ class MainScene extends Phaser.Scene {
             up: cursors.up,
             down: cursors.down,
             acceleration: 0.02,
-            drag: 0.0005,
-            maxSpeed: 1.0
+          drag: 0.0005,
+          maxSpeed: 1.0
         };
 
         this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
@@ -143,7 +143,7 @@ class MainScene extends Phaser.Scene {
 
         /* debug */
         this.input.on('pointerup', function (pointer) {
-            console.log(pointer.x, pointer.y);
+            console.log(pointer.worldX, pointer.worldY);
         });
     }
 
@@ -152,17 +152,23 @@ class MainScene extends Phaser.Scene {
     }
 
     onLearnedNewCharacters(data){
-        if(!this.player.checkSubsetArray(data)){
-            this.player.learnNewCharacters(data);
+        console.log(data);
+        if(!this.player.checkSubsetArray(data.charSet)){
+            this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message});
+            this.player.learnNewCharacters(data.charSet);
             this.player.story++;
         }
         this.compareStoryLevels();
         console.log('received', data);
     }
 
-    onFinishedDungeon(){
-        this.player.story++;
-        this.compareStoryLevels();
+    onFinishedDungeon(data){
+        console.log(data);
+        if(data) {
+            this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message });
+            this.player.story++;
+            this.compareStoryLevels();
+        }
     }
 
     compareStoryLevels() {

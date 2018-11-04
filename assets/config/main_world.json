@@ -7,7 +7,7 @@
             "charSet": ["A","I","U","E","O"],
             "wordPool": ["A","I","U","E","O"],
             "sprites":    {
-                "x": 530, "y": 220, "name": "k_cave",
+                "x": 550, "y": 307, "name": "k_cave",
                 "dungeonBG": {
                     "name": "v_dungeon", "path": "assets/images/v_dungeon/cave_pj.png"},
                     "battleBG": {
@@ -33,7 +33,34 @@
             "charSet": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["A-KA", "KO-A", "KA-KI", "KU-O-KE", "KI-KU", "KO-O", "KE-KE", "KO-KO", "KI-KU"],
             "sprites":    {
-                "x": 360, "y": 240, "name": "k_cave",
+                "x": 665, "y": 357, "name": "k_cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblinidle.png", "exp": 10,
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinbossidle.png", "exp": 50,
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 90, "sizeY": 64}
+
+        },
+        {
+            "name": "S-dungeon" ,
+            "level": 5,
+            "description":  "S dungeon!",
+            "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "sprites":    {
+                "x": 770, "y": 316, "name": "k_cave",
                 "dungeonBG": {
                     "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
                     "battleBG": {
@@ -58,7 +85,7 @@
     "storyLevels": [
         {
             "name": "V start",
-            "sprite": {"name": "level", "x": 622, "y": 124},
+            "sprite": {"name": "level", "x": 633, "y": 222},
             "json": "level0.json",
             "level": 0,
             "optionals" : {"sizeX": 16, "sizeY":16},
@@ -71,7 +98,7 @@
         },
         {
             "name": "V start: Training",
-            "sprite": {"name": "level",  "x": 596, "y": 159},
+            "sprite": {"name": "level",  "x": 623, "y": 258},
             "optionals" : {"sizeX": 16, "sizeY":16},
             "level": 1,
             "details" : {
@@ -83,8 +110,8 @@
              "characterPool": ["A","I","U","E","O"]
         },
         {
-            "name": "The K-invasion: Practice Battle",
-            "sprite": {"name": "level",  "x": 574, "y": 186},
+            "name": "V start: Practice Battle",
+            "sprite": {"name": "level",  "x": 597, "y": 289},
             "optionals" : {"sizeX": 16, "sizeY":16},
             "level": 1,
             "details" : {
@@ -97,7 +124,7 @@
         },
         {
             "name": "The K-invasion",
-            "sprite": {"name": "level", "x": 485, "y": 230},
+            "sprite": {"name": "level", "x": 546, "y": 366},
             "json": "level1.json",
             "level": 2,
             "optionals" : {"sizeX": 16, "sizeY":16},
@@ -110,7 +137,7 @@
         },
         {
             "name": "The K-invasion: Training",
-            "sprite": {"name": "level",  "x": 447, "y": 237},
+            "sprite": {"name": "level",  "x": 570, "y": 397},
             "optionals" : {"sizeX": 16, "sizeY":16},
             "level": 3,
             "details" : {
@@ -123,7 +150,7 @@
         },
         {
             "name": "The K-invasion: Practice Battle",
-            "sprite": {"name": "level",  "x": 409, "y": 241},
+            "sprite": {"name": "level",  "x": 624, "y": 392 },
             "optionals" : {"sizeX": 16, "sizeY":16},
             "level": 3,
             "details" : {
@@ -133,6 +160,45 @@
             },
             "type":"BattleScene",
             "wordPool": ["KA","KI","KU","KE","KO","A","I","U","E","O"]
+        },
+        {
+            "name": "S-cape the trap!",
+            "sprite": {"name": "level", "x": 701, "y": 325},
+            "json": "level2.json",
+            "level": 4,
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "details" : {
+                "title": "Chapter II: S",
+                "subtitle": "subtitles.",
+                "desc": "This is a place holder!"
+            },
+            "type":"CutScene"
+        },
+        {
+            "name": "S-cape: Train",
+            "sprite": {"name": "level",  "x": 707, "y": 287},
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "level": 5,
+            "details" : {
+                "title": "Chapter II: S",
+                "subtitle": "subtitles.",
+                "desc": "This is a place holder!"
+            },
+            "type":"TrainScene",
+             "characterPool": ["KA","KI","KU","KE","KO"]
+        },
+        {
+            "name": "S-cape: Practice",
+            "sprite": {"name": "level",  "x": 751, "y": 277 },
+            "optionals" : {"sizeX": 16, "sizeY":16},
+            "level": 5,
+            "details" : {
+                "title": "Chapter II: S",
+                "subtitle": "subtitles.",
+                "desc": "This is a place holder!"
+            },
+            "type":"BattleScene",
+            "wordPool": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"]
         }
     ]
 }

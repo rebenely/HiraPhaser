@@ -26,6 +26,8 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         }).
         on('pointerover', () => {
             levelName.visible = true;
+            levelName.setDepth(1);
+
         }, levelName).
         on('pointerout', () => {
             levelName.visible = false;

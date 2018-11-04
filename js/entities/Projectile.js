@@ -85,7 +85,7 @@ class Projectile extends Phaser.GameObjects.BitmapText {
             case 'SA':
                 charString = charString.concat(String.fromCharCode(12373));
             break;
-            case 'SI':
+            case 'SHI':
                 charString = charString.concat(String.fromCharCode(12375));
             break;
             case 'SU':
@@ -115,10 +115,10 @@ class Projectile extends Phaser.GameObjects.BitmapText {
             case 'TA':
                 charString = charString.concat(String.fromCharCode(12383));
             break;
-            case 'TI':
+            case 'CHI':
                 charString = charString.concat(String.fromCharCode(12385));
             break;
-            case 'TU':
+            case 'TSU':
                 charString = charString.concat(String.fromCharCode(12388));
             break;
             case 'TE':

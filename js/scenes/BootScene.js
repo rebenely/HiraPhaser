@@ -11,7 +11,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('k_cave', 'assets/images/k_dungeon/cave.png');
         this.load.image('level', 'assets/images/globals/level.png');
 
-        this.load.image('world_map', 'assets/images/globals/world_map.jpg');
+        this.load.image('world_map', 'assets/images/globals/world_map.png');
         this.load.image('heart', 'assets/images/globals/heart.png');
 
         this.load.spritesheet('player', 'assets/spritesheets/player/miniIdle.png', { frameWidth: 32, frameHeight: 32 });

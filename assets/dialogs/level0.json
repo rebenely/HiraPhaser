@@ -80,5 +80,9 @@
         "y": "380",
         "scale": "1"
     },
-    "teach": ["A", "I", "U", "E", "O"]
+    "teach": ["A", "I", "U", "E", "O"],
+    "message": {
+        "title":"Vowels!",
+        "message": "You learned A,I,U,E,O!"
+    }
 }

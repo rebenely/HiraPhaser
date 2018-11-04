@@ -160,7 +160,7 @@ class DungeonScene extends Phaser.Scene {
             }
             /* success screen, related to story probably cutscene */
             this.scene.stop('DungeonScene');
-            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4});
+            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, progress: this.player.story <= this.dungeon.level});
             this.cleared = 0; /* this is a solution to a bug, maybe due to timing? if i remove this, dungeon will be cleared before it is even loaded */
         }
     }

@@ -39,29 +39,29 @@
         "message": "Then good! I'll teach you your next characters!"
     },
     {
-        "text": "KA",
+        "text": "SA",
         "name": "Ai",
-        "message": "This is read as 'ka'."
+        "message": "This is read as 'Sa'."
     },
     {
-        "text": "KI",
+        "text": "SHI",
         "name": "Ai",
-        "message": "This is read as 'ki'."
+        "message": "This is read as 'Si'."
     },
     {
-        "text": "KU",
+        "text": "SU",
         "name": "Ai",
-        "message": "This is read as 'ku'."
+        "message": "This is read as 'Su'."
     },
     {
-        "text": "KE",
+        "text": "SE",
         "name": "Ai",
-        "message": "This is read as 'ke'."
+        "message": "This is read as 'Se'."
     },
     {
-        "text": "KO",
+        "text": "SO",
         "name": "Ai",
-        "message": "This is read as 'ko'."
+        "message": "This is read as 'So'."
     },
     {
         "image": "npc_surprised",
@@ -80,9 +80,9 @@
         "y": "380",
         "scale": "1"
     },
-    "teach": ["KA", "KI", "KU", "KE", "KO"],
+    "teach": ["SA", "SHI", "SU", "SE", "SO"],
     "message": {
-        "title":"K-Family!",
-        "message": "You learned the K-family!"
+        "title":"Vowels!",
+        "message": "You learned SA,SI,SU,SE,SO!"
     }
 }
