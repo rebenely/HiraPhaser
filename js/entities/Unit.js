@@ -39,4 +39,9 @@ class Unit  {
         this.characterPool = this.characterPool.concat(newChars);
     }
 
+    checkSubsetArray(newChars) {
+        console.log(newChars.every(val => this.characterPool.includes(val)));
+        return newChars.every(val => this.characterPool.includes(val));
+    }
+
 }

@@ -152,8 +152,10 @@ class MainScene extends Phaser.Scene {
     }
 
     onLearnedNewCharacters(data){
-        this.player.learnNewCharacters(data);
-        this.player.story++;
+        if(!this.player.checkSubsetArray(data)){
+            this.player.learnNewCharacters(data);
+            this.player.story++;
+        }
         this.compareStoryLevels();
         console.log('received', data);
     }

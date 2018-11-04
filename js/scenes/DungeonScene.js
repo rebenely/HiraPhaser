@@ -25,7 +25,7 @@ class DungeonScene extends Phaser.Scene {
     }
 
     create () {
-
+        console.log('recreate boii');
         var bg = this.add.sprite(720/2, 480/2, this.dungeon.background);
         this.playerHP = this.player.hp;
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
@@ -142,11 +142,14 @@ class DungeonScene extends Phaser.Scene {
                 }
             }
             /* some anim before starting next scene */
+            this.scene.stop();
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared === 4});
+            this.cleared = 0;
         }
 
         /* if dungeon is cleared, no anims for now but will probably add later */
         if(this.cleared >= 4) {
+            console.log('tapos na', this.cleared);
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
@@ -156,7 +159,9 @@ class DungeonScene extends Phaser.Scene {
                 }
             }
             /* success screen, related to story probably cutscene */
+            this.scene.stop('DungeonScene');
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4});
+            this.cleared = 0; /* this is a solution to a bug, maybe due to timing? if i remove this, dungeon will be cleared before it is even loaded */
         }
     }
 
