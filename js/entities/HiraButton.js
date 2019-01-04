@@ -4,8 +4,9 @@ class HiraButton extends Phaser.GameObjects.Text {
         super(scene, x, y, text, style);
         this.setFontFamily(style.font.split(' ')[1]);
         this.clickable = true; // to prevent double clicking
-        this.setInteractive().on('pointerup', () => {
+        this.setInteractive({ cursor: 'url(assets/images/cursor/link.cur), pointer' }).on('pointerup', () => {
             // cursor changes
+            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
             if(this.clickable){
                 this.clickable = false;
                 this.clearTint();

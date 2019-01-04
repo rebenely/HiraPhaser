@@ -49,8 +49,9 @@ class Dungeon extends Phaser.GameObjects.Sprite {
 
 
 
-        this.setInteractive().
+        this.setInteractive({ cursor: 'url(assets/images/cursor/text.cur), pointer' }).
         on('pointerup', () => {
+            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');  
             if(this.enabled){
                 caveName.visible = false;
                 callback();

@@ -17,8 +17,9 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         levelName.setOrigin(0.5);
         Phaser.Display.Align.To.TopCenter(levelName, this, 0, 0);
 
-        this.setInteractive().
+        this.setInteractive({ cursor: 'url(assets/images/cursor/help.cur), pointer' }).
         on('pointerup', () => {
+            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
             if(this.enabled){
                 levelName.visible = false;
                 callback();

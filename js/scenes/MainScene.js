@@ -14,6 +14,8 @@ class MainScene extends Phaser.Scene {
     }
 
     create () {
+        this.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
+
         this.scene.launch('WorldNavScene', {camera: this.cameras.main});
         this.events.on('pause', function(){
             this.scene.sleep('WorldNavScene');
@@ -158,7 +160,7 @@ class MainScene extends Phaser.Scene {
     onLearnedNewCharacters(data){
         console.log(data);
         if(!this.player.checkSubsetArray(data.charSet)){
-            this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message});
+            this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: undefined});
             this.player.learnNewCharacters(data.charSet);
             this.player.story++;
         }
@@ -167,7 +169,7 @@ class MainScene extends Phaser.Scene {
     }
 
     onFinishedDungeon(data){
-        console.log(data.success);
+        console.log(data);
         this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: data.dataCapture });
 
         if(data.success) {

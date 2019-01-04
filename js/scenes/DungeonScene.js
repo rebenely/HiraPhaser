@@ -52,7 +52,7 @@ class DungeonScene extends Phaser.Scene {
         var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
 
         this.cancelButton = new HiraButton(this, 60 + 30 , 420, "Run away", style, () => {
-            console.log('fuck go back');
+            // console.log('fuck go back');
             this.packCapturedData(false, true);
             var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
@@ -188,9 +188,9 @@ class DungeonScene extends Phaser.Scene {
 
     packCapturedData(success, flee){
         this.dataCapture.success = success;
-        if(flee === true) {
-            this.dataCapture.flee = flee;
-        }
+
+        this.dataCapture.flee = flee;
+
         console.log('tapos na', this.dataCapture);
         for(let i = 0; i < this.dataCapture.battles.length; i++){
             this.dataCapture.accuracy += this.dataCapture.battles[i].accuracy;

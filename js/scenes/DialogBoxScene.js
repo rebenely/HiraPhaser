@@ -16,6 +16,8 @@ class DialogBoxScene extends Phaser.Scene {
         if(data.dataCapture !== undefined){
             this.payload = data.dataCapture;
             this.apiRequest = true;
+        } else {
+            this.apiRequest = false;
         }
     }
     create () {
@@ -38,6 +40,7 @@ class DialogBoxScene extends Phaser.Scene {
         // this.add.existing(this.cancelButton);
         //
         if(this.apiRequest){
+            console.log(this.payload);
             console.log('send data');
             this.postData(`http://localhost:5000/api/dungeon`, this.payload)
           .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call

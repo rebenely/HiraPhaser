@@ -69,7 +69,7 @@ class BattleScene extends Phaser.Scene {
                     stats.correct = true;
                     this.cameras.main.flash(100);
                     this.state = this.STATE_VALUE.idle;
-                    if(!this.simulate){
+                    if(!this.simulate){ /* can be refactored similar to when wrong answer, timing on animation before damage */
                         var hearts = this.enemyHealthDisplay.getChildren();
                         hearts[hearts.length - 1].destroy();
 
@@ -152,6 +152,28 @@ class BattleScene extends Phaser.Scene {
             }
         }, this);
         this.add.existing(this.attackButton);
+
+        /* add attack button */
+        this.skipButton = new HiraButton(this, 720/2, 3*480/4, "Skip", style, () =>  {
+            if(this.state === this.STATE_VALUE.attack) {
+
+                let stats = {
+                    word: this.projectile.currentChar,
+                    answer: '$SKIP$',
+                    time: parseFloat(this.timerDisplay.text)
+                };
+
+                stats.correct = false;
+                this.cameras.main.flash(100);
+                this.state = this.STATE_VALUE.idle;
+
+                this.timedEvent.remove(false);
+
+                this.battleCapture.questions.push(stats);
+
+            }
+        }, this);
+        this.add.existing(this.skipButton);
 
         /* create anims */
         this.anims.create({
@@ -237,6 +259,7 @@ class BattleScene extends Phaser.Scene {
         this.slash.on('animationcomplete', this.animCompleteSlash, this);
 
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
+            console.log('yow');
             this.battleCapture.total_time = this.time.now/1000 - this.battleCapture.total_time;
             let correct = 0;
             let time_answer = 0;
@@ -320,6 +343,7 @@ class BattleScene extends Phaser.Scene {
             this.attackButton.visible = true;
             this.projectile.visible = false;
             this.timerDisplay.visible = false;
+            this.skipButton.visible = false;
             this.follower.t = 0;
             this.follower.vec.x = 720/2;
             this.follower.vec.y = 480/3;
@@ -333,6 +357,9 @@ class BattleScene extends Phaser.Scene {
             this.backButton.visible = false;
             this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
 
+            if(!this.simulate){
+                this.skipButton.visible = true;
+            }
             this.attackButton.visible = false;
             this.timerDisplay.visible = true;
             this.timerDisplay.setText(this.timedEvent.getElapsedSeconds().toString().substr(0, 4));

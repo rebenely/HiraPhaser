@@ -33,7 +33,7 @@ class DetailScene extends Phaser.Scene {
         var charSetDisplay = this.add.text(60, 90, this.content.subtitle, style);
 
         this.cancelButton = new HiraButton(this, 720 - 60 - 30 - 60 - 30, 420, "Cancel", style, () => {
-            console.log('fuck go back');
+            // console.log('fuck go back');
             this.scene.wake('MainScene');
             this.scene.stop('DetailScene');
         }, this);

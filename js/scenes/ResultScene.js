@@ -50,7 +50,7 @@ class ResultScene extends Phaser.Scene {
         if(this.success) {
             this.message.setText(this.player.name + ' was victorious!');
         } else  if (this.flee) {
-            this.message.setText('You fleed!');
+            this.message.setText('You fled!');
         } else {
             this.message.setText('You lose!');
             this.message.setInteractive().on('pointerdown', function () {
@@ -110,7 +110,7 @@ class ResultScene extends Phaser.Scene {
         } else if (this.state >= 1) {
             console.log('gising na bata');
 
-            this.events.emit('finishedDungeon', {success: this.success, dataCapture: this.dataCapture, progress: this.progress, message : {title: "#1 Victory Royale!", message:"You have successfully finished this dungeon!"}});
+            this.events.emit('finishedDungeon', {success: this.success, dataCapture: this.dataCapture, progress: this.progress, message : {title:  this.success ? "#1 Victory Royale!" : "Mission Failed", message: this.success ? "You have successfully finished this dungeon!" : "We'll get 'em next time."}});
 
             this.scene.wake('MainScene', {player: this.player});
             this.scene.stop('ResultScene');

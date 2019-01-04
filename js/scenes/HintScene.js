@@ -55,7 +55,7 @@ class HintScene extends Phaser.Scene {
         }
 
         this.cancelButton = new HiraButton(this, 720  - 60 - 30, 420, "Cancel", style, () => {
-            console.log('fuck go back');
+            // console.log('fuck go back');
             this.scene.wake('DungeonScene');
             this.scene.stop('HintScene');
         }, this);
