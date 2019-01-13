@@ -7,6 +7,7 @@ class TrainScene extends Phaser.Scene {
     init (data) {
         this.player = data.player;
         this.characterPool = data.characterPool;
+        console.log("ayyy ", this.characterPool);
     }
 
     preload () {

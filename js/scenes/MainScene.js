@@ -157,6 +157,7 @@ class MainScene extends Phaser.Scene {
         this.controls.update(delta);
     }
 
+    /* emitted event from cutscene */
     onLearnedNewCharacters(data){
         console.log(data);
         if(!this.player.checkSubsetArray(data.charSet)){
@@ -168,11 +169,12 @@ class MainScene extends Phaser.Scene {
         console.log('received', data);
     }
 
+    /* emmitted event from dungeon */
     onFinishedDungeon(data){
         console.log(data);
         this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: data.dataCapture });
 
-        if(data.success) {
+        if(data.success) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
         }

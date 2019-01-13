@@ -67,6 +67,8 @@ class HintScene extends Phaser.Scene {
         this.container.fillRect(720/2 - 680/2, 0, 640,  j*100 + 100);
         this.verticalCamera.setBounds(0, 0, 680, j*100 + 100);
 
+
+        console.log(this.world);
     }
 
 
