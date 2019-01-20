@@ -9,9 +9,15 @@ class HintScene extends Phaser.Scene {
     }
 
     create () {
+        this.move = 0;
+
         this.graphics = this.add.graphics();
-        this.graphics.fillStyle(0x003366 , 1);
+
+        this.graphics.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
+
+        this.graphics.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B, game.global.UI_ALPHA);
         this.graphics.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
+        this.graphics.strokeRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
 
         this.container = this.add.graphics();
 
@@ -26,9 +32,9 @@ class HintScene extends Phaser.Scene {
             right: cursors.right,
             up: cursors.up,
             down: cursors.down,
-            acceleration: 0.04,
-            drag: 0.00025,
-            maxSpeed: 1.0
+            acceleration: 0.2,
+            drag: 0.0005,
+            maxSpeed: 0.2
         };
 
         this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
@@ -60,11 +66,24 @@ class HintScene extends Phaser.Scene {
             this.scene.stop('HintScene');
         }, this);
         this.add.existing(this.cancelButton);
+
+        this.downButton = new HiraPress(this, 90, 430, "Down", style, () => {
+            this.move = 5;
+        }, this, true);
+        this.add.existing(this.downButton);
+
+        this.upButton = new HiraPress(this, 90, 400, "Up", style, () => {
+            this.move = -5;
+        }, this);
+        this.add.existing(this.upButton);
+
         console.log(j* 100 + 5);
         this.cameras.main.ignore([this.characterDisplay, this.romajiDisplay, this.container, titleDisplay]);
-        this.verticalCamera.ignore([this.cancelButton]);
-        this.container.fillStyle(0x000d1a, 1);
+        this.verticalCamera.ignore([this.cancelButton, this.downButton, this.upButton, this.graphics]);
+        this.container.fillStyle(game.global.UI_FILL_A, 1);
+        this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
         this.container.fillRect(720/2 - 680/2, 0, 640,  j*100 + 100);
+        this.container.strokeRect(720/2 - 680/2, 0, 640, j*100 + 100);
         this.verticalCamera.setBounds(0, 0, 680, j*100 + 100);
 
 
@@ -74,5 +93,12 @@ class HintScene extends Phaser.Scene {
 
     update (time, delta) {
         this.controls.update(delta);
+        if(this.move > 0) {
+            this.verticalCamera.scrollY += 5;
+            this.move -= 1;
+        } else if (this.move < 0) {
+            this.verticalCamera.scrollY -= 5;
+            this.move += 1;
+        }
     }
 }

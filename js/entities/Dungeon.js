@@ -40,18 +40,23 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         this.minionExp = enemies.minion.exp;
         this.bossExp = enemies.boss.exp;
 
-        /* display name */
-        var style = { font: "16px manaspc", fill: "#ffffff" };
-        var caveName = scene.add.text(0, 0, this.name, style);
-        caveName.visible = false;
+        /* display name : change this to bitmaptext */
+        // var caveName = new HiraText(this, 0, 0, this.name, "basic");
+        // scene.add.existing(caveName);
+        // caveName.visible = false;
+        // Phaser.Display.Align.To.TopCenter(caveName, this, 0, 0);
+
+        var caveName = scene.add.bitmapText(720/2, 480/2, 'mnspc', this.name, 32);
+        caveName.visible = false ;
         caveName.setOrigin(0.5);
         Phaser.Display.Align.To.TopCenter(caveName, this, 0, 0);
 
 
 
+
         this.setInteractive({ cursor: 'url(assets/images/cursor/text.cur), pointer' }).
         on('pointerup', () => {
-            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');  
+            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
             if(this.enabled){
                 caveName.visible = false;
                 callback();

@@ -39,8 +39,8 @@ class CutScene extends Phaser.Scene {
         this.npc.setScale(Number(this.jsonFile.image.scale));
         this.npc.setOrigin(0.5);
 
-        var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 660, useAdvancedWrap: true} };
-        var titleStyle = { font: "32px manaspc", fill: "#00ff44", align: "center" };
+        var style = { font: "16px manaspc", fill: game.global.UI_TEXT_FILL, align: "left", wordWrap: { width: 660, useAdvancedWrap: true} };
+        var titleStyle = { font: "32px manaspc", fill:  game.global.UI_TEXT_FILL, align: "center" };
 
 
         this.hiraText = this.add.bitmapText(720/2, 480/2, 'hira', '');
@@ -48,11 +48,11 @@ class CutScene extends Phaser.Scene {
         this.hiraText.visible = false;
 
         this.dialogBox = this.add.graphics();
-        this.dialogBox.fillStyle(0x003366 , 0.7);
+        this.dialogBox.fillStyle(game.global.UI_FILL_A , 0.7);
         this.dialogBox.fillRect(10, 480 - 120, 700, 100);
 
         this.nameBox = this.add.graphics();
-        this.nameBox.fillStyle(0xffffff , 0.3);
+        this.nameBox.fillStyle(game.global.UI_FILL_B , 0.3);
         this.nameBox.fillRect(10, 480 - 145, 100, 48);
 
         console.log(this.jsonFile['dialog'][0]['message']);

@@ -125,7 +125,7 @@ class BattleScene extends Phaser.Scene {
         bg.setOrigin(0.5);
 
         /* draw hud */
-        var style = { font: "16px manaspc", fill: "#00ff44" };
+        var style = { font: "16px manaspc", fill: game.global.UI_TEXT_FILL };
 
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
         if(!this.simulate){

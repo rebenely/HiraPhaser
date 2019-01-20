@@ -6,8 +6,11 @@ class BootScene extends Phaser.Scene {
 
     preload () {
         /* Preload dungeon icons, level icons, player sprite */
-        var style = { font: "1px manaspc", fill: "#ffffff" };
-        var caveName = this.add.text(0, 0, 'load', style);
+        var style = { font: "32px manaspc", fill: "#ffffff" };
+        var caveName = this.add.text(720/2, 480/2, 'loading', style);
+        caveName.setOrigin(0.5);
+
+
         this.load.image('k_cave', 'assets/images/k_dungeon/cave.png');
         this.load.image('level', 'assets/images/globals/level.png');
 
@@ -25,7 +28,7 @@ class BootScene extends Phaser.Scene {
         this.player = new Unit(this, 120, 320, "TestBoi", 5, 1);
 
         this.load.bitmapFont('hira', 'assets/font/font.png', 'assets/font/font.fnt');
-
+        this.load.bitmapFont('mnspc', 'assets/font/mnspc.png', 'assets/font/mnspc.fnt');
 
 
 
@@ -51,6 +54,7 @@ class BootScene extends Phaser.Scene {
     create () {
         this.worldJson = this.cache.json.get('main_world');
         console.log(this.worldJson);
+        console.log(game.global.UI_TEXT_HIGHLIGHT);
         if(this.worldJson) {
             this.loaded = true;
         }

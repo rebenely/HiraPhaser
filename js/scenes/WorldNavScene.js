@@ -11,15 +11,11 @@ class WorldNavScene extends Phaser.Scene {
 
         this.container = this.add.graphics();
 
-        var color = 0x909090;
-        var thickness = 2;
-        var alpha = 1;
+        this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
 
-        this.container.lineStyle(thickness, color, alpha);
-
-        this.container.fillGradientStyle(0x404040, 0x404040,0x202020, 0x202020, 0.8);
-        this.container.fillRect(0, 430, 720, 48);
-        this.container.strokeRect(0, 430, 720, 48);
+        this.container.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B, game.global.UI_ALPHA);
+        this.container.fillRect(2, 430, 716, 48);
+        this.container.strokeRect(2, 430, 716, 48);
 
         this.navEnable = false;
         this.coordinates = [{x:643, y:292}, {x: 705, y: 655}, {x: 1397, y: 531}, {x:1350, y:230}];
@@ -27,7 +23,7 @@ class WorldNavScene extends Phaser.Scene {
         this.cam.pan(this.coordinates[0].x, this.coordinates[0].y, 2000, 'Sine.easeInOut');
         this.cam.zoomTo(this.zoom[0], 2000);
 
-        var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
+        var style = { font: "16px manaspc", fill:  game.global.UI_TEXT_FILL, align: "left"};
         this.iterator = 0;
         this.prevButton = new HiraButton(this, 60, 430 + 24, "Prev", style, () => {
             if(this.navEnable === true){

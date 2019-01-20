@@ -16,5 +16,15 @@ var game = new Phaser.Game(config);
 game.global = {
     EASY: 0,
     NORMAL: 1,
-    HARD: 2
+    HARD: 2,
+    UI_COLOR: 0xfbf5ef,
+    UI_THICKNESS: 2,
+    UI_ALPHA: 0.8,
+    UI_FILL_A: 0x272744,
+    UI_FILL_B: 0x494d7e,
+    UI_TEXT_FILL: "#fbf5ef",
+    UI_TEXT_STROKE: "#272744",
+    UI_TEXT_HIGHLIGHT: 0xf2d3ab,
+    UI_TEXT_STROKE_HIGHLIGHT: "#f2d3ab"
+
 }

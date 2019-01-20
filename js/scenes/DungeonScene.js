@@ -49,7 +49,7 @@ class DungeonScene extends Phaser.Scene {
 
          /* buttons */
 
-        var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
+        var style = { font: "16px manaspc", fill: game.global.UI_TEXT_FILL, align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
 
         this.cancelButton = new HiraButton(this, 60 + 30 , 420, "Run away", style, () => {
             // console.log('fuck go back');
@@ -81,20 +81,20 @@ class DungeonScene extends Phaser.Scene {
 
         this.easyButton = new HiraButton(this, 720/4, 480/5, 'Easy', style, () => {
             this.difficulty = game.global.EASY;
-            this.easyButton.setStroke('#00ff44', 3);
-            this.normalButton.setStroke('#00ff44', 0);
-            this.hardButton.setStroke('#00ff44', 0);
+            this.easyButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
+            this.normalButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 0);
+            this.hardButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 0);
 
         }, this);
         this.add.existing(this.easyButton);
-        this.easyButton.setStroke('#00ff44', 3);
+        this.easyButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
 
 
         this.normalButton = new HiraButton(this, 2*720/4, 480/5, 'Normal', style, () => {
             this.difficulty = game.global.NORMAL;
-            this.normalButton.setStroke('#00ff44', 3);
-            this.easyButton.setStroke('#00ff44', 0);
-            this.hardButton.setStroke('#00ff44', 0);
+            this.normalButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
+            this.easyButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 0);
+            this.hardButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 0);
 
 
         }, this);
@@ -102,9 +102,9 @@ class DungeonScene extends Phaser.Scene {
 
         this.hardButton = new HiraButton(this, 3*720/4, 480/5, 'Hard', style, () => {
             this.difficulty = game.global.HARD;
-            this.hardButton.setStroke('#00ff44', 3);
-            this.easyButton.setStroke('#00ff44', 0);
-            this.normalButton.setStroke('#00ff44', 0);
+            this.hardButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
+            this.easyButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 0);
+            this.normalButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 0);
 
         }, this);
         this.add.existing(this.hardButton);
