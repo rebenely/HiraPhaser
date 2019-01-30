@@ -21,9 +21,12 @@ class ResultScene extends Phaser.Scene {
     create () {
         this.scene.bringToTop();
 
-        let graphics = this.add.graphics();
-        graphics.fillStyle(0x003366 , 1);
-        graphics.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
+        this.container = this.add.graphics();
+        this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
+
+        this.container.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B, 1);
+        this.container.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
+        this.container.strokeRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
 
         this.progressBox = this.add.graphics();
         this.progressBar = this.add.graphics();
@@ -42,8 +45,9 @@ class ResultScene extends Phaser.Scene {
         var gob = this.add.sprite(720/2, 480/2, 'gameover'); gob.setOrigin(0.5); gob.setScale(0.8);
         gob.visible = false;
 
-        this.message = this.add.text(720/2, 480/5, 'xxx', header);
-        this.message.setOrigin(0.5);
+
+        this.message = new HiraText(this, 720/2, 480/5, 'xxx', "header");
+        this.add.existing(this.message);
 
 
 
@@ -65,14 +69,17 @@ class ResultScene extends Phaser.Scene {
         this.enemyNames = [];
         this.enemyExp = [];
         for(var i = 0; i < this.enemy.length; i++){
-            this.enemyNames.push(this.add.text(720/3, 480/3 + 50*(i+1), this.enemy[i].name, style));
-            this.enemyNames[i].setOrigin(0.5);
-            this.enemyExp.push(this.add.text(2*720/3, 480/3 + 50*(i+1), this.enemy[i].exp, style));
-            this.enemyExp[i].setOrigin(0.5);
+            this.enemyNames.push(new HiraText(this, 720/3, 480/3 + 50*(i+1), this.enemy[i].name, "basic"));
+            this.add.existing(this.enemyNames[i]);
+
+            this.enemyExp.push(new HiraText(this, 2*720/3, 480/3 + 50*(i+1), this.enemy[i].exp, "basic"));
+            this.add.existing(this.enemyExp[i]);
+
         }
 
-        this.playerName = this.add.text(720/3, 480/3, this.player.name, style);
-        this.playerName.setOrigin(0.5);
+
+        this.playerName = new HiraText(this, 720/3, 480/3, this.player.name,  "basic");
+        this.add.existing(this.playerName);
 
         this.levelUpMessage = this.add.text(720/3 - 100, 480/3, 'level up!', style);
         this.levelUpMessage.setOrigin(0.5);
@@ -85,7 +92,9 @@ class ResultScene extends Phaser.Scene {
     }
 
     typedKeys (e) {
-        this.state++;
+        if (e.keyCode === 32 || e.keyCode === 13) {
+            this.state++;
+        }
     }
 
     update () {

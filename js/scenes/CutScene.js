@@ -48,18 +48,30 @@ class CutScene extends Phaser.Scene {
         this.hiraText.visible = false;
 
         this.dialogBox = this.add.graphics();
+        this.dialogBox.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
         this.dialogBox.fillStyle(game.global.UI_FILL_A , 0.7);
         this.dialogBox.fillRect(10, 480 - 120, 700, 100);
+        this.dialogBox.strokeRect(10, 480 - 120, 700, 100);
 
-        this.nameBox = this.add.graphics();
-        this.nameBox.fillStyle(game.global.UI_FILL_B , 0.3);
-        this.nameBox.fillRect(10, 480 - 145, 100, 48);
+        // this.nameBox = this.add.graphics();
+        // this.nameBox.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
+        // this.nameBox.fillStyle(game.global.UI_FILL_B , 1);
+        // this.nameBox.fillRect(10, 480 - 145, 100, 48);
+        // this.nameBox.strokeRect(10, 480 - 145, 100, 48);
 
-        console.log(this.jsonFile['dialog'][0]['message']);
-        this.dialogName = this.add.text(60, 480 -120, this.jsonFile['dialog'][0]['name'], titleStyle);
-        this.dialogName.setOrigin(0.5);
+        this.dialogName = new HiraText(this, 40, 480 - 100, this.jsonFile['dialog'][0]['name'], "basic");
+        this.add.existing(this.dialogName);
 
-        this.dialogText = this.add.text(40, 480 - 80, this.jsonFile['dialog'][0]['message'], style);
+        // console.log(this.jsonFile['dialog'][0]['message']);
+        // this.dialogName = this.add.text(60, 480 -120, this.jsonFile['dialog'][0]['name'], titleStyle);
+        // this.dialogName.setOrigin(0.5);
+
+        this.dialogText = new HiraText(this, 40, 480 - 80, this.jsonFile['dialog'][0]['message'], "wordWrap", 660);
+        this.add.existing(this.dialogText);
+        this.dialogText.setOrigin(0);
+
+        // this.dialogText = this.add.text(40, 480 - 80, this.jsonFile['dialog'][0]['message'], style);
+
         this.dialogIterator = 1; this.maxIterator = this.jsonFile['dialog'].length;
 
         this.input.keyboard.on('keyup', this.typedKeys, this);

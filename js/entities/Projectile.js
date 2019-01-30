@@ -11,16 +11,34 @@ class Projectile extends Phaser.GameObjects.BitmapText {
         this.chars = [];
         this.setOrigin(0.5);
         this.visible = false;
-        this.getRandomCharacter();
+        this.characterPool = this.shuffle(characterPool);
+        this.iterator = 0;
+        console.log('char pool length', this.characterPool.length)
     }
 
-    getRandomCharacter () {
-        var i = Math.floor((Math.random() * this.characterPool.length));
-        this.currentChar = this.characterPool[i];
+    say(text) {
+        this.currentChar = text;
         this.chars = this.currentChar.split('-');
         this.currentChar = this.currentChar.replace(/-/g, '');
         console.log('new char', this.currentChar);
-        return this.currentChar;
+        this.setText(this.getHiragana());
+    }
+
+    getRandomCharacter () {
+        console.log('iterator ', this.iterator, this.characterPool);
+        this.currentChar = this.characterPool[this.iterator];
+        this.chars = this.currentChar.split('-');
+        this.currentChar = this.currentChar.replace(/-/g, '');
+        console.log('new char', this.currentChar);
+        this.setText(this.getHiragana());
+        if(this.iterator < this.characterPool.length - 1) {
+            this.iterator++;
+        } else {
+            console.log('go here');
+            this.characterPool = this.shuffle(this.characterPool);
+            this.iterator = 0;
+        }
+
     }
 
     getHiragana () {
@@ -263,5 +281,23 @@ class Projectile extends Phaser.GameObjects.BitmapText {
 
         console.log('yikes ', charString);
         return charString;
+    }
+    shuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
     }
 }

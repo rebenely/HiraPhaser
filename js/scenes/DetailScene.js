@@ -20,8 +20,10 @@ class DetailScene extends Phaser.Scene {
         }
         this.startScene = data.startScene;
         this.passData = data.passData;
+
     }
     create () {
+        console.log(this.passData);
         this.container = this.add.graphics();
 
 

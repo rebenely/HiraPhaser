@@ -110,7 +110,7 @@ class MainScene extends Phaser.Scene {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
-                     }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool}});
+                     }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool, title: currentLevel.name} });
                      }
                  ));
                  this.add.existing(this.trainLevels[this.trainLevels.length - 1]);

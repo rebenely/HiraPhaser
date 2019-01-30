@@ -5,6 +5,7 @@ class HiraButton extends Phaser.GameObjects.Text {
         this.setFontFamily(style.font.split(' ')[1]);
         this.clickable = true; // to prevent double clicking
         this.enabled = true; // enable / disable
+        this.longpress = false;
         this.setStroke( game.global.UI_TEXT_STROKE, 3);
         this.setInteractive({ cursor: 'url(assets/images/cursor/link.cur), pointer' }).on('pointerup', () => {
             // cursor changes
@@ -18,14 +19,18 @@ class HiraButton extends Phaser.GameObjects.Text {
         })
         .on('pointerover', function () {
             if(this.clickable && this.enabled) {
-                this.setTint(game.global.UI_TEXT_HIGHLIGHT);
+                if(!this.longpress){
+                    this.setTint(game.global.UI_TEXT_HIGHLIGHT);
+                }
                 this.setFontSize(16 * 1.25);
             }
         })
         .on('pointerout', function () {
             if(this.enabled) {
                 this.clickable = true;
-                this.clearTint();
+                if(!this.longpress){
+                    this.clearTint();
+                }
                 this.setFontSize(16);
             }
         });

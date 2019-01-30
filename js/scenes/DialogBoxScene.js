@@ -24,13 +24,23 @@ class DialogBoxScene extends Phaser.Scene {
         this.scene.pause('MainScene');
 
         this.graphics = this.add.graphics();
-        this.graphics.fillStyle(0x003366 , 1);
+        this.graphics.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
+
+        this.graphics.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B,  game.global.UI_ALPHA);
         this.graphics.fillRect(90, 160, 540, 150);
+        this.graphics.strokeRect(90, 160, 540, 150);
+
 
         var titleStyle = { font: "32px manaspc", fill: "#ffffff", align: "left" };
         var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 180, useAdvancedWrap: true} };
-        var caveName = this.add.text(90 + 30, 160 + 30, this.title, titleStyle);
-        var caveDesc = this.add.text(90 + 30, 160 + 80, this.message, style);
+
+
+        var dialogTitle = new HiraText(this, 90 + 30, 160 + 30, this.title, "header");
+        dialogTitle.setOrigin(0);
+        this.add.existing(dialogTitle);
+        var dialogMessage = new HiraText(this, 90 + 30, 160 + 80, this.message, "basic");
+        dialogMessage.setOrigin(0);
+        this.add.existing(dialogMessage);
 
         // this.cancelButton = new HiraButton(this, 720 - 60 - 30 - 60 - 30, 420, "Cancel", style, () => {
         //     console.log('fuck go back');
@@ -43,8 +53,10 @@ class DialogBoxScene extends Phaser.Scene {
             console.log(this.payload);
             console.log('send data');
             this.postData(`http://localhost:5000/api/dungeon`, this.payload)
-          .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-          .catch(error => console.error(error));
+            .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+            .catch(error => {
+                console.error(error); console.log('yikes')
+            });
         }
         this.okayButton = new HiraButton(this, 90 + 540 - 80, 160 + 150 - 30, "Continue", style, () => {
             this.scene.wake('MainScene');

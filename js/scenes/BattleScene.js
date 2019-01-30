@@ -58,6 +58,7 @@ class BattleScene extends Phaser.Scene {
             else if (e.keyCode === 13) //enter
             {
                 e.preventDefault();
+                this.skipButton.visible = false;
                 let stats = {
                     word: this.projectile.currentChar,
                     answer: this.inputText,
@@ -83,7 +84,7 @@ class BattleScene extends Phaser.Scene {
                 else
                 {
                     stats.correct = false;
-                    this.timedEvent.remove(this.answerFailed());
+                    this.timedEvent.remove(this.answerFailed(true));
 
                 }
                 this.battleCapture.questions.push(stats);
@@ -134,8 +135,8 @@ class BattleScene extends Phaser.Scene {
 
         /* draw 'inputbox' */
         this.inputText = '';
-        this.inputTextDisplay = this.add.text(720/2, 480/2, this.inputText, style);
-        this.inputTextDisplay.setOrigin(0.5);
+        this.inputTextDisplay =  new HiraText(this,720/2, 480/2, this.inputText, "header");
+        this.add.existing(this.inputTextDisplay);
 
         /* add attack button */
         this.attackButton = new HiraButton(this, 720/2, 480/2, "Attack!", style, () =>  {
@@ -369,11 +370,21 @@ class BattleScene extends Phaser.Scene {
         }
     }
 
-    answerFailed () {
+    answerFailed (wrong) {
         /* failed, time's up or wrong anser */
         console.log('time ends');
         this.timedEvent.remove(false);
-        this.timerDisplay.setText('Times up!');
+        if(!wrong){
+            this.timerDisplay.setText('Times up!');
+            let stats = {
+                word: this.projectile.currentChar,
+                answer: this.inputText,
+                time: parseFloat(5.0)
+            };
+            this.battleCapture.questions.push(stats);
+        } else {
+            this.timerDisplay.setText('Wrong!');
+        }
 
         /* change state while animating */
         this.state = this.STATE_VALUE.animate;

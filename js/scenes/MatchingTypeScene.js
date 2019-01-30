@@ -6,7 +6,7 @@ class MatchingTypeScene extends Phaser.Scene {
 
     init (data) {
         this.player = data.player;
-        this.characterPool = data.characterPool;
+        this.characterPool = data.characterPool.slice();
     }
 
     preload () {
@@ -15,11 +15,12 @@ class MatchingTypeScene extends Phaser.Scene {
 
     create () {
 
-        this.graphics = this.add.graphics();
-        this.graphics.fillStyle(0x003366 , 1);
-        this.graphics.lineStyle(1, 0xfffff00, 1);
+        this.container = this.add.graphics();
+        this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
 
-        this.graphics.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
+        this.container.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B, 1);
+        this.container.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
+        this.container.strokeRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
 
         this.style = { font: "32px manaspc", fill: "#ffffff", align: "center" };
         this.ypos = []; /* holder of HiraButtons */
@@ -34,18 +35,18 @@ class MatchingTypeScene extends Phaser.Scene {
             console.log(value);
 
             // this.ypos.push(i*460/(this.characterPool.length + 2) + (460/this.characterPool.length + 2));
-            this.graphics.strokeRect(20, (460/this.characterPool.length + 2), 680,  i*460/(this.characterPool.length + 2) );
+            this.container.strokeRect(20, (460/this.characterPool.length + 2), 680,  i*460/(this.characterPool.length + 2) );
 
 
             this.ypos.push(this.add.existing(new HiraButton(this, 100, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2   ), value, this.style,
                 () => {
                     if (this.selectedLetter == null) {
                         this.selectedLetter = value;
-                        this.ypos[i].setStroke('#ff0000', 2);
+                        this.ypos[i].setTint(game.global.UI_TEXT_HIGHLIGHT);
                         console.log(this.selectedLetter);
                     } else if (this.selectedLetter === value) {
                         this.selectedLetter = null;
-                        this.ypos[i].setStroke('#ff0000', 0);
+                        this.ypos[i].clearTint();
                     } else if (this.selectedLetter != value) {
                         let selected = null;
                         let swap = null;
@@ -76,7 +77,8 @@ class MatchingTypeScene extends Phaser.Scene {
                         let temp = this.ypos[posswap].y;
                         this.ypos[posswap].y = this.ypos[posselected].y;
                         this.ypos[posselected].y = temp;
-                        this.ypos[posselected].setStroke('#ff0000', 0);
+                        this.ypos[posselected].clearTint();
+                        this.ypos[posswap].clearTint();
                     }
                 }
             )).setOrigin(0.5));
@@ -84,6 +86,7 @@ class MatchingTypeScene extends Phaser.Scene {
             this.hiragana.push(this.add.bitmapText(620, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2   ), 'hira', Projectile.convertToHiragana(this.shuffled[i]), 48));
             this.hiragana[i].setOrigin(0.5);
             this.ypos[i].setScale(1.5).setInteractive();
+            this.ypos[i].longpress = true;
             this.answer.push(this.ypos[i].text);
 
             // this.hiragana[i].setOrigin(0.5).setInteractive();
@@ -130,9 +133,9 @@ class MatchingTypeScene extends Phaser.Scene {
 
                       console.log(this.answer[i], 'vs', this.shuffled[i]);
                       if(this.answer[i] === this.shuffled[i]){
-                          this.results.push(this.add.text((720)/2,  (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2), "Correct!" , this.style).setOrigin(0.5));
+                          this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
                       } else {
-                          this.results.push(this.add.text((720)/2,  (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2), "Wrong!" , this.style).setOrigin(0.5));
+                          this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
                       }
                    }
                });
