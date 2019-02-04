@@ -5,6 +5,7 @@ class ResultScene extends Phaser.Scene {
     }
 
     init (data) {
+        console.log(data);
         this.enemy = data.enemy;
         this.player = data.player;
         this.cleared = data.cleared;
