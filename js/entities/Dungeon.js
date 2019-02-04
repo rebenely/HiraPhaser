@@ -7,7 +7,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         this.setOrigin(0.5);
         this.setDisplaySize(optionals.sizeX, optionals.sizeY);
         this.setSize(optionals.sizeX, optionals.sizeY);
-
+        this.setDepth(2);
 
         /* set values */
         this.name = dungeonContent.name;
@@ -19,9 +19,11 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         /* other sprite values */
         this.minionSprite = enemies.minion.name;
         this.minionSpritePath = enemies.minion.path;
+        this.minionAttackSpritePath = enemies.minion.attack;
 
         this.bossSprite = enemies.boss.name;
         this.bossSpritePath = enemies.boss.path;
+        this.bossAttackSpritePath = enemies.boss.attack;
 
         this.minionFace = enemies.minion.face.name;
         this.minionFacePath = enemies.minion.face.path;
@@ -48,7 +50,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
 
         var caveName = scene.add.bitmapText(720/2, 480/2, 'mnspc', this.name, 32);
         caveName.visible = false ;
-        caveName.setOrigin(0.5);
+        caveName.setOrigin(0.5).setDepth(5);
         Phaser.Display.Align.To.TopCenter(caveName, this, 0, 0);
 
 
@@ -63,11 +65,14 @@ class Dungeon extends Phaser.GameObjects.Sprite {
             }
         }).
         on('pointerover', () => {
-            caveName.setDepth(1);
-            caveName.visible = true;
+            caveName.setDepth(5);
+            // caveName.visible = true;
+
+            scene.events.emit('sayName', {name: this.name});
         }, caveName).
         on('pointerout', () => {
-            caveName.visible = false;
+            // caveName.visible = false;
+            scene.events.emit('hoverOut');
         }, caveName);
 
         console.log(this);
@@ -85,4 +90,6 @@ class Dungeon extends Phaser.GameObjects.Sprite {
             this.setTint(0x585858);
         }
     }
+
+
 }

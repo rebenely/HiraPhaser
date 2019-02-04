@@ -7,7 +7,7 @@
             "charSet": ["A","I","U","E","O"],
             "wordPool": ["A","I","U","E","O"],
             "sprites":    {
-                "x": 550, "y": 307, "name": "k_cave",
+                "x": 430, "y": 185, "name": "cave",
                 "dungeonBG": {
                     "name": "v_dungeon", "path": "assets/images/v_dungeon/cave_pj.png"},
                     "battleBG": {
@@ -16,15 +16,15 @@
             },
             "enemies": {
                 "minion": {
-                    "name": "goblin", "path": "assets/spritesheets/enemies/goblinidle.png", "exp": 10,
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
                     "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
                 },
                 "boss": {
-                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinbossidle.png", "exp": 50,
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
                     "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
                 }
             },
-            "optionals" : {"sizeX": 90, "sizeY": 64}
+            "optionals" : {"sizeX": 133, "sizeY": 110}
         },
         {
             "name": "K-dungeon" ,
@@ -33,7 +33,7 @@
             "charSet": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["A-KA", "KO-A", "KA-KI", "KU-O-KE", "KI-KU", "KO-O", "KE-KE", "KO-KO", "KI-KU"],
             "sprites":    {
-                "x": 665, "y": 357, "name": "k_cave",
+                "x": 475, "y": 374, "name": "cave",
                 "dungeonBG": {
                     "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
                     "battleBG": {
@@ -42,15 +42,15 @@
             },
             "enemies": {
                 "minion": {
-                    "name": "goblin", "path": "assets/spritesheets/enemies/goblinidle.png", "exp": 10,
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
                     "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
                 },
                 "boss": {
-                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinbossidle.png", "exp": 50,
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
                     "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
                 }
             },
-            "optionals" : {"sizeX": 90, "sizeY": 64}
+            "optionals" : {"sizeX": 133, "sizeY": 110}
 
         },
         {
@@ -60,7 +60,7 @@
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
             "sprites":    {
-                "x": 770, "y": 316, "name": "k_cave",
+                "x": 236, "y": 420, "name": "cave",
                 "dungeonBG": {
                     "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
                     "battleBG": {
@@ -69,26 +69,39 @@
             },
             "enemies": {
                 "minion": {
-                    "name": "goblin", "path": "assets/spritesheets/enemies/goblinidle.png", "exp": 10,
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
                     "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
                 },
                 "boss": {
-                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinbossidle.png", "exp": 50,
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
                     "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
                 }
             },
-            "optionals" : {"sizeX": 90, "sizeY": 64}
+            "optionals" : {"sizeX": 133, "sizeY": 110}
 
         }
     ],
 
     "storyLevels": [
         {
-            "name": "V start",
-            "sprite": {"name": "level", "x": 633, "y": 222},
+            "name": "Hello, World!",
+            "sprite": {"name": "message", "x": 190, "y": 165},
             "json": "level0.json",
             "level": 0,
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "details" : {
+                "title": "Pambati",
+                "subtitle": "Yoikes",
+                "desc": "wwwww"
+            },
+            "type":"CutScene"
+        },
+        {
+            "name": "V start",
+            "sprite": {"name": "learn", "x": 210, "y": 230},
+            "json": "level0.json",
+            "level": 0,
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "Chapter 0: Vowels 4 u",
                 "subtitle": "You will learn vowels.",
@@ -98,8 +111,8 @@
         },
         {
             "name": "V start: Training",
-            "sprite": {"name": "level",  "x": 623, "y": 258},
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "sprite": {"name": "train",  "x": 280, "y": 260},
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 1,
             "details" : {
                 "title": "Chapter 0: Vowels 4 u",
@@ -111,8 +124,8 @@
         },
         {
             "name": "V start: Practice Battle",
-            "sprite": {"name": "level",  "x": 597, "y": 289},
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "sprite": {"name": "practice",  "x": 360, "y": 260},
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 1,
             "details" : {
                 "title": "Chapter 0: Vowels 4 u",
@@ -120,14 +133,18 @@
                 "desc": "This is a place holder!"
             },
             "type":"BattleScene",
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/jojo_idle.png",
+                "attack": "assets/spritesheets/teachers/jojo_attack.png"
+            },
             "wordPool": ["A","I","U","E","O"]
         },
         {
             "name": "The K-invasion",
-            "sprite": {"name": "level", "x": 546, "y": 366},
+            "sprite": {"name": "learn", "x": 505, "y": 240},
             "json": "level1.json",
             "level": 2,
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "Chapter I: Wtf",
                 "subtitle": "You will learn vowels.",
@@ -137,8 +154,8 @@
         },
         {
             "name": "The K-invasion: Training",
-            "sprite": {"name": "level",  "x": 570, "y": 397},
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "sprite": {"name": "train",  "x": 550, "y": 260},
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 3,
             "details" : {
                 "title": "Chapter I: Wtf",
@@ -150,23 +167,27 @@
         },
         {
             "name": "The K-invasion: Practice Battle",
-            "sprite": {"name": "level",  "x": 624, "y": 392 },
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "sprite": {"name": "practice",  "x": 490, "y": 300 },
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 3,
             "details" : {
                 "title": "Chapter I: Wtf",
                 "subtitle": "You will learn vowels.",
                 "desc": "yikes"
             },
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/jojo_idle.png",
+                "attack": "assets/spritesheets/teachers/jojo_attack.png"
+            },
             "type":"BattleScene",
             "wordPool": ["KA","KI","KU","KE","KO","A","I","U","E","O"]
         },
         {
             "name": "S-cape the trap!",
-            "sprite": {"name": "level", "x": 701, "y": 325},
+            "sprite": {"name": "learn", "x": 420, "y": 410},
             "json": "level2.json",
             "level": 4,
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "Chapter II: S",
                 "subtitle": "subtitles.",
@@ -176,8 +197,8 @@
         },
         {
             "name": "S-cape: Train",
-            "sprite": {"name": "level",  "x": 707, "y": 287},
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "sprite": {"name": "train",  "x": 370, "y": 420},
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 5,
             "details" : {
                 "title": "Chapter II: S",
@@ -189,13 +210,17 @@
         },
         {
             "name": "S-cape: Practice",
-            "sprite": {"name": "level",  "x": 751, "y": 277 },
-            "optionals" : {"sizeX": 16, "sizeY":16},
+            "sprite": {"name": "practice",  "x": 315, "y": 415 },
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 5,
             "details" : {
                 "title": "Chapter II: S",
                 "subtitle": "subtitles.",
                 "desc": "This is a place holder!"
+            },
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/jojo_idle.png",
+                "attack": "assets/spritesheets/teachers/jojo_attack.png"
             },
             "type":"BattleScene",
             "wordPool": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"]

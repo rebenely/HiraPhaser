@@ -17,9 +17,16 @@ class WorldNavScene extends Phaser.Scene {
         this.container.fillRect(2, 430, 716, 48);
         this.container.strokeRect(2, 430, 716, 48);
 
+        this.levelTitle = this.add.graphics();
+
+        this.levelTitle.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
+
+        this.levelTitle.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B, game.global.UI_ALPHA);
+        this.levelTitle.visible = false;
+
         this.navEnable = false;
-        this.coordinates = [{x:643, y:292}, {x: 705, y: 655}, {x: 1397, y: 531}, {x:1350, y:230}];
-        this.zoom = [1.2, 1, 0.9, 2]
+        this.coordinates = [{x:350, y:300}, {x: 705, y: 655}, {x: 1397, y: 531}, {x:1350, y:230}];
+        this.zoom = [1.1, 1, 0.9, 2]
         this.cam.pan(this.coordinates[0].x, this.coordinates[0].y, 2000, 'Sine.easeInOut');
         this.cam.zoomTo(this.zoom[0], 2000);
 
@@ -62,22 +69,50 @@ class WorldNavScene extends Phaser.Scene {
         }, this);
 
         this.codexButton = new HiraButton(this, 60*8, 430 + 24, "Journal", style, () => {
-
+            this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Under construction!"}});
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
         }, this);
         this.add.existing(this.codexButton);
 
         this.questButton = new HiraButton(this, 60*6, 430 + 24, "Quest", style, () => {
-
+            this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Under construction!"}});
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
         }, this);
         this.add.existing(this.questButton);
 
         this.statsButton = new HiraButton(this, 60*4, 430 + 24, "Stats", style, () => {
+            this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Under construction!"}});
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
 
         }, this);
         this.add.existing(this.statsButton);
 
         this.prevButton.disable();
 
+        let mainScene = this.scene.get('MainScene');
+        mainScene.events.on('sayName', this.onSayName, this);
+        mainScene.events.on('hoverOut', this.onHoverOut, this);
+
+        this.caveName = new HiraText(this, 720/2, 30, "", "header");
+        this.add.existing(this.caveName);
+        this.caveName.visible = false;
+    }
+
+    onSayName(data) {
+        this.levelTitle.fillRect(720/2 - data.name.length * 16, 2, data.name.length*32, 48);
+        this.levelTitle.strokeRect(720/2 - data.name.length * 16, 2, data.name.length*32, 48);
+        this.caveName.setText(data.name);
+        this.caveName.visible = true;
+        this.levelTitle.visible = true;
+    }
+
+    onHoverOut(data) {
+        this.levelTitle.clear();
+        this.caveName.visible = false;
+        this.levelTitle.visible = false;
     }
 
     update () {

@@ -17,17 +17,39 @@ class MainScene extends Phaser.Scene {
         this.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
 
         this.scene.launch('WorldNavScene', {camera: this.cameras.main});
+        this.scene.sleep('WorldNavScene');
+        this.scene.launch('MessageScene', {message: { title : "Hello, World", body: "This is an announcement."}});
+
         this.events.on('pause', function(){
             this.scene.sleep('WorldNavScene');
         }, this);
         this.events.on('wake', function(){
             this.scene.wake('WorldNavScene');
+            this.enableInteractiveLevels();
         }, this);
         /* background */
-        var grassland = this.add.sprite(0, 0, 'world_map').setOrigin(0);
-        // grassland.setScale(3);
+        var grassland = this.add.sprite(0, 0, 'world_map').setOrigin(0).setScale(1.75).setDepth(3);
+
+        this.clouds = this.add.group();
+        this.clouds2 = this.add.group();
+
+    	for (var i = 0; i < 50; i++) {
+    		var x = Phaser.Math.RND.between(0, 2048);
+    		var y = Phaser.Math.RND.between(0, 981);
+
+    		var newObj = this.clouds.create(x, y, 'clouds').setScale(Phaser.Math.RND.between(1, 3));
+            newObj.alpha = Math.random() + 0.2;
+    	}
+        for (var i = 0; i < 50; i++) {
+            var x = Phaser.Math.RND.between(-2048, 0);
+            var y = Phaser.Math.RND.between(0, 981);
+
+            var newObj = this.clouds2.create(x, y, 'clouds').setScale(Phaser.Math.RND.between(1, 3));
+            newObj.alpha = Math.random() + 0.2;
+        }
 
         this.cameras.main.setBounds(0, 0, 2048, 981);
+        this.cameras.main.setBackgroundColor(0x28ccdf);
 
         console.log(this.world);
 
@@ -59,16 +81,20 @@ class MainScene extends Phaser.Scene {
                 {
                     minion: {
                         name: currentDungeon.enemies.minion.name, path: currentDungeon.enemies.minion.path, exp: currentDungeon.enemies.minion.exp,
-                        face: { name: currentDungeon.enemies.minion.face.name, path: currentDungeon.enemies.minion.face.path}
+                        face: { name: currentDungeon.enemies.minion.face.name, path: currentDungeon.enemies.minion.face.path},
+                        attack: currentDungeon.enemies.minion.attack
                     },
                     boss: {
                         name: currentDungeon.enemies.boss.name, path: currentDungeon.enemies.boss.path, exp: currentDungeon.enemies.boss.exp,
-                        face: { name: currentDungeon.enemies.boss.face.name, path: currentDungeon.enemies.boss.face.path}
+                        face: { name: currentDungeon.enemies.boss.face.name, path: currentDungeon.enemies.boss.face.path},
+                        attack: currentDungeon.enemies.boss.attack
                     }
                 },
                 {sizeX: currentDungeon.optionals.sizeX, sizeY: currentDungeon.optionals.sizeY},
                 () => {
-                    this.scene.pause('MainScene');
+                    //this.scene.pause('MainScene');
+                    this.scene.sleep('WorldNavScene');
+                    this.disableInteractiveLevels();
                     this.scene.launch('DetailScene', {player: this.player, dungeon: this.dungeons[i], startScene: 'DungeonScene', passData: {player: this.player, dungeon: this.dungeons[i], difficulty: game.global.EASY}});
                 }
             ));
@@ -85,7 +111,10 @@ class MainScene extends Phaser.Scene {
                      currentLevel.json,
                      {sizeX: currentLevel.optionals.sizeX, sizeY: currentLevel.optionals.sizeY, level: currentLevel.level},
                      () => {
-                         this.scene.pause('MainScene');
+                         //this.scene.pause('MainScene');
+                         this.scene.sleep('WorldNavScene');
+                         this.disableInteractiveLevels();
+
                          this.scene.launch('DetailScene', {player: this.player, content: {
                              title: currentLevel.details.title,
                              subtitle:  currentLevel.details.subtitle,
@@ -105,7 +134,10 @@ class MainScene extends Phaser.Scene {
                      '',
                      {sizeX: currentLevel.optionals.sizeX, sizeY: currentLevel.optionals.sizeY, level: currentLevel.level},
                      () => {
-                     this.scene.pause('MainScene');
+                     //this.scene.pause('MainScene');
+                     this.scene.sleep('WorldNavScene');
+                     this.disableInteractiveLevels();
+
                      this.scene.launch('DetailScene', {player: this.player, content: {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
@@ -124,12 +156,15 @@ class MainScene extends Phaser.Scene {
                      '',
                      {sizeX: currentLevel.optionals.sizeX, sizeY: currentLevel.optionals.sizeY, level: currentLevel.level},
                      () => {
-                     this.scene.pause('MainScene');
+                     //this.scene.pause('MainScene');
+                     this.scene.sleep('WorldNavScene');
+                     this.disableInteractiveLevels();
+
                      this.scene.launch('DetailScene', {player: this.player, content: {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
-                     },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool}});
+                     },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool, mentor: currentLevel.mentor}});
                      }
                  ));
                  this.add.existing(this.practiceLevels[this.practiceLevels.length - 1]);
@@ -147,14 +182,40 @@ class MainScene extends Phaser.Scene {
         finishedDungeon.events.removeListener('finishedDungeon');
         finishedDungeon.events.on('finishedDungeon', this.onFinishedDungeon, this);
 
+        let gameUI = this.scene.get('WorldNavScene');
+        gameUI.events.removeListener('disableLevels');
+        gameUI.events.on('disableLevels', this.disableInteractiveLevels, this);
+
         /* debug */
         this.input.on('pointerup', function (pointer) {
             console.log(pointer.worldX, pointer.worldY);
         });
+
+        //for inn
+        this.cutSceneLevels[0].setDepth(2);
+        this.disableInteractiveLevels();
     }
 
     update (time, delta) {
         this.controls.update(delta);
+
+        this.clouds.getChildren().forEach(function (child) {﻿
+            if(child.x > 2048) {
+                child.x = -1024;
+            }
+            child.x += 2;
+            // tween child
+
+        });
+
+        this.clouds2.getChildren().forEach(function (child) {﻿
+            if(child.x > 2048) {
+                child.x = -1024;
+            }
+            child.x += 2;
+            // tween child
+
+        });
     }
 
     /* emitted event from cutscene */
@@ -172,7 +233,7 @@ class MainScene extends Phaser.Scene {
     /* emmitted event from dungeon */
     onFinishedDungeon(data){
         console.log(data);
-        this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: data.dataCapture });
+        this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'ayy lmao' });
 
         if(data.success) { // check if player story is lower than dungeon story level
             this.player.story++;
@@ -196,5 +257,37 @@ class MainScene extends Phaser.Scene {
         }
     }
 
+    disableInteractiveLevels(tint){
+        if(!tint){
+            for (let i = 0; i < this.cutSceneLevels.length; i ++) {
+                this.cutSceneLevels[i].disableInteractive();
+            }
+            for (let i = 0; i < this.trainLevels.length; i ++) {
+                this.trainLevels[i].disableInteractive();
+            }
+            for (let i = 0; i < this.practiceLevels.length; i ++) {
+                this.practiceLevels[i].disableInteractive();
+            }
+            for (let i = 0; i < this.dungeons.length; i ++) {
+                this.dungeons[i].disableInteractive();
+            }
+        }
+    }
 
+    enableInteractiveLevels(tint){
+        if(!tint){
+            for (let i = 0; i < this.cutSceneLevels.length; i ++) {
+                this.cutSceneLevels[i].setInteractive(true);
+            }
+            for (let i = 0; i < this.trainLevels.length; i ++) {
+                this.trainLevels[i].setInteractive(true);
+            }
+            for (let i = 0; i < this.practiceLevels.length; i ++) {
+                this.practiceLevels[i].setInteractive(true);
+            }
+            for (let i = 0; i < this.dungeons.length; i ++) {
+                this.dungeons[i].setInteractive(true);
+            }
+        }
+    }
 }

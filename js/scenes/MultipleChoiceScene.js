@@ -25,8 +25,6 @@ class MultipleChoiceScene extends Phaser.Scene {
 
 
         this.dataCapture = {
-            name: this.title,
-            asked: 0,
             total_time: this.time.now/1000,
             questions: []
         };
@@ -86,11 +84,13 @@ class MultipleChoiceScene extends Phaser.Scene {
             this.add.existing(new HiraButton(this, (700/this.characterDisplayPool.length + 1) +  i*700/(this.characterDisplayPool.length+1), 480/2, '[' + value + ']', style,
                 () => {
                     console.log(value, i, 'vs', this.targetChar.currentChar);
-                    this.dataCapture.questions.push({
-                        answer: value,
-                        target: this.targetChar.currentChar,
-                        time: this.time.now/1000 - this.charTime
-                    });
+                    if(this.targetChar.visible === true){
+                        this.dataCapture.questions.push({
+                            answer: value,
+                            target: this.targetChar.currentChar,
+                            time: this.time.now/1000 - this.charTime
+                        });
+                    }
                     this.charTime = this.time.now/1000;
                     if(value === this.targetChar.currentChar && this.targetChar.visible === true) {
                         this.counter++;
@@ -114,6 +114,7 @@ class MultipleChoiceScene extends Phaser.Scene {
         }
 
         this.closeButton = new HiraButton(this, 720/2, 2*480/3, "Continue", style, () => {
+            this.events.emit('mulchoFinish', {dataCapture: this.dataCapture});
             this.scene.stop('MultipleChoiceScene');
             this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});
         }, this);

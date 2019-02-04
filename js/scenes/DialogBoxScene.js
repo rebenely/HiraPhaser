@@ -8,10 +8,10 @@ class DialogBoxScene extends Phaser.Scene {
         this.message = data.message;
         this.title = data.title;
         this.api = data.api;
-        if(this.api !== undefined) {
-            this.url = data.api.url;
-            this.payload = data.api.payload;
-        }
+        // if(this.api !== undefined) {
+        //     this.url = data.api.url;
+        //     this.payload = data.api.payload;
+        // }
 
         if(data.dataCapture !== undefined){
             this.payload = data.dataCapture;
@@ -22,7 +22,7 @@ class DialogBoxScene extends Phaser.Scene {
     }
     create () {
         this.scene.pause('MainScene');
-
+        console.log(this.api);
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
 

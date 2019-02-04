@@ -6,7 +6,7 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         this.name = name;
         this.level = optionals.level;
         this.setOrigin(0.5);
-
+        this.setDepth(4);
         this.setDisplaySize(optionals.sizeX, optionals.sizeY);
         this.setSize(optionals.sizeX, optionals.sizeY);
 
@@ -20,7 +20,7 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
 
         var levelName = scene.add.bitmapText(720/2, 480/2, 'mnspc', this.name, 32);
         levelName.visible = false ;
-        levelName.setOrigin(0.5);
+        levelName.setOrigin(0.5).setDepth(5);
         Phaser.Display.Align.To.TopCenter(levelName, this, 0, 0);
 
 
@@ -33,12 +33,13 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
             }
         }).
         on('pointerover', () => {
-            levelName.visible = true;
-            levelName.setDepth(1);
-
+            // levelName.visible = true;
+            // levelName.setDepth(5);
+            scene.events.emit('sayName', {name: this.name});
         }, levelName).
         on('pointerout', () => {
-            levelName.visible = false;
+            // levelName.visible = false;
+            scene.events.emit('hoverOut');
         }, levelName);
 
         this.enabled = false;
@@ -56,4 +57,5 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         }
     }
 
+    
 }

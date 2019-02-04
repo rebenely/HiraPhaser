@@ -15,12 +15,24 @@ class MatchingTypeScene extends Phaser.Scene {
 
     create () {
 
+        this.dataCapture = {
+            total_time: 0,
+            answers: []
+        }
+
         this.container = this.add.graphics();
         this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
 
         this.container.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B, 1);
         this.container.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
         this.container.strokeRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
+
+        this.display = new HiraText(this, 720/2, 480/2, 'Match the Hiragana characters with their romaji!', "wordWrap", 2*720/3);
+        this.add.existing(this.display);
+
+        this.matchLines = this.add.graphics();
+        this.matchLines.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
+        this.matchLines.visible = false;
 
         this.style = { font: "32px manaspc", fill: "#ffffff", align: "center" };
         this.ypos = []; /* holder of HiraButtons */
@@ -35,7 +47,7 @@ class MatchingTypeScene extends Phaser.Scene {
             console.log(value);
 
             // this.ypos.push(i*460/(this.characterPool.length + 2) + (460/this.characterPool.length + 2));
-            this.container.strokeRect(20, (460/this.characterPool.length + 2), 680,  i*460/(this.characterPool.length + 2) );
+            this.matchLines.strokeRect(20, (460/this.characterPool.length + 2), 680,  i*460/(this.characterPool.length + 2) );
 
 
             this.ypos.push(this.add.existing(new HiraButton(this, 100, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2   ), value, this.style,
@@ -85,8 +97,10 @@ class MatchingTypeScene extends Phaser.Scene {
 
             this.hiragana.push(this.add.bitmapText(620, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2   ), 'hira', Projectile.convertToHiragana(this.shuffled[i]), 48));
             this.hiragana[i].setOrigin(0.5);
+            this.hiragana[i].visible = false;
             this.ypos[i].setScale(1.5).setInteractive();
             this.ypos[i].longpress = true;
+            this.ypos[i].visible = false;
             this.answer.push(this.ypos[i].text);
 
             // this.hiragana[i].setOrigin(0.5).setInteractive();
@@ -113,7 +127,8 @@ class MatchingTypeScene extends Phaser.Scene {
         // });
 
         var exitButton = new HiraButton(this, 720/3, 5*480/6, "Exit", this.style, () => {
-            console.log('yeman');
+            console.log('yeman', this.dataCapture);
+            this.events.emit('matchFinish', {dataCapture: this.dataCapture});
             this.scene.stop('MatchingTypeScene');
             this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});
         }, this);
@@ -121,27 +136,41 @@ class MatchingTypeScene extends Phaser.Scene {
         this.results = [];
         this.playButton = new HiraButton(this, 2*720/3, 5*480/6, "Play", this.style, () => {
             console.log('Play');
-            this.playButton.visible = false;
 
-            for (let i = 0; i < this.ypos.length; i++){
-                this.tweens.add({
-                   targets: this.ypos[i],
-                   x: 620,
-                   duration: 1000,
-                   ease: 'Power2',
-                   onComplete: () => {
+            if(this.matchLines.visible === true){
+                this.playButton.visible = false;
 
-                      console.log(this.answer[i], 'vs', this.shuffled[i]);
-                      if(this.answer[i] === this.shuffled[i]){
-                          this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
-                      } else {
-                          this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
-                      }
-                   }
-               });
+                for (let i = 0; i < this.ypos.length; i++){
+                    this.tweens.add({
+                       targets: this.ypos[i],
+                       x: 620,
+                       duration: 1000,
+                       ease: 'Power2',
+                       onComplete: () => {
+
+                          console.log(this.answer[i], 'vs', this.shuffled[i]);
+                          this.dataCapture.answers.push({target: this.shuffled[i], answer: this.answer[i]});
+                          if(this.answer[i] === this.shuffled[i]){
+                              this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
+                          } else {
+                              this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
+                          }
+                       }
+                   });
+                }
+                this.dataCapture.total_time = this.time.now/1000 - this.timeStamp;
+
+            } else {
+                this.display.visible = false;
+                this.timeStamp = this.time.now/1000;
+                console.log(this.timeStamp);
+                for(let i = 0; i < this.ypos.length; i++) {
+                    this.ypos[i].visible = true;
+                    this.hiragana[i].visible = true;
+                }
+                this.matchLines.visible = true;
             }
         }, this);
-
 
         this.add.existing(this.playButton);
     }

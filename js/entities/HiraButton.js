@@ -51,6 +51,7 @@ class HiraButton extends Phaser.GameObjects.Text {
         this.setStroke('#0000000', 3);
         this.clearTint();
         this.enabled = true;
+        this.clickable = true;
     }
 
 }

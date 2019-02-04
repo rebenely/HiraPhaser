@@ -11,24 +11,29 @@ class BattleScene extends Phaser.Scene {
         /* to keep the attributes in between scenes */
         console.log(this.dungeon);
         this.load.image(this.dungeon.battleBackground, this.dungeon.battleBackgroundPath);
-        console.log(this.dungeon.minionName, this.dungeon.minionSpritePath);
-        this.load.spritesheet(this.dungeon.minionName, this.dungeon.minionSpritePath, { frameWidth: 32, frameHeight: 32 });
+        console.log(this.dungeon.minionName + "_idle", this.dungeon.minionSpritePath);
+        this.load.spritesheet(this.dungeon.minionName + "_idle", this.dungeon.minionSpritePath, { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet(this.dungeon.minionName + "_attack", this.dungeon.minionAttackSpritePath, { frameWidth: 64, frameHeight: 64 });
         if(this.dungeon.bossName != undefined){
-            this.load.spritesheet(this.dungeon.bossName, this.dungeon.bossSpritePath, { frameWidth: 32, frameHeight: 32 });
+            console.log(this.dungeon.bossSpritePath);
+            this.load.spritesheet(this.dungeon.bossName + "_idle", this.dungeon.bossSpritePath, { frameWidth: 64, frameHeight: 64 });
+            this.load.spritesheet(this.dungeon.bossName + "_attack", this.dungeon.bossAttackSpritePath, { frameWidth: 64, frameHeight: 64 });
         }
 
     }
 
     init (data) {
+        console.log(data);
         if(data.dungeon !== undefined) {
             this.dungeon = data.dungeon;
             this.boss = data.boss;
             this.difficulty = data.difficulty;
         } else if (data.simulate) {
             this.dungeon = {
-                minionName: 'trainingdummy',
-                minionSpritePath: 'assets/spritesheets/enemies/trainingdummy.png',
-                battleBackgroundPath: 'assets/images/globals/dojo.jpg',
+                minionName: 'Mentor',
+                minionSpritePath: data.mentor.idle,
+                minionAttackSpritePath: data.mentor.attack,
+                battleBackgroundPath: 'assets/images/globals/grassland.png',
                 battleBackground: 'dojo',
                 minionExp: 0,
                 wordPool: data.wordPool
@@ -68,22 +73,18 @@ class BattleScene extends Phaser.Scene {
                 if(this.inputText === this.projectile.currentChar)
                 {
                     stats.correct = true;
-                    this.cameras.main.flash(100);
                     this.state = this.STATE_VALUE.idle;
-                    if(!this.simulate){ /* can be refactored similar to when wrong answer, timing on animation before damage */
-                        var hearts = this.enemyHealthDisplay.getChildren();
-                        hearts[hearts.length - 1].destroy();
 
-                        this.enemy.hp -=1;
-                    }
                     this.timedEvent.remove(false);
-                    this.player.sprite.play('player_attack', false);
-                    this.showSlash(this.enemy.sprite.x, this.enemy.sprite.y, true);
+                    // this.player.sprite.play('player_attack', false);
+                    this.playerAttack();
+                    this.state = this.STATE_VALUE.animate;
 
                 }
                 else
                 {
                     stats.correct = false;
+                    this.enemy.sprite.play('enemy_attack', false);
                     this.timedEvent.remove(this.answerFailed(true));
 
                 }
@@ -101,12 +102,15 @@ class BattleScene extends Phaser.Scene {
             questions: []
         };
 
+
+
         console.log('ayo mark time', this.battleCapture.total_time);
 
         this.scene.bringToTop();
         /* remove existing anims since this scene will be reused */
         this.anims.remove('idle');
-        this.anims.remove('enemyidle');
+        this.anims.remove('enemy_idle');
+        this.anims.remove('enemy_attack');
         this.anims.remove('player_attack');
         this.anims.remove('player_hurt');
         this.anims.remove('slash');
@@ -183,12 +187,19 @@ class BattleScene extends Phaser.Scene {
             frameRate: 2,
             repeat: -1
         });
-        console.log(this.boss ? this.dungeon.bossName : this.dungeon.minionName );
+        console.log((this.boss ? this.dungeon.bossName : this.dungeon.minionName) + "_idle" );
         this.anims.create({
-            key: 'enemyidle',
-            frames: this.anims.generateFrameNumbers(this.boss ? this.dungeon.bossName : this.dungeon.minionName , { frames: [ 0, 1 ] }),
+            key: 'enemy_idle',
+            frames: this.anims.generateFrameNumbers((this.boss ? this.dungeon.bossName : this.dungeon.minionName) + "_idle" , { frames: [ 0, 1 ] }),
             frameRate: 2,
             repeat: -1
+        });
+
+        this.anims.create({
+            key: 'enemy_attack',
+            frames: this.anims.generateFrameNumbers((this.boss ? this.dungeon.bossName : this.dungeon.minionName) + "_attack"),
+            frameRate: 14,
+            repeat: 0
         });
 
         this.anims.create({
@@ -201,7 +212,7 @@ class BattleScene extends Phaser.Scene {
         var player_attack = {
             key: 'player_attack',
             frames: this.anims.generateFrameNumbers('player_attack', { frames: [ 0, 1, 2, 3, 4, 5, 6 ] }),
-            frameRate: 7,
+            frameRate: 14,
             repeat: 0
         };
         this.anims.create(player_attack);
@@ -213,8 +224,13 @@ class BattleScene extends Phaser.Scene {
             repeat: 0
         });
 
-        this.player.createSprite(this, 'player', 'idle', 120, 320, 2);
-        this.enemy.createSprite(this, this.boss ? this.dungeon.bossName : this.dungeon.minionName  , 'enemyidle', 720 - 120, 480 - 480/3, 2);
+
+        this.enemyShadow = this.add.sprite(120, 300 + 58, 'shadow');
+        this.playerShadow = this.add.sprite(720 - 120, 300 + 58, 'shadow');
+
+
+        this.player.createSprite(this, 'player', 'idle', 120, 300, 2);
+        this.enemy.createSprite(this, this.boss ? this.dungeon.bossName : this.dungeon.minionName + "_idle"  , 'enemy_idle', 720 - 120, 300, 2);
         this.enemy.sprite.setFlipX(true);
         this.slash = this.add.sprite(0,0, 'kidlatslash');
         this.slash.setScale(2);
@@ -248,6 +264,10 @@ class BattleScene extends Phaser.Scene {
         /* back button */
         this.backButton = new HiraButton(this, 720/2, 480/2 + 100, "Back", style, () =>  {
             if(this.state === this.STATE_VALUE.idle) {
+                if(this.simulate){
+                    this.packData();
+                    console.log(this.battleCapture);
+                }
                 this.scene.wake('MainScene');
                 this.scene.stop('BattleScene');
             }
@@ -257,35 +277,141 @@ class BattleScene extends Phaser.Scene {
         console.log('quingina');
 
         this.player.sprite.on('animationcomplete', this.animComplete, this);
+        this.enemy.sprite.on('animationcomplete', this.animCompleteEnemy, this);
         this.slash.on('animationcomplete', this.animCompleteSlash, this);
 
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
             console.log('yow');
-            this.battleCapture.total_time = this.time.now/1000 - this.battleCapture.total_time;
-            let correct = 0;
-            let time_answer = 0;
-            for(let i = 0; i < this.battleCapture.questions.length; i++){
-                if(this.battleCapture.questions[i].correct) {
-                    correct++;
-                }
-                time_answer += this.battleCapture.questions[i].time;
+            this.packData();
+            if(this.simulate){
+                console.log(this.battleCapture);
+            } else {
+                this.events.emit('battleFinish', {success: this.player.hp > 0, dataCapture: this.battleCapture});
+                this.scene.stop('BattleScene');
+                this.scene.wake('DungeonScene');
             }
-            this.battleCapture.accuracy = correct/this.battleCapture.asked;
-            this.battleCapture.time_answering = time_answer;
 
-            this.events.emit('battleFinish', {success: this.player.hp > 0, dataCapture: this.battleCapture});
-            this.scene.stop('BattleScene');
-            this.scene.wake('DungeonScene');
 
             console.log('return this my nibba', this.battleCapture);
         }, this);
 
         this.events.once('closeScreen', this.closeScreen, this);
 
+        this.enemyShake = this.tweens.add({
+             targets: this.enemy.sprite,
+             x: '-=16',
+             duration: 50,
+             ease: 'Sine.easeInOut',
+             yoyo: true,
+             repeat: 2,
+             paused: true
+         });
+
+         this.playerShake = this.tweens.add({
+              targets: this.player.sprite,
+              x: '-=16',
+              duration: 50,
+              ease: 'Sine.easeInOut',
+              yoyo: true,
+              repeat: 2,
+              paused: true
+          });
+
+          this.playerFlicker = this.tweens.add({
+               targets: this.player.sprite,
+               alpha: 0,
+               duration: 50,
+               ease: 'Sine.easeInOut',
+               yoyo: true,
+               repeat: 2,
+               paused: true
+           });
+
+           this.enemyFlicker = this.tweens.add({
+                targets: this.enemy.sprite,
+                alpha: 0,
+                duration: 50,
+                ease: 'Sine.easeInOut',
+                yoyo: true,
+                repeat: 2,
+                paused: true
+            });
+
+            this.hitEnemy = this.tweens.add({
+                targets: this.enemy.sprite,
+                x: "-=50",
+                duration: 500,
+                ease: 'Power2',
+                yoyo: true,
+                paused: true
+            });
+
+            this.hitPlayer = this.tweens.add({
+                targets: this.player.sprite,
+                x: "+=50",
+                duration: 500,
+                ease: 'Power2',
+                yoyo: true,
+                paused: true
+            });
+
+            this.enemyShadow.setScale(2);
+            this.playerShadow.setScale(2);
+            this.enemyShadow.alpha = 0.5;
+            this.playerShadow.alpha = 0.5;
+    }
+
+    hurtEnemy(){
+        this.enemyFlicker.restart();
+        this.enemyShake.restart();
+        this.showSlash(this.enemy.sprite.x, this.enemy.sprite.y, true);
+        this.cameras.main.flash(100);
+        if(!this.simulate){ /* can be refactored similar to when wrong answer, timing on animation before damage */
+            var hearts = this.enemyHealthDisplay.getChildren();
+            hearts[hearts.length - 1].destroy();
+
+            this.enemy.hp -=1;
+        }
+    }
+    hurtPlayer(){
+        this.playerFlicker.restart();
+        this.playerShake.restart();
+        this.showSlash(this.player.sprite.x, this.player.sprite.y, false);
+    }
+    enemyAttack(){
+        this.hitEnemy.restart();
+        this.enemy.sprite.play('enemy_attack', false);
+    }
+    playerAttack(){
+        this.hitPlayer.restart();
+        this.player.sprite.play('player_attack', false);
+    }
+
+
+    packData(){
+        this.battleCapture.total_time = this.time.now/1000 - this.battleCapture.total_time;
+        let correct = 0;
+        let time_answer = 0;
+        for(let i = 0; i < this.battleCapture.questions.length; i++){
+            if(this.battleCapture.questions[i].correct) {
+                correct++;
+            }
+            time_answer += this.battleCapture.questions[i].time;
+        }
+        this.battleCapture.accuracy = correct/this.battleCapture.asked;
+        this.battleCapture.time_answering = time_answer;
     }
 
     animCompleteSlash(animation, frame){
         this.slash.visible = false;
+        if(this.player.hp <= 0 || this.enemy.hp <= 0) {
+            /* play death anim here */
+            console.log('fade out');
+            this.events.emit('closeScreen');
+            this.state = this.STATE_VALUE.close;
+
+        }
+
     }
 
     animComplete(animation, frame){
@@ -293,8 +419,23 @@ class BattleScene extends Phaser.Scene {
         if(animation.key === 'player_attack' || animation.key === 'player_hurt'){
             console.log('finish anim');
             this.player.sprite.play('idle', true);
+            this.state = this.STATE_VALUE.idle;
         }
+        if(animation.key === 'player_attack') {
+            this.hurtEnemy();
+        }
+
         /* handle death anim to change scene */
+    }
+
+
+    animCompleteEnemy(animation, frame){
+        console.log(animation.key);
+        if(animation.key === 'enemy_attack' || animation.key === 'player_hurt'){
+            console.log('finish anim');
+            this.enemy.sprite.play('enemy_idle', true);
+        }
+
     }
 
     closeScreen() {
@@ -326,12 +467,11 @@ class BattleScene extends Phaser.Scene {
     }
 
     update () {
-
+        this.playerShadow.x = this.player.sprite.x;
+        this.enemyShadow.x = this.enemy.sprite.x;
         /* if player died or enemy died,  probably will add animations later */
         if(this.player.hp <= 0 || this.enemy.hp <= 0) {
             /* play death anim here */
-            console.log('fade out');
-            this.events.emit('closeScreen');
             this.state = this.STATE_VALUE.close;
 
         }
@@ -374,6 +514,7 @@ class BattleScene extends Phaser.Scene {
         /* failed, time's up or wrong anser */
         console.log('time ends');
         this.timedEvent.remove(false);
+        this.enemyAttack();
         if(!wrong){
             this.timerDisplay.setText('Times up!');
             let stats = {
@@ -394,11 +535,12 @@ class BattleScene extends Phaser.Scene {
            targets: this.follower,
            t: 1,
            ease: 'Cubic.easeIn',
-           duration: 1000,
+           duration: 500,
            yoyo: false,
            repeat: 0,
            onComplete: () => {
                /* duplicate */
+               this.hurtPlayer();
                this.cameras.main.shake(100);
                this.state = this.STATE_VALUE.idle;
                console.log('burado');
@@ -407,8 +549,6 @@ class BattleScene extends Phaser.Scene {
                    hearts[hearts.length - 1].destroy();
                    this.player.hp -=1;
                }
-               this.player.sprite.play('player_hurt', false);
-               this.showSlash(this.player.sprite.x, this.player.sprite.y, false);
            }
        }, this);
    }
@@ -419,5 +559,6 @@ class BattleScene extends Phaser.Scene {
        this.slash.y = posY;
        this.slash.play('slash', false);
        this.slash.setFlipX(flip);
+
    }
 }

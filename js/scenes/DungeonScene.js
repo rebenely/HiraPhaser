@@ -25,6 +25,7 @@ class DungeonScene extends Phaser.Scene {
     }
 
     create () {
+        this.enemyCleared = [];
         this.dataCapture = {
             player: this.player.name,
             name: this.dungeon.name,
@@ -116,6 +117,14 @@ class DungeonScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.hintButton);
 
+        this.cameras.main.once('camerafadeoutcomplete', function (camera) {
+            this.scene.stop();
+            this.scene.start('ResultScene', {player: this.player, enemy: this.enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture});
+        }, this);
+
+        this.events.once('closeScreen', function () {
+            this.cameras.main.fadeOut(1000);
+        }, this);
     }
 
     update () {
@@ -139,39 +148,40 @@ class DungeonScene extends Phaser.Scene {
             case 3:
                 this.crosshair.setPosition(4*720/5, 480/2);
             break;
+            default:
+                this.crosshair.setPosition(4*720/5, 480/2);
+            break;
         }
 
         /* if player died, no anims for now but will probably add later */
         if(this.player.hp <= 0) {
             this.packCapturedData(false, false);
-            var enemyCleared = [];
+
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
-                    enemyCleared.push({name: this.dungeon.bossName, exp: 50});
+                    this.enemyCleared.push({name: this.dungeon.bossName, exp: 50});
                 } else {
-                    enemyCleared.push({name: this.dungeon.minionName, exp: 10});
+                    this.enemyCleared.push({name: this.dungeon.minionName, exp: 10});
                 }
             }
             /* some anim before starting next scene */
-            this.scene.stop();
-            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture});
+
+            this.events.emit('closeScreen');
             this.cleared = 0;
         }
 
         /* if dungeon is cleared, no anims for now but will probably add later */
         if(this.cleared >= 4) {
             this.packCapturedData(true, false);
-            var enemyCleared = [];
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
-                    enemyCleared.push({name: this.dungeon.bossName, exp: 50});
+                    this.enemyCleared.push({name: this.dungeon.bossName, exp: 50});
                 } else {
-                    enemyCleared.push({name: this.dungeon.minionName, exp: 10});
+                    this.enemyCleared.push({name: this.dungeon.minionName, exp: 10});
                 }
             }
-            /* success screen, related to story probably cutscene */
-            this.scene.stop('DungeonScene');
-            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, progress: this.player.story <= this.dungeon.level, dataCapture: this.dataCapture});
+
+            this.events.emit('closeScreen');
             this.cleared = 0; /* this is a solution to a bug, maybe due to timing? if i remove this, dungeon will be cleared before it is even loaded */
         }
     }

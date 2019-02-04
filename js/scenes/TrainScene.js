@@ -16,6 +16,11 @@ class TrainScene extends Phaser.Scene {
     }
 
     create () {
+        this.dataCapture = {
+            name: this.title,
+            mulcho: [],
+            match: []
+        }
 
         this.container = this.add.graphics();
         this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
@@ -51,9 +56,24 @@ class TrainScene extends Phaser.Scene {
             this.scene.wake('MainScene', {player: this.player});
         }, this);
         this.add.existing(exitButton);
+
+        let mulcho = this.scene.get('MultipleChoiceScene');
+        mulcho.events.removeListener('mulchoFinish');
+        mulcho.events.on('mulchoFinish', this.onMulchoFinish, this);
+
+        let match = this.scene.get('MatchingTypeScene');
+        match.events.removeListener('matchFinish');
+        match.events.on('matchFinish', this.onMatchFinish, this);
     }
     update () {
 
     }
-
+    onMulchoFinish (data) {
+        this.dataCapture.mulcho.push(data.dataCapture);
+        console.log(this.dataCapture);
+    }
+    onMatchFinish (data) {
+        this.dataCapture.match.push(data.dataCapture);
+        console.log(this.dataCapture);
+    }
 }
