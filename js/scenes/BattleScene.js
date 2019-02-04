@@ -9,6 +9,9 @@ class BattleScene extends Phaser.Scene {
     preload () {
         /* initialized once in the main game, to be reused by all scenes */
         /* to keep the attributes in between scenes */
+        this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
+        this.add.existing(this.loading);
+
         console.log(this.dungeon);
         this.load.image(this.dungeon.battleBackground, this.dungeon.battleBackgroundPath);
         console.log(this.dungeon.minionName + "_idle", this.dungeon.minionSpritePath);
@@ -359,6 +362,7 @@ class BattleScene extends Phaser.Scene {
             this.playerShadow.setScale(2);
             this.enemyShadow.alpha = 0.5;
             this.playerShadow.alpha = 0.5;
+            this.loading.visible = false;
     }
 
     hurtEnemy(){

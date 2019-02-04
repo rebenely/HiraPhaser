@@ -32,6 +32,7 @@ class MainScene extends Phaser.Scene {
 
         this.clouds = this.add.group();
         this.clouds2 = this.add.group();
+        this.clouds3 = this.add.group();
 
     	for (var i = 0; i < 50; i++) {
     		var x = Phaser.Math.RND.between(0, 2048);
@@ -46,6 +47,14 @@ class MainScene extends Phaser.Scene {
 
             var newObj = this.clouds2.create(x, y, 'clouds').setScale(Phaser.Math.RND.between(1, 3));
             newObj.alpha = Math.random() + 0.2;
+        }
+        for (var i = 0; i < 20; i++) {
+            var x = Phaser.Math.RND.between(-2048, 2048);
+            var y = Phaser.Math.RND.between(0, 981);
+
+            var newObj = this.clouds2.create(x, y, 'clouds').setScale(Phaser.Math.RND.between(3, 5));
+            newObj.alpha = Math.random() + 0.2;
+            newObj.setDepth(5);
         }
 
         this.cameras.main.setBounds(0, 0, 2048, 981);
@@ -212,7 +221,16 @@ class MainScene extends Phaser.Scene {
             if(child.x > 2048) {
                 child.x = -1024;
             }
-            child.x += 2;
+            child.x += 3;
+            // tween child
+
+        });
+
+        this.clouds3.getChildren().forEach(function (child) {﻿
+            if(child.x > 2048) {
+                child.x = -1024;
+            }
+            child.x += 4;
             // tween child
 
         });

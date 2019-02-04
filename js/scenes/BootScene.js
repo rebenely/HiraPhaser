@@ -6,9 +6,8 @@ class BootScene extends Phaser.Scene {
 
     preload () {
         /* Preload dungeon icons, level icons, player sprite */
-        var style = { font: "32px manaspc", fill: "#ffffff" };
-        var caveName = this.add.text(720/2, 480/2, 'loading', style);
-        caveName.setOrigin(0.5);
+        this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
+        this.add.existing(this.loading);
 
 
         this.load.image('cave', 'assets/images/globals/dungeon.png');

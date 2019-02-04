@@ -5,9 +5,8 @@ class DungeonScene extends Phaser.Scene {
     }
 
     preload () {
-        var titleStyle = { font: "32px manaspc", fill: "#00ff44", align: "center" };
-        var loadingText = this.add.text(720/2, 480/2, "Loading",titleStyle);
-        loadingText.setOrigin(0.5);
+        this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
+        this.add.existing(this.loading);
         console.log(this.dungeon.background, this.dungeon.backgroundPath);
 
         /* load images and spritesheets */

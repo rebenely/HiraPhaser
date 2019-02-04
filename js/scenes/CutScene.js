@@ -9,9 +9,8 @@ class CutScene extends Phaser.Scene {
     }
 
     preload () {
-        var titleStyle = { font: "32px manaspc", fill: "#00ff44", align: "center" };
-        var loadingText = this.add.text(720/2, 480/2, "Loading",titleStyle);
-        loadingText.setOrigin(0.5);
+        this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
+        this.add.existing(this.loading);
 
         for (var property in this.jsonFile['images']) {
             if (this.jsonFile['images'].hasOwnProperty(property)) {
