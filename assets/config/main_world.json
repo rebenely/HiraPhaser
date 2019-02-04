@@ -206,7 +206,7 @@
                 "desc": "This is a place holder!"
             },
             "type":"TrainScene",
-             "characterPool": ["KA","KI","KU","KE","KO"]
+             "characterPool": ["SA","SHI","SU","SE","SO"]
         },
         {
             "name": "S-cape: Practice",
