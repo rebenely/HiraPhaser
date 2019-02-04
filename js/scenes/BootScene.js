@@ -30,9 +30,6 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('kidlatslash', 'assets/spritesheets/effects/kidlatslash.png',  { frameWidth: 32, frameHeight: 32 });
 
 
-
-        this.player = new Unit(this, 120, 320, "TestBoi", 5, 1);
-
         this.load.bitmapFont('hira', 'assets/font/font.png', 'assets/font/font.fnt');
         this.load.bitmapFont('mnspc', 'assets/font/mnspc.png', 'assets/font/mnspc.fnt');
 
@@ -59,6 +56,7 @@ class BootScene extends Phaser.Scene {
     }
     create () {
         this.worldJson = this.cache.json.get('main_world');
+        this.player = new Unit(this, 120, 320, "TestBoi", 5, 1);
         console.log(this.worldJson);
         console.log(game.global.UI_TEXT_HIGHLIGHT);
         if(this.worldJson) {
@@ -66,8 +64,8 @@ class BootScene extends Phaser.Scene {
         }
     }
     update () {
-        console.log(this.loaded);
-        if(this.loaded){
+
+        if(game.loaded){
             this.scene.start("MainScene", {player: this.player, world: this.worldJson});
         }
     }
