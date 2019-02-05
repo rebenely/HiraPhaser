@@ -18,6 +18,7 @@
   "homepage": "https://github.com/rebenely/HiraPhaser#readme",
   "dependencies": {
     "express": "^4.16.4",
-    "jsonwebtoken": "^8.4.0"
+    "jsonwebtoken": "^8.4.0",
+    "mongodb": "^3.1.13"
   }
 }

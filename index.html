@@ -136,6 +136,8 @@ $( "#loginButton" ).click( function () {
     console.log('ayy');
     var data = { "username" : $( "#username" ).val(), "password": $( "#password" ).val()};
     $( "#message" ).text("Logging in...");
+    $( '#loginButton' ).prop('disabled', true);
+    $(this).css('background-color', 'gray');
     $.ajax({
         url: "http://localhost:8081/login",
         type: "POST",
@@ -144,11 +146,15 @@ $( "#loginButton" ).click( function () {
         success: function (responseData) {
             console.log(responseData);
             $( "#myModal" ).hide();
+            game.player_name = responseData['player_name'];
+            game.story = responseData['story'];
             game.loaded = true;
         },
         error: function (xhr) {
             console.log(xhr.responseJSON.message);
             $( "#message" ).text(xhr.responseJSON.message);
+            $( '#loginButton' ).prop('disabled', false);
+            $( "#loginButton" ).css('background-color', 'green');
         }
     });
 } );

@@ -28,3 +28,5 @@ game.global = {
     UI_TEXT_STROKE_HIGHLIGHT: "#f2d3ab",
 };
 game.loaded = false;
+game.story = 0;
+game.player_name = '';

@@ -14,12 +14,13 @@ app.all('/*', function(req, res, next) {
 });
 app.use(express.static(__dirname));
 
-
-app.use(bodyParser.urlencoded({ // Middleware
+/* middleware */
+app.use(bodyParser.urlencoded({
    extended: true
 }));
 app.use(bodyParser.json());
 
+/* db driver */
 
 /* End points */
 app.post('/login', auth.login);
@@ -31,10 +32,26 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 app.get('/hello', function (req, res) {
-    res.json({
-      title: 'Hello, Tester!',
-      body: 'You still have a long way to go.'
+
+    var MongoClient = require('mongodb').MongoClient;
+    var url = "mongodb://localhost:27017/";
+    var succ = {};
+    MongoClient.connect(url, function(err, db) {
+      if (err) throw err;
+      var announcement = {};
+      var dbo = db.db("hira");
+      dbo.collection("game_vars").findOne({var_name: "announcement" }, function(err, result) {
+        if (err) throw err;
+        console.log(result);
+        succ = result;
+        res.json({
+          title: succ.title,
+          body: succ.body
+        });
+        db.close();
+      });
     });
+    console.log('ayyyy succ');
 })
 
 app.get('/amireal', middleware.checkToken, function (req, res) {

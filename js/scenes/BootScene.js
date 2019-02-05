@@ -57,10 +57,9 @@ class BootScene extends Phaser.Scene {
     create () {
         this.loaded = false;
         this.worldJson = this.cache.json.get('main_world');
-        this.player = new Unit(this, 120, 320, "TestBoi", 5, 1);
         console.log(this.worldJson);
         console.log(game.global.UI_TEXT_HIGHLIGHT);
-
+        this.announcement = {};
         $.ajax({
             url: "http://localhost:8081/hello",
             type: "GET",
@@ -73,7 +72,7 @@ class BootScene extends Phaser.Scene {
                     body: responseData['body']
                 }
                 this.loaded = true;
-                console.log('ayy lmaoooo', this.announcement);
+                console.log('ayy lmaoooo', responseData);
             },
             error: function (xhr) {
                 this.announcement = {
@@ -85,6 +84,8 @@ class BootScene extends Phaser.Scene {
     }
     update () {
         if(game.loaded && this.loaded){
+            this.player = new Unit(this, 120, 320, game.player_name, 5, 1);
+            this.player.story = game.story;
             this.scene.start("MainScene", {player: this.player, world: this.worldJson, announcement: this.announcement});
         }
     }
