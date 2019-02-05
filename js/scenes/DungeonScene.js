@@ -26,7 +26,7 @@ class DungeonScene extends Phaser.Scene {
     create () {
         this.enemyCleared = [];
         this.dataCapture = {
-            player: this.player.name,
+            username: this.player.name,
             name: this.dungeon.name,
             timestamp: new Date(),
             accuracy: 0,
@@ -196,6 +196,9 @@ class DungeonScene extends Phaser.Scene {
         console.log('tapos na', this.dataCapture);
         for(let i = 0; i < this.dataCapture.battles.length; i++){
             this.dataCapture.accuracy += this.dataCapture.battles[i].accuracy;
+        }
+        if(this.dataCapture.accuracy === null) {
+            this.dataCapture.accuracy = 0;
         }
         this.dataCapture.accuracy /= this.dataCapture.battles.length;
     }

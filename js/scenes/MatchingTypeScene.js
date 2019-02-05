@@ -126,20 +126,20 @@ class MatchingTypeScene extends Phaser.Scene {
         //
         // });
 
-        var exitButton = new HiraButton(this, 720/3, 5*480/6, "Exit", this.style, () => {
+        this.exitButton = new HiraButton(this, 720/3, 5*480/6, "Exit", this.style, () => {
             console.log('yeman', this.dataCapture);
             this.events.emit('matchFinish', {dataCapture: this.dataCapture});
             this.scene.stop('MatchingTypeScene');
             this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});
         }, this);
-        this.add.existing(exitButton);
+        this.add.existing(this.exitButton);
         this.results = [];
         this.playButton = new HiraButton(this, 2*720/3, 5*480/6, "Play", this.style, () => {
             console.log('Play');
 
             if(this.matchLines.visible === true){
                 this.playButton.visible = false;
-
+                this.exitButton.visible = false;
                 for (let i = 0; i < this.ypos.length; i++){
                     this.tweens.add({
                        targets: this.ypos[i],
@@ -147,7 +147,7 @@ class MatchingTypeScene extends Phaser.Scene {
                        duration: 1000,
                        ease: 'Power2',
                        onComplete: () => {
-
+                           this.exitButton.visible = true;
                           console.log(this.answer[i], 'vs', this.shuffled[i]);
                           this.dataCapture.answers.push({target: this.shuffled[i], answer: this.answer[i]});
                           if(this.answer[i] === this.shuffled[i]){

@@ -152,7 +152,7 @@ class MainScene extends Phaser.Scene {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
-                     }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool, title: currentLevel.name} });
+                     }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool, title: currentLevel.name, level: currentLevel.level} });
                      }
                  ));
                  this.add.existing(this.trainLevels[this.trainLevels.length - 1]);
@@ -174,7 +174,7 @@ class MainScene extends Phaser.Scene {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
-                     },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool, mentor: currentLevel.mentor}});
+                     },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool, mentor: currentLevel.mentor, level: currentLevel.level}});
                      }
                  ));
                  this.add.existing(this.practiceLevels[this.practiceLevels.length - 1]);
@@ -195,6 +195,14 @@ class MainScene extends Phaser.Scene {
         let gameUI = this.scene.get('WorldNavScene');
         gameUI.events.removeListener('disableLevels');
         gameUI.events.on('disableLevels', this.disableInteractiveLevels, this);
+
+        let trainScene = this.scene.get('TrainScene');
+        trainScene.events.removeListener('finishedTraining');
+        trainScene.events.on('finishedTraining', this.onTrainFinish, this);
+
+        let practiceScene = this.scene.get('BattleScene');
+        practiceScene.events.removeListener('finishedPractice');
+        practiceScene.events.on('finishedPractice', this.onPracticeFinish, this);
 
         /* debug */
         this.input.on('pointerup', function (pointer) {
@@ -240,24 +248,60 @@ class MainScene extends Phaser.Scene {
     /* emitted event from cutscene */
     onLearnedNewCharacters(data){
         console.log(data);
+        var updateCharset = false;
+
         if(!this.player.checkSubsetArray(data.charSet)){
-            this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: undefined});
             this.player.learnNewCharacters(data.charSet);
+            console.log('this true boi');
             this.player.story++;
+            this.compareStoryLevels();
+            updateCharset = true;
+        } else {
+            console.log('nani the fuck');
         }
-        this.compareStoryLevels();
+
+        // if(this.player.story <= data.story) { // check if player story is lower than dungeon story level
+        //     this.player.story++;
+        //     this.compareStoryLevels();
+        //     updateCharset = true;
+        // }
+
+        this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, timestamp: new Date(), updateCharset: updateCharset}, api: 'api/learn'});
         console.log('received', data);
     }
 
     /* emmitted event from dungeon */
     onFinishedDungeon(data){
         console.log(data);
-        this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'ayy lmao' });
-
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
         }
+
+        this.scene.launch('DialogBoxScene', {story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/dungeon' });
+    }
+
+    onTrainFinish(data){
+        if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
+            this.player.story++;
+            this.compareStoryLevels();
+        }
+        console.log(data);
+        this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/train' });
+        console.log(data.success, this.player.story, data.story)
+
+    }
+
+    onPracticeFinish(data){
+        if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
+            this.player.story++;
+            this.compareStoryLevels();
+        }
+        console.log(data);
+        data.dataCapture.username = this.player.name;
+        this.scene.launch('DialogBoxScene', {story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/practice' });
+        console.log(data.success, this.player.story, data.story)
+
     }
 
     compareStoryLevels() {

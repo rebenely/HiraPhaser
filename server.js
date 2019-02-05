@@ -5,6 +5,7 @@ var server = require('http').Server(app);
 const bodyParser = require('body-parser');
 let middleware = require('./middleware');
 let auth = require('./authJWT');
+var api = require('./api');
 
 /* Allow CORS */
 app.all('/*', function(req, res, next) {
@@ -25,12 +26,18 @@ app.use(bodyParser.json());
 /* End points */
 app.post('/login', auth.login);
 
+app.post('/api/learn', api.postLearn);
+app.post('/api/train', api.postTrain);
+app.post('/api/practice', api.postPractice);
+app.post('/api/dungeon', api.postDungeon);
+
 app.get('/wtf', function(req, res) {
     console.log('ayy lmao');
 });
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
+
 app.get('/hello', function (req, res) {
 
     var MongoClient = require('mongodb').MongoClient;
@@ -61,6 +68,9 @@ app.get('/amireal', middleware.checkToken, function (req, res) {
       username: req.decoded.username
     });
 })
+
+
+
 
 /* Start Server */
 server.listen(8081, function () {

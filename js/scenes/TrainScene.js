@@ -8,6 +8,7 @@ class TrainScene extends Phaser.Scene {
         this.player = data.player;
         this.characterPool = data.characterPool;
         this.title = data.title;
+        this.level = data.level;
         console.log("ayyy ", this.characterPool);
     }
 
@@ -18,8 +19,10 @@ class TrainScene extends Phaser.Scene {
     create () {
         this.dataCapture = {
             name: this.title,
+            timestamp: new Date(),
             mulcho: [],
-            match: []
+            match: [],
+            username: this.player.name
         }
 
         this.container = this.add.graphics();
@@ -51,6 +54,10 @@ class TrainScene extends Phaser.Scene {
         this.add.existing(matchingButton);
 
         var exitButton = new HiraButton(this, 720/2, 3*480/4, "Exit", style, () => {
+            if(this.dataCapture.mulcho.length > 0 || this.dataCapture.match.length > 0){
+                this.events.emit('finishedTraining', {success: true, dataCapture: this.dataCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level } );
+            }
+
             console.log('yeman');
             this.scene.stop('TrainScene');
             this.scene.wake('MainScene', {player: this.player});

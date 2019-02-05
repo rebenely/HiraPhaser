@@ -40,6 +40,7 @@ class Unit  {
     }
 
     checkSubsetArray(newChars) {
+        console.log(this.characterPool);
         console.log(newChars.every(val => this.characterPool.includes(val)));
         return newChars.every(val => this.characterPool.includes(val));
     }

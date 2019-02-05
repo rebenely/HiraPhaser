@@ -86,6 +86,12 @@ class BootScene extends Phaser.Scene {
         if(game.loaded && this.loaded){
             this.player = new Unit(this, 120, 320, game.player_name, 5, 1);
             this.player.story = game.story;
+            for(let i = 0; i < game.charset.length; i++ ){
+                for(let j = 0; j < game.charset[i].length; j++) {
+                    this.player.characterPool.push(game.charset[i][j]);
+                }
+            }
+            console.log(this.player.characterPool, game.charset);
             this.scene.start("MainScene", {player: this.player, world: this.worldJson, announcement: this.announcement});
         }
     }

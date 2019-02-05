@@ -36,8 +36,9 @@ module.exports  = {
                 success: true,
                 message: 'Authentication successful!',
                 token: token,
-                player_name: result.player_name,
-                story: result.story
+                username: result.username,
+                story: result.story,
+                charset: result.charset
               });
             } else {
               res.status(403).send({

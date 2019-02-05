@@ -1,0 +1,43 @@
+{
+    "images" : {
+        "guild_bg": "assets/dialogs/images/guild_bg.png",
+        "npc_smile": "assets/dialogs/images/fm2happy.png",
+        "npc_sad": "assets/dialogs/images/fm2sad.png",
+        "npc_upset": "assets/dialogs/images/fm2upset.png",
+        "npc_surprised": "assets/dialogs/images/fm2surprised.png"
+    },
+
+    "dialog": [
+    {
+        "image" : "npc_smile",
+        "name" : "Ai",
+        "message": "Hello! Welcome to the game."
+    },
+    {
+        "image": "npc_sad",
+        "name" : "Ai",
+        "message": "Di pa to tapos,"
+    },
+    {
+        "image": "npc_sad",
+        "name" : "Ai",
+        "message": "sana matapos na "
+    },
+    {
+        "image": "npc_upset",
+        "name" : "Ai",
+        "message": "test lang to"
+    }
+    ],
+
+    "image": {
+        "x": "320",
+        "y": "380",
+        "scale": "1"
+    },
+    "teach": ["aint a thing"],
+    "message": {
+        "title":"Uwi na boi!",
+        "message": "You learned nothing!"
+    }
+}

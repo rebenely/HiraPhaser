@@ -146,8 +146,9 @@ $( "#loginButton" ).click( function () {
         success: function (responseData) {
             console.log(responseData);
             $( "#myModal" ).hide();
-            game.player_name = responseData['player_name'];
+            game.player_name = responseData['username'];
             game.story = responseData['story'];
+            game.charset = responseData['charset'];
             game.loaded = true;
         },
         error: function (xhr) {

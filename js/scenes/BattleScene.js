@@ -43,6 +43,7 @@ class BattleScene extends Phaser.Scene {
             };
             this.boss = false;
             this.difficulty = 0;
+            this.level = data.level;
         }
         this.simulate = data.simulate;
 
@@ -270,6 +271,9 @@ class BattleScene extends Phaser.Scene {
                 if(this.simulate){
                     this.packData();
                     console.log(this.battleCapture);
+                    if(this.battleCapture.questions.length > 0){
+                        this.events.emit('finishedPractice', {success: true, dataCapture: this.battleCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level } );
+                    }
                 }
                 this.scene.wake('MainScene');
                 this.scene.stop('BattleScene');
