@@ -5,6 +5,7 @@
         <title>HiraRPG</title>
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
         <script src="//cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
         <script src="js/entities/HiraButton.js"></script>
         <script src="js/entities/StoryLevel.js"></script>
@@ -73,6 +74,15 @@
           border-radius: 4px;
           box-sizing: border-box;
         }
+        input[type=password], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
 
         button {
           width: 100%;
@@ -103,15 +113,15 @@
           <!-- Modal content -->
           <div class="modal-content">
               <div id="loginForm" style="font-family:'manaspc';padding:20px;text-align:center;">
-                  <h2>Welcome!</h2>
+                  <h2 id="message">Welcome!</h2>
                   <form >
                     <label for="fname">First Name</label>
-                    <input type="text" id="fname" name="firstname" placeholder="Username" style="font-family:'manaspc'">
+                    <input type="text" id="username" name="Username" placeholder="Username" style="font-family:'manaspc'">
 
-                    <label for="lname">Last Name</label>
-                    <input type="text" id="lname" name="lastname" placeholder="Password" style="font-family:'manaspc'">
+                    <label for="lname">Password</label>
+                    <input type="password" id="password" name="Password" placeholder="Password" >
 
-                    <button type="button" style="font-family:'manaspc'" onclick="login()" >Login</button>
+                    <button type="button" style="font-family:'manaspc'" id="loginButton" >Login</button>
                   </form>
               </div>
           </div>
@@ -121,12 +131,27 @@
 </html>
 
 <script>
-var modal = document.getElementById('myModal');
 
-function login() {
+$( "#loginButton" ).click( function () {
     console.log('ayy');
-    modal.style.display = "none";
-    game.loaded = true;
-}
+    var data = { "username" : $( "#username" ).val(), "password": $( "#password" ).val()};
+    $( "#message" ).text("Logging in...");
+    $.ajax({
+        url: "http://localhost:8081/login",
+        type: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (responseData) {
+            console.log(responseData);
+            $( "#myModal" ).hide();
+            game.loaded = true;
+        },
+        error: function (xhr) {
+            console.log(xhr.responseJSON.message);
+            $( "#message" ).text(xhr.responseJSON.message);
+        }
+    });
+} );
+
 
 </script>

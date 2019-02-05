@@ -7,6 +7,7 @@ class MainScene extends Phaser.Scene {
     init (data) {
         this.player = data.player;
         this.world = data.world;
+        this.announcement = data.announcement;
     }
 
     preload () {
@@ -18,7 +19,7 @@ class MainScene extends Phaser.Scene {
 
         this.scene.launch('WorldNavScene', {camera: this.cameras.main});
         this.scene.sleep('WorldNavScene');
-        this.scene.launch('MessageScene', {message: { title : "Hello, World", body: "This is an announcement."}});
+        this.scene.launch('MessageScene', {message: { title : this.announcement.title, body: this.announcement.body}});
 
         this.events.on('pause', function(){
             this.scene.sleep('WorldNavScene');

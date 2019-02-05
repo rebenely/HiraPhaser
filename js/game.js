@@ -26,5 +26,5 @@ game.global = {
     UI_TEXT_STROKE: "#272744",
     UI_TEXT_HIGHLIGHT: 0xf2d3ab,
     UI_TEXT_STROKE_HIGHLIGHT: "#f2d3ab",
-    loaded: false
 };
+game.loaded = false;

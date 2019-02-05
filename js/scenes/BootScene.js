@@ -55,18 +55,37 @@ class BootScene extends Phaser.Scene {
         console.debug('failed: ', totalFailed);
     }
     create () {
+        this.loaded = false;
         this.worldJson = this.cache.json.get('main_world');
         this.player = new Unit(this, 120, 320, "TestBoi", 5, 1);
         console.log(this.worldJson);
         console.log(game.global.UI_TEXT_HIGHLIGHT);
-        if(this.worldJson) {
-            this.loaded = true;
-        }
+
+        $.ajax({
+            url: "http://localhost:8081/hello",
+            type: "GET",
+            async: true,
+            context: this,
+            success: function (responseData) {
+
+                this.announcement = {
+                    title: responseData['title'],
+                    body: responseData['body']
+                }
+                this.loaded = true;
+                console.log('ayy lmaoooo', this.announcement);
+            },
+            error: function (xhr) {
+                this.announcement = {
+                    title: "Uh oh",
+                    body: "Unable to read from server"
+                }
+            }
+        });
     }
     update () {
-
-        if(game.loaded){
-            this.scene.start("MainScene", {player: this.player, world: this.worldJson});
+        if(game.loaded && this.loaded){
+            this.scene.start("MainScene", {player: this.player, world: this.worldJson, announcement: this.announcement});
         }
     }
 }
