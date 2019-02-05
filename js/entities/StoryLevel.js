@@ -53,9 +53,9 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
             this.clearTint();
         } else {
             this.enabled = false;
-            this.setTint(0x585858);
+            this.setTint(0x4c4c4c);
         }
     }
 
-    
+
 }

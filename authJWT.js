@@ -1,7 +1,7 @@
 let jwt = require('jsonwebtoken');
 let config = require('./config');
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+const url = "mongodb://localhost:27017/";
 
 module.exports  = {
   login (req, res) {
@@ -14,11 +14,17 @@ module.exports  = {
     if (username && password) {
 
         MongoClient.connect(url, function(err, db) {
-          if (err) throw err;
+          if (err) {
+              throw err;
+          }
           var dbo = db.db("hira");
-          dbo.collection("Player").findOne({}, function(err, result) {
-            if (err) throw err;
-
+          var query = {username: username};
+          dbo.collection("players").findOne(query, function(err, result) {
+            if (err) {
+                console.log('ayo wtf');
+                throw err;
+            }
+            console.log('query result', result);
             if (username === result.username && password === result.password) {
               let token = jwt.sign({username: username},
                 config.secret,

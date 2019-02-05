@@ -33,7 +33,7 @@ class DungeonScene extends Phaser.Scene {
             battles: []
         }
         this.hintChecked = false;
-        console.log('recreate boii', this.dataCapture);
+        console.log('recreate boii', this.dungeon);
         var bg = this.add.sprite(720/2, 480/2, this.dungeon.background);
         this.playerHP = this.player.hp;
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
@@ -62,6 +62,7 @@ class DungeonScene extends Phaser.Scene {
                     enemyCleared.push({name: this.dungeon.minionName, exp: 10});
                 }
             }
+            this.scene.stop();
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true, dataCapture: this.dataCapture});
         }, this);
         this.add.existing(this.cancelButton);
@@ -116,13 +117,16 @@ class DungeonScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.hintButton);
 
+        this.events.removeListener('camerafadeoutcomplete');
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
             this.scene.stop();
-            this.scene.start('ResultScene', {player: this.player, enemy: this.enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture});
+            this.scene.start('ResultScene', {player: this.player, enemy: this.enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture, story: this.dungeon.story});
         }, this);
 
+        this.events.removeListener('closeScreen');
         this.events.once('closeScreen', function (success, flee) {
             this.packCapturedData(success, flee);
+            console.log('look what i did', this.cleared);
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
                     this.enemyCleared.push({name: this.dungeon.bossName, exp: 50});
@@ -162,7 +166,7 @@ class DungeonScene extends Phaser.Scene {
 
         /* if player died, no anims for now but will probably add later */
         /* note: added fade out on finish */
-        
+
         if(this.player.hp <= 0) {
             this.events.emit('closeScreen', false, false);
         }
@@ -176,8 +180,8 @@ class DungeonScene extends Phaser.Scene {
 
     onBattleFinish (data) {
         if(data.success){
-            console.log('tapos');
             this.cleared += 1;
+            console.log('tapos ', this.cleared);
         }
         data.dataCapture.hint_checked = this.hintChecked;
         this.dataCapture.battles.push(data.dataCapture);

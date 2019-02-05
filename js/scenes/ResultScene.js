@@ -11,7 +11,7 @@ class ResultScene extends Phaser.Scene {
         this.cleared = data.cleared;
         this.success = data.success;
         this.flee = data.flee;
-        this.progress = data.progress;
+        this.story = data.story;
         this.dataCapture = data.dataCapture;
     }
 
@@ -74,6 +74,7 @@ class ResultScene extends Phaser.Scene {
         this.aveTime = [];
         this.diff = [];
         var equiv = ["Easy", "Normal", "Hard"];
+        console.log('this enemy', this.enemy.length);
         for(var i = 0; i < this.enemy.length; i++){
             this.enemyNames.push(new HiraText(this, 720/5, 480/3 + 50*(i+1), this.enemy[i].name, "basic"));
             this.add.existing(this.enemyNames[i]);
@@ -136,7 +137,7 @@ class ResultScene extends Phaser.Scene {
         if (this.state >= 1) {
             console.log('gising na bata');
 
-            this.events.emit('finishedDungeon', {success: this.success, dataCapture: this.dataCapture, progress: this.progress, message : {title:  this.success ? "#1 Victory Royale!" : "Mission Failed", message: this.success ? "You have successfully finished this dungeon!" : "We'll get 'em next time."}});
+            this.events.emit('finishedDungeon', {success: this.success, dataCapture: this.dataCapture, story: this.story, message : {title:  this.success ? "#1 Victory Royale!" : "Mission Failed", message: this.success ? "You have successfully finished this dungeon!" : "We'll get 'em next time."}});
 
             this.scene.wake('MainScene', {player: this.player});
             this.scene.stop('ResultScene');

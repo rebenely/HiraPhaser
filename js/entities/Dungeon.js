@@ -11,7 +11,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
 
         /* set values */
         this.name = dungeonContent.name;
-        this.level = dungeonContent.level;
+        this.story = dungeonContent.level;
         this.characterPool = dungeonContent.charSet;
         this.wordPool = dungeonContent.wordPool;
         this.description = dungeonContent.description;
@@ -81,8 +81,8 @@ class Dungeon extends Phaser.GameObjects.Sprite {
 
 
     comparePlayerLevel(level) {
-        console.log('level',level,'this level',this.level);
-        if (level >= this.level) {
+        console.log('level',level,'this level',this.story);
+        if (level >= this.story) {
             this.enabled = true;
             this.clearTint();
         } else {

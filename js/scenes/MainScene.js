@@ -254,7 +254,7 @@ class MainScene extends Phaser.Scene {
         console.log(data);
         this.scene.launch('DialogBoxScene', {title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'ayy lmao' });
 
-        if(data.success) { // check if player story is lower than dungeon story level
+        if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
         }
