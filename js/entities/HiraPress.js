@@ -16,7 +16,7 @@ class HiraPress extends Phaser.GameObjects.Text {
         .on('pointerover', function (pointer) {
 
             if(this.clickable && this.enabled) {
-                console.log('aayy');
+                // console.log('aayy');
                 if(pointer.isDown) {
                     callback();
                 }

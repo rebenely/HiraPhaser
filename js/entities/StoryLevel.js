@@ -46,7 +46,7 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
     }
 
     comparePlayerLevel(level) {
-        console.log('level',level,'this level',this.level);
+        // console.log('level',level,'this level',this.level);
 
         if (level >= this.level) {
             this.enabled = true;

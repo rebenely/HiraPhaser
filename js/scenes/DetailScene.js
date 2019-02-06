@@ -53,7 +53,7 @@ class DetailScene extends Phaser.Scene {
 
         this.enterButton = new HiraButton(this, 720  - 60 - 30, 420, "Enter", style, () => {
             if(this.dungeon != null || this.content != null){
-                console.log('upgrade');
+                // console.log('upgrade');
                 this.scene.sleep('MainScene');
                 this.scene.stop('DetailScene');
                 this.scene.start(this.startScene, this.passData);

@@ -16,7 +16,7 @@ class CutLoaderScene extends Phaser.Scene {
 
     create() {
         var dialogJson = this.cache.json.get('dialog');
-        console.log(dialogJson);
+        // console.log(dialogJson);
         this.scene.start('CutScene', {jsonFile: dialogJson});
     }
 

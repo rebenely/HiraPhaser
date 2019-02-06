@@ -3,7 +3,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
     constructor(scene, dungeonContent, dungeonSprite, enemies, optionals, callback) {
         /* initiate sprite */
         super(scene, dungeonSprite.x, dungeonSprite.y, dungeonSprite.spriteName);
-        console.log(dungeonSprite.spriteName);
+        // console.log(dungeonSprite.spriteName);
         this.setOrigin(0.5);
         this.setDisplaySize(optionals.sizeX, optionals.sizeY);
         this.setSize(optionals.sizeX, optionals.sizeY);
@@ -75,13 +75,13 @@ class Dungeon extends Phaser.GameObjects.Sprite {
             scene.events.emit('hoverOut');
         }, caveName);
 
-        console.log(this);
+        // console.log(this);
         this.enabled = false;
     }
 
 
     comparePlayerLevel(level) {
-        console.log('level',level,'this level',this.story);
+        // console.log('level',level,'this level',this.story);
         if (level >= this.story) {
             this.enabled = true;
             this.clearTint();

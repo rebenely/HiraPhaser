@@ -12,13 +12,13 @@ class BattleScene extends Phaser.Scene {
         this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
         this.add.existing(this.loading);
 
-        console.log(this.dungeon);
+        // console.log(this.dungeon);
         this.load.image(this.dungeon.battleBackground, this.dungeon.battleBackgroundPath);
-        console.log(this.dungeon.minionName + "_idle", this.dungeon.minionSpritePath);
+        // console.log(this.dungeon.minionName + "_idle", this.dungeon.minionSpritePath);
         this.load.spritesheet(this.dungeon.minionName + "_idle", this.dungeon.minionSpritePath, { frameWidth: 64, frameHeight: 64 });
         this.load.spritesheet(this.dungeon.minionName + "_attack", this.dungeon.minionAttackSpritePath, { frameWidth: 64, frameHeight: 64 });
         if(this.dungeon.bossName != undefined){
-            console.log(this.dungeon.bossSpritePath);
+            // console.log(this.dungeon.bossSpritePath);
             this.load.spritesheet(this.dungeon.bossName + "_idle", this.dungeon.bossSpritePath, { frameWidth: 64, frameHeight: 64 });
             this.load.spritesheet(this.dungeon.bossName + "_attack", this.dungeon.bossAttackSpritePath, { frameWidth: 64, frameHeight: 64 });
         }
@@ -26,7 +26,7 @@ class BattleScene extends Phaser.Scene {
     }
 
     init (data) {
-        console.log(data);
+        // console.log(data);
         if(data.dungeon !== undefined) {
             this.dungeon = data.dungeon;
             this.boss = data.boss;
@@ -57,7 +57,7 @@ class BattleScene extends Phaser.Scene {
             {
                 e.preventDefault();
                 this.inputText += e.key.toUpperCase();
-                console.log('you typed ', this.inputText);
+                // console.log('you typed ', this.inputText);
             }
             else if (e.keyCode === 8) //backspace
             {
@@ -108,7 +108,7 @@ class BattleScene extends Phaser.Scene {
 
 
 
-        console.log('ayo mark time', this.battleCapture.total_time);
+        // console.log('ayo mark time', this.battleCapture.total_time);
 
         this.scene.bringToTop();
         /* remove existing anims since this scene will be reused */
@@ -150,12 +150,12 @@ class BattleScene extends Phaser.Scene {
         this.attackButton = new HiraButton(this, 720/2, 480/2, "Attack!", style, () =>  {
             if(this.state === this.STATE_VALUE.idle) {
                 this.timedEvent = this.time.addEvent({ delay: 5000, callback: this.answerFailed, callbackScope: this }, this);
-                console.log('state has been changed');
+                // console.log('state has been changed');
                 this.projectile.getRandomCharacter();
                 this.projectile.getHiragana();
                 this.projectile.setText(this.projectile.getHiragana());
                 this.state = this.STATE_VALUE.attack;
-                console.log(this.projectile);
+                // console.log(this.projectile);
                 this.battleCapture.asked++;
 
             }
@@ -191,7 +191,7 @@ class BattleScene extends Phaser.Scene {
             frameRate: 2,
             repeat: -1
         });
-        console.log((this.boss ? this.dungeon.bossName : this.dungeon.minionName) + "_idle" );
+        // console.log((this.boss ? this.dungeon.bossName : this.dungeon.minionName) + "_idle" );
         this.anims.create({
             key: 'enemy_idle',
             frames: this.anims.generateFrameNumbers((this.boss ? this.dungeon.bossName : this.dungeon.minionName) + "_idle" , { frames: [ 0, 1 ] }),
@@ -270,7 +270,7 @@ class BattleScene extends Phaser.Scene {
             if(this.state === this.STATE_VALUE.idle) {
                 if(this.simulate){
                     this.packData();
-                    console.log(this.battleCapture);
+                    // console.log(this.battleCapture);
                     if(this.battleCapture.questions.length > 0){
                         this.events.emit('finishedPractice', {success: true, dataCapture: this.battleCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level } );
                     }
@@ -281,25 +281,23 @@ class BattleScene extends Phaser.Scene {
         }, this);
         this.backButton.visible = false;
         this.add.existing(this.backButton);
-        console.log('quingina');
+        // console.log('quingina');
 
         this.player.sprite.on('animationcomplete', this.animComplete, this);
         this.enemy.sprite.on('animationcomplete', this.animCompleteEnemy, this);
         this.slash.on('animationcomplete', this.animCompleteSlash, this);
 
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
-            console.log('yow');
+            // console.log('yow');
             this.packData();
-            if(this.simulate){
-                console.log(this.battleCapture);
-            } else {
+            if(!this.simulate){
                 this.events.emit('battleFinish', {success: this.player.hp > 0, dataCapture: this.battleCapture});
                 this.scene.stop('BattleScene');
                 this.scene.wake('DungeonScene');
             }
 
 
-            console.log('return this my nibba', this.battleCapture);
+            // console.log('return this my nibba', this.battleCapture);
         }, this);
 
         this.events.once('closeScreen', this.closeScreen, this);
@@ -414,7 +412,7 @@ class BattleScene extends Phaser.Scene {
         this.slash.visible = false;
         if(this.player.hp <= 0 || this.enemy.hp <= 0) {
             /* play death anim here */
-            console.log('fade out');
+            // console.log('fade out');
             this.events.emit('closeScreen');
             this.state = this.STATE_VALUE.close;
 
@@ -423,9 +421,9 @@ class BattleScene extends Phaser.Scene {
     }
 
     animComplete(animation, frame){
-        console.log(animation.key);
+        // console.log(animation.key);
         if(animation.key === 'player_attack' || animation.key === 'player_hurt'){
-            console.log('finish anim');
+            // console.log('finish anim');
             this.player.sprite.play('idle', true);
             this.state = this.STATE_VALUE.idle;
         }
@@ -440,7 +438,7 @@ class BattleScene extends Phaser.Scene {
     animCompleteEnemy(animation, frame){
         console.log(animation.key);
         if(animation.key === 'enemy_attack' || animation.key === 'player_hurt'){
-            console.log('finish anim');
+            // console.log('finish anim');
             this.enemy.sprite.play('enemy_idle', true);
         }
 
@@ -520,7 +518,7 @@ class BattleScene extends Phaser.Scene {
 
     answerFailed (wrong) {
         /* failed, time's up or wrong anser */
-        console.log('time ends');
+        // console.log('time ends');
         this.timedEvent.remove(false);
         this.enemyAttack();
         if(!wrong){

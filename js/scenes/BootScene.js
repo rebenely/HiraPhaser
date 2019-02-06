@@ -57,8 +57,8 @@ class BootScene extends Phaser.Scene {
     create () {
         this.loaded = false;
         this.worldJson = this.cache.json.get('main_world');
-        console.log(this.worldJson);
-        console.log(game.global.UI_TEXT_HIGHLIGHT);
+        // console.log(this.worldJson);
+        // console.log(game.global.UI_TEXT_HIGHLIGHT);
         this.announcement = {};
         $.ajax({
             url: "http://localhost:8081/hello",
@@ -72,7 +72,7 @@ class BootScene extends Phaser.Scene {
                     body: responseData['body']
                 }
                 this.loaded = true;
-                console.log('ayy lmaoooo', responseData);
+                // console.log('ayy lmaoooo', responseData);
             },
             error: function (xhr) {
                 this.announcement = {
@@ -91,7 +91,7 @@ class BootScene extends Phaser.Scene {
                     this.player.characterPool.push(game.charset[i][j]);
                 }
             }
-            console.log(this.player.characterPool, game.charset);
+            // console.log(this.player.characterPool, game.charset);
             this.scene.start("MainScene", {player: this.player, world: this.worldJson, announcement: this.announcement});
         }
     }

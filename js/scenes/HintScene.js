@@ -46,7 +46,7 @@ class HintScene extends Phaser.Scene {
 
         this.characterDisplay = [];
         this.romajiDisplay = [];
-        console.log(this.player.characterPool);
+        // console.log(this.player.characterPool);
         var j = 0;
         var column = 0;
         for ( let i = 0; i < this.player.characterPool.length; i++ ) {
@@ -77,7 +77,7 @@ class HintScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.upButton);
 
-        console.log(j* 100 + 5);
+        // console.log(j* 100 + 5);
         this.cameras.main.ignore([this.characterDisplay, this.romajiDisplay, this.container, titleDisplay]);
         this.verticalCamera.ignore([this.cancelButton, this.downButton, this.upButton, this.graphics]);
         this.container.fillStyle(game.global.UI_FILL_A, 1);
@@ -87,7 +87,7 @@ class HintScene extends Phaser.Scene {
         this.verticalCamera.setBounds(0, 0, 680, j*100 + 100);
 
 
-        console.log(this.world);
+        // console.log(this.world);
     }
 
 

@@ -44,7 +44,7 @@ class MatchingTypeScene extends Phaser.Scene {
         this.characterPool = this.shuffle(this.characterPool);
         for ( let i = 0; i < this.characterPool.length; i++ ){
             let value = this.characterPool[i];
-            console.log(value);
+            // console.log(value);
 
             // this.ypos.push(i*460/(this.characterPool.length + 2) + (460/this.characterPool.length + 2));
             this.matchLines.strokeRect(20, (460/this.characterPool.length + 2), 680,  i*460/(this.characterPool.length + 2) );
@@ -55,7 +55,7 @@ class MatchingTypeScene extends Phaser.Scene {
                     if (this.selectedLetter == null) {
                         this.selectedLetter = value;
                         this.ypos[i].setTint(game.global.UI_TEXT_HIGHLIGHT);
-                        console.log(this.selectedLetter);
+                        // console.log(this.selectedLetter);
                     } else if (this.selectedLetter === value) {
                         this.selectedLetter = null;
                         this.ypos[i].clearTint();
@@ -79,12 +79,12 @@ class MatchingTypeScene extends Phaser.Scene {
                                 posselected = j;
                             }
                         }
-                        console.log('swap:',swap,'selected:',selected);
+                        // console.log('swap:',swap,'selected:',selected);
 
                         let swappang = this.answer[swap];
                         this.answer[swap] = this.answer[selected];
                         this.answer[selected] = swappang;
-                        console.log(this.answer);
+                        // console.log(this.answer);
                         this.selectedLetter = null;
                         let temp = this.ypos[posswap].y;
                         this.ypos[posswap].y = this.ypos[posselected].y;
@@ -106,7 +106,7 @@ class MatchingTypeScene extends Phaser.Scene {
             // this.hiragana[i].setOrigin(0.5).setInteractive();
             // this.input.setDraggable(this.hiragana[i]);
         }
-        console.log(this.ypos);
+        // console.log(this.ypos);
 
         // this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
         //
@@ -127,7 +127,7 @@ class MatchingTypeScene extends Phaser.Scene {
         // });
 
         this.exitButton = new HiraButton(this, 720/3, 5*480/6, "Exit", this.style, () => {
-            console.log('yeman', this.dataCapture);
+            // console.log('yeman', this.dataCapture);
             this.events.emit('matchFinish', {dataCapture: this.dataCapture});
             this.scene.stop('MatchingTypeScene');
             this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});
@@ -135,7 +135,7 @@ class MatchingTypeScene extends Phaser.Scene {
         this.add.existing(this.exitButton);
         this.results = [];
         this.playButton = new HiraButton(this, 2*720/3, 5*480/6, "Play", this.style, () => {
-            console.log('Play');
+            // console.log('Play');
 
             if(this.matchLines.visible === true){
                 this.playButton.visible = false;
@@ -148,7 +148,7 @@ class MatchingTypeScene extends Phaser.Scene {
                        ease: 'Power2',
                        onComplete: () => {
                            this.exitButton.visible = true;
-                          console.log(this.answer[i], 'vs', this.shuffled[i]);
+                          // console.log(this.answer[i], 'vs', this.shuffled[i]);
                           this.dataCapture.answers.push({target: this.shuffled[i], answer: this.answer[i]});
                           if(this.answer[i] === this.shuffled[i]){
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
@@ -163,7 +163,7 @@ class MatchingTypeScene extends Phaser.Scene {
             } else {
                 this.display.visible = false;
                 this.timeStamp = this.time.now/1000;
-                console.log(this.timeStamp);
+                // console.log(this.timeStamp);
                 for(let i = 0; i < this.ypos.length; i++) {
                     this.ypos[i].visible = true;
                     this.hiragana[i].visible = true;

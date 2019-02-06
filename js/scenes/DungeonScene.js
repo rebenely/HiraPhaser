@@ -7,7 +7,7 @@ class DungeonScene extends Phaser.Scene {
     preload () {
         this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
         this.add.existing(this.loading);
-        console.log(this.dungeon.background, this.dungeon.backgroundPath);
+        // console.log(this.dungeon.background, this.dungeon.backgroundPath);
 
         /* load images and spritesheets */
         this.load.image(this.dungeon.background, this.dungeon.backgroundPath);
@@ -33,7 +33,7 @@ class DungeonScene extends Phaser.Scene {
             battles: []
         }
         this.hintChecked = false;
-        console.log('recreate boii', this.dungeon);
+        // console.log('recreate boii', this.dungeon);
         var bg = this.add.sprite(720/2, 480/2, this.dungeon.background);
         this.playerHP = this.player.hp;
         this.playerHealthDisplay =  this.add.group({ key: 'heart', frame: 0, repeat: this.player.hp - 1, setXY: { x: 720/2 - 680/2, y:  480/2 - 440/2, stepX: 32 } });
@@ -126,7 +126,7 @@ class DungeonScene extends Phaser.Scene {
         this.events.removeListener('closeScreen');
         this.events.once('closeScreen', function (success, flee) {
             this.packCapturedData(success, flee);
-            console.log('look what i did', this.cleared);
+            // console.log('look what i did', this.cleared);
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {
                     this.enemyCleared.push({name: this.dungeon.bossName, exp: 50});
@@ -181,7 +181,7 @@ class DungeonScene extends Phaser.Scene {
     onBattleFinish (data) {
         if(data.success){
             this.cleared += 1;
-            console.log('tapos ', this.cleared);
+            // console.log('tapos ', this.cleared);
         }
         data.dataCapture.hint_checked = this.hintChecked;
         this.dataCapture.battles.push(data.dataCapture);
@@ -193,7 +193,7 @@ class DungeonScene extends Phaser.Scene {
 
         this.dataCapture.flee = flee;
 
-        console.log('tapos na', this.dataCapture);
+        // console.log('tapos na', this.dataCapture);
         for(let i = 0; i < this.dataCapture.battles.length; i++){
             this.dataCapture.accuracy += this.dataCapture.battles[i].accuracy;
         }

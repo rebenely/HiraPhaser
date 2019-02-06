@@ -9,7 +9,7 @@ class MultipleChoiceScene extends Phaser.Scene {
         this.characterPool = data.characterPool.slice();
         this.characterDisplayPool = data.characterPool.slice();
         this.title = data.title;
-        console.log(data);
+        // console.log(data);
     }
 
     preload () {
@@ -28,7 +28,7 @@ class MultipleChoiceScene extends Phaser.Scene {
             total_time: this.time.now/1000,
             questions: []
         };
-        console.log(this.dataCapture);
+        // console.log(this.dataCapture);
         this.maxQuestions = 10;
 
         this.anims.remove('slash');
@@ -79,11 +79,11 @@ class MultipleChoiceScene extends Phaser.Scene {
 
         for ( let i = 0; i < this.characterDisplayPool.length; i++ ){
             let value = this.characterDisplayPool[i];
-            console.log(value);
+            // console.log(value);
 
             this.add.existing(new HiraButton(this, (700/this.characterDisplayPool.length + 1) +  i*700/(this.characterDisplayPool.length+1), 480/2, '[' + value + ']', style,
                 () => {
-                    console.log(value, i, 'vs', this.targetChar.currentChar);
+                    // console.log(value, i, 'vs', this.targetChar.currentChar);
                     if(this.targetChar.visible === true){
                         this.dataCapture.questions.push({
                             answer: value,
@@ -94,12 +94,12 @@ class MultipleChoiceScene extends Phaser.Scene {
                     this.charTime = this.time.now/1000;
                     if(value === this.targetChar.currentChar && this.targetChar.visible === true) {
                         this.counter++;
-                        console.log(this.counter);
+                        // console.log(this.counter);
                         this.targetChar.getRandomCharacter();
                         this.showSlash(720/2, 480/4, false);
 
                         if(this.counter >= this.maxQuestions) {
-                            console.log(this.dataCapture);
+                            // console.log(this.dataCapture);
                             this.targetChar.say("SA-SU-GA");
                             this.closeButton.visible = true;
                             this.display.visible = false;
@@ -130,7 +130,7 @@ class MultipleChoiceScene extends Phaser.Scene {
             this.startTime = this.time.now/1000;
             this.charTime =  this.time.now/1000;
             this.dataCapture.total_time = this.startTime;
-            console.log(this.time.now/1000);
+            // console.log(this.time.now/1000);
         }, this);
         this.add.existing(this.startButton);
 

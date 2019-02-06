@@ -23,7 +23,7 @@ class DialogBoxScene extends Phaser.Scene {
     }
     create () {
         this.scene.pause('MainScene');
-        console.log(this.api);
+        // console.log(this.api);
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
 
@@ -51,7 +51,7 @@ class DialogBoxScene extends Phaser.Scene {
         // this.add.existing(this.cancelButton);
         //
         if(this.apiRequest){
-            console.log(this.payload);
+            // console.log(this.payload);
             this.postData();
         }
 
@@ -69,7 +69,7 @@ class DialogBoxScene extends Phaser.Scene {
             context: this,
             retryLimit: 3,
             success: function (responseData) {
-                console.log('ahahah', JSON.stringify(this.payload));
+                // console.log('ahahah', JSON.stringify(this.payload));
                 var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 180, useAdvancedWrap: true} };
                 this.okayButton = new HiraButton(this, 90 + 540 - 80, 160 + 150 - 30, "Continue", style, () => {
                     this.scene.wake('MainScene');

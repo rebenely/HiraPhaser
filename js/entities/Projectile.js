@@ -3,7 +3,7 @@ class Projectile extends Phaser.GameObjects.BitmapText {
     constructor(scene, x, y, font, characterPool) {
         super(scene, x, y, font, '');
 
-        console.log('created!');
+        // console.log('created!');
         this.x = x;
         this.y = y;
         this.characterPool = characterPool;
@@ -13,28 +13,28 @@ class Projectile extends Phaser.GameObjects.BitmapText {
         this.visible = false;
         this.characterPool = this.shuffle(characterPool);
         this.iterator = 0;
-        console.log('char pool length', this.characterPool.length)
+        // console.log('char pool length', this.characterPool.length)
     }
 
     say(text) {
         this.currentChar = text;
         this.chars = this.currentChar.split('-');
         this.currentChar = this.currentChar.replace(/-/g, '');
-        console.log('new char', this.currentChar);
+        // console.log('new char', this.currentChar);
         this.setText(this.getHiragana());
     }
 
     getRandomCharacter () {
-        console.log('iterator ', this.iterator, this.characterPool);
+        // console.log('iterator ', this.iterator, this.characterPool);
         this.currentChar = this.characterPool[this.iterator];
         this.chars = this.currentChar.split('-');
         this.currentChar = this.currentChar.replace(/-/g, '');
-        console.log('new char', this.currentChar);
+        // console.log('new char', this.currentChar);
         this.setText(this.getHiragana());
         if(this.iterator < this.characterPool.length - 1) {
             this.iterator++;
         } else {
-            console.log('go here');
+            // console.log('go here');
             this.characterPool = this.shuffle(this.characterPool);
             this.iterator = 0;
         }
@@ -47,7 +47,7 @@ class Projectile extends Phaser.GameObjects.BitmapText {
         for( var i = 0; i < this.chars.length; i++ ){
             charString += Projectile.convertToHiragana(this.chars[i]);
         }
-        console.log('yikes ', charString);
+        // console.log('yikes ', charString);
         return charString;
     }
     static convertToHiragana (text) {
@@ -279,7 +279,7 @@ class Projectile extends Phaser.GameObjects.BitmapText {
             break;
         }
 
-        console.log('yikes ', charString);
+        // console.log('yikes ', charString);
         return charString;
     }
     shuffle(array) {

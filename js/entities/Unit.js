@@ -2,7 +2,7 @@ class Unit  {
 
     constructor(scene, x, y, type, hp, damage) {
         /* not a sprite since it will not be always drawn in scenes that have it */
-        console.log('i received ', hp);
+        // console.log('i received ', hp);
         this.name = type;
         this.maxHp = this.hp = hp;
         this.damage = damage; // default damage
@@ -28,7 +28,7 @@ class Unit  {
     }
 
     createSprite (scene, sprite, anim, x, y, scale) {
-        console.log(this.sprite);
+        // console.log(this.sprite);
         this.sprite = scene.physics.add.sprite(x, y, sprite);
         this.sprite.setScale(scale);
         this.sprite.anchor = 0.5;
@@ -40,8 +40,8 @@ class Unit  {
     }
 
     checkSubsetArray(newChars) {
-        console.log(this.characterPool);
-        console.log(newChars.every(val => this.characterPool.includes(val)));
+        // console.log(this.characterPool);
+        // console.log(newChars.every(val => this.characterPool.includes(val)));
         return newChars.every(val => this.characterPool.includes(val));
     }
 

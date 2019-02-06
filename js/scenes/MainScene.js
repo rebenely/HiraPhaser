@@ -61,7 +61,7 @@ class MainScene extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 2048, 981);
         this.cameras.main.setBackgroundColor(0x28ccdf);
 
-        console.log(this.world);
+        // console.log(this.world);
 
         var cursors = this.input.keyboard.createCursorKeys();
 
@@ -84,7 +84,7 @@ class MainScene extends Phaser.Scene {
         for(let i = 0; i < this.world.dungeons.length; i++){
             // this.dungeons.push();
             let currentDungeon =  this.world.dungeons[i];
-            console.log(this.world.dungeons[i]);
+            // console.log(this.world.dungeons[i]);
             this.dungeons.push( new Dungeon(this,
                 { name: currentDungeon.name, level: currentDungeon.level, description:  currentDungeon.description, charSet: currentDungeon.charSet, wordPool: currentDungeon.wordPool },
                 { x: currentDungeon.sprites.x, y: currentDungeon.sprites.y, spriteName: currentDungeon.sprites.name, dungeonBG: {name: currentDungeon.sprites.dungeonBG.name, path: currentDungeon.sprites.dungeonBG.path}, battleBG: {name: currentDungeon.sprites.battleBG.name, path: currentDungeon.sprites.battleBG.path}},
@@ -180,7 +180,7 @@ class MainScene extends Phaser.Scene {
                  this.add.existing(this.practiceLevels[this.practiceLevels.length - 1]);
                  this.practiceLevels[this.practiceLevels.length - 1].comparePlayerLevel(this.player.story);
             }
-            console.log(this.world.storyLevels[i]);
+            // console.log(this.world.storyLevels[i]);
         }
 
         /* emit events */
@@ -205,9 +205,9 @@ class MainScene extends Phaser.Scene {
         practiceScene.events.on('finishedPractice', this.onPracticeFinish, this);
 
         /* debug */
-        this.input.on('pointerup', function (pointer) {
-            console.log(pointer.worldX, pointer.worldY);
-        });
+        // this.input.on('pointerup', function (pointer) {
+        //     console.log(pointer.worldX, pointer.worldY);
+        // });
 
         //for inn
         this.cutSceneLevels[0].setDepth(2);
@@ -218,7 +218,7 @@ class MainScene extends Phaser.Scene {
         this.controls.update(delta);
 
         this.clouds.getChildren().forEach(function (child) {﻿
-            if(child.x > 2048) {
+            if(child.x > 2048 + child.width + 200) {
                 child.x = -1024;
             }
             child.x += 2;
@@ -227,7 +227,7 @@ class MainScene extends Phaser.Scene {
         });
 
         this.clouds2.getChildren().forEach(function (child) {﻿
-            if(child.x > 2048) {
+            if(child.x > 2048 + child.width + 200) {
                 child.x = -1024;
             }
             child.x += 3;
@@ -236,7 +236,7 @@ class MainScene extends Phaser.Scene {
         });
 
         this.clouds3.getChildren().forEach(function (child) {﻿
-            if(child.x > 2048) {
+            if(child.x > 2048 + child.width + 200) {
                 child.x = -1024;
             }
             child.x += 4;
@@ -247,7 +247,7 @@ class MainScene extends Phaser.Scene {
 
     /* emitted event from cutscene */
     onLearnedNewCharacters(data){
-        console.log(data);
+        // console.log(data);
         var updateCharset = false;
 
         if(!this.player.checkSubsetArray(data.charSet)){
@@ -256,8 +256,6 @@ class MainScene extends Phaser.Scene {
             this.player.story++;
             this.compareStoryLevels();
             updateCharset = true;
-        } else {
-            console.log('nani the fuck');
         }
 
         // if(this.player.story <= data.story) { // check if player story is lower than dungeon story level
@@ -267,12 +265,12 @@ class MainScene extends Phaser.Scene {
         // }
 
         this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, timestamp: new Date(), updateCharset: updateCharset}, api: 'api/learn'});
-        console.log('received', data);
+        // console.log('received', data);
     }
 
     /* emmitted event from dungeon */
     onFinishedDungeon(data){
-        console.log(data);
+        // console.log(data);
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
@@ -286,9 +284,9 @@ class MainScene extends Phaser.Scene {
             this.player.story++;
             this.compareStoryLevels();
         }
-        console.log(data);
+        // console.log(data);
         this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/train' });
-        console.log(data.success, this.player.story, data.story)
+        // console.log(data.success, this.player.story, data.story)
 
     }
 
@@ -297,15 +295,15 @@ class MainScene extends Phaser.Scene {
             this.player.story++;
             this.compareStoryLevels();
         }
-        console.log(data);
+        // console.log(data);
         data.dataCapture.username = this.player.name;
         this.scene.launch('DialogBoxScene', {story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/practice' });
-        console.log(data.success, this.player.story, data.story)
+        // console.log(data.success, this.player.story, data.story)
 
     }
 
     compareStoryLevels() {
-        console.log('ayo update', this.player.story);
+        // console.log('ayo update', this.player.story);
         for (let i = 0; i < this.cutSceneLevels.length; i ++) {
             this.cutSceneLevels[i].comparePlayerLevel(this.player.story);
         }

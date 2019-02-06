@@ -9,7 +9,7 @@ class TrainScene extends Phaser.Scene {
         this.characterPool = data.characterPool;
         this.title = data.title;
         this.level = data.level;
-        console.log("ayyy ", this.characterPool);
+        // console.log("ayyy ", this.characterPool);
     }
 
     preload () {
@@ -47,7 +47,7 @@ class TrainScene extends Phaser.Scene {
         this.add.existing(mulchoButton);
 
         var matchingButton = new HiraButton(this, 2*720/3, 480/2, "Matching Type!", style, () => {
-            console.log('yeman');
+            // console.log('yeman');
             this.scene.pause('TrainScene');
             this.scene.launch('MatchingTypeScene', {player: this.player, characterPool: this.characterPool});
         }, this);
@@ -58,7 +58,7 @@ class TrainScene extends Phaser.Scene {
                 this.events.emit('finishedTraining', {success: true, dataCapture: this.dataCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level } );
             }
 
-            console.log('yeman');
+            // console.log('yeman');
             this.scene.stop('TrainScene');
             this.scene.wake('MainScene', {player: this.player});
         }, this);
@@ -77,10 +77,10 @@ class TrainScene extends Phaser.Scene {
     }
     onMulchoFinish (data) {
         this.dataCapture.mulcho.push(data.dataCapture);
-        console.log(this.dataCapture);
+        // console.log(this.dataCapture);
     }
     onMatchFinish (data) {
         this.dataCapture.match.push(data.dataCapture);
-        console.log(this.dataCapture);
+        // console.log(this.dataCapture);
     }
 }

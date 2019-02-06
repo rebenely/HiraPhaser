@@ -15,9 +15,9 @@ class CutScene extends Phaser.Scene {
         for (var property in this.jsonFile['images']) {
             if (this.jsonFile['images'].hasOwnProperty(property)) {
                 this.load.image(property.toString(),  this.jsonFile['images'][property]);
-                console.log(property.toString(), this.jsonFile['images'][property]);
+                // console.log(property.toString(), this.jsonFile['images'][property]);
                 if(property.toString().search("_bg") != -1) {
-                    console.log(property.toString());
+                    // console.log(property.toString());
                     this.bgKey = property.toString(); /* what if multiple bg */
                 }
             }
@@ -33,7 +33,7 @@ class CutScene extends Phaser.Scene {
 
     create() {
         var bg = this.add.sprite(720/2, 480/2, this.bgKey);
-        console.log('image resize', this.jsonFile.image.x, this.jsonFile.image.y, this.jsonFile.image.scale);
+        // console.log('image resize', this.jsonFile.image.x, this.jsonFile.image.y, this.jsonFile.image.scale);
         this.npc = this.add.sprite(parseInt(this.jsonFile.image.x, 10), parseInt(this.jsonFile.image.y, 10), this.jsonFile['dialog'][0].image);
         this.npc.setScale(Number(this.jsonFile.image.scale));
         this.npc.setOrigin(0.5);
@@ -87,13 +87,13 @@ class CutScene extends Phaser.Scene {
                 this.dialogName.setText(this.messageArray[this.dialogIterator].name);
                 this.dialogText.setText(this.messageArray[this.dialogIterator].message);
                 if (this.messageArray[this.dialogIterator].image !== undefined) {
-                    console.log('start ', this.messageArray[this.dialogIterator].image);
+                    // console.log('start ', this.messageArray[this.dialogIterator].image);
 
                     this.npc.setTexture(this.messageArray[this.dialogIterator].image);
                     this.hiraText.visible = false;
                     this.npc.visible = true;
                 } else if (this.messageArray[this.dialogIterator].text !== undefined) {
-                    console.log('start ', this.messageArray[this.dialogIterator].text);
+                    // console.log('start ', this.messageArray[this.dialogIterator].text);
 
                     this.npc.visible = false;
                     this.hiraText.visible = true;
@@ -101,10 +101,10 @@ class CutScene extends Phaser.Scene {
                     this.hiraText.setText([Projectile.convertToHiragana(this.messageArray[this.dialogIterator].text)]);
                 }
                 this.dialogName.setOrigin(0.5);
-                console.log(this.dialogIterator, 'vs', this.maxIterator);
+                // console.log(this.dialogIterator, 'vs', this.maxIterator);
                 this.dialogIterator++;
             } else {
-                console.log(this.jsonFile);
+                // console.log(this.jsonFile);
                 this.events.emit('learnedNewCharacters', {charSet: this.jsonFile.teach, message: this.jsonFile.message});
                 this.scene.stop('CutScene');
                 this.scene.wake('MainScene');

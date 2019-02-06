@@ -133,7 +133,6 @@
 <script>
 
 $( "#loginButton" ).click( function () {
-    console.log('ayy');
     var data = { "username" : $( "#username" ).val(), "password": $( "#password" ).val()};
     $( "#message" ).text("Logging in...");
     $( '#loginButton' ).prop('disabled', true);
@@ -144,7 +143,7 @@ $( "#loginButton" ).click( function () {
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (responseData) {
-            console.log(responseData);
+            // console.log(responseData);
             $( "#myModal" ).hide();
             game.player_name = responseData['username'];
             game.story = responseData['story'];
@@ -153,7 +152,7 @@ $( "#loginButton" ).click( function () {
             game.loaded = true;
         },
         error: function (xhr) {
-            console.log(xhr.responseJSON.message);
+            // console.log(xhr.responseJSON.message);
             $( "#message" ).text(xhr.responseJSON.message);
             $( '#loginButton' ).prop('disabled', false);
             $( "#loginButton" ).css('background-color', 'green');
