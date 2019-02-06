@@ -6,6 +6,7 @@ class CutScene extends Phaser.Scene {
 
     init (data) {
         this.jsonFile = data.jsonFile;
+        this.story = data.story;
     }
 
     preload () {
@@ -105,7 +106,7 @@ class CutScene extends Phaser.Scene {
                 this.dialogIterator++;
             } else {
                 // console.log(this.jsonFile);
-                this.events.emit('learnedNewCharacters', {charSet: this.jsonFile.teach, message: this.jsonFile.message});
+                this.events.emit('learnedNewCharacters', {charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story});
                 this.scene.stop('CutScene');
                 this.scene.wake('MainScene');
             }

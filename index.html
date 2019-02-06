@@ -36,14 +36,22 @@
         <style>
         html,
         body {
-            margin: 0;
+            margin: 20px;
             padding: 0;
+            background: lightblue;
         }
         @font-face {
             font-family: manaspc;
             src: url('assets/font/manaspc.ttf');
             font-weight:400;
             font-weight:normal;
+        }
+        .center-div {
+         margin: 0% auto;
+         padding-top: 3px;
+         width: 58%;
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+         background: white;
         }
         .modal {
           display: block; /* Hidden by default */
@@ -86,7 +94,7 @@
 
         button {
           width: 100%;
-          background-color: #4CAF50;
+          background-color:  #272744;
           color: white;
           padding: 14px 20px;
           margin: 8px 0;
@@ -96,49 +104,50 @@
         }
 
         button:hover {
-          background-color: #45a049;
+          background-color: #32B3ED;
         }
 
     </style>
     </head>
     <body>
 
-        <div>
+        <div class="center-div">
             <div style="font-family:'manaspc';position: absolute;left: -1000px;visibility: hidden;font-smooth:never;">.</div>
-            <div id="content" style="display: block; width: 100%; text-align:left;font-smooth:never;"></div>
+            <div id="content" style="display: block; width: 100%; text-align:center;font-smooth:never;"></div>
         </div>
 
         <div id="myModal" class="modal">
 
           <!-- Modal content -->
           <div class="modal-content">
-              <div id="loginForm" style="font-family:'manaspc';padding:20px;text-align:center;">
-                  <h2 id="message">Welcome!</h2>
-                  <form >
-                    <label for="fname">First Name</label>
-                    <input type="text" id="username" name="Username" placeholder="Username" style="font-family:'manaspc'">
-
-                    <label for="lname">Password</label>
-                    <input type="password" id="password" name="Password" placeholder="Password" >
-
-                    <button type="button" style="font-family:'manaspc'" id="loginButton" >Login</button>
-                  </form>
-              </div>
+              <h1 id="message" style="font-family:'manaspc';padding:20px;text-align:center;">Welcome!</h2>
+              <button type="button" style="font-family:'manaspc'" id="chooseLogin" >Login</button>
+              <button type="button" style="font-family:'manaspc'" id="chooseSignup" >Signup</button>
           </div>
-
         </div>
     </body>
 </html>
 
 <script>
 
-$( "#loginButton" ).click( function () {
+
+
+$('#myModal').on('click', '#chooseLogin',function() {
+    var loginContent = "<div class='modal-content'><div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'><h2 id='message'>Welcome!</h2><form ><label for='fname'>First Name</label><input type='text' id='username' name='Username' placeholder='Username' style='font-family:\"manaspc\"'><label for='lname'>Password</label><input type='password' id='password' name='Password' placeholder='Password' ><button type='button' style='font-family:\"manaspc\"' id='loginButton' >Login</button></form></div></div>";
+    $('#myModal').html(loginContent);
+});
+
+$('#chooseSignup').click(function() {
+    var signupContent = " <div class='modal-content'> <div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'> <h2 id='signupMessage'>Signup!</h2> <form > <label for='fname'>First Name</label> <input type='text' id='usernameS' name='Username' placeholder='Username' style='font-family:\"manaspc\"'>  <label for='lname'>Password</label> <input type='password' id='password0' name='Password' placeholder='Password' >  <label for='lname'>Retype Password</label> <input type='password' id='password1' name='Password' placeholder='Retype Password' style='-webkit-text-security: square;'>  <button type='button' style='font-family:\"manaspc\"' id='signUpButton' >Signup</button> </form> </div> </div>";
+    $('#myModal').html(signupContent);
+});
+$('#myModal').on('click', '#loginButton', function(){
     var data = { "username" : $( "#username" ).val(), "password": $( "#password" ).val()};
     $( "#message" ).text("Logging in...");
     $( '#loginButton' ).prop('disabled', true);
     $(this).css('background-color', 'gray');
     $.ajax({
-        url: "http://localhost:8081/login",
+        url: window.location.href + "login",
         type: "POST",
         data: JSON.stringify(data),
         contentType: "application/json",
@@ -153,12 +162,45 @@ $( "#loginButton" ).click( function () {
         },
         error: function (xhr) {
             // console.log(xhr.responseJSON.message);
-            $( "#message" ).text(xhr.responseJSON.message);
+            if(xhr.responseJSON){
+                $( "#message" ).text(xhr.responseJSON.message);
+            } else {
+                $( "#message" ).text("Unable to contact server! Please refresh page.");
+
+            }
             $( '#loginButton' ).prop('disabled', false);
-            $( "#loginButton" ).css('background-color', 'green');
+            $( "#loginButton" ).css('background-color', '#272744');
         }
     });
-} );
+});
+
+$('#myModal').on('click', '#signUpButton', function(){
+    var data = { "username" : $( "#usernameS" ).val(), "password": $( "#password0" ).val(), "password1": $( "#password1" ).val()};
+    $( "#message" ).text("Signing up...");
+    $( '#signUpButton' ).prop('disabled', true);
+    $(this).css('background-color', 'gray');
+    $.ajax({
+        url: window.location.href + "signup",
+        type: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (responseData) {
+            var success = "<div class='modal-content'><h1 id='message' style='font-family:\"manaspc\";padding:20px;text-align:center;'>Account registered successfully!</h2><button type='button' style='font-family:\"manaspc\"' id='chooseLogin' >Login</button></div>";
+            $('#myModal').html(success);
+        },
+        error: function (xhr) {
+            // console.log(xhr.responseJSON.message);
+            if(xhr.responseJSON){
+                $( "#signupMessage" ).text(xhr.responseJSON.message);
+            } else {
+                $( "#signupMessage" ).text("Unable to contact server! Please refresh page.");
+
+            }
+            $( '#signUpButton' ).prop('disabled', false);
+            $( "#signUpButton" ).css('background-color', '#272744');
+        }
+    });
+});
 
 
 </script>

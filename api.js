@@ -9,33 +9,32 @@ module.exports = {
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
           var announcement = {};
-          var dbo = db.db("hira");
-          console.log('this be the body' , req.body);
+          var dbo = db.db(config.db_name);
           var myobj = req.body
           var updateCharset = req.body.updateCharset;
           delete req.body.updateCharset;
           if(res.locals.decoded.username === myobj.username) {
               dbo.collection("learn").insertOne(myobj, function(err, res) {
                 if (err) throw err;
-                console.log("1 document inserted");
+                console.log(myobj.username + ": added learn document");
                 db.close();
               });
 
               dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
                 if (err) throw err;
-                console.log("1 document updated");
+                console.log(myobj.username + ": updated story");
                 db.close();
               });
 
               if(updateCharset) {
                   dbo.collection("players").updateOne({username: myobj.username}, { $push: { charset: myobj.characters } }, function(err, res) {
                     if (err) throw err;
-                    console.log("1 document updated");
+                    console.log(myobj.username + ": updated charset");
                     db.close();
                   });
               }
 
-              res.json({
+              return res.json({
                 success: true
               });
           } else {
@@ -46,31 +45,31 @@ module.exports = {
           }
 
         });
-        console.log('ayyyy succ');
+        // console.log('ayyyy succ');
     },
     postTrain (req, res) {
         var succ = {};
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
           var announcement = {};
-          var dbo = db.db("hira");
+          var dbo = db.db(config.db_name);
           var myobj = req.body
 
           if(res.locals.decoded.username === myobj.username) {
 
               dbo.collection("train").insertOne(myobj, function(err, res) {
                 if (err) throw err;
-                console.log("1 document inserted");
+                console.log(myobj.username + ": added train document");
                 db.close();
               });
 
               dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
                 if (err) throw err;
-                console.log("1 document updated");
+                console.log(myobj.username + ": updated story");
                 db.close();
               });
 
-              res.json({
+              return res.json({
                 success: true
               });
           } else {
@@ -81,29 +80,29 @@ module.exports = {
           }
 
         });
-        console.log('ayyyy succ');
+        // console.log('ayyyy succ');
     },
     postPractice (req, res) {
         var succ = {};
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
           var announcement = {};
-          var dbo = db.db("hira");
+          var dbo = db.db(config.db_name);
           var myobj = req.body
           if(res.locals.decoded.username === myobj.username) {
             dbo.collection("practice").insertOne(myobj, function(err, res) {
               if (err) throw err;
-              console.log("1 document inserted");
+              console.log(myobj.username + ": added practice document");
 
             });
 
             dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
               if (err) throw err;
-              console.log("1 document updated");
+              console.log(myobj.username + ": updated story");
               db.close();
             });
 
-            res.json({
+            return res.json({
               success: true
             });
           } else {
@@ -114,29 +113,29 @@ module.exports = {
           }
 
         });
-        console.log('ayyyy succ');
+        // console.log('ayyyy succ');
     },
     postDungeon (req, res) {
         var succ = {};
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
           var announcement = {};
-          var dbo = db.db("hira");
+          var dbo = db.db(config.db_name);
           var myobj = req.body
 
           if(res.locals.decoded.username === myobj.username) {
               dbo.collection("dungeon").insertOne(myobj, function(err, res) {
                 if (err) throw err;
-                console.log("1 document inserted");
+                console.log(myobj.username + ": added dungeon document");
 
               });
 
               dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
                 if (err) throw err;
-                console.log("1 document updated");
+                console.log(myobj.username + ": updated story");
                 db.close();
               });
-              res.json({
+              return res.json({
                 success: true
               });
           } else {
@@ -147,7 +146,7 @@ module.exports = {
           }
 
         });
-        console.log('ayyyy succ');
+        // console.log('ayyyy succ');
     }
 
 }

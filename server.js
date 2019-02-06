@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 
 /* End points */
 app.post('/login', auth.login);
+app.post('/signup', auth.signup);
 
 app.post('/api/learn', middleware.checkToken, api.postLearn);
 app.post('/api/train', middleware.checkToken, api.postTrain);
@@ -42,15 +43,16 @@ app.get('/', function (req, res) {
 app.get('/hello', function (req, res) {
 
     var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/";
+    var url = config.db_url;
     var succ = {};
     MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
       if (err) throw err;
       var announcement = {};
       var dbo = db.db("hira");
+
       dbo.collection("game_vars").findOne({var_name: "announcement" }, function(err, result) {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
         succ = result;
         res.json({
           title: succ.title,
@@ -59,7 +61,7 @@ app.get('/hello', function (req, res) {
         db.close();
       });
     });
-    console.log('ayyyy succ');
+    console.log('User started loading the game.');
 })
 
 app.get('/amireal', middleware.checkToken, function (req, res) {
@@ -75,5 +77,6 @@ app.get('/amireal', middleware.checkToken, function (req, res) {
 
 /* Start Server */
 server.listen(process.env.PORT, function () {
+    console.log(config.db_url);
   console.log(`Listening on ${server.address().port}`);
 });

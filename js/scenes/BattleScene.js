@@ -436,7 +436,7 @@ class BattleScene extends Phaser.Scene {
 
 
     animCompleteEnemy(animation, frame){
-        console.log(animation.key);
+        // console.log(animation.key);
         if(animation.key === 'enemy_attack' || animation.key === 'player_hurt'){
             // console.log('finish anim');
             this.enemy.sprite.play('enemy_idle', true);
@@ -549,7 +549,7 @@ class BattleScene extends Phaser.Scene {
                this.hurtPlayer();
                this.cameras.main.shake(100);
                this.state = this.STATE_VALUE.idle;
-               console.log('burado');
+               // console.log('burado');
                if(!this.simulate){
                    var hearts = this.playerHealthDisplay.getChildren();
                    hearts[hearts.length - 1].destroy();

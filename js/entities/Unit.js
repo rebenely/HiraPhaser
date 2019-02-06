@@ -39,10 +39,15 @@ class Unit  {
         this.characterPool = this.characterPool.concat(newChars);
     }
 
-    checkSubsetArray(newChars) {
+    checkSubsetArray(newChars, story) {
         // console.log(this.characterPool);
         // console.log(newChars.every(val => this.characterPool.includes(val)));
-        return newChars.every(val => this.characterPool.includes(val));
+        if(newChars.length === 0 && this.story <= story) {
+            this.story++;
+            return true;
+        } else {
+            return newChars.every(val => this.characterPool.includes(val));
+        }
     }
 
 }

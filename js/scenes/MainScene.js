@@ -129,7 +129,7 @@ class MainScene extends Phaser.Scene {
                              title: currentLevel.details.title,
                              subtitle:  currentLevel.details.subtitle,
                              desc:  currentLevel.details.desc
-                         }, startScene: 'CutLoaderScene', passData: {jsonFile: currentLevel.json}});
+                         }, startScene: 'CutLoaderScene', passData: {jsonFile: currentLevel.json, story: currentLevel.level}});
                      }
                  ));
                  this.add.existing(this.cutSceneLevels[this.cutSceneLevels.length - 1]);
@@ -247,16 +247,16 @@ class MainScene extends Phaser.Scene {
 
     /* emitted event from cutscene */
     onLearnedNewCharacters(data){
-        // console.log(data);
+         // console.log(data.story);
         var updateCharset = false;
 
-        if(!this.player.checkSubsetArray(data.charSet)){
+        if(!this.player.checkSubsetArray(data.charSet, data.story)){
             this.player.learnNewCharacters(data.charSet);
-            console.log('this true boi');
             this.player.story++;
-            this.compareStoryLevels();
             updateCharset = true;
         }
+
+        this.compareStoryLevels(); /* for special case of learning nothing, player adds to story in its own function */
 
         // if(this.player.story <= data.story) { // check if player story is lower than dungeon story level
         //     this.player.story++;
