@@ -1,122 +1,151 @@
 var MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://localhost:27017/";
+
+let config = require('./config');
+const url = config.db_url;
 
 module.exports = {
     postLearn (req, res) {
-        var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/";
         var succ = {};
-        MongoClient.connect(url, function(err, db) {
+        MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db("hira");
-          console.log(req.body.timestamp);
+          console.log('this be the body' , req.body);
           var myobj = req.body
           var updateCharset = req.body.updateCharset;
           delete req.body.updateCharset;
-          dbo.collection("learn").insertOne(myobj, function(err, res) {
-            if (err) throw err;
-            console.log("1 document inserted");
-            db.close();
-          });
+          if(res.locals.decoded.username === myobj.username) {
+              dbo.collection("learn").insertOne(myobj, function(err, res) {
+                if (err) throw err;
+                console.log("1 document inserted");
+                db.close();
+              });
 
-          dbo.collection("players").updateOne({username: req.body.username}, { $set: { story: req.body.story } }, function(err, res) {
-            if (err) throw err;
-            console.log("1 document updated");
-            db.close();
-          });
-
-          if(updateCharset) {
-              dbo.collection("players").updateOne({username: req.body.username}, { $push: { charset: req.body.characters } }, function(err, res) {
+              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
                 if (err) throw err;
                 console.log("1 document updated");
                 db.close();
               });
+
+              if(updateCharset) {
+                  dbo.collection("players").updateOne({username: myobj.username}, { $push: { charset: myobj.characters } }, function(err, res) {
+                    if (err) throw err;
+                    console.log("1 document updated");
+                    db.close();
+                  });
+              }
+
+              res.json({
+                success: true
+              });
+          } else {
+              return res.status(403).json({
+                success: false,
+                message: 'username and token does not match!'
+              });
           }
 
-          res.json({
-            success: true
-          });
         });
         console.log('ayyyy succ');
     },
     postTrain (req, res) {
-        var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/";
         var succ = {};
-        MongoClient.connect(url, function(err, db) {
+        MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db("hira");
           var myobj = req.body
-          dbo.collection("train").insertOne(myobj, function(err, res) {
-            if (err) throw err;
-            console.log("1 document inserted");
-            db.close();
-          });
 
-          dbo.collection("players").updateOne({username: req.body.username}, { $set: { story: req.body.story } }, function(err, res) {
-            if (err) throw err;
-            console.log("1 document updated");
-            db.close();
-          });
+          if(res.locals.decoded.username === myobj.username) {
 
-          res.json({
-            success: true
-          });
+              dbo.collection("train").insertOne(myobj, function(err, res) {
+                if (err) throw err;
+                console.log("1 document inserted");
+                db.close();
+              });
+
+              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
+                if (err) throw err;
+                console.log("1 document updated");
+                db.close();
+              });
+
+              res.json({
+                success: true
+              });
+          } else {
+              return res.status(403).json({
+                success: false,
+                message: 'username and token does not match!'
+              });
+          }
+
         });
         console.log('ayyyy succ');
     },
     postPractice (req, res) {
-        var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/";
         var succ = {};
-        MongoClient.connect(url, function(err, db) {
+        MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db("hira");
           var myobj = req.body
-          dbo.collection("practice").insertOne(myobj, function(err, res) {
-            if (err) throw err;
-            console.log("1 document inserted");
+          if(res.locals.decoded.username === myobj.username) {
+            dbo.collection("practice").insertOne(myobj, function(err, res) {
+              if (err) throw err;
+              console.log("1 document inserted");
 
-          });
+            });
 
-          dbo.collection("players").updateOne({username: req.body.username}, { $set: { story: req.body.story } }, function(err, res) {
-            if (err) throw err;
-            console.log("1 document updated");
-            db.close();
-          });
+            dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
+              if (err) throw err;
+              console.log("1 document updated");
+              db.close();
+            });
 
-          res.json({
-            success: true
-          });
+            res.json({
+              success: true
+            });
+          } else {
+              return res.status(403).json({
+                success: false,
+                message: 'username and token does not match!'
+              });
+          }
+
         });
         console.log('ayyyy succ');
     },
     postDungeon (req, res) {
-        var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/";
         var succ = {};
-        MongoClient.connect(url, function(err, db) {
+        MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db("hira");
           var myobj = req.body
-          dbo.collection("dungeon").insertOne(myobj, function(err, res) {
-            if (err) throw err;
-            console.log("1 document inserted");
 
-          });
+          if(res.locals.decoded.username === myobj.username) {
+              dbo.collection("dungeon").insertOne(myobj, function(err, res) {
+                if (err) throw err;
+                console.log("1 document inserted");
 
-          dbo.collection("players").updateOne({username: req.body.username}, { $set: { story: req.body.story } }, function(err, res) {
-            if (err) throw err;
-            console.log("1 document updated");
-            db.close();
-          });
-          res.json({
-            success: true
-          });
+              });
+
+              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
+                if (err) throw err;
+                console.log("1 document updated");
+                db.close();
+              });
+              res.json({
+                success: true
+              });
+          } else {
+              return res.status(403).json({
+                success: false,
+                message: 'username and token does not match!'
+              });
+          }
+
         });
         console.log('ayyyy succ');
     }

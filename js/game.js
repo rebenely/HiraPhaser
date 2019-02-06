@@ -12,6 +12,7 @@ var config = {
     },
     scene: [ BootScene, MainScene, BattleScene, ResultScene, DetailScene, DungeonScene, CutScene, CutLoaderScene, TrainScene, MultipleChoiceScene, MatchingTypeScene, HintScene, DialogBoxScene, WorldNavScene, MessageScene ]
 };
+
 var game = new Phaser.Game(config);
 game.global = {
     EASY: 0,
@@ -26,9 +27,10 @@ game.global = {
     UI_TEXT_STROKE: "#272744",
     UI_TEXT_HIGHLIGHT: 0xf2d3ab,
     UI_TEXT_STROKE_HIGHLIGHT: "#f2d3ab",
-    URL: "http://localhost:8081/"
+    URL: window.location.href
 };
 game.loaded = false;
 game.story = 0;
 game.player_name = '';
 game.charset = [];
+game.token = '';

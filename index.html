@@ -149,6 +149,7 @@ $( "#loginButton" ).click( function () {
             game.player_name = responseData['username'];
             game.story = responseData['story'];
             game.charset = responseData['charset'];
+            game.token = responseData['token'];
             game.loaded = true;
         },
         error: function (xhr) {

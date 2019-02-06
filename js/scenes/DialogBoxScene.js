@@ -65,6 +65,7 @@ class DialogBoxScene extends Phaser.Scene {
             async: true,
             data: JSON.stringify(this.payload),
             contentType: "application/json",
+            headers: {"Authorization": "Bearer " + game.token },
             context: this,
             retryLimit: 3,
             success: function (responseData) {

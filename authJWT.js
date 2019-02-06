@@ -13,7 +13,7 @@ module.exports  = {
 
     if (username && password) {
 
-        MongoClient.connect(url, function(err, db) {
+        MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) {
               throw err;
           }
@@ -47,7 +47,7 @@ module.exports  = {
               });
             }
 
-            console.log(result.username);
+            console.log(result.username, 'logged in!');
             db.close();
           });
         });

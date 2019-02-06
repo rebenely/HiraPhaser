@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+let config = require('./config');
 
 var server = require('http').Server(app);
 const bodyParser = require('body-parser');
@@ -26,10 +27,10 @@ app.use(bodyParser.json());
 /* End points */
 app.post('/login', auth.login);
 
-app.post('/api/learn', api.postLearn);
-app.post('/api/train', api.postTrain);
-app.post('/api/practice', api.postPractice);
-app.post('/api/dungeon', api.postDungeon);
+app.post('/api/learn', middleware.checkToken, api.postLearn);
+app.post('/api/train', middleware.checkToken, api.postTrain);
+app.post('/api/practice', middleware.checkToken, api.postPractice);
+app.post('/api/dungeon', middleware.checkToken, api.postDungeon);
 
 app.get('/wtf', function(req, res) {
     console.log('ayy lmao');
@@ -43,7 +44,7 @@ app.get('/hello', function (req, res) {
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://localhost:27017/";
     var succ = {};
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
       if (err) throw err;
       var announcement = {};
       var dbo = db.db("hira");
@@ -62,10 +63,10 @@ app.get('/hello', function (req, res) {
 })
 
 app.get('/amireal', middleware.checkToken, function (req, res) {
-    console.log(req.decoded);
+    console.log('this is the token decoded', res.locals.decoded);
     res.json({
       message: 'toight',
-      username: req.decoded.username
+      username: res.locals.decoded.username
     });
 })
 
@@ -73,6 +74,6 @@ app.get('/amireal', middleware.checkToken, function (req, res) {
 
 
 /* Start Server */
-server.listen(8081, function () {
+server.listen(process.env.PORT, function () {
   console.log(`Listening on ${server.address().port}`);
 });
