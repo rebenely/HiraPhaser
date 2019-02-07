@@ -70,6 +70,7 @@ class BootScene extends Phaser.Scene {
         console.debug('failed: ', totalFailed);
     }
     create () {
+        this.resize();
         this.loaded = false;
         this.worldJson = this.cache.json.get('main_world');
         // console.log(this.worldJson);
@@ -108,6 +109,19 @@ class BootScene extends Phaser.Scene {
             }
             // console.log(this.player.characterPool, game.charset);
             this.scene.start("MainScene", {player: this.player, world: this.worldJson, announcement: this.announcement});
+        }
+    }
+
+    resize() {
+        var canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
+        var wratio = width / height, ratio = canvas.width / canvas.height;
+
+        if (wratio < ratio) {
+            canvas.style.width = width + "px";
+            canvas.style.height = (width / ratio) + "px";
+        } else {
+            canvas.style.width = (height * ratio) + "px";
+            canvas.style.height = height + "px";
         }
     }
 }

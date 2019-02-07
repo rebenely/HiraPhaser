@@ -46,13 +46,21 @@
             font-weight:400;
             font-weight:normal;
         }
+         #warning-message { display: none; }
+         @media only screen and (orientation:portrait){
+             #wrapper { display:none; }
+             #warning-message { display:block; }
+         }
+         @media only screen and (orientation:landscape){
+             #warning-message { display:none; }
+         }
         .center-div {
          margin: 0% auto;
          padding-top: 3px;
-         width: 58%;
+         width: 100%;
          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
          background: white;
-         min-width: 720px;
+         min-width: 70px;
         }
         .modal {
           display: block; /* Hidden by default */
@@ -111,21 +119,32 @@
     </style>
     </head>
     <body>
+        <h1 id="header_message" style="font-family:'manaspc';padding:20px;text-align:center;">Hira Alpha 1.0</h2>
+        <div id="wrapper">
+            <div class="center-div">
+                <div style="font-family:'manaspc';position: absolute;left: -1000px;visibility: hidden;font-smooth:never;">.</div>
+                <div id="content" style="display: block; width: 100%; text-align:center;font-smooth:never;"></div>
+            </div>
 
-        <div class="center-div">
-            <div style="font-family:'manaspc';position: absolute;left: -1000px;visibility: hidden;font-smooth:never;">.</div>
-            <div id="content" style="display: block; width: 100%; text-align:center;font-smooth:never;"></div>
+            <div id="myModal" class="modal">
+
+              <!-- Modal content -->
+              <div class="modal-content">
+                  <h1 id="message" style="font-family:'manaspc';padding:20px;text-align:center;">Welcome!</h2>
+                  <button type="button" style="font-family:'manaspc'" id="chooseLogin" >Login</button>
+                  <button type="button" style="font-family:'manaspc'" id="chooseSignup" >Signup</button>
+              </div>
+            </div>
+        </div>
+        <div id="warning-message" style="font-family:'manaspc';text-align:center;">
+            <h1>This website is only viewable in landscape mode.</h1>
+                <h2>You also need an external keyboard to play.</h1>
+                    <h6>Kasi di naman to dapat pang mobile, late ko na naisip gawin compatible sa mobile. Mabubuksan mo pa rin naman ung laro. Pero di mo malalaro pag wala ka keyboard.</h6>
+
+
         </div>
 
-        <div id="myModal" class="modal">
 
-          <!-- Modal content -->
-          <div class="modal-content">
-              <h1 id="message" style="font-family:'manaspc';padding:20px;text-align:center;">Welcome!</h2>
-              <button type="button" style="font-family:'manaspc'" id="chooseLogin" >Login</button>
-              <button type="button" style="font-family:'manaspc'" id="chooseSignup" >Signup</button>
-          </div>
-        </div>
     </body>
 </html>
 
@@ -202,6 +221,5 @@ $('#myModal').on('click', '#signUpButton', function(){
         }
     });
 });
-
 
 </script>
