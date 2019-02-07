@@ -56,16 +56,19 @@ class BattleScene extends Phaser.Scene {
             if (e.keyCode >= 65 && e.keyCode <= 90)
             {
                 e.preventDefault();
+                this.sound.play('type');
                 this.inputText += e.key.toUpperCase();
                 // console.log('you typed ', this.inputText);
             }
             else if (e.keyCode === 8) //backspace
             {
+                this.sound.play('delete');
                 e.preventDefault();
                 this.inputText = this.inputText.slice(0, -1);
             }
             else if (e.keyCode === 13) //enter
             {
+                this.sound.play('next');
                 e.preventDefault();
                 this.skipButton.visible = false;
                 let stats = {
@@ -378,11 +381,17 @@ class BattleScene extends Phaser.Scene {
 
             this.enemy.hp -=1;
         }
+        this.sound.play('punch');
+        this.sound.play('flicker');
+        this.sound.play('unga');
     }
     hurtPlayer(){
         this.playerFlicker.restart();
         this.playerShake.restart();
         this.showSlash(this.player.sprite.x, this.player.sprite.y, false);
+        this.sound.play('shake');
+        this.sound.play('ugh');
+        this.sound.play('minus');
     }
     enemyAttack(){
         this.hitEnemy.restart();
@@ -565,6 +574,6 @@ class BattleScene extends Phaser.Scene {
        this.slash.y = posY;
        this.slash.play('slash', false);
        this.slash.setFlipX(flip);
-
+       this.sound.play('slash');
    }
 }

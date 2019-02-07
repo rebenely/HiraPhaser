@@ -28,11 +28,16 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         on('pointerup', () => {
             scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
             if(this.enabled){
+                scene.sound.play('click');
                 levelName.visible = false;
                 callback();
+            } else {
+                scene.sound.play('disabled');
             }
         }).
         on('pointerover', () => {
+
+            scene.sound.play('hover');
             // levelName.visible = true;
             // levelName.setDepth(5);
             scene.events.emit('sayName', {name: this.name});

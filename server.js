@@ -10,6 +10,14 @@ var api = require('./api');
 
 /* Allow CORS */
 app.all('/*', function(req, res, next) {
+    // console.log('cors allowed');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
+app.use(function(req, res, next) {
+    // console.log('cors allowed');
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
@@ -41,7 +49,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/hello', function (req, res) {
-
+    // console.log('You are connected to the sever!', req);
     var MongoClient = require('mongodb').MongoClient;
     var url = config.db_url;
     var succ = {};
@@ -52,7 +60,7 @@ app.get('/hello', function (req, res) {
 
       dbo.collection("game_vars").findOne({var_name: "announcement" }, function(err, result) {
         if (err) throw err;
-        // console.log(result);
+        console.log(result);
         succ = result;
         res.json({
           title: succ.title,

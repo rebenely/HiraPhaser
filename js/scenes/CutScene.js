@@ -104,6 +104,8 @@ class CutScene extends Phaser.Scene {
                 this.dialogName.setOrigin(0.5);
                 // console.log(this.dialogIterator, 'vs', this.maxIterator);
                 this.dialogIterator++;
+                this.sound.play('next');
+
             } else {
                 // console.log(this.jsonFile);
                 this.events.emit('learnedNewCharacters', {charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story});

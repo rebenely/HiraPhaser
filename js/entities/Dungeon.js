@@ -60,12 +60,18 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         on('pointerup', () => {
             scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
             if(this.enabled){
+                scene.sound.play('click');
+
                 caveName.visible = false;
                 callback();
+            } else {
+                scene.sound.play('disabled');
             }
         }).
         on('pointerover', () => {
             caveName.setDepth(5);
+            scene.sound.play('hover');
+
             // caveName.visible = true;
 
             scene.events.emit('sayName', {name: this.name});

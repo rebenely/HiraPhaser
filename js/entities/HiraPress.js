@@ -10,12 +10,15 @@ class HiraPress extends Phaser.GameObjects.Text {
             // cursor changes
             scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
 
+            scene.sound.play('click');
             callback();
 
         })
         .on('pointerover', function (pointer) {
 
             if(this.clickable && this.enabled) {
+                scene.sound.play('hover');
+
                 // console.log('aayy');
                 if(pointer.isDown) {
                     callback();

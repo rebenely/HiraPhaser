@@ -108,6 +108,7 @@ class MultipleChoiceScene extends Phaser.Scene {
                         }
                     } else {
                         this.cameras.main.shake(100);
+                        this.sound.play('shake');
                     }
                 }
             )).setOrigin(0.5);

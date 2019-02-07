@@ -34,6 +34,21 @@ class BootScene extends Phaser.Scene {
         this.load.bitmapFont('mnspc', 'assets/font/mnspc.png', 'assets/font/mnspc.fnt');
 
 
+        /* load sfx */
+        this.load.audio('hover', ['assets/sounds/sfx/sfx_coin_double1.wav']);
+        this.load.audio('click', ['assets/sounds/sfx/sfx_coin_double3.wav']);
+        this.load.audio('disabled', ['assets/sounds/sfx/sfx_sounds_error7.wav']);
+        this.load.audio('shake', ['assets/sounds/sfx/sfx_sounds_impact6.wav']);
+        this.load.audio('ugh', ['assets/sounds/sfx/sfx_deathscream_human2.wav']);
+        this.load.audio('punch', ['assets/sounds/sfx/sfx_wpn_punch3.wav']);
+        this.load.audio('minus', ['assets/sounds/sfx/sfx_sounds_damage3.wav']);
+        this.load.audio('unga', ['assets/sounds/sfx/sfx_deathscream_alien3.wav']);
+        this.load.audio('flicker', ['assets/sounds/sfx/sfx_sounds_damage3.wav']);
+        this.load.audio('slash', ['assets/sounds/sfx/sfx_exp_short_hard13.wav']);
+        this.load.audio('type', ['assets/sounds/sfx/sfx_menu_move4.wav']);
+        this.load.audio('delete', ['assets/sounds/sfx/sfx_menu_move3.wav']);
+        this.load.audio('next', ['assets/sounds/sfx/sfx_menu_move3.wav']);
+
 
         this.load.on('progress', this.onLoadProgress, this);
         this.load.on('complete', this.onLoadComplete, this);
@@ -61,7 +76,7 @@ class BootScene extends Phaser.Scene {
         // console.log(game.global.UI_TEXT_HIGHLIGHT);
         this.announcement = {};
         $.ajax({
-            url: "http://localhost:8081/hello",
+            url: game.global.URL + "hello",
             type: "GET",
             async: true,
             context: this,
