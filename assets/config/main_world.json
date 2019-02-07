@@ -186,7 +186,7 @@
             "name": "S-cape the trap!",
             "sprite": {"name": "learn", "x": 420, "y": 410},
             "json": "level2.json",
-            "level": 7,
+            "level": 9,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "Chapter II: S",
@@ -199,7 +199,7 @@
             "name": "S-cape: Train",
             "sprite": {"name": "train",  "x": 370, "y": 420},
             "optionals" : {"sizeX": 64, "sizeY":58},
-            "level": 9,
+            "level": 10,
             "details" : {
                 "title": "Chapter II: S",
                 "subtitle": "subtitles.",
@@ -212,7 +212,7 @@
             "name": "S-cape: Practice",
             "sprite": {"name": "practice",  "x": 315, "y": 415 },
             "optionals" : {"sizeX": 64, "sizeY":58},
-            "level": 10,
+            "level": 11,
             "details" : {
                 "title": "Chapter II: S",
                 "subtitle": "subtitles.",

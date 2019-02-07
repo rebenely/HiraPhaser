@@ -258,8 +258,7 @@ class BattleScene extends Phaser.Scene {
         }, this);
 
         this.timedEvent = null;
-        this.timerDisplay = this.add.text(720/2, 10, 'ayy lmao', style);
-        this.timerDisplay.setOrigin(0.5);
+        this.timerDisplay = new HiraText(this,720/2, 10, 'ayy lmao', "basic" );
         this.timerDisplay.visible = false;
 
         /* projectile path */
@@ -455,6 +454,7 @@ class BattleScene extends Phaser.Scene {
 
     closeScreen() {
         if(this.enemy.hp <= 0){
+            this.sound.play('enemy_death');
             this.tweens.add({
               targets: this.enemy.sprite,
               ease: 'Sine.easeInOut',
@@ -467,6 +467,7 @@ class BattleScene extends Phaser.Scene {
               }
             }, this);
         } else {
+            this.sound.play('player_death');
             this.tweens.add({
               targets: this.player.sprite,
               ease: 'Sine.easeInOut',
@@ -484,6 +485,8 @@ class BattleScene extends Phaser.Scene {
     update () {
         this.playerShadow.x = this.player.sprite.x;
         this.enemyShadow.x = this.enemy.sprite.x;
+        this.playerShadow.alpha = this.player.sprite.alpha;
+        this.enemyShadow.alpha = this.enemy.sprite.alpha;
         /* if player died or enemy died,  probably will add animations later */
         if(this.player.hp <= 0 || this.enemy.hp <= 0) {
             /* play death anim here */
@@ -507,7 +510,7 @@ class BattleScene extends Phaser.Scene {
                 this.backButton.visible = true;
             }
         } else if (this.state === this.STATE_VALUE.attack) {
-            this.inputTextDisplay.setText(this.inputText);
+            this.inputTextDisplay.setTextUpper(this.inputText);
             this.inputTextDisplay.visible = true;
             this.projectile.visible = true;
             this.backButton.visible = false;
@@ -518,7 +521,7 @@ class BattleScene extends Phaser.Scene {
             }
             this.attackButton.visible = false;
             this.timerDisplay.visible = true;
-            this.timerDisplay.setText(this.timedEvent.getElapsedSeconds().toString().substr(0, 4));
+            this.timerDisplay.setTextUpper(this.timedEvent.getElapsedSeconds().toString().substr(0, 4));
         } else if (this.state === this.STATE_VALUE.animate) {
             this.path.getPoint(this.follower.t, this.follower.vec);
             this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
@@ -531,7 +534,7 @@ class BattleScene extends Phaser.Scene {
         this.timedEvent.remove(false);
         this.enemyAttack();
         if(!wrong){
-            this.timerDisplay.setText('Times up!');
+            this.timerDisplay.setTextUpper('Times up!');
             let stats = {
                 word: this.projectile.currentChar,
                 answer: this.inputText,
@@ -539,7 +542,7 @@ class BattleScene extends Phaser.Scene {
             };
             this.battleCapture.questions.push(stats);
         } else {
-            this.timerDisplay.setText('Wrong!');
+            this.timerDisplay.setTextUpper('Wrong!');
         }
 
         /* change state while animating */

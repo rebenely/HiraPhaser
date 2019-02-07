@@ -53,6 +53,7 @@ class DialogBoxScene extends Phaser.Scene {
         if(this.apiRequest){
             // console.log(this.payload);
             this.postData();
+            this.sound.play('next');
         }
 
     }
@@ -69,6 +70,7 @@ class DialogBoxScene extends Phaser.Scene {
             context: this,
             retryLimit: 3,
             success: function (responseData) {
+                this.sound.play('success');
                 // console.log('ahahah', JSON.stringify(this.payload));
                 var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 180, useAdvancedWrap: true} };
                 this.okayButton = new HiraButton(this, 90 + 540 - 80, 160 + 150 - 30, "Continue", style, () => {
@@ -79,8 +81,8 @@ class DialogBoxScene extends Phaser.Scene {
             },
             error: function (xhr) {
                 setTimeout(() => {
-                    this.dialogTitle.setText("Retrying");
-                    this.dialogMessage.setText("Unable to connect to server...");
+                    this.dialogTitle.setTextUpper("Retrying");
+                    this.dialogMessage.setTextUpper("Unable to connect to server...");
                     this.postData();
                 }, 5000);
 

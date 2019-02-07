@@ -31,7 +31,7 @@ class BootScene extends Phaser.Scene {
 
 
         this.load.bitmapFont('hira', 'assets/font/font.png', 'assets/font/font.fnt');
-        this.load.bitmapFont('mnspc', 'assets/font/mnspc.png', 'assets/font/mnspc.fnt');
+
 
 
         /* load sfx */
@@ -48,6 +48,12 @@ class BootScene extends Phaser.Scene {
         this.load.audio('type', ['assets/sounds/sfx/sfx_menu_move4.wav']);
         this.load.audio('delete', ['assets/sounds/sfx/sfx_menu_move3.wav']);
         this.load.audio('next', ['assets/sounds/sfx/sfx_menu_move3.wav']);
+        this.load.audio('success', ['assets/sounds/sfx/sfx_sounds_fanfare3.wav']);
+        this.load.audio('start', ['assets/sounds/sfx/sfx_sounds_fanfare2.wav']);
+        this.load.audio('fail', ['assets/sounds/sfx/sfx_sounds_impact10.wav']);
+        this.load.audio('show', ['assets/sounds/sfx/sfx_sounds_fanfare1.wav']);
+        this.load.audio('enemy_death', ['assets/sounds/sfx/sfx_deathscream_alien5.wav']);
+        this.load.audio('player_death', ['assets/sounds/sfx/sfx_deathscream_human14.wav']);
 
 
         this.load.on('progress', this.onLoadProgress, this);
@@ -113,7 +119,13 @@ class BootScene extends Phaser.Scene {
     }
 
     resize() {
-        var canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
+        var canvas = game.canvas, width = window.innerWidth - 10, height = window.innerHeight - 10;
+        if(width > 720) {
+            width = 720;
+        }
+        if(height > 480) {
+            height = 480;
+        }
         var wratio = width / height, ratio = canvas.width / canvas.height;
 
         if (wratio < ratio) {

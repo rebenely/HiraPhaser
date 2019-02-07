@@ -101,6 +101,7 @@ class MultipleChoiceScene extends Phaser.Scene {
                         if(this.counter >= this.maxQuestions) {
                             // console.log(this.dataCapture);
                             this.targetChar.say("SA-SU-GA");
+                            this.sound.play("success");
                             this.closeButton.visible = true;
                             this.display.visible = false;
                             this.timeDisplay.visible = false;
@@ -131,6 +132,7 @@ class MultipleChoiceScene extends Phaser.Scene {
             this.startTime = this.time.now/1000;
             this.charTime =  this.time.now/1000;
             this.dataCapture.total_time = this.startTime;
+            this.sound.play('start');
             // console.log(this.time.now/1000);
         }, this);
         this.add.existing(this.startButton);
@@ -139,9 +141,9 @@ class MultipleChoiceScene extends Phaser.Scene {
     }
 
     update () {
-        this.display.setText(this.counter.toString() + '/' + this.maxQuestions.toString());
+        this.display.setTextUpper(this.counter.toString() + '/' + this.maxQuestions.toString());
         this.display.setOrigin(0.5);
-        this.timeDisplay.setText('Time: ' + (this.time.now/1000 - this.startTime).toString().substr(0, 4));
+        this.timeDisplay.setTextUpper('Time: ' + (this.time.now/1000 - this.startTime).toString().substr(0, 4));
     }
 
     checkValue(e) {

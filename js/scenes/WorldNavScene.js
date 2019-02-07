@@ -25,10 +25,9 @@ class WorldNavScene extends Phaser.Scene {
         this.levelTitle.visible = false;
 
         this.navEnable = false;
-        this.coordinates = [{x:350, y:300}, {x: 705, y: 655}, {x: 1397, y: 531}, {x:1350, y:230}];
-        this.zoom = [1.1, 1, 0.9, 2]
+        this.coordinates = [{x:350, y:300, z: 1.1}, {x: 1000, y: 655, z: 1}, {x: 1565, y: 531, z: 0.9}, {x:1350, y:100, z: 2}];
         this.cam.pan(this.coordinates[0].x, this.coordinates[0].y, 2000, 'Sine.easeInOut');
-        this.cam.zoomTo(this.zoom[0], 2000);
+        this.cam.zoomTo(this.coordinates[0].z, 2000);
 
         var style = { font: "16px manaspc", fill:  game.global.UI_TEXT_FILL, align: "left"};
         this.iterator = 0;
@@ -43,7 +42,7 @@ class WorldNavScene extends Phaser.Scene {
                     this.prevButton.disable();
                 }
                 this.cam.pan(this.coordinates[this.iterator].x, this.coordinates[this.iterator].y, 2000, 'Sine.easeInOut');
-                this.cam.zoomTo(this.zoom[this.iterator], 2000);
+                this.cam.zoomTo(this.coordinates[this.iterator].z, 2000);
             }
         }, this);
         this.add.existing(this.prevButton);
@@ -104,7 +103,7 @@ class WorldNavScene extends Phaser.Scene {
     onSayName(data) {
         this.levelTitle.fillRect(720/2 - data.name.length * 16, 2, data.name.length*32, 48);
         this.levelTitle.strokeRect(720/2 - data.name.length * 16, 2, data.name.length*32, 48);
-        this.caveName.setText(data.name);
+        this.caveName.setTextUpper(data.name);
         this.caveName.visible = true;
         this.levelTitle.visible = true;
     }

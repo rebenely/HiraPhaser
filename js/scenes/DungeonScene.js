@@ -63,12 +63,14 @@ class DungeonScene extends Phaser.Scene {
                 }
             }
             this.scene.stop();
+            this.sound.play('fail');
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true, dataCapture: this.dataCapture});
         }, this);
         this.add.existing(this.cancelButton);
 
         this.battleButton = new HiraButton(this, 720 - 60 - 30 , 420, "To Battle!", style, () => {
             this.scene.sleep('DungeonScene');
+            this.sound.play('start');
 
             this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3, simulate: false });
         }, this);
@@ -126,6 +128,19 @@ class DungeonScene extends Phaser.Scene {
         this.events.removeListener('closeScreen');
         this.events.once('closeScreen', function (success, flee) {
             this.packCapturedData(success, flee);
+            if(success){
+                this.sound.play('success');
+            } else {
+                this.sound.play('fail');
+            }
+            this.hintButton.visible = false;
+            this.easyButton.visible = false;
+            this.hardButton.visible = false;
+            this.normalButton.visible = false;
+
+            this.battleButton.visible = false;
+            this.cancelButton.visible = false;
+
             // console.log('look what i did', this.cleared);
             for(var i = 0; i < this.cleared; i++) {
                 if(i === 3) {

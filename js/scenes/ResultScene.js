@@ -54,11 +54,11 @@ class ResultScene extends Phaser.Scene {
 
 
         if(this.success) {
-            this.message.setText(this.player.name + ' was victorious!');
+            this.message.setTextUpper(this.player.name + ' was victorious!');
         } else  if (this.flee) {
-            this.message.setText('You fled!');
+            this.message.setTextUpper('You fled!');
         } else {
-            this.message.setText('You lose!');
+            this.message.setTextUpper('You lose!');
             this.message.setInteractive().on('pointerdown', function () {
                 // console.log('oy wtf');
                 gob.visible = gob.visible ? false : true;
@@ -119,11 +119,13 @@ class ResultScene extends Phaser.Scene {
 
         this.player.hp = this.player.maxHp; /* restore player health */
 
+
     }
 
     typedKeys (e) {
         if (e.keyCode === 32 || e.keyCode === 13) {
             this.state+= 2;
+
         }
     }
 
@@ -135,6 +137,7 @@ class ResultScene extends Phaser.Scene {
         //
         // } else
         if (this.state >= 1) {
+            this.sound.play('next');
             // console.log('gising na bata');
 
             this.events.emit('finishedDungeon', {success: this.success, dataCapture: this.dataCapture, story: this.story, message : {title:  this.success ? "#1 Victory Royale!" : "Mission Failed", message: this.success ? "You have successfully finished this dungeon!" : "We'll get 'em next time."}});

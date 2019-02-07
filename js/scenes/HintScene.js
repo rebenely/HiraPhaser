@@ -42,7 +42,8 @@ class HintScene extends Phaser.Scene {
 
         var titleStyle = { font: "32px manaspc", fill: "#ffffff", align: "left" };
         var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
-        var titleDisplay = this.add.text( 640/2 + 20, 50, 'Cheat Sheet', style).setOrigin(0.5);
+        var titleDisplay = new HiraText(this,  640/2 + 20, 50, 'Cheat Sheet', "header");
+        this.add.existing(titleDisplay);
 
         this.characterDisplay = [];
         this.romajiDisplay = [];
@@ -55,8 +56,10 @@ class HintScene extends Phaser.Scene {
                 j++;
                 column = 0;
             }
-            this.characterDisplay.push(this.add.bitmapText(680/(6) + column * 680/(6), 100*j, 'hira', Projectile.convertToHiragana(this.player.characterPool[i]), 48).setOrigin(0.5));
-            this.characterDisplay.push(this.add.text(680/(6) + column * 680/(6), 50 + 100*j, this.player.characterPool[i], style).setOrigin(0.5));
+            this.characterDisplay.push(this.add.bitmapText(680/(6) + column * 680/(6), 30+100*j, 'hira', Projectile.convertToHiragana(this.player.characterPool[i]), 48).setOrigin(0.5));
+            this.romajiDisplay.push(new HiraText(this, 680/(6) + column * 680/(6), 70 + 100*j, this.player.characterPool[i], "basic"));
+
+            this.add.existing(this.romajiDisplay[i]);
             column++;
         }
 
@@ -82,10 +85,10 @@ class HintScene extends Phaser.Scene {
         this.verticalCamera.ignore([this.cancelButton, this.downButton, this.upButton, this.graphics]);
         this.container.fillStyle(game.global.UI_FILL_A, 1);
         this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
-        this.container.fillRect(720/2 - 680/2, 0, 640,  j*100 + 100);
-        this.container.strokeRect(720/2 - 680/2, 0, 640, j*100 + 100);
-        this.verticalCamera.setBounds(0, 0, 680, j*100 + 100);
-
+        this.container.fillRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
+        this.container.strokeRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
+        this.verticalCamera.setBounds(0, 0, 680, this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
+        this.sound.play('next');
 
         // console.log(this.world);
     }

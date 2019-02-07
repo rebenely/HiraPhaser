@@ -42,7 +42,7 @@
         }
         @font-face {
             font-family: manaspc;
-            src: url('assets/font/manaspc.ttf');
+            src: url('assets/font/Gamer.ttf');
             font-weight:400;
             font-weight:normal;
         }
@@ -153,12 +153,12 @@
 
 
 $('#myModal').on('click', '#chooseLogin',function() {
-    var loginContent = "<div class='modal-content'><div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'><h2 id='message'>Welcome!</h2><form ><label for='fname'>First Name</label><input type='text' id='username' name='Username' placeholder='Username' style='font-family:\"manaspc\"'><label for='lname'>Password</label><input type='password' id='password' name='Password' placeholder='Password' ><button type='button' style='font-family:\"manaspc\"' id='loginButton' >Login</button></form></div></div>";
+    var loginContent = "<div class='modal-content'><div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'><h2 id='message'>Welcome!</h2><form ><label for='username'>Username</label><input type='text' id='username' name='Username' placeholder='Username' style='font-family:\"manaspc\"'><label for='lname'>Password</label><input type='password' id='password' name='Password' placeholder='Password' ><button type='button' style='font-family:\"manaspc\"' id='loginButton' >Login</button></form></div></div>";
     $('#myModal').html(loginContent);
 });
 
 $('#chooseSignup').click(function() {
-    var signupContent = " <div class='modal-content'> <div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'> <h2 id='signupMessage'>Signup!</h2> <form > <label for='fname'>First Name</label> <input type='text' id='usernameS' name='Username' placeholder='Username' style='font-family:\"manaspc\"'>  <label for='lname'>Password</label> <input type='password' id='password0' name='Password' placeholder='Password' >  <label for='lname'>Retype Password</label> <input type='password' id='password1' name='Password' placeholder='Retype Password' style='-webkit-text-security: square;'>  <button type='button' style='font-family:\"manaspc\"' id='signUpButton' >Signup</button> </form> </div> </div>";
+    var signupContent = " <div class='modal-content'> <div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'> <h2 id='signupMessage'>Signup!</h2> <form > <label for='username'>Username</label> <input type='text' id='usernameS' name='Username' placeholder='Username' style='font-family:\"manaspc\"'>  <label for='lname'>Password</label> <input type='password' id='password0' name='Password' placeholder='Password' >  <label for='lname'>Retype Password</label> <input type='password' id='password1' name='Password' placeholder='Retype Password' style='-webkit-text-security: square;'>  <button type='button' style='font-family:\"manaspc\"' id='signUpButton' >Signup</button> </form> </div> </div>";
     $('#myModal').html(signupContent);
 });
 $('#myModal').on('click', '#loginButton', function(){

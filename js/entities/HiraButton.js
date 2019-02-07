@@ -1,12 +1,13 @@
 class HiraButton extends Phaser.GameObjects.Text {
 
     constructor(scene, x, y, text, style, callback) {
-        super(scene, x, y, text, style);
-        this.setFontFamily(style.font.split(' ')[1]);
+        super(scene, x, y, text, { fontFamily: 'manaspc', fontSize: 32, color: game.global.UI_TEXT_FILL });
+        // this.setFontFamily(style.font.split(' ')[1]);
         this.clickable = true; // to prevent double clicking
         this.enabled = true; // enable / disable
         this.longpress = false;
-        this.setStroke( game.global.UI_TEXT_STROKE, 3);
+        this.strokeThiccness = 3;
+        this.setStroke( game.global.UI_TEXT_STROKE, this.strokeThiccness);
         this.setInteractive({ cursor: 'url(assets/images/cursor/link.cur), pointer' }).on('pointerup', () => {
             // cursor changes
             scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
@@ -47,16 +48,20 @@ class HiraButton extends Phaser.GameObjects.Text {
     }
 
     disable() {
-        this.setStroke('#686868', 3);
+        this.setStroke('#686868', this.strokeThiccness);
         this.setTint(0x686868);
         this.enabled = false;
     }
 
     enable() {
-        this.setStroke('#0000000', 3);
+        this.setStroke('#0000000', this.strokeThiccness);
         this.clearTint();
         this.enabled = true;
         this.clickable = true;
+    }
+
+    setTextUpper(string){
+        this.setText(string.toUpperCase());
     }
 
 }

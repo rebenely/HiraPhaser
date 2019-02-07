@@ -28,6 +28,7 @@ class MainScene extends Phaser.Scene {
             this.scene.wake('WorldNavScene');
             this.enableInteractiveLevels();
         }, this);
+
         /* background */
         var grassland = this.add.sprite(0, 0, 'world_map').setOrigin(0).setScale(1.75).setDepth(3);
 
@@ -61,22 +62,7 @@ class MainScene extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 2048, 981);
         this.cameras.main.setBackgroundColor(0x28ccdf);
 
-        // console.log(this.world);
 
-        var cursors = this.input.keyboard.createCursorKeys();
-
-        var controlConfig = {
-            camera: this.cameras.main,
-            left: cursors.left,
-            right: cursors.right,
-            up: cursors.up,
-            down: cursors.down,
-            acceleration: 0.02,
-          drag: 0.0005,
-          maxSpeed: 1.0
-        };
-
-        this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
         this.dungeons = [];
         this.cutSceneLevels = [];
         this.trainLevels = [];
@@ -205,13 +191,60 @@ class MainScene extends Phaser.Scene {
         practiceScene.events.on('finishedPractice', this.onPracticeFinish, this);
 
         /* debug */
-        // this.input.on('pointerup', function (pointer) {
-        //     console.log(pointer.worldX, pointer.worldY);
-        // });
+        this.input.on('pointerup', function (pointer) {
+            console.log(pointer.worldX, pointer.worldY);
+        });
 
-        //for inn
+        var cursors = this.input.keyboard.createCursorKeys();
+
+        var controlConfig = {
+            camera: this.cameras.main,
+            left: cursors.left,
+            right: cursors.right,
+            up: cursors.up,
+            down: cursors.down,
+            acceleration: 0.02,
+          drag: 0.0005,
+          maxSpeed: 1.0
+        };
+
+        this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+
+        /* ------------------------------------ */
+
+        /* for objects that do not follow the conventions, aka mga di ko agad naisip pano kapag ganito */
+
+        /* inn story level */
         this.cutSceneLevels[0].setDepth(2);
+
+        /* ------------------------------------- */
+
+        /* para di tumagos ung pindot sa main kapag may nakabukas na iba */
         this.disableInteractiveLevels();
+
+        var style = { font: "16px manaspc", fill:  game.global.UI_TEXT_FILL, align: "center"}; /* itong style dapat ginlobal ko na lang eh hahaha */
+
+        /* for alpha, mga kagaguhan ko lang */
+        var nextArea0 = new HiraButton(this, 1000, 655, "Area not yet available!", style, () => {
+            this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Will be available for next versions."}});
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
+        }, this);
+        this.add.existing(nextArea0);
+
+        var nextArea1 = new HiraButton(this, 1565, 531, "Wala pa nga di ba?", style, () => {
+            this.scene.launch('MessageScene', {message: { title : "Kulit mo rin eh", body: "Isa pang next mo ..."}});
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
+        }, this);
+        this.add.existing(nextArea1);
+
+        var nextArea1 = new HiraButton(this, 1350, 100, "Ligma", style, () => {
+            this.scene.launch('MessageScene', {message: { title : "Pindot pa", body: "Type mo konami code"}});
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
+        }, this);
+        this.add.existing(nextArea1);
     }
 
     update (time, delta) {

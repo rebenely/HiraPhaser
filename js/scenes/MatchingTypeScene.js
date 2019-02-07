@@ -140,6 +140,7 @@ class MatchingTypeScene extends Phaser.Scene {
             if(this.matchLines.visible === true){
                 this.playButton.visible = false;
                 this.exitButton.visible = false;
+                var correct = 0;
                 for (let i = 0; i < this.ypos.length; i++){
                     this.tweens.add({
                        targets: this.ypos[i],
@@ -151,16 +152,24 @@ class MatchingTypeScene extends Phaser.Scene {
                           // console.log(this.answer[i], 'vs', this.shuffled[i]);
                           this.dataCapture.answers.push({target: this.shuffled[i], answer: this.answer[i]});
                           if(this.answer[i] === this.shuffled[i]){
+                              correct++;
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
                           } else {
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
                           }
+                          if(correct > this.ypos.length/2) {
+                              this.sound.play('success');
+                          } else {
+                              this.sound.play('fail');
+                          }
                        }
                    });
                 }
+
                 this.dataCapture.total_time = this.time.now/1000 - this.timeStamp;
 
             } else {
+                this.sound.play('start');
                 this.display.visible = false;
                 this.timeStamp = this.time.now/1000;
                 // console.log(this.timeStamp);

@@ -59,15 +59,16 @@ class CutScene extends Phaser.Scene {
         // this.nameBox.fillRect(10, 480 - 145, 100, 48);
         // this.nameBox.strokeRect(10, 480 - 145, 100, 48);
 
-        this.dialogName = new HiraText(this, 40, 480 - 100, this.jsonFile['dialog'][0]['name'], "basic");
+        this.dialogName = new HiraText(this, 40, 480 - 115, this.jsonFile['dialog'][0]['name'], "basic");
         this.add.existing(this.dialogName);
 
         // console.log(this.jsonFile['dialog'][0]['message']);
         // this.dialogName = this.add.text(60, 480 -120, this.jsonFile['dialog'][0]['name'], titleStyle);
         // this.dialogName.setOrigin(0.5);
 
-        this.dialogText = new HiraText(this, 40, 480 - 80, this.jsonFile['dialog'][0]['message'], "wordWrap", 660);
+        this.dialogText = new HiraText(this, 40, 480 - 85, this.jsonFile['dialog'][0]['message'], "wordWrapL", 660);
         this.add.existing(this.dialogText);
+        this.dialogName.setOrigin(0);
         this.dialogText.setOrigin(0);
 
         // this.dialogText = this.add.text(40, 480 - 80, this.jsonFile['dialog'][0]['message'], style);
@@ -85,8 +86,8 @@ class CutScene extends Phaser.Scene {
         } else if (e.keyCode === 13 || e.keyCode === 32) { //enter
             e.preventDefault();
             if(this.dialogIterator < this.maxIterator) {
-                this.dialogName.setText(this.messageArray[this.dialogIterator].name);
-                this.dialogText.setText(this.messageArray[this.dialogIterator].message);
+                this.dialogName.setTextUpper(this.messageArray[this.dialogIterator].name);
+                this.dialogText.setTextUpper(this.messageArray[this.dialogIterator].message);
                 if (this.messageArray[this.dialogIterator].image !== undefined) {
                     // console.log('start ', this.messageArray[this.dialogIterator].image);
 
@@ -101,7 +102,8 @@ class CutScene extends Phaser.Scene {
                     this.hiraText.setOrigin(0.5);
                     this.hiraText.setText([Projectile.convertToHiragana(this.messageArray[this.dialogIterator].text)]);
                 }
-                this.dialogName.setOrigin(0.5);
+                this.dialogName.setOrigin(0);
+                this.dialogText.setOrigin(0);
                 // console.log(this.dialogIterator, 'vs', this.maxIterator);
                 this.dialogIterator++;
                 this.sound.play('next');
