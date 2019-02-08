@@ -76,15 +76,22 @@ class CutScene extends Phaser.Scene {
         this.dialogIterator = 1; this.maxIterator = this.jsonFile['dialog'].length;
 
         this.input.keyboard.on('keyup', this.typedKeys, this);
+        this.input.on('pointerup', this.nextPage, this);
 
 
     }
 
     typedKeys (e) {
-        if (e.keyCode === 8) { //back
-            e.preventDefault();
-        } else if (e.keyCode === 13 || e.keyCode === 32) { //enter
-            e.preventDefault();
+        e.preventDefault();
+        this.parseInput(e.keyCode, e.key);
+    }
+
+    nextPage(){
+        this.parseInput(13, 13);
+    }
+
+    parseInput(keyCode, key){
+         if (keyCode === 13 || keyCode === 32) { //enter
             if(this.dialogIterator < this.maxIterator) {
                 this.dialogName.setTextUpper(this.messageArray[this.dialogIterator].name);
                 this.dialogText.setTextUpper(this.messageArray[this.dialogIterator].message);

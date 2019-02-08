@@ -51,25 +51,29 @@ class BattleScene extends Phaser.Scene {
     }
 
     typedKeys (e) {
-        if(this.state === this.STATE_VALUE.attack)
-        {
-            if (e.keyCode >= 65 && e.keyCode <= 90)
+        this.parseText(e.keyCode, e.key);
+        e.preventDefault();
+    }
+
+    parseText(keyCode, key){
+        if(this.state === this.STATE_VALUE.attack){
+
+            if (keyCode >= 65 && keyCode <= 90)
             {
-                e.preventDefault();
+
                 this.sound.play('type');
-                this.inputText += e.key.toUpperCase();
+                this.inputText += key.toUpperCase();
                 // console.log('you typed ', this.inputText);
             }
-            else if (e.keyCode === 8) //backspace
+            else if (keyCode === 8) //backspace
             {
                 this.sound.play('delete');
-                e.preventDefault();
                 this.inputText = this.inputText.slice(0, -1);
             }
-            else if (e.keyCode === 13) //enter
+            else if (keyCode === 13) //enter
             {
+
                 this.sound.play('next');
-                e.preventDefault();
                 this.skipButton.visible = false;
                 let stats = {
                     word: this.projectile.currentChar,
@@ -109,6 +113,7 @@ class BattleScene extends Phaser.Scene {
             questions: []
         };
 
+        /* onscreen keyboard */
 
 
         // console.log('ayo mark time', this.battleCapture.total_time);
@@ -160,13 +165,12 @@ class BattleScene extends Phaser.Scene {
                 this.state = this.STATE_VALUE.attack;
                 // console.log(this.projectile);
                 this.battleCapture.asked++;
-
             }
         }, this);
         this.add.existing(this.attackButton);
 
         /* add attack button */
-        this.skipButton = new HiraButton(this, 720/2, 3*480/4, "Skip", style, () =>  {
+        this.skipButton = new HiraButton(this, 720/2, 480/2 - 30, "Skip", style, () =>  {
             if(this.state === this.STATE_VALUE.attack) {
 
                 let stats = {
@@ -264,7 +268,7 @@ class BattleScene extends Phaser.Scene {
         /* projectile path */
         this.path = this.add.path();
         this.follower = { t: 0, vec: new Phaser.Math.Vector2() };
-        var line1 = new Phaser.Curves.Line([  720/2, 480/3, 120, 320 ]);
+        var line1 = new Phaser.Curves.Line([  720/2, 480/3 - 50, 120, 320 ]);
         this.path.add(line1);
 
         /* back button */
@@ -367,6 +371,142 @@ class BattleScene extends Phaser.Scene {
             this.enemyShadow.alpha = 0.5;
             this.playerShadow.alpha = 0.5;
             this.loading.visible = false;
+
+            /* on screen kb */
+            this.okboverlay = this.add.graphics();
+            this.okboverlay.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
+            this.okboverlay.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B, game.global.UI_ALPHA);
+            this.okboverlay.fillRect(70, 280, 580, 220);
+            this.okboverlay.strokeRect(70, 280, 580, 220);
+
+
+            this.okb = this.add.bitmapText(720/2, 380, 'onscreen', 'QWERTYUIOP\n\nASDFGHJKL\n\nZXCVBNM-^').setLetterSpacing(40).setOrigin(0.5).setCenterAlign();
+            this.okb.setInteractive();
+
+            this.okboverlay.visible = false;
+            this.okb.visible = false;
+
+            this.okb.input.hitArea.setTo(-15, 0, 600, 200);
+
+            this.okb.on('pointerup', function (pointer, x, y) {
+                var char = this.getEquivalentX(x, y);
+                console.log(x, y, this.getEquivalentX(x, y));
+                if(this.getEquivalentX(x,y) === '^') {
+                    this.parseText(13, this.getEquivalentX(x, y));
+                } else if (this.getEquivalentX(x, y) === '-') {
+                    this.parseText(8, this.getEquivalentX(x, y));
+                } else {
+                    this.parseText(this.getEquivalentX(x, y).charCodeAt(0), this.getEquivalentX(x, y));
+                }
+
+            }, this);
+
+            this.okbButton = new HiraButton(this, 700, 470, "OKB", style, () =>  {
+                game.showOKB = game.showOKB ? false : true;
+                if(game.showOKB){
+                    this.okbButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
+                } else {
+                    this.okbButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 0);
+                }
+            }, this);
+            this.add.existing(this.okbButton);
+
+    }
+    toggleOKB(on) {
+        this.okboverlay.visible = on;
+        this.okb.visible =  on;
+    }
+    getEquivalentX(x, y){
+        if ( y < 45 ){
+            if( x > -10 && x <= 30 ) {
+                return 'Q';
+            }
+            if( x > 45 && x <= 45 + 40 ) {
+                return 'W';
+            }
+            if( x > 110 && x <= 150 ) {
+                return 'E';
+            }
+            if( x > 170 && x <= 210 ) {
+                return 'R';
+            }
+            if( x > 225 && x <= 270 ) {
+                return 'T';
+            }
+            if( x > 280 && x <= 320 ) {
+                return 'Y';
+            }
+            if( x > 340 && x <= 375 ) {
+                return 'U';
+            }
+            if( x > 400 && x <= 440 ) {
+                return 'I';
+            }
+            if( x > 455 && x <= 480 ) {
+                return 'O';
+            }
+            if( x > 510 && x <= 550 ) {
+                return 'P';
+            }
+        } if (y > 65 && y < 120) {
+            if( x > 25 && x <= 65 ) {
+                return 'A';
+            }
+            if( x > 80 && x <= 120 ) {
+                return 'S';
+            }
+            if( x > 135 && x <= 175 ) {
+                return 'D';
+            }
+            if( x > 190 && x <= 230 ) {
+                return 'F';
+            }
+            if( x > 250 && x <= 290 ) {
+                return 'G';
+            }
+            if( x > 310 && x <= 350 ) {
+                return 'H';
+            }
+            if( x > 365 && x <= 405 ) {
+                return 'J';
+            }
+            if( x > 420 && x <= 460 ) {
+                return 'K';
+            }
+            if( x > 475 && x <= 515 ) {
+                return 'L';
+            }
+        } if (y > 140) {
+            if( x > 20 && x <= 60 ) {
+                return 'Z';
+            }
+            if( x > 75 && x <= 115 ) {
+                return 'X';
+            }
+            if( x > 130 && x <= 170 ) {
+                return 'C';
+            }
+            if( x > 185 && x <= 225 ) {
+                return 'V';
+            }
+            if( x > 245 && x <= 290 ) {
+                return 'B';
+            }
+            if( x > 310 && x <= 350 ) {
+                return 'N';
+            }
+            if( x > 365 && x <= 405 ) {
+                return 'M';
+            }
+            if( x > 425 && x <= 465 ) {
+                return '-';
+            }
+            if( x > 480 && x <= 520 ) {
+                return '^';
+            }
+        }
+
+        return '';
     }
 
     hurtEnemy(){
@@ -505,10 +645,11 @@ class BattleScene extends Phaser.Scene {
             this.skipButton.visible = false;
             this.follower.t = 0;
             this.follower.vec.x = 720/2;
-            this.follower.vec.y = 480/3;
+            this.follower.vec.y = 480/3 - 50;
             if(this.simulate){
                 this.backButton.visible = true;
             }
+            this.toggleOKB(false);
         } else if (this.state === this.STATE_VALUE.attack) {
             this.inputTextDisplay.setTextUpper(this.inputText);
             this.inputTextDisplay.visible = true;
@@ -522,9 +663,14 @@ class BattleScene extends Phaser.Scene {
             this.attackButton.visible = false;
             this.timerDisplay.visible = true;
             this.timerDisplay.setTextUpper(this.timedEvent.getElapsedSeconds().toString().substr(0, 4));
+
+
+            this.toggleOKB(game.showOKB);
+
         } else if (this.state === this.STATE_VALUE.animate) {
             this.path.getPoint(this.follower.t, this.follower.vec);
             this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
+            this.toggleOKB(false);
         }
     }
 

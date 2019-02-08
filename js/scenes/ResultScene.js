@@ -118,6 +118,7 @@ class ResultScene extends Phaser.Scene {
         this.add.existing(this.totalDiff);
 
         this.input.keyboard.on('keydown', this.typedKeys, this);
+        this.input.on('pointerup', this.nextPage, this);
 
         this.player.hp = this.player.maxHp; /* restore player health */
 
@@ -127,8 +128,10 @@ class ResultScene extends Phaser.Scene {
     typedKeys (e) {
         if (e.keyCode === 32 || e.keyCode === 13) {
             this.state+= 2;
-
         }
+    }
+    nextPage() {
+        this.state += 2;
     }
 
     update () {

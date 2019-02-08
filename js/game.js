@@ -34,3 +34,4 @@ game.story = 0;
 game.player_name = '';
 game.charset = [];
 game.token = '';
+game.showOKB = false;

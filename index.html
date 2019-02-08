@@ -54,6 +54,9 @@
          @media only screen and (orientation:landscape){
              #warning-message { display:none; }
          }
+         @media only screen and (max-width: 760px) {
+             #this-mobile { display: none; }
+        }
         .center-div {
          margin: 0% auto;
          padding-top: 3px;
@@ -120,6 +123,7 @@
     </head>
     <body>
         <h1 id="header_message" style="font-family:'manaspc';padding:20px;text-align:center;">Hira Alpha 1.0</h2>
+        <div id="this-mobile"></div>
         <div id="wrapper">
             <div class="center-div">
                 <div style="font-family:'manaspc';position: absolute;left: -1000px;visibility: hidden;font-smooth:never;">.</div>
@@ -149,7 +153,7 @@
 </html>
 
 <script>
-
+    var me = this;
 
 
 $('#myModal').on('click', '#chooseLogin',function() {
@@ -162,6 +166,8 @@ $('#chooseSignup').click(function() {
     $('#myModal').html(signupContent);
 });
 $('#myModal').on('click', '#loginButton', function(){
+
+    toggleFullScreen();
     var data = { "username" : $( "#username" ).val(), "password": $( "#password" ).val()};
     $( "#message" ).text("Logging in...");
     $( '#loginButton' ).prop('disabled', true);
@@ -221,5 +227,33 @@ $('#myModal').on('click', '#signUpButton', function(){
         }
     });
 });
+function toggleFullScreen() {
+    if( $('#this-mobile').css('display')=='none') {
+        if (!document.fullscreenElement &&    // alternative standard method
+            !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+          } else if (document.documentElement.msRequestFullscreen) {
+            document.documentElement.msRequestFullscreen();
+          } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+          } else if (document.documentElement.webkitRequestFullscreen) {
+            document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
+        }
+    }
+
+
+}
 
 </script>

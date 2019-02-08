@@ -6,7 +6,7 @@ class MessageScene extends Phaser.Scene {
     init (data) {
         this.message = data.message;
     }
-    create () {
+    preload() {
         this.container = this.add.graphics();
 
 
@@ -16,15 +16,22 @@ class MessageScene extends Phaser.Scene {
         this.container.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
         this.container.strokeRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
 
+        this.messageTitle = new HiraText(this, 720/2, 90, "Loading", "header");
+        this.add.existing(this.messageTitle);
+        this.messageContent = new HiraText(this, 720/2, 480/2, "Loading message", "wordWrap", 680 - 90);
+        this.add.existing(this.messageContent);
+    }
+    create () {
+
 
 
         var titleStyle = { font: "32px manaspc", fill: "#ffffff", align: "left" };
         var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
         // var caveName = this.add.text(58, 60, this.content.title , titleStyle);
-        var messageTitle = new HiraText(this, 720/2, 90, this.message.title, "header");
-        this.add.existing(messageTitle);
-        var messageContent = new HiraText(this, 720/2, 480/2, this.message.body, "wordWrap", 680 - 90);
-        this.add.existing(messageContent);
+
+        this.messageTitle.setText(this.message.title);
+        this.messageContent.setText(this.message.body);
+
         // var caveDesc = this.add.text(60, 130, this.content.desc, style);
         // var charSetDisplay = this.add.text(60, 90, this.content.subtitle, style);
 

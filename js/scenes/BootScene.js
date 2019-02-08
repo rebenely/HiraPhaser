@@ -30,7 +30,8 @@ class BootScene extends Phaser.Scene {
         this.load.spritesheet('kidlatslash', 'assets/spritesheets/effects/kidlatslash.png',  { frameWidth: 32, frameHeight: 32 });
 
 
-        this.load.bitmapFont('hira', 'assets/font/font.png', 'assets/font/font.fnt');
+        this.load.bitmapFont('hira', 'assets/font/bmpfont/jackey.png', 'assets/font/bmpfont/jackey.fnt');
+        this.load.bitmapFont('onscreen', 'assets/font/bmpfont/keyboard.png', 'assets/font/bmpfont/keyboard.fnt');
 
 
 
@@ -77,7 +78,7 @@ class BootScene extends Phaser.Scene {
         console.debug('failed: ', totalFailed);
     }
     create () {
-        this.resize();
+
         this.loaded = false;
         this.worldJson = this.cache.json.get('main_world');
         // console.log(this.worldJson);
@@ -115,6 +116,7 @@ class BootScene extends Phaser.Scene {
                 }
             }
             // console.log(this.player.characterPool, game.charset);
+            this.resize();
             this.scene.start("MainScene", {player: this.player, world: this.worldJson, announcement: this.announcement});
         }
     }
