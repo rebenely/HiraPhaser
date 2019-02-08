@@ -119,6 +119,14 @@
           background-color: #32B3ED;
         }
 
+        .game-area {
+            display: block;
+            width: 100%;
+            text-align:center;
+            font-smooth:never;
+            cursor: url('assets/images/cursor/normal.cur'),url('assets/images/cursor/text.cur'),url('assets/images/cursor/link.cur'),url('assets/images/cursor/help.cur'), auto;
+        }
+
     </style>
     </head>
     <body>
@@ -127,7 +135,7 @@
         <div id="wrapper">
             <div class="center-div">
                 <div style="font-family:'manaspc';position: absolute;left: -1000px;visibility: hidden;font-smooth:never;">.</div>
-                <div id="content" style="display: block; width: 100%; text-align:center;font-smooth:never;"></div>
+                <div id="content" class="game-area"></div>
             </div>
 
             <div id="myModal" class="modal">

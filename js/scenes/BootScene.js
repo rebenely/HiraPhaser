@@ -18,6 +18,7 @@ class BootScene extends Phaser.Scene {
         this.load.image('practice', 'assets/images/globals/practice.png');
         this.load.image('message', 'assets/images/globals/inn.png');
         this.load.image('shadow', 'assets/images/globals/shadow.png');
+        this.load.image('black50', 'assets/images/globals/black50.png');
 
 
         this.load.image('world_map', 'assets/images/globals/world_redux.png');

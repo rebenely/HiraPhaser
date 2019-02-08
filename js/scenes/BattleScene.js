@@ -419,6 +419,40 @@ class BattleScene extends Phaser.Scene {
                 this.okbButton.clearTint();
             }
 
+            var blocks = this.add.group({ key: 'black50', repeat: 191 });
+
+           Phaser.Actions.GridAlign(blocks.getChildren(), {
+               width: 16,
+               cellWidth: 50,
+               cellHeight: 50,
+               x: 25,
+               y: 25
+           });
+
+           var _this = this;
+
+           var i = 0;
+
+           blocks.children.iterate(function (child) {
+
+               _this.tweens.add({
+                   targets: child,
+                   alpha: 0,
+                   ease: 'Power3',
+                   duration: 500,
+                   delay: 10 + (i * 10)
+               });
+
+               i++;
+
+               //  Change the value 32 for different results
+               if (i % 32 === 0)
+               {
+                   i = 0;
+               }
+
+           });
+
     }
     toggleOKB(on) {
         this.okboverlay.visible = on;
@@ -633,8 +667,8 @@ class BattleScene extends Phaser.Scene {
     update () {
         this.playerShadow.x = this.player.sprite.x;
         this.enemyShadow.x = this.enemy.sprite.x;
-        this.playerShadow.alpha = this.player.sprite.alpha;
-        this.enemyShadow.alpha = this.enemy.sprite.alpha;
+        this.playerShadow.alpha = this.player.sprite.alpha - 0.4;
+        this.enemyShadow.alpha = this.enemy.sprite.alpha - 0.4;
         /* if player died or enemy died,  probably will add animations later */
         if(this.player.hp <= 0 || this.enemy.hp <= 0) {
             /* play death anim here */

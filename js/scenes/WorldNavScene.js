@@ -95,7 +95,7 @@ class WorldNavScene extends Phaser.Scene {
         mainScene.events.on('sayName', this.onSayName, this);
         mainScene.events.on('hoverOut', this.onHoverOut, this);
 
-        this.caveName = new HiraText(this, 720/2, 30, "", "header");
+        this.caveName = new HiraText(this, 720/2, 25, "", "header");
         this.add.existing(this.caveName);
         this.caveName.visible = false;
     }
