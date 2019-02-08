@@ -263,6 +263,7 @@ class BattleScene extends Phaser.Scene {
 
         this.timedEvent = null;
         this.timerDisplay = new HiraText(this,720/2, 10, 'ayy lmao', "basic" );
+        this.add.existing(this.timerDisplay);
         this.timerDisplay.visible = false;
 
         /* projectile path */
@@ -383,8 +384,9 @@ class BattleScene extends Phaser.Scene {
             this.okb = this.add.bitmapText(720/2, 380, 'onscreen', 'QWERTYUIOP\n\nASDFGHJKL\n\nZXCVBNM-^').setLetterSpacing(40).setOrigin(0.5).setCenterAlign();
             this.okb.setInteractive();
 
+
             this.okboverlay.visible = false;
-            this.okb.visible = false;
+
 
             this.okb.input.hitArea.setTo(-15, 0, 600, 200);
 
@@ -404,12 +406,18 @@ class BattleScene extends Phaser.Scene {
             this.okbButton = new HiraButton(this, 700, 470, "OKB", style, () =>  {
                 game.showOKB = game.showOKB ? false : true;
                 if(game.showOKB){
-                    this.okbButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
+                    this.okbButton.setTint(game.global.UI_TEXT_HIGHLIGHT);
                 } else {
-                    this.okbButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 0);
+                    this.okbButton.clearTint();
                 }
             }, this);
             this.add.existing(this.okbButton);
+            this.okbButton.longpress = true;
+            if(game.showOKB){
+                this.okbButton.setTint(game.global.UI_TEXT_HIGHLIGHT);
+            } else {
+                this.okbButton.clearTint();
+            }
 
     }
     toggleOKB(on) {

@@ -90,8 +90,9 @@ class DungeonScene extends Phaser.Scene {
 
         }, this);
         this.add.existing(this.easyButton);
-        this.easyButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
-
+        if(this.difficulty === game.global.EASY) {
+            this.easyButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
+        }
 
         this.normalButton = new HiraButton(this, 2*720/4, 480/5, 'Normal', style, () => {
             this.difficulty = game.global.NORMAL;
@@ -102,6 +103,10 @@ class DungeonScene extends Phaser.Scene {
 
         }, this);
         this.add.existing(this.normalButton);
+        if(this.difficulty === game.global.NORMAL) {
+            this.normalButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
+        }
+
 
         this.hardButton = new HiraButton(this, 3*720/4, 480/5, 'Hard', style, () => {
             this.difficulty = game.global.HARD;
@@ -111,6 +116,9 @@ class DungeonScene extends Phaser.Scene {
 
         }, this);
         this.add.existing(this.hardButton);
+        if(this.difficulty === game.global.HARD) {
+            this.hardButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
+        }
 
         this.hintButton = new HiraButton(this, 720/2 , 420, 'Hint!', style, () => {
             this.hintChecked = true;

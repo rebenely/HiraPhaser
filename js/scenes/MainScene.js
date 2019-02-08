@@ -91,7 +91,7 @@ class MainScene extends Phaser.Scene {
                     //this.scene.pause('MainScene');
                     this.scene.sleep('WorldNavScene');
                     this.disableInteractiveLevels();
-                    this.scene.launch('DetailScene', {player: this.player, dungeon: this.dungeons[i], startScene: 'DungeonScene', passData: {player: this.player, dungeon: this.dungeons[i], difficulty: game.global.EASY}});
+                    this.scene.launch('DetailScene', {player: this.player, dungeon: this.dungeons[i], startScene: 'DungeonScene', passData: {player: this.player, dungeon: this.dungeons[i], difficulty: game.global.NORMAL}});
                 }
             ));
             this.dungeons[i].comparePlayerLevel(this.player.story);
