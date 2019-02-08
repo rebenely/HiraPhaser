@@ -140,11 +140,13 @@ class MatchingTypeScene extends Phaser.Scene {
             if(this.matchLines.visible === true){
                 this.playButton.visible = false;
                 this.exitButton.visible = false;
+
                 var correct = 0;
                 for (let i = 0; i < this.ypos.length; i++){
+                    this.ypos[i].disableInteractive();
                     this.tweens.add({
                        targets: this.ypos[i],
-                       x: 620,
+                       x: 550,
                        duration: 1000,
                        ease: 'Power2',
                        onComplete: () => {
@@ -156,6 +158,7 @@ class MatchingTypeScene extends Phaser.Scene {
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
                           } else {
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
+                              this.ypos[i].disable();
                           }
                           if(correct > this.ypos.length/2) {
                               this.sound.play('success');

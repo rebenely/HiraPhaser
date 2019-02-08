@@ -20,7 +20,7 @@ game.global = {
     HARD: 2,
     UI_COLOR: 0xfbf5ef,
     UI_THICKNESS: 2,
-    UI_ALPHA: 0.6,
+    UI_ALPHA: 0.8,
     UI_FILL_A: 0x3978a8,
     UI_FILL_B: 0x8aebf1,
     UI_TEXT_FILL: "#fbf5ef",

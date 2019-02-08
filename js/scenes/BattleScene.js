@@ -155,8 +155,8 @@ class BattleScene extends Phaser.Scene {
                 this.timedEvent = this.time.addEvent({ delay: 5000, callback: this.answerFailed, callbackScope: this }, this);
                 // console.log('state has been changed');
                 this.projectile.getRandomCharacter();
-                this.projectile.getHiragana();
-                this.projectile.setText(this.projectile.getHiragana());
+                // this.projectile.getHiragana();
+                // this.projectile.setText(this.projectile.getHiragana());
                 this.state = this.STATE_VALUE.attack;
                 // console.log(this.projectile);
                 this.battleCapture.asked++;

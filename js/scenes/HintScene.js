@@ -83,7 +83,7 @@ class HintScene extends Phaser.Scene {
         // console.log(j* 100 + 5);
         this.cameras.main.ignore([this.characterDisplay, this.romajiDisplay, this.container, titleDisplay]);
         this.verticalCamera.ignore([this.cancelButton, this.downButton, this.upButton, this.graphics]);
-        this.container.fillStyle(game.global.UI_FILL_A, 1);
+        this.container.fillStyle(game.global.UI_FILL_B, 0.9);
         this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
         this.container.fillRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
         this.container.strokeRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);

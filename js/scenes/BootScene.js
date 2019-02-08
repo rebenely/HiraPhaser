@@ -55,6 +55,7 @@ class BootScene extends Phaser.Scene {
         this.load.audio('enemy_death', ['assets/sounds/sfx/sfx_deathscream_alien5.wav']);
         this.load.audio('player_death', ['assets/sounds/sfx/sfx_deathscream_human14.wav']);
 
+        this.sound.pauseOnBlur = false;
 
         this.load.on('progress', this.onLoadProgress, this);
         this.load.on('complete', this.onLoadComplete, this);

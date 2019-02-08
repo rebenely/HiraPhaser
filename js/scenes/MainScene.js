@@ -245,6 +245,13 @@ class MainScene extends Phaser.Scene {
             this.scene.sleep('WorldNavScene');
         }, this);
         this.add.existing(nextArea1);
+
+        var secret = new HiraButton(this, 2035, 980, "Huli ka", style, () => {
+            this.scene.launch('MessageScene', {message: { title : "Tanong", body: "Bakit madaling utuin ang mga nakababatang kapatid na lalake ng mga hapon? Kasi otouto."}});
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
+        }, this);
+        this.add.existing(secret);
     }
 
     update (time, delta) {
@@ -287,6 +294,9 @@ class MainScene extends Phaser.Scene {
             this.player.learnNewCharacters(data.charSet);
             this.player.story++;
             updateCharset = true;
+        } else {
+            data.message.title = "Saving Progress";
+            data.message.message = "Please do not exit.";
         }
 
         this.compareStoryLevels(); /* for special case of learning nothing, player adds to story in its own function */

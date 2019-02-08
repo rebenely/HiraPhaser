@@ -10,6 +10,9 @@ class CutLoaderScene extends Phaser.Scene {
     }
 
     preload () {
+        this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
+        this.add.existing(this.loading);
+        
         this.cache.json.remove('dialog');
         this.load.json('dialog', 'assets/dialogs/'+this.fileName);
 
