@@ -35,6 +35,7 @@ app.use(bodyParser.json());
 /* End points */
 app.post('/login', auth.login);
 app.post('/signup', auth.signup);
+app.post('/logout', middleware.checkToken, auth.logout);
 
 app.post('/api/learn', middleware.checkToken, api.postLearn);
 app.post('/api/train', middleware.checkToken, api.postTrain);
@@ -49,6 +50,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/hello', function (req, res) {
+    console.log('----------hello------------');
     // console.log('You are connected to the sever!', req);
     var MongoClient = require('mongodb').MongoClient;
     var url = config.db_url;
@@ -60,7 +62,6 @@ app.get('/hello', function (req, res) {
 
       dbo.collection("game_vars").findOne({var_name: "announcement" }, function(err, result) {
         if (err) throw err;
-        console.log(result);
         succ = result;
         res.json({
           title: succ.title,
@@ -69,7 +70,7 @@ app.get('/hello', function (req, res) {
         db.close();
       });
     });
-    console.log('User started loading the game.');
+    console.log('Someone waved!.');
 })
 
 app.get('/amireal', middleware.checkToken, function (req, res) {

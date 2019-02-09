@@ -266,6 +266,12 @@ $(window).on("beforeunload", function(e) {
     if(game.player_name !== ''){
         /* end session */
         console.log(game.player_name);
+        $.ajax({
+            url: window.location.href + "logout",
+            headers: {"Authorization": "Bearer " + game.token },
+            type: "POST",
+            contentType: "application/json"
+        });
     }
 });
 

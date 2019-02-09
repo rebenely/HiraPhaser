@@ -10,7 +10,8 @@ module.exports = {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db(config.db_name);
-          var myobj = req.body
+          var myobj = req.body;
+          myobj.session_id = res.locals.decoded.session;
           var updateCharset = req.body.updateCharset;
           delete req.body.updateCharset;
           if(res.locals.decoded.username === myobj.username) {
@@ -54,7 +55,7 @@ module.exports = {
           var announcement = {};
           var dbo = db.db(config.db_name);
           var myobj = req.body
-
+          myobj.session_id = res.locals.decoded.session;
           if(res.locals.decoded.username === myobj.username) {
 
               dbo.collection("train").insertOne(myobj, function(err, res) {
@@ -88,7 +89,8 @@ module.exports = {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db(config.db_name);
-          var myobj = req.body
+          var myobj = req.body;
+          myobj.session_id = res.locals.decoded.session;
           if(res.locals.decoded.username === myobj.username) {
             dbo.collection("practice").insertOne(myobj, function(err, res) {
               if (err) throw err;
@@ -122,6 +124,7 @@ module.exports = {
           var announcement = {};
           var dbo = db.db(config.db_name);
           var myobj = req.body
+          myobj.session_id = res.locals.decoded.session;
 
           if(res.locals.decoded.username === myobj.username) {
               dbo.collection("dungeon").insertOne(myobj, function(err, res) {
