@@ -199,7 +199,10 @@ module.exports  = {
                 db.close();
               });
 
-
+              return res.status(200).send({
+                success: true,
+                message: 'Logout successful'
+              });
           }
 
           db.close();

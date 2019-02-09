@@ -178,7 +178,7 @@ class MatchingTypeScene extends Phaser.Scene {
             } else {
                 this.sound.play('start');
                 this.display.visible = false;
-                this.playButton.setText("Submit!");
+                this.playButton.setText("Play!");
                 this.timeStamp = this.time.now/1000;
                 // console.log(this.timeStamp);
                 for(let i = 0; i < this.ypos.length; i++) {

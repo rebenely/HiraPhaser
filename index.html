@@ -270,6 +270,7 @@ $(window).on("beforeunload", function(e) {
             url: window.location.href + "logout",
             headers: {"Authorization": "Bearer " + game.token },
             type: "POST",
+            async: false,
             contentType: "application/json"
         });
     }
