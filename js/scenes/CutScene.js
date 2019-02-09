@@ -78,6 +78,7 @@ class CutScene extends Phaser.Scene {
         this.input.keyboard.on('keyup', this.typedKeys, this);
         this.input.on('pointerup', this.nextPage, this);
 
+        game.screenWipe(this);
 
     }
 

@@ -76,11 +76,17 @@ class TrainScene extends Phaser.Scene {
 
     }
     onMulchoFinish (data) {
-        this.dataCapture.mulcho.push(data.dataCapture);
+        if(data.played){
+            this.dataCapture.mulcho.push(data.dataCapture);
+        }
+
         // console.log(this.dataCapture);
     }
     onMatchFinish (data) {
-        this.dataCapture.match.push(data.dataCapture);
+        if(data.played){
+            this.dataCapture.match.push(data.dataCapture);
+        }
+
         // console.log(this.dataCapture);
     }
 }

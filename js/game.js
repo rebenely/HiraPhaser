@@ -35,3 +35,36 @@ game.player_name = '';
 game.charset = [];
 game.token = '';
 game.showOKB = false;
+
+game.screenWipe = function (scene) {
+    var blocks = scene.add.group({ key: 'black50', repeat: 191 });
+
+   Phaser.Actions.GridAlign(blocks.getChildren(), {
+       width: 16,
+       cellWidth: 50,
+       cellHeight: 50,
+       x: 25,
+       y: 25
+   });
+
+   var _this = scene;
+
+   var i = 0;
+
+   blocks.children.iterate(function (child) {
+
+       _this.tweens.add({
+           targets: child,
+           alpha: 0,
+           ease: 'Power3',
+           duration: 500,
+           delay: 1 + (i * 1)
+       });
+       i++;
+       //  Change the value 32 for different results
+       if (i % 16 === 0) {
+
+       }
+
+   });
+}

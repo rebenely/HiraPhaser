@@ -418,41 +418,7 @@ class BattleScene extends Phaser.Scene {
             } else {
                 this.okbButton.clearTint();
             }
-
-            var blocks = this.add.group({ key: 'black50', repeat: 191 });
-
-           Phaser.Actions.GridAlign(blocks.getChildren(), {
-               width: 16,
-               cellWidth: 50,
-               cellHeight: 50,
-               x: 25,
-               y: 25
-           });
-
-           var _this = this;
-
-           var i = 0;
-
-           blocks.children.iterate(function (child) {
-
-               _this.tweens.add({
-                   targets: child,
-                   alpha: 0,
-                   ease: 'Power3',
-                   duration: 500,
-                   delay: 10 + (i * 10)
-               });
-
-               i++;
-
-               //  Change the value 32 for different results
-               if (i % 32 === 0)
-               {
-                   i = 0;
-               }
-
-           });
-
+            game.screenWipe(this);
     }
     toggleOKB(on) {
         this.okboverlay.visible = on;

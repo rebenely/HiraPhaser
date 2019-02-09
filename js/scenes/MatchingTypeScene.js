@@ -20,6 +20,7 @@ class MatchingTypeScene extends Phaser.Scene {
             answers: []
         }
 
+        this.played = false;
         this.container = this.add.graphics();
         this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
 
@@ -27,7 +28,7 @@ class MatchingTypeScene extends Phaser.Scene {
         this.container.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
         this.container.strokeRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
 
-        this.display = new HiraText(this, 720/2, 480/2, 'Match the Hiragana characters with their romaji!', "wordWrap", 2*720/3);
+        this.display = new HiraText(this, 720/2, 480/2, 'Match the Hiragana characters with their romaji!\n\n\nRearrange by clicking the characters on the left to their equivalent on the right!', "wordWrap", 2*720/3);
         this.add.existing(this.display);
 
         this.matchLines = this.add.graphics();
@@ -126,9 +127,9 @@ class MatchingTypeScene extends Phaser.Scene {
         //
         // });
 
-        this.exitButton = new HiraButton(this, 720/3, 5*480/6, "Exit", this.style, () => {
+        this.exitButton = new HiraButton(this, 720/3, 5*480/6, "Back", this.style, () => {
             // console.log('yeman', this.dataCapture);
-            this.events.emit('matchFinish', {dataCapture: this.dataCapture});
+            this.events.emit('matchFinish', {dataCapture: this.dataCapture, played: this.played});
             this.scene.stop('MatchingTypeScene');
             this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});
         }, this);
@@ -138,6 +139,8 @@ class MatchingTypeScene extends Phaser.Scene {
             // console.log('Play');
 
             if(this.matchLines.visible === true){
+                this.played = true;
+
                 this.playButton.visible = false;
                 this.exitButton.visible = false;
 
@@ -150,6 +153,7 @@ class MatchingTypeScene extends Phaser.Scene {
                        duration: 1000,
                        ease: 'Power2',
                        onComplete: () => {
+                           this.exitButton.x = 720/2;
                            this.exitButton.visible = true;
                           // console.log(this.answer[i], 'vs', this.shuffled[i]);
                           this.dataCapture.answers.push({target: this.shuffled[i], answer: this.answer[i]});
@@ -174,6 +178,7 @@ class MatchingTypeScene extends Phaser.Scene {
             } else {
                 this.sound.play('start');
                 this.display.visible = false;
+                this.playButton.setText("Submit!");
                 this.timeStamp = this.time.now/1000;
                 // console.log(this.timeStamp);
                 for(let i = 0; i < this.ypos.length; i++) {
@@ -181,6 +186,8 @@ class MatchingTypeScene extends Phaser.Scene {
                     this.hiragana[i].visible = true;
                 }
                 this.matchLines.visible = true;
+                this.exitButton.visible = false;
+                this.playButton.x = 720/2;
             }
         }, this);
 

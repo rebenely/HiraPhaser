@@ -159,6 +159,7 @@ class DungeonScene extends Phaser.Scene {
             }
             this.cameras.main.fadeOut(1000);
         }, this);
+        game.screenWipe(this);
     }
 
     update () {

@@ -260,8 +260,13 @@ function toggleFullScreen() {
           }
         }
     }
-
-
 }
+
+$(window).on("beforeunload", function(e) {
+    if(game.player_name !== ''){
+        /* end session */
+        console.log(game.player_name);
+    }
+});
 
 </script>
