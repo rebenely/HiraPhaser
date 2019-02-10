@@ -38,19 +38,26 @@ module.exports  = {
                 bcrypt.compare(password, result.password, function(err, hashResult) {
                     if (hashResult) {
                         var stringTime = JSON.stringify(new Date()).replace(/\"/g, "");
-                      jwt.sign({username: username, session: result.session, start: stringTime},config.secret,
+                      jwt.sign({username: username, session: result.session + 1, start: stringTime},config.secret,
                         { expiresIn: '12h' }, async function(err, token) {
                             /* create session */
 
                             var currentSesh = {
                                 username: username,
-                                session_id: result.session,
+                                session_id: result.session + 1,
                                 start: stringTime,
                                 end: ''
                             }
+                            dbo.collection("players").updateOne({username: username}, { $set: {session: result.session + 1} }, function(err, res) {
+                              if (err) throw err;
+                              console.log( username + ": updated session id", result.session + 1);
+                              db.close();
+                            });
+
+
                             await dbo.collection("sessions").insertOne(currentSesh, function(errx, res) {
                               if (errx) {throw errx;}
-                              console.log(username + ": added a session with id", result.session);
+                              console.log(username + ": added a session with id", result.session + 1);
                               db.close();
                             });
                             // return the JWT token for the future API calls
@@ -193,15 +200,15 @@ module.exports  = {
                 db.close();
               });
 
-              dbo.collection("players").updateOne({username: username}, { $set: { session: session + 1 }, $inc: {total_playtime: playTime} }, function(err, res) {
+              dbo.collection("players").updateOne({username: username}, { $inc: {total_playtime: playTime} }, function(err, res) {
                 if (err) throw err;
-                console.log( username + ": updated session to", session + 1);
+                console.log( username + ": updated playtime to", playTime);
                 db.close();
               });
 
               return res.status(200).send({
                 success: true,
-                message: 'Logout successful'
+                message: 'Saved data for ' + username
               });
           }
 

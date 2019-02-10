@@ -73,16 +73,27 @@ class DialogBoxScene extends Phaser.Scene {
                 this.sound.play('success');
                 // console.log('ahahah', JSON.stringify(this.payload));
                 var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 180, useAdvancedWrap: true} };
-                this.okayButton = new HiraButton(this, 90 + 540 - 80, 160 + 150 - 30, "Continue", style, () => {
-                    this.scene.wake('MainScene');
-                    this.scene.stop('DialogBoxScene');
-                }, this);
-                this.add.existing(this.okayButton);
+                if(this.api !== 'logout'){
+                    this.okayButton = new HiraButton(this, 90 + 540 - 80, 160 + 150 - 30, "Continue", style, () => {
+                        this.scene.wake('MainScene');
+                        this.scene.stop('DialogBoxScene');
+                    }, this);
+                    this.add.existing(this.okayButton);
+                } else {
+                    game.logged_out = true;
+                    this.dialogTitle.setTextUpper("Saved!");
+                    this.dialogTitle.setOrigin(0);
+                    this.dialogMessage.setTextUpper("You can now exit the game.");
+                    this.dialogMessage.setOrigin(0);
+                }
+
             },
             error: function (xhr) {
                 setTimeout(() => {
                     this.dialogTitle.setTextUpper("Retrying");
+                    this.dialogTitle.setOrigin(0);
                     this.dialogMessage.setTextUpper("Unable to connect to server...");
+                    this.dialogMessage.setOrigin(0);
                     this.postData();
                 }, 5000);
 

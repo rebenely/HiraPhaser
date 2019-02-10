@@ -131,6 +131,7 @@
     </head>
     <body>
         <h1 id="header_message" style="font-family:'manaspc';padding:20px;text-align:center;">Hira Alpha 1.0</h2>
+
         <div id="this-mobile"></div>
         <div id="wrapper">
             <div class="center-div">
@@ -142,7 +143,7 @@
 
               <!-- Modal content -->
               <div class="modal-content">
-                  <h1 id="message" style="font-family:'manaspc';padding:20px;text-align:center;">Welcome!</h2>
+                  <h1 id="message" style="font-family:'manaspc';padding:20px;text-align:center;">Welcome!</h1>
                   <button type="button" style="font-family:'manaspc'" id="chooseLogin" >Login</button>
                   <button type="button" style="font-family:'manaspc'" id="chooseSignup" >Signup</button>
               </div>
@@ -162,6 +163,7 @@
 
 <script>
     var me = this;
+    var logged_out = false;
 
 
 $('#myModal').on('click', '#chooseLogin',function() {
@@ -173,6 +175,38 @@ $('#chooseSignup').click(function() {
     var signupContent = " <div class='modal-content'> <div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'> <h2 id='signupMessage'>Signup!</h2> <form > <label for='username'>Username</label> <input type='text' id='usernameS' name='Username' placeholder='Username' style='font-family:\"manaspc\"'>  <label for='lname'>Password</label> <input type='password' id='password0' name='Password' placeholder='Password' >  <label for='lname'>Retype Password</label> <input type='password' id='password1' name='Password' placeholder='Retype Password' style='-webkit-text-security: square;'>  <button type='button' style='font-family:\"manaspc\"' id='signUpButton' >Signup</button> </form> </div> </div>";
     $('#myModal').html(signupContent);
 });
+
+$('#logout').click(function() {
+    if(game.player_name !== '' && !game.logged_out){
+        /* end session */
+        console.log(game.player_name);
+        $.ajax({
+            url: window.location.href + "logout",
+            headers: {"Authorization": "Bearer " + game.token },
+            type: "POST",
+            async: true,
+            contentType: "application/json",
+            success: function (responseData) {
+                $('#myModal').show();
+                var logoutMessage = "<div class='modal-content'> <h1 style='font-family:\"manaspc\";padding:20px;text-align:center;'>Logged out and " + responseData['message'] + "</h1><h3 style='font-family:\"manaspc\";padding:20px;text-align:center;'>You can now safely exit.</h3></div>";
+                $('#myModal').html(logoutMessage);
+                logged_out = true;
+            },
+            error: function (xhr) {
+                // console.log(xhr.responseJSON.message);
+                if(xhr.responseJSON){
+                    $( "#message" ).text(xhr.responseJSON.message);
+                } else {
+                    $( "#message" ).text("Unable to contact server! Please refresh page.");
+
+                }
+                $( '#loginButton' ).prop('disabled', false);
+                $( "#loginButton" ).css('background-color', '#272744');
+            }
+        });
+    }
+});
+
 $('#myModal').on('click', '#loginButton', function(){
 
     toggleFullScreen();
@@ -262,15 +296,15 @@ function toggleFullScreen() {
     }
 }
 
-$(window).on("beforeunload", function(e) {
-    if(game.player_name !== ''){
+$(window).on("beforeunload unload", function(e) {
+    if(game.player_name !== '' && !game.logged_out){
         /* end session */
+        logged_out = true;
         console.log(game.player_name);
         $.ajax({
             url: window.location.href + "logout",
             headers: {"Authorization": "Bearer " + game.token },
             type: "POST",
-            async: false,
             contentType: "application/json"
         });
     }

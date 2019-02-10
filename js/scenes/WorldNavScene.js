@@ -88,6 +88,13 @@ class WorldNavScene extends Phaser.Scene {
 
         }, this);
         this.add.existing(this.statsButton);
+        this.saveButton = new HiraButton(this, 60*11, 26, "Log out", style, () => {
+            this.scene.launch('DialogBoxScene', { title: "Logging out", message: "Saving data", dataCapture: {}, api: 'logout' });
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
+
+        }, this);
+        this.add.existing(this.saveButton);
 
         this.prevButton.disable();
 
@@ -124,6 +131,7 @@ class WorldNavScene extends Phaser.Scene {
             this.codexButton.visible = false;
             this.questButton.visible = false;
             this.statsButton.visible = false;
+            this.saveButton.visible = false;
         } else {
             this.container.visible = true;
             this.prevButton.visible = true;
@@ -131,6 +139,7 @@ class WorldNavScene extends Phaser.Scene {
             this.codexButton.visible = true;
             this.questButton.visible = true;
             this.statsButton.visible = true;
+            this.saveButton.visible = true;
         }
 
 

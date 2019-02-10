@@ -5,6 +5,7 @@ const url = config.db_url;
 
 module.exports = {
     postLearn (req, res) {
+        console.log('----------post learn------------');
         var succ = {};
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
@@ -49,6 +50,8 @@ module.exports = {
         // console.log('ayyyy succ');
     },
     postTrain (req, res) {
+        console.log('----------post train------------');
+
         var succ = {};
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;
@@ -118,6 +121,8 @@ module.exports = {
         // console.log('ayyyy succ');
     },
     postDungeon (req, res) {
+        console.log('----------post dungeon------------');
+
         var succ = {};
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
           if (err) throw err;

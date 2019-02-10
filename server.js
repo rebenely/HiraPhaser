@@ -37,10 +37,10 @@ app.post('/login', auth.login);
 app.post('/signup', auth.signup);
 app.post('/logout', middleware.checkToken, auth.logout);
 
-app.post('/api/learn', middleware.checkToken, api.postLearn);
-app.post('/api/train', middleware.checkToken, api.postTrain);
-app.post('/api/practice', middleware.checkToken, api.postPractice);
-app.post('/api/dungeon', middleware.checkToken, api.postDungeon);
+app.post('/api/learn', middleware.checkToken, middleware.updateSession, api.postLearn);
+app.post('/api/train', middleware.checkToken, middleware.updateSession, api.postTrain);
+app.post('/api/practice', middleware.checkToken, middleware.updateSession, api.postPractice);
+app.post('/api/dungeon', middleware.checkToken, middleware.updateSession, api.postDungeon);
 
 app.get('/wtf', function(req, res) {
     console.log('ayy lmao');

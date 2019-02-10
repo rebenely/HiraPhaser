@@ -35,6 +35,7 @@ game.player_name = '';
 game.charset = [];
 game.token = '';
 game.showOKB = false;
+game.logged_out = false;
 
 game.screenWipe = function (scene) {
     var blocks = scene.add.group({ key: 'black50', repeat: 191 });
