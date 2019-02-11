@@ -72,7 +72,7 @@ class MainScene extends Phaser.Scene {
             let currentDungeon =  this.world.dungeons[i];
             // console.log(this.world.dungeons[i]);
             this.dungeons.push( new Dungeon(this,
-                { name: currentDungeon.name, level: currentDungeon.level, description:  currentDungeon.description, charSet: currentDungeon.charSet, wordPool: currentDungeon.wordPool },
+                { name: currentDungeon.name, level: currentDungeon.level, description:  currentDungeon.description, charSet: currentDungeon.charSet, wordPool: currentDungeon.wordPool, log: currentDungeon.log },
                 { x: currentDungeon.sprites.x, y: currentDungeon.sprites.y, spriteName: currentDungeon.sprites.name, dungeonBG: {name: currentDungeon.sprites.dungeonBG.name, path: currentDungeon.sprites.dungeonBG.path}, battleBG: {name: currentDungeon.sprites.battleBG.name, path: currentDungeon.sprites.battleBG.path}},
                 {
                     minion: {
@@ -91,7 +91,7 @@ class MainScene extends Phaser.Scene {
                     //this.scene.pause('MainScene');
                     this.scene.sleep('WorldNavScene');
                     this.disableInteractiveLevels();
-                    this.scene.launch('DetailScene', {player: this.player, dungeon: this.dungeons[i], startScene: 'DungeonScene', passData: {player: this.player, dungeon: this.dungeons[i], difficulty: game.global.NORMAL}});
+                    this.scene.launch('DetailScene', {player: this.player, dungeon: this.dungeons[i], startScene: 'DungeonScene', passData: {player: this.player, dungeon: this.dungeons[i], difficulty: game.global.NORMAL, log: currentDungeon.log}});
                 }
             ));
             this.dungeons[i].comparePlayerLevel(this.player.story);
@@ -115,9 +115,9 @@ class MainScene extends Phaser.Scene {
                              title: currentLevel.details.title,
                              subtitle:  currentLevel.details.subtitle,
                              desc:  currentLevel.details.desc
-                         }, startScene: 'CutLoaderScene', passData: {jsonFile: currentLevel.json, story: currentLevel.level}});
-                     }
-                 ));
+                         }, startScene: 'CutLoaderScene', passData: {jsonFile: currentLevel.json, story: currentLevel.level, log: currentLevel.log}});
+                     },
+                     currentLevel.log));
                  this.add.existing(this.cutSceneLevels[this.cutSceneLevels.length - 1]);
                  this.cutSceneLevels[this.cutSceneLevels.length - 1].comparePlayerLevel(this.player.story);
 
@@ -138,9 +138,8 @@ class MainScene extends Phaser.Scene {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
-                     }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool, title: currentLevel.name, level: currentLevel.level} });
-                     }
-                 ));
+                     }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool, title: currentLevel.name, level: currentLevel.level, log: currentLevel.log} });
+                 }, currentLevel.log));
                  this.add.existing(this.trainLevels[this.trainLevels.length - 1]);
                  this.trainLevels[this.trainLevels.length - 1].comparePlayerLevel(this.player.story);
             }
@@ -160,13 +159,20 @@ class MainScene extends Phaser.Scene {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
-                     },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool, mentor: currentLevel.mentor, level: currentLevel.level}});
-                     }
+                     },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool, mentor: currentLevel.mentor, level: currentLevel.level, log: currentLevel.log}});
+                    },
+                    currentLevel.log
                  ));
                  this.add.existing(this.practiceLevels[this.practiceLevels.length - 1]);
                  this.practiceLevels[this.practiceLevels.length - 1].comparePlayerLevel(this.player.story);
             }
             // console.log(this.world.storyLevels[i]);
+        }
+
+        /* load logs, maybe refactor charset too similar to this */
+        for(let i = 0; i < this.cutSceneLevels.length && i < this.player.story; i++) {
+            // this.player.learnNewCharacters(this.cutSceneLevels[i].fileName['teach']);
+            console.log(this.cutSceneLevels[i].logs);
         }
 
         /* emit events */

@@ -24,7 +24,8 @@
                     "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
                 }
             },
-            "optionals" : {"sizeX": 133, "sizeY": 110}
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "log":"Cutscene log"
         },
         {
             "name": "K-dungeon" ,
@@ -50,12 +51,12 @@
                     "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
                 }
             },
-            "optionals" : {"sizeX": 133, "sizeY": 110}
-
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "log":"Cutscene log"
         },
         {
             "name": "S-dungeon" ,
-            "level": 11,
+            "level": 12,
             "description":  "S dungeon!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
@@ -77,8 +78,8 @@
                     "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
                 }
             },
-            "optionals" : {"sizeX": 133, "sizeY": 110}
-
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "log":"Cutscene log"
         }
     ],
 
@@ -94,7 +95,8 @@
                 "subtitle": "Yoikes",
                 "desc": "wwwww"
             },
-            "type":"CutScene"
+            "type":"CutScene",
+            "log":"Cutscene log"
         },
         {
             "name": "V start",
@@ -107,7 +109,8 @@
                 "subtitle": "You will learn vowels.",
                 "desc": "This is a place holder!"
             },
-            "type":"CutScene"
+            "type":"CutScene",
+            "log":"Cutscene log"
         },
         {
             "name": "V start: Training",
@@ -120,7 +123,8 @@
                 "desc": "This is a place holder!"
             },
             "type":"TrainScene",
-             "characterPool": ["A","I","U","E","O"]
+             "characterPool": ["A","I","U","E","O"],
+             "log":"Cutscene log"
         },
         {
             "name": "V start: Practice Battle",
@@ -137,7 +141,8 @@
                 "idle": "assets/spritesheets/teachers/jojo_idle.png",
                 "attack": "assets/spritesheets/teachers/jojo_attack.png"
             },
-            "wordPool": ["A","I","U","E","O"]
+            "wordPool": ["A","I","U","E","O"],
+            "log":"Cutscene log"
         },
         {
             "name": "The K-invasion",
@@ -150,7 +155,8 @@
                 "subtitle": "You will learn vowels.",
                 "desc": "This is a place holder!"
             },
-            "type":"CutScene"
+            "type":"CutScene",
+            "log":"Cutscene log"
         },
         {
             "name": "The K-invasion: Training",
@@ -163,7 +169,8 @@
                 "desc": "You will learn vowels."
             },
             "type":"TrainScene",
-             "characterPool": ["KA","KI","KU","KE","KO"]
+             "characterPool": ["KA","KI","KU","KE","KO"],
+             "log":"Cutscene log"
         },
         {
             "name": "The K-invasion: Practice Battle",
@@ -180,7 +187,8 @@
                 "attack": "assets/spritesheets/teachers/jojo_attack.png"
             },
             "type":"BattleScene",
-            "wordPool": ["KA","KI","KU","KE","KO","A","I","U","E","O"]
+            "wordPool": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "log":"Cutscene log"
         },
         {
             "name": "S-cape the trap!",
@@ -193,7 +201,8 @@
                 "subtitle": "subtitles.",
                 "desc": "This is a place holder!"
             },
-            "type":"CutScene"
+            "type":"CutScene",
+            "log":"Cutscene log"
         },
         {
             "name": "S-cape: Train",
@@ -206,7 +215,8 @@
                 "desc": "This is a place holder!"
             },
             "type":"TrainScene",
-             "characterPool": ["SA","SHI","SU","SE","SO"]
+             "characterPool": ["SA","SHI","SU","SE","SO"],
+             "log":"Cutscene log"
         },
         {
             "name": "S-cape: Practice",
@@ -223,7 +233,8 @@
                 "attack": "assets/spritesheets/teachers/jojo_attack.png"
             },
             "type":"BattleScene",
-            "wordPool": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"]
+            "wordPool": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "log":"Cutscene log"
         }
     ]
 }

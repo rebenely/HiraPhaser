@@ -1,10 +1,11 @@
 class StoryLevel extends Phaser.GameObjects.Sprite {
 
-    constructor(scene, name, sprite, levelContent, optionals, callback) {
+    constructor(scene, name, sprite, levelContent, optionals, callback, logs) {
         super(scene, sprite.x, sprite.y, sprite.name);
         this.fileName = levelContent;
         this.name = name;
         this.level = optionals.level;
+        this.logs = logs;
         this.setOrigin(0.5);
         this.setDepth(4);
         this.setDisplaySize(optionals.sizeX, optionals.sizeY);
