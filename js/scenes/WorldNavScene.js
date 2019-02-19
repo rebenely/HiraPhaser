@@ -58,7 +58,7 @@ class WorldNavScene extends Phaser.Scene {
                     this.nextButton.disable();
                 }
                 this.cam.pan(this.coordinates[this.iterator].x, this.coordinates[this.iterator].y, 2000, 'Sine.easeInOut');
-                this.cam.zoomTo(this.zoom[this.iterator], 2000);
+                this.cam.zoomTo(this.coordinates[this.iterator].z, 2000);
             }
         }, this);
         this.add.existing(this.nextButton);
@@ -75,9 +75,7 @@ class WorldNavScene extends Phaser.Scene {
         this.add.existing(this.codexButton);
 
         this.questButton = new HiraButton(this, 60*6, 430 + 24, "Quest", style, () => {
-            this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Under construction!"}});
-            this.events.emit('disableLevels');
-            this.scene.sleep('WorldNavScene');
+            this.events.emit('quest');
         }, this);
         this.add.existing(this.questButton);
 
@@ -101,10 +99,38 @@ class WorldNavScene extends Phaser.Scene {
         let mainScene = this.scene.get('MainScene');
         mainScene.events.on('sayName', this.onSayName, this);
         mainScene.events.on('hoverOut', this.onHoverOut, this);
+        mainScene.events.on('updateNextStory', this.onUpdateNextStory, this);
 
         this.caveName = new HiraText(this, 720/2, 25, "", "header");
         this.add.existing(this.caveName);
         this.caveName.visible = false;
+    }
+
+    onUpdateNextStory(data) {
+        console.log(data.level.world, 'vs', this.iterator)
+        if(this.iterator !== data.level.world) {
+            this.iterator = data.level.world;
+            this.navEnable = false;
+            console.log('iterator is ', this.iterator);
+
+            if (this.iterator === 3) {
+                this.nextButton.disable();
+                this.prevButton.enable();
+            }
+            if(this.iterator < 3){
+                this.prevButton.enable();
+                this.nextButton.enable();
+            }
+            if (this.iterator === 0) {
+                this.prevButton.disable();
+                this.nextButton.enable();
+            }
+
+
+
+            this.cam.pan(this.coordinates[this.iterator].x, this.coordinates[this.iterator].y, 2000, 'Sine.easeInOut');
+            this.cam.zoomTo(this.coordinates[this.iterator].z, 2000);
+        }
     }
 
     onSayName(data) {

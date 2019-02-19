@@ -12,6 +12,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         /* set values */
         this.name = dungeonContent.name;
         this.story = dungeonContent.level;
+        this.world = dungeonContent.world;
         this.characterPool = dungeonContent.charSet;
         this.wordPool = dungeonContent.wordPool;
         this.description = dungeonContent.description;
@@ -41,6 +42,21 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         this.bossName = enemies.boss.name;
         this.minionExp = enemies.minion.exp;
         this.bossExp = enemies.boss.exp;
+        var tweenie = this;
+        this.alertTween = scene.tweens.addCounter({
+            from: 255,
+            to: 0,
+            duration: 200,
+            repeat: 5,
+            yoyo: true,
+            paused: true,
+            ease: 'Sine.easeInOut',
+            onUpdate: function (tween)  {
+                var value = Math.floor(tween.getValue());
+
+                tweenie.setTint(Phaser.Display.Color.GetColor(255, value, value));
+            }
+        });
 
         /* WorldNavScene handles name display */
 
@@ -71,10 +87,16 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         if (level >= this.story) {
             this.enabled = true;
             this.clearTint();
+            return true;
         } else {
             this.enabled = false;
             this.setTint(0x585858);
+            return false;
         }
+    }
+
+    alert(){
+        this.alertTween.restart();
     }
 
 

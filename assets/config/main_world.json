@@ -3,6 +3,7 @@
         {
             "name": "V-dungeon REE" ,
             "level": 4,
+            "world": 0,
             "description":  "Test for loop!",
             "charSet": ["A","I","U","E","O"],
             "wordPool": ["A","I","U","E","O"],
@@ -30,6 +31,7 @@
         {
             "name": "K-dungeon" ,
             "level": 8,
+            "world": 0,
             "description":  "This dungeon is the first dungeon ever made in this game! Easter egg dungeons will be added later. I just need to test the word wrap on this.",
             "charSet": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["A-KA", "KO-A", "KA-KI", "KU-O-KE", "KI-KU", "KO-O", "KE-KE", "KO-KO", "KI-KU"],
@@ -57,6 +59,7 @@
         {
             "name": "S-dungeon" ,
             "level": 12,
+            "world": 0,
             "description":  "S dungeon!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
@@ -89,6 +92,7 @@
             "sprite": {"name": "message", "x": 190, "y": 165},
             "json": "welcome.json",
             "level": 0,
+            "world": 0,
             "optionals" : {"sizeX": 133, "sizeY": 110},
             "details" : {
                 "title": "Pambati",
@@ -103,6 +107,7 @@
             "sprite": {"name": "learn", "x": 210, "y": 230},
             "json": "level0.json",
             "level": 1,
+            "world": 0,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "Chapter 0: Vowels 4 u",
@@ -117,6 +122,7 @@
             "sprite": {"name": "train",  "x": 280, "y": 260},
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 2,
+            "world": 0,
             "details" : {
                 "title": "Chapter 0: Vowels 4 u",
                 "subtitle": "You will learn vowels.",
@@ -131,6 +137,7 @@
             "sprite": {"name": "practice",  "x": 360, "y": 260},
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 3,
+            "world": 0,
             "details" : {
                 "title": "Chapter 0: Vowels 4 u",
                 "subtitle": "You will learn vowels.",
@@ -149,6 +156,7 @@
             "sprite": {"name": "learn", "x": 505, "y": 240},
             "json": "level1.json",
             "level": 5,
+            "world": 0,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "Chapter I: Wtf",
@@ -163,6 +171,7 @@
             "sprite": {"name": "train",  "x": 550, "y": 260},
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 6,
+            "world": 0,
             "details" : {
                 "title": "Chapter I: Wtf",
                 "subtitle": "this should work",
@@ -177,6 +186,7 @@
             "sprite": {"name": "practice",  "x": 490, "y": 300 },
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 7,
+            "world": 0,
             "details" : {
                 "title": "Chapter I: Wtf",
                 "subtitle": "You will learn vowels.",
@@ -195,6 +205,7 @@
             "sprite": {"name": "learn", "x": 420, "y": 410},
             "json": "level2.json",
             "level": 9,
+            "world": 0,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "Chapter II: S",
@@ -209,6 +220,7 @@
             "sprite": {"name": "train",  "x": 370, "y": 420},
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 10,
+            "world": 0,
             "details" : {
                 "title": "Chapter II: S",
                 "subtitle": "subtitles.",
@@ -223,6 +235,7 @@
             "sprite": {"name": "practice",  "x": 315, "y": 415 },
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 11,
+            "world": 0,
             "details" : {
                 "title": "Chapter II: S",
                 "subtitle": "subtitles.",

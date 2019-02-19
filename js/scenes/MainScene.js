@@ -15,6 +15,8 @@ class MainScene extends Phaser.Scene {
     }
 
     create () {
+        this.nextStory = {};
+
         this.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
 
         this.scene.launch('WorldNavScene', {camera: this.cameras.main});
@@ -72,7 +74,7 @@ class MainScene extends Phaser.Scene {
             let currentDungeon =  this.world.dungeons[i];
             // console.log(this.world.dungeons[i]);
             this.dungeons.push( new Dungeon(this,
-                { name: currentDungeon.name, level: currentDungeon.level, description:  currentDungeon.description, charSet: currentDungeon.charSet, wordPool: currentDungeon.wordPool, log: currentDungeon.log },
+                { name: currentDungeon.name, level: currentDungeon.level, description:  currentDungeon.description, charSet: currentDungeon.charSet, wordPool: currentDungeon.wordPool, log: currentDungeon.log, world: currentDungeon.world },
                 { x: currentDungeon.sprites.x, y: currentDungeon.sprites.y, spriteName: currentDungeon.sprites.name, dungeonBG: {name: currentDungeon.sprites.dungeonBG.name, path: currentDungeon.sprites.dungeonBG.path}, battleBG: {name: currentDungeon.sprites.battleBG.name, path: currentDungeon.sprites.battleBG.path}},
                 {
                     minion: {
@@ -117,7 +119,7 @@ class MainScene extends Phaser.Scene {
                              desc:  currentLevel.details.desc
                          }, startScene: 'CutLoaderScene', passData: {jsonFile: currentLevel.json, story: currentLevel.level, log: currentLevel.log}});
                      },
-                     currentLevel.log));
+                     currentLevel.log, currentLevel.world));
                  this.add.existing(this.cutSceneLevels[this.cutSceneLevels.length - 1]);
                  this.cutSceneLevels[this.cutSceneLevels.length - 1].comparePlayerLevel(this.player.story);
 
@@ -139,7 +141,7 @@ class MainScene extends Phaser.Scene {
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
                      }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool, title: currentLevel.name, level: currentLevel.level, log: currentLevel.log} });
-                 }, currentLevel.log));
+                 }, currentLevel.log, currentLevel.world));
                  this.add.existing(this.trainLevels[this.trainLevels.length - 1]);
                  this.trainLevels[this.trainLevels.length - 1].comparePlayerLevel(this.player.story);
             }
@@ -161,7 +163,7 @@ class MainScene extends Phaser.Scene {
                          desc:  currentLevel.details.desc
                      },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool, mentor: currentLevel.mentor, level: currentLevel.level, log: currentLevel.log}});
                     },
-                    currentLevel.log
+                    currentLevel.log, currentLevel.world
                  ));
                  this.add.existing(this.practiceLevels[this.practiceLevels.length - 1]);
                  this.practiceLevels[this.practiceLevels.length - 1].comparePlayerLevel(this.player.story);
@@ -174,6 +176,7 @@ class MainScene extends Phaser.Scene {
             // this.player.learnNewCharacters(this.cutSceneLevels[i].fileName['teach']);
             console.log(this.cutSceneLevels[i].logs);
         }
+        this.compareStoryLevels();
 
         /* emit events */
         let learn = this.scene.get('CutScene');
@@ -195,6 +198,10 @@ class MainScene extends Phaser.Scene {
         let practiceScene = this.scene.get('BattleScene');
         practiceScene.events.removeListener('finishedPractice');
         practiceScene.events.on('finishedPractice', this.onPracticeFinish, this);
+
+        let worldNavScene = this.scene.get('WorldNavScene');
+        worldNavScene.events.removeListener('quest');
+        worldNavScene.events.on('quest', this.onQuest, this);
 
         /* debug */
         this.input.on('pointerup', function (pointer) {
@@ -258,6 +265,12 @@ class MainScene extends Phaser.Scene {
             this.scene.sleep('WorldNavScene');
         }, this);
         this.add.existing(secret);
+
+    }
+
+    onQuest(){
+        this.events.emit('updateNextStory', {level: this.nextStory});
+        this.nextStory.alert();
     }
 
     update (time, delta) {
@@ -353,18 +366,35 @@ class MainScene extends Phaser.Scene {
 
     compareStoryLevels() {
         // console.log('ayo update', this.player.story);
+        var nextStory = this.cutSceneLevels[0];
         for (let i = 0; i < this.cutSceneLevels.length; i ++) {
-            this.cutSceneLevels[i].comparePlayerLevel(this.player.story);
+            if(this.cutSceneLevels[i].comparePlayerLevel(this.player.story)) {
+                if(nextStory.story < this.cutSceneLevels[i].story) {
+                    nextStory = this.cutSceneLevels[i];
+                }
+            }
+
+            if(i < this.trainLevels.length && this.trainLevels[i].comparePlayerLevel(this.player.story)) {
+                if(nextStory.story < this.trainLevels[i].story) {
+                    nextStory = this.trainLevels[i];
+                }
+            }
+
+            if(i < this.practiceLevels.length && this.practiceLevels[i].comparePlayerLevel(this.player.story)) {
+                if(nextStory.story < this.practiceLevels[i].story) {
+                    nextStory = this.practiceLevels[i];
+                }
+            }
+
+            if(i < this.dungeons.length && this.dungeons[i].comparePlayerLevel(this.player.story)) {
+                if(nextStory.story < this.dungeons[i].story) {
+                    nextStory = this.dungeons[i];
+                }
+            }
         }
-        for (let i = 0; i < this.trainLevels.length; i ++) {
-            this.trainLevels[i].comparePlayerLevel(this.player.story);
-        }
-        for (let i = 0; i < this.practiceLevels.length; i ++) {
-            this.practiceLevels[i].comparePlayerLevel(this.player.story);
-        }
-        for (let i = 0; i < this.dungeons.length; i ++) {
-            this.dungeons[i].comparePlayerLevel(this.player.story);
-        }
+        this.nextStory = nextStory;
+
+        console.log(nextStory.name, 'world', this.nextStory.world);
     }
 
     disableInteractiveLevels(tint){
