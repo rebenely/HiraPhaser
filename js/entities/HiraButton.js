@@ -1,7 +1,7 @@
 class HiraButton extends Phaser.GameObjects.Text {
 
     constructor(scene, x, y, text, style, callback) {
-        super(scene, x, y, text, { fontFamily: 'manaspc', fontSize: 32, color: game.global.UI_TEXT_FILL });
+        super(scene, x, y, text, { fontFamily: 'manaspc', fontSize: 32, color: game.global.UI_TEXT_FILL, align: 'center' });
         // this.setFontFamily(style.font.split(' ')[1]);
         this.clickable = true; // to prevent double clicking
         this.enabled = true; // enable / disable

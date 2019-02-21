@@ -5,7 +5,7 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         this.fileName = levelContent;
         this.name = name;
         this.story = this.level = optionals.level;
-        this.logs = logs;
+        this.log = logs;
         this.world = world;
         this.setOrigin(0.5);
         this.setDepth(4);

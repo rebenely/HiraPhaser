@@ -1,11 +1,10 @@
-class HintScene extends Phaser.Scene {
+class LogScene extends Phaser.Scene {
 
     constructor () {
-        super('HintScene');
+        super('LogScene');
     }
     init (data) {
         this.player = data.player;
-        this.characterPool = data.characterPool;
     }
 
     create () {
@@ -43,7 +42,7 @@ class HintScene extends Phaser.Scene {
 
         var titleStyle = { font: "32px manaspc", fill: "#ffffff", align: "left" };
         var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
-        var titleDisplay = new HiraText(this,  640/2 + 20, 50, 'Cheat Sheet', "header");
+        var titleDisplay = new HiraText(this,  640/2 + 20, 50, 'Story so far', "header");
         this.add.existing(titleDisplay);
 
         this.characterDisplay = [];
@@ -51,24 +50,22 @@ class HintScene extends Phaser.Scene {
         // console.log(this.player.characterPool);
         var j = 0;
         var column = 0;
-        for ( let i = 0; i < this.player.characterPool.length; i++ ) {
+        this.borders = this.add.graphics();
+        this.borders.lineStyle(game.global.UI_THICKNESS + 2, game.global.UI_COLOR, 1);
+        var currentHeight = 100;
+        for ( let i = 0; i < this.player.logs.length; i++ ) {
 
-            if(i % 5 == 0) {
-                j++;
-                column = 0;
-            }
-            this.characterDisplay.push(this.add.bitmapText(680/(6) + column * 680/(6), 30+100*j, 'hira', Projectile.convertToHiragana(this.player.characterPool[i]), 48).setOrigin(0.5));
-            this.romajiDisplay.push(new HiraText(this, 680/(6) + column * 680/(6), 70 + 100*j, this.player.characterPool[i], "basic"));
-
+            this.romajiDisplay.push(new HiraText(this, 65, currentHeight + 25, this.player.logs[i].log, "wordWrapL", 600));
+            currentHeight = this.romajiDisplay[i].y - 10 + this.romajiDisplay[i].height + 24;
+            this.romajiDisplay[i].setOrigin(0);
+            this.borders.strokeRect(50, this.romajiDisplay[i].y - 10, 580, this.romajiDisplay[i].height + 24);
             this.add.existing(this.romajiDisplay[i]);
-            column++;
         }
 
         this.cancelButton = new HiraButton(this, 720  - 60 - 30, 420, "Back", style, () => {
             // console.log('fuck go back');
-            this.scene.wake('DungeonScene');
             this.scene.wake('JournalScene');
-            this.scene.stop('HintScene');
+            this.scene.stop('LogScene');
         }, this);
         this.add.existing(this.cancelButton);
 
@@ -81,23 +78,27 @@ class HintScene extends Phaser.Scene {
             this.move = -5;
         }, this);
         this.add.existing(this.upButton);
+        var warningDisplay = new HiraText(this,  720/2, 480/2, 'No data yet!', "header");
 
         // console.log(j* 100 + 5);
-        this.cameras.main.ignore([this.characterDisplay, this.romajiDisplay, this.container, titleDisplay]);
-        this.verticalCamera.ignore([this.cancelButton, this.downButton, this.upButton, this.graphics]);
+        this.cameras.main.ignore([this.characterDisplay, this.romajiDisplay, this.container, titleDisplay, this.borders]);
+        this.verticalCamera.ignore([this.cancelButton, this.downButton, this.upButton, this.graphics, warningDisplay]);
         this.container.fillGradientStyle(game.global.UI_FILL_B, game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, 1);
         this.container.lineStyle(game.global.UI_THICKNESS + 2, game.global.UI_COLOR, 1);
+
         if(this.romajiDisplay.length > 0) {
-            this.container.fillRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
-            this.container.strokeRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
-            this.verticalCamera.setBounds(0, 0, 680, this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
+            this.container.fillRect(720/2 - 680/2, 0, 640, this.romajiDisplay[this.romajiDisplay.length - 1].y + this.romajiDisplay[this.romajiDisplay.length - 1].height + 36);
+            this.container.strokeRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + this.romajiDisplay[this.romajiDisplay.length - 1].height + 36);
+            this.verticalCamera.setBounds(0, 0, 680, this.romajiDisplay[this.romajiDisplay.length - 1].y + this.romajiDisplay[this.romajiDisplay.length - 1].height + 36);
         } else {
-            var warningDisplay = new HiraText(this,  720/2, 480/2, 'No data yet!', "header");
+            this.controls.stop();
             this.add.existing(warningDisplay);
+            this.downButton.visible = false;
+            this.upButton.visible = false;
         }
 
         this.sound.play('next');
-
+        this.borders.setDepth(3);
         // console.log(this.world);
     }
 
@@ -105,10 +106,10 @@ class HintScene extends Phaser.Scene {
     update (time, delta) {
         this.controls.update(delta);
         if(this.move > 0) {
-            this.verticalCamera.scrollY += 5;
+            this.verticalCamera.scrollY += 10;
             this.move -= 1;
         } else if (this.move < 0) {
-            this.verticalCamera.scrollY -= 5;
+            this.verticalCamera.scrollY -= 10;
             this.move += 1;
         }
     }

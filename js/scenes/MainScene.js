@@ -19,7 +19,7 @@ class MainScene extends Phaser.Scene {
 
         this.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
 
-        this.scene.launch('WorldNavScene', {camera: this.cameras.main});
+        this.scene.launch('WorldNavScene', {camera: this.cameras.main, player: this.player});
         this.scene.sleep('WorldNavScene');
         this.scene.launch('MessageScene', {message: { title : this.announcement.title, body: this.announcement.body}});
 
@@ -173,9 +173,28 @@ class MainScene extends Phaser.Scene {
 
         /* load logs, maybe refactor charset too similar to this */
         for(let i = 0; i < this.cutSceneLevels.length && i < this.player.story; i++) {
+
             // this.player.learnNewCharacters(this.cutSceneLevels[i].fileName['teach']);
-            console.log(this.cutSceneLevels[i].logs);
+            // console.log(this.cutSceneLevels[i].log);
+            if(this.player.story >= this.cutSceneLevels[i].level){
+                this.player.insertLog(this.cutSceneLevels[i].log, this.cutSceneLevels[i].level);
+            }
+
+            if(i < this.trainLevels.length && this.player.story >= this.trainLevels[i].level) {
+                // console.log(this.trainLevels[i].log);
+                this.player.insertLog(this.trainLevels[i].log, this.trainLevels[i].level);
+            }
+            if(i < this.practiceLevels.length && this.player.story >= this.practiceLevels[i].level) {
+                // console.log(this.practiceLevels[i].log);
+                this.player.insertLog(this.practiceLevels[i].log, this.practiceLevels[i].level);
+            }
+
+            if(i < this.dungeons.length && this.player.story >= this.dungeons[i].level) {
+                this.player.insertLog(this.dungeons[i].log, this.dungeons[i].level);
+                // console.log(this.dungeons[i].log);
+            }
         }
+        console.log(this.player.logs);
         this.compareStoryLevels();
 
         /* emit events */
@@ -208,20 +227,20 @@ class MainScene extends Phaser.Scene {
             console.log(pointer.worldX, pointer.worldY);
         });
 
-        var cursors = this.input.keyboard.createCursorKeys();
+        // var cursors = this.input.keyboard.createCursorKeys();
 
-        var controlConfig = {
-            camera: this.cameras.main,
-            left: cursors.left,
-            right: cursors.right,
-            up: cursors.up,
-            down: cursors.down,
-            acceleration: 0.02,
-          drag: 0.0005,
-          maxSpeed: 1.0
-        };
-
-        this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        // var controlConfig = {
+        //     camera: this.cameras.main,
+        //     left: cursors.left,
+        //     right: cursors.right,
+        //     up: cursors.up,
+        //     down: cursors.down,
+        //     acceleration: 0.02,
+        //   drag: 0.0005,
+        //   maxSpeed: 1.0
+        // };
+        //
+        // this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
         /* ------------------------------------ */
 
@@ -274,7 +293,7 @@ class MainScene extends Phaser.Scene {
     }
 
     update (time, delta) {
-        this.controls.update(delta);
+        // this.controls.update(delta);
 
         this.clouds.getChildren().forEach(function (child) {﻿
             if(child.x > 2048 + child.width + 200) {
@@ -308,6 +327,9 @@ class MainScene extends Phaser.Scene {
     onLearnedNewCharacters(data){
          // console.log(data.story);
         var updateCharset = false;
+        if(this.player.story <= data.story){
+            this.player.insertLog(data.log, data.story);
+        }
 
         if(!this.player.checkSubsetArray(data.charSet, data.story)){
             this.player.learnNewCharacters(data.charSet);
@@ -336,6 +358,7 @@ class MainScene extends Phaser.Scene {
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
+            this.player.insertLog(data.log, data.story);
         }
 
         this.scene.launch('DialogBoxScene', {story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/dungeon' });
@@ -345,6 +368,7 @@ class MainScene extends Phaser.Scene {
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
+            this.player.insertLog(data.log, data.story);
         }
         // console.log(data);
         this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/train' });
@@ -356,6 +380,7 @@ class MainScene extends Phaser.Scene {
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
+            this.player.insertLog(data.log, data.story);
         }
         // console.log(data);
         data.dataCapture.username = this.player.name;

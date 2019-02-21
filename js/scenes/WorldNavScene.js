@@ -6,6 +6,7 @@ class WorldNavScene extends Phaser.Scene {
 
     init(data) {
         this.cam = data.camera;
+        this.player = data.player;
     }
     create () {
 
@@ -68,7 +69,7 @@ class WorldNavScene extends Phaser.Scene {
         }, this);
 
         this.codexButton = new HiraButton(this, 60*8, 430 + 24, "Journal", style, () => {
-            this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Under construction!"}});
+            this.scene.launch('JournalScene', {player: this.player});
             this.events.emit('disableLevels');
             this.scene.sleep('WorldNavScene');
         }, this);

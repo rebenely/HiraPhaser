@@ -10,12 +10,14 @@ class Dungeon extends Phaser.GameObjects.Sprite {
         this.setDepth(2);
 
         /* set values */
+        console.log(dungeonContent);
         this.name = dungeonContent.name;
-        this.story = dungeonContent.level;
+        this.level = this.story = dungeonContent.level;
         this.world = dungeonContent.world;
         this.characterPool = dungeonContent.charSet;
         this.wordPool = dungeonContent.wordPool;
         this.description = dungeonContent.description;
+        this.log = dungeonContent.log;
 
         /* other sprite values */
         this.minionSprite = enemies.minion.name;

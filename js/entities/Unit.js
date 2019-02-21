@@ -10,10 +10,10 @@ class Unit  {
         this.x = x;
         this.y = y;
         this.exp = 0;
-        this.level = 1;
+        this.story = this.level = 0;
         this.maxExp = 100;
         this.characterPool = [];
-        this.story = 5;
+        this.logs = [];
     }
 
     levelUp () {
@@ -48,6 +48,22 @@ class Unit  {
         } else {
             return newChars.every(val => this.characterPool.includes(val));
         }
+    }
+
+    insertLog(log, level){
+        var pushed = false;
+        if(this.logs.length > 0) {
+            for(let i = 0; i < this.logs.length && !pushed; i++) {
+                if(level > this.logs[i].level) {
+                    this.logs.splice(i, 0, {log: log, level: level});
+                    pushed = true;
+                }
+            }
+        }
+        if(!pushed){
+            this.logs.push({log: log, level: level});
+        }
+
     }
 
 }

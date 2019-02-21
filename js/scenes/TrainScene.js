@@ -9,6 +9,7 @@ class TrainScene extends Phaser.Scene {
         this.characterPool = data.characterPool;
         this.title = data.title;
         this.level = data.level;
+        this.log = data.log;
         // console.log("ayyy ", this.characterPool);
     }
 
@@ -55,7 +56,7 @@ class TrainScene extends Phaser.Scene {
 
         var exitButton = new HiraButton(this, 720/2, 3*480/4, "Exit", style, () => {
             if(this.dataCapture.mulcho.length > 0 || this.dataCapture.match.length > 0){
-                this.events.emit('finishedTraining', {success: true, dataCapture: this.dataCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level } );
+                this.events.emit('finishedTraining', {success: true, dataCapture: this.dataCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level, log: this.log } );
             }
 
             // console.log('yeman');

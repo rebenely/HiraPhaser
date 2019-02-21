@@ -26,7 +26,7 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Cutscene log"
+            "log":"Dungeon log"
         },
         {
             "name": "K-dungeon" ,
@@ -54,7 +54,7 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Cutscene log"
+            "log":"Dungeon log 2"
         },
         {
             "name": "S-dungeon" ,
@@ -82,7 +82,7 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Cutscene log"
+            "log":"Dungeon log 3"
         }
     ],
 
@@ -100,7 +100,7 @@
                 "desc": "wwwww"
             },
             "type":"CutScene",
-            "log":"Cutscene log"
+            "log":"Cutscene log 1. Word wrap test. Multiline ek ek. BASudbasod asdiabs asib aosdbiao sbdao da. He thought he fine, he aint."
         },
         {
             "name": "V start",
@@ -115,7 +115,7 @@
                 "desc": "This is a place holder!"
             },
             "type":"CutScene",
-            "log":"Cutscene log"
+            "log":"Cutscene log 2. OwO what's this?"
         },
         {
             "name": "V start: Training",
@@ -130,7 +130,7 @@
             },
             "type":"TrainScene",
              "characterPool": ["A","I","U","E","O"],
-             "log":"Cutscene log"
+             "log":"Cutscene log 3"
         },
         {
             "name": "V start: Practice Battle",
@@ -149,7 +149,7 @@
                 "attack": "assets/spritesheets/teachers/jojo_attack.png"
             },
             "wordPool": ["A","I","U","E","O"],
-            "log":"Cutscene log"
+            "log":"Cutscene log 4"
         },
         {
             "name": "The K-invasion",
@@ -164,7 +164,7 @@
                 "desc": "This is a place holder!"
             },
             "type":"CutScene",
-            "log":"Cutscene log"
+            "log":"Cutscene log 5"
         },
         {
             "name": "The K-invasion: Training",
@@ -179,7 +179,7 @@
             },
             "type":"TrainScene",
              "characterPool": ["KA","KI","KU","KE","KO"],
-             "log":"Cutscene log"
+             "log":"Cutscene log 6"
         },
         {
             "name": "The K-invasion: Practice Battle",
@@ -198,7 +198,7 @@
             },
             "type":"BattleScene",
             "wordPool": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "log":"Cutscene log"
+            "log":"Cutscene log 7"
         },
         {
             "name": "S-cape the trap!",
@@ -213,7 +213,7 @@
                 "desc": "This is a place holder!"
             },
             "type":"CutScene",
-            "log":"Cutscene log"
+            "log":"Cutscene log 8"
         },
         {
             "name": "S-cape: Train",
@@ -228,7 +228,7 @@
             },
             "type":"TrainScene",
              "characterPool": ["SA","SHI","SU","SE","SO"],
-             "log":"Cutscene log"
+             "log":"Cutscene log 9"
         },
         {
             "name": "S-cape: Practice",
@@ -247,7 +247,7 @@
             },
             "type":"BattleScene",
             "wordPool": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "log":"Cutscene log"
+            "log":"Cutscene log 10"
         }
     ]
 }

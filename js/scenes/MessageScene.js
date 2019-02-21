@@ -11,7 +11,6 @@ class MessageScene extends Phaser.Scene {
 
 
         this.container.lineStyle(game.global.UI_THICKNESS, game.global.UI_COLOR, 1);
-
         this.container.fillGradientStyle(game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, game.global.UI_FILL_B, game.global.UI_ALPHA);
         this.container.fillRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
         this.container.strokeRect(720/2 - 680/2, 480/2 - 440/2, 680, 440);
