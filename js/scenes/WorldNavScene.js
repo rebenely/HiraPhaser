@@ -81,11 +81,9 @@ class WorldNavScene extends Phaser.Scene {
         this.add.existing(this.questButton);
 
         this.statsButton = new HiraButton(this, 60*4, 430 + 24, "Stats", style, () => {
-            this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Under construction!"}});
-            this.events.emit('disableLevels');
-            this.scene.sleep('WorldNavScene');
-
+            this.scene.launch('DialogBoxScene', { story: this.player.story, title: 'testing aggre', message: 'must get ave', dataCapture: {}, api: 'api/stats'});
         }, this);
+
         this.add.existing(this.statsButton);
         this.saveButton = new HiraButton(this, 60*11, 26, "Log out", style, () => {
             this.scene.launch('DialogBoxScene', { title: "Logging out", message: "Saving data", dataCapture: {}, api: 'logout' });

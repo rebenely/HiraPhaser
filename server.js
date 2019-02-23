@@ -41,6 +41,7 @@ app.post('/api/learn', middleware.checkToken, middleware.updateSession, api.post
 app.post('/api/train', middleware.checkToken, middleware.updateSession, api.postTrain);
 app.post('/api/practice', middleware.checkToken, middleware.updateSession, api.postPractice);
 app.post('/api/dungeon', middleware.checkToken, middleware.updateSession, api.postDungeon);
+app.post('/api/stats', middleware.checkToken, middleware.updateSession, api.getStats);
 
 app.get('/wtf', function(req, res) {
     console.log('ayy lmao');

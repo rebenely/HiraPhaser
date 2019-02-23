@@ -17,6 +17,7 @@ class MultipleChoiceScene extends Phaser.Scene {
     }
 
     create () {
+
         this.stat = {
             answer: '',
             target: '',
@@ -27,7 +28,8 @@ class MultipleChoiceScene extends Phaser.Scene {
 
         this.dataCapture = {
             total_time: this.time.now/1000,
-            questions: []
+            questions: [],
+            accuracy: 0
         };
         // console.log(this.dataCapture);
         this.maxQuestions = 10;
@@ -95,6 +97,7 @@ class MultipleChoiceScene extends Phaser.Scene {
                     this.charTime = this.time.now/1000;
                     if(value === this.targetChar.currentChar && this.targetChar.visible === true) {
                         this.counter++;
+                        this.dataCapture.accuracy++;
                         // console.log(this.counter);
                         this.targetChar.getRandomCharacter();
                         this.showSlash(720/2, 480/4, false);
@@ -117,6 +120,8 @@ class MultipleChoiceScene extends Phaser.Scene {
         }
 
         this.closeButton = new HiraButton(this, 720/2, 2*480/3 + 50, "Back", style, () => {
+            this.dataCapture.accuracy = this.dataCapture.accuracy / this.dataCapture.questions.length;
+            console.log('yoman', this.dataCapture);
             this.events.emit('mulchoFinish', {dataCapture: this.dataCapture, played: this.played});
             this.scene.stop('MultipleChoiceScene');
             this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});

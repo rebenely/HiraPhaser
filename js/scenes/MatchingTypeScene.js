@@ -17,7 +17,8 @@ class MatchingTypeScene extends Phaser.Scene {
 
         this.dataCapture = {
             total_time: 0,
-            answers: []
+            answers: [],
+            accuracy: 0
         }
 
         this.played = false;
@@ -128,7 +129,8 @@ class MatchingTypeScene extends Phaser.Scene {
         // });
 
         this.exitButton = new HiraButton(this, 720/3, 5*480/6, "Back", this.style, () => {
-            // console.log('yeman', this.dataCapture);
+            console.log('yeman', this.dataCapture);
+            this.dataCapture.accuracy = this.dataCapture.accuracy / this.ypos.length;
             this.events.emit('matchFinish', {dataCapture: this.dataCapture, played: this.played});
             this.scene.stop('MatchingTypeScene');
             this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});
@@ -159,16 +161,20 @@ class MatchingTypeScene extends Phaser.Scene {
                           this.dataCapture.answers.push({target: this.shuffled[i], answer: this.answer[i]});
                           if(this.answer[i] === this.shuffled[i]){
                               correct++;
+                              this.dataCapture.accuracy++;
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
                           } else {
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
                               this.ypos[i].disable();
                           }
+
                           if(correct > this.ypos.length/2) {
                               this.sound.play('success');
+
                           } else {
                               this.sound.play('fail');
                           }
+
                        }
                    });
                 }

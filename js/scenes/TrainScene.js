@@ -18,8 +18,10 @@ class TrainScene extends Phaser.Scene {
     }
 
     create () {
+        this.first = true;
         this.dataCapture = {
             name: this.title,
+            accuracy: 0,
             timestamp: new Date(),
             mulcho: [],
             match: [],
@@ -78,6 +80,13 @@ class TrainScene extends Phaser.Scene {
     }
     onMulchoFinish (data) {
         if(data.played){
+            if(this.first){
+                this.first = false;
+                this.dataCapture.accuracy = data.dataCapture.accuracy;
+            } else {
+                this.dataCapture.accuracy = (this.dataCapture.accuracy + data.dataCapture.accuracy)/2;
+            }
+
             this.dataCapture.mulcho.push(data.dataCapture);
         }
 
@@ -85,6 +94,12 @@ class TrainScene extends Phaser.Scene {
     }
     onMatchFinish (data) {
         if(data.played){
+            if(this.first){
+                this.first = false;
+                this.dataCapture.accuracy = data.dataCapture.accuracy;
+            } else {
+                this.dataCapture.accuracy = (this.dataCapture.accuracy + data.dataCapture.accuracy)/2;
+            }
             this.dataCapture.match.push(data.dataCapture);
         }
 

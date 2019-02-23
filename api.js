@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient;
 let config = require('./config');
 const url = config.db_url;
 
-module.exports = {
+var self = module.exports = {
     postLearn (req, res) {
         console.log('----------post learn------------');
         var succ = {};
@@ -153,6 +153,43 @@ module.exports = {
               });
           }
 
+        });
+        // console.log('ayyyy succ');
+    },
+    getAccuracy(db, collection, username, callback) {
+        db.collection(collection).aggregate(
+            [ { '$match': {"username": username} },
+              { '$group': { '_id': "$username", 'ave' : {'$avg' : "$accuracy"}} },
+            ],
+            function(err, cursor) {
+                cursor.toArray(function(err, documents) {
+                  callback(documents);
+                });
+            }
+        )
+    },
+    getStats (req, res) {
+        console.log('----------get stats------------');
+        var stats = {};
+        var succ = new MongoClient(url, { useNewUrlParser: true });
+        succ.connect(function(err, db) {
+          if (err) throw err;
+          var announcement = {};
+          var dbo = db.db(config.db_name);
+          self.getAccuracy(dbo, 'dungeon', res.locals.decoded.username, function(result) {
+              succ.close();
+              if(result.length){
+                  stats.dungeon_ave = result[0].ave;
+                  console.log('i have this badboy here', result[0].ave);
+              } else {
+                  console.log('empty');
+              }
+          });
+
+          return res.status(200).json({
+            success: true,
+            message: 'some data!'
+          });
         });
         // console.log('ayyyy succ');
     }
