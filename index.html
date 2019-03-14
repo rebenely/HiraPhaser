@@ -169,7 +169,9 @@
 <script>
     var me = this;
     var logged_out = false;
-
+    var asiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
+    asiaTime = new Date(asiaTime);
+    console.log('Asia time: ' + asiaTime);
 
 $('#myModal').on('click', '#chooseLogin',function() {
     var loginContent = "<div class='modal-content'><div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'><h2 id='message'>Welcome!</h2><form ><label for='username'>Username</label><input type='text' id='username' name='Username' placeholder='Username' style='font-family:\"manaspc\"'><label for='lname'>Password</label><input type='password' id='password' name='Password' placeholder='Password' ><button type='button' style='font-family:\"manaspc\"' id='loginButton' >Login</button></form></div></div>";

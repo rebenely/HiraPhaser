@@ -17,6 +17,7 @@ class HiraText extends Phaser.GameObjects.Text {
         }
         super(scene, x, y, text, style);
         this.strokeThiccness = 3;
+        this.setLineSpacing(-10);
         this.setFontFamily(style.font.split(' ')[1]);
         this.setFontSize(style.font.split(' ')[0]);
         this.setStroke( game.global.UI_TEXT_STROKE, this.strokeThiccness);

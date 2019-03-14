@@ -350,7 +350,7 @@ class MainScene extends Phaser.Scene {
         //     updateCharset = true;
         // }
 
-        this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, timestamp: new Date(), updateCharset: updateCharset}, api: 'api/learn'});
+        this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, updateCharset: updateCharset, timestamp: data.timestamp, total_time: data.total_time}, api: 'api/learn'});
         // console.log('received', data);
     }
 

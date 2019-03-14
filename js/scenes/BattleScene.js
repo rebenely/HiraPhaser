@@ -110,10 +110,13 @@ class BattleScene extends Phaser.Scene {
             difficulty: this.difficulty,
             enemy_health: this.boss ? 4 : 2 + this.difficulty,
             asked: 0,
-            total_time: this.time.now/1000,
+            total_time: new Date(),
             questions: []
         };
 
+        if(this.simulate) {
+            this.battleCapture.timestamp = game.timestamp();
+        }
         /* onscreen keyboard */
 
 
@@ -552,7 +555,7 @@ class BattleScene extends Phaser.Scene {
 
 
     packData(){
-        this.battleCapture.total_time = this.time.now/1000 - this.battleCapture.total_time;
+        this.battleCapture.total_time =( new Date() - this.battleCapture.total_time)/1000;
         let correct = 0;
         let time_answer = 0;
         for(let i = 0; i < this.battleCapture.questions.length; i++){

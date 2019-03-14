@@ -13,6 +13,8 @@ class CutScene extends Phaser.Scene {
     preload () {
         this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
         this.add.existing(this.loading);
+        this.timeIn = new Date();
+        this.timestampIn = game.timestamp();
 
         for (var property in this.jsonFile['images']) {
             if (this.jsonFile['images'].hasOwnProperty(property)) {
@@ -119,7 +121,7 @@ class CutScene extends Phaser.Scene {
 
             } else {
                 // console.log(this.jsonFile);
-                this.events.emit('learnedNewCharacters', {charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log});
+                this.events.emit('learnedNewCharacters', {charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});
                 this.scene.stop('CutScene');
                 this.scene.wake('MainScene');
             }

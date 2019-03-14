@@ -22,7 +22,8 @@ class TrainScene extends Phaser.Scene {
         this.dataCapture = {
             name: this.title,
             accuracy: 0,
-            timestamp: new Date(),
+            timestamp: game.timestamp(),
+            total_time: new Date(),
             mulcho: [],
             match: [],
             username: this.player.name
@@ -57,6 +58,8 @@ class TrainScene extends Phaser.Scene {
         this.add.existing(matchingButton);
 
         var exitButton = new HiraButton(this, 720/2, 3*480/4, "Exit", style, () => {
+            this.dataCapture.total_time = (new Date() - this.dataCapture.total_time)/1000;
+            console.log(this.dataCapture.total_time);
             if(this.dataCapture.mulcho.length > 0 || this.dataCapture.match.length > 0){
                 this.events.emit('finishedTraining', {success: true, dataCapture: this.dataCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level, log: this.log } );
             }

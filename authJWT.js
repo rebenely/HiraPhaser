@@ -37,7 +37,9 @@ module.exports  = {
             } else {
                 bcrypt.compare(password, result.password, function(err, hashResult) {
                     if (hashResult) {
-                        var stringTime = JSON.stringify(new Date()).replace(/\"/g, "");
+                        var asiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
+                        asiaTime = new Date(asiaTime);
+                        var stringTime = JSON.stringify(asiaTime.toLocaleString()).replace(/\"/g, "");;
                       jwt.sign({username: username, session: result.session + 1, start: stringTime},config.secret,
                         { expiresIn: '12h' }, async function(err, token) {
                             /* create session */
@@ -189,12 +191,12 @@ module.exports  = {
                 message: 'User does not exist!'
               });
           } else {
-
-              var end = new Date();
+              var end = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
+              end = new Date(end);
               var startDate = new Date(start);
               var playTime = (end - startDate) / 1000;
 
-              dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end).replace(/\"/g, ""), play_time: playTime } }, function(err, res) {
+              dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime } }, function(err, res) {
                 if (err) throw err;
                 console.log( username + ": ended session", session);
                 db.close();

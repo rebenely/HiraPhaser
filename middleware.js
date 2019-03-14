@@ -46,21 +46,22 @@ let updateSession = (req, res, next) => {
     var start = res.locals.decoded.start;
     var dbo = db.db(config.db_name);
 
-    var end = new Date();
+    var end = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
+    end = new Date(end);
     var startDate = new Date(start);
     var playTime = (end - startDate) / 1000;
 
-  dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end).replace(/\"/g, ""), play_time: playTime } }, function(err, res) {
+  dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime } }, function(err, res) {
     if (err) throw err;
     console.log( username + ": updated end time of session ", session);
     db.close();
   });
 
-  dbo.collection("players").updateOne({username: username}, { $inc: {total_playtime: playTime} }, function(err, res) {
-    if (err) throw err;
-    console.log( username + ": updated playtime to", playTime);
-    db.close();
-  });
+  // dbo.collection("players").updateOne({username: username}, { $inc: {total_playtime: playTime} }, function(err, res) {
+  //   if (err) throw err;
+  //   console.log( username + ": updated playtime to", playTime);
+  //   db.close();
+  // });
 
   next();
  });

@@ -174,7 +174,7 @@ class MatchingTypeScene extends Phaser.Scene {
                               } else {
                                   this.sound.play('fail');
                               }
-    
+
                           }
 
 
@@ -183,13 +183,13 @@ class MatchingTypeScene extends Phaser.Scene {
                 }
 
 
-                this.dataCapture.total_time = this.time.now/1000 - this.timeStamp;
+                this.dataCapture.total_time = (new Date() - this.timeStamp)/1000;
 
             } else {
                 this.sound.play('start');
                 this.display.visible = false;
                 this.playButton.setText("Play!");
-                this.timeStamp = this.time.now/1000;
+                this.timeStamp = new Date();
                 // console.log(this.timeStamp);
                 for(let i = 0; i < this.ypos.length; i++) {
                     this.ypos[i].visible = true;
