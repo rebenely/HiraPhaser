@@ -1,10 +1,35 @@
-class LogScene extends Phaser.Scene {
+class CutSceneV2 extends Phaser.Scene {
 
     constructor () {
-        super('LogScene');
+        super('CutSceneV2');
     }
     init (data) {
-        this.player = data.player;
+        this.jsonFile = data.jsonFile;
+        this.story = data.story;
+        this.log = data.log;
+    }
+
+    preload(){
+        this.loading = new HiraText(this, 720/2, 480/2, "Loading", "header");
+        this.add.existing(this.loading);
+
+        for (var property in this.jsonFile['images']) {
+            if (this.jsonFile['images'].hasOwnProperty(property)) {
+                this.load.image(property.toString(),  this.jsonFile['images'][property]);
+                // console.log(property.toString(), this.jsonFile['images'][property]);
+                if(property.toString().search("_bg") != -1) {
+                    // console.log(property.toString());
+                    this.bgKey = property.toString(); /* what if multiple bg */
+                }
+            }
+        }
+
+        this.dialogIterator = 1; this.maxIterator = this.jsonFile['dialog'].length;
+
+        this.messageArray = [];
+        for(let i = 0; i < this.maxIterator; i++){
+            this.messageArray.push(this.jsonFile['dialog'][i]);
+        }
     }
 
     create () {
@@ -22,7 +47,7 @@ class LogScene extends Phaser.Scene {
         this.container = this.add.graphics();
 
 
-        this.verticalCamera = this.cameras.add(720/2 - 680/2, 50, 680, 320);
+        this.verticalCamera = this.cameras.add(-20, 0, 760, 480);
 
         var cursors = this.input.keyboard.createCursorKeys();
 
@@ -53,9 +78,9 @@ class LogScene extends Phaser.Scene {
         this.borders = this.add.graphics();
         this.borders.lineStyle(game.global.UI_THICKNESS + 2, game.global.UI_COLOR, 1);
         var currentHeight = 100;
-        for ( let i = 0; i < this.player.logs.length; i++ ) {
+        for ( let i = 0; i < this.messageArray.length; i++ ) {
 
-            this.romajiDisplay.push(new HiraText(this, 65, currentHeight + 25, this.player.logs[i].log, "wordWrapL", 550));
+            this.romajiDisplay.push(new HiraText(this, 65, currentHeight + 25, this.messageArray[i].message, "wordWrapL", 550));
             currentHeight = this.romajiDisplay[i].y - 10 + this.romajiDisplay[i].height + 24;
             this.romajiDisplay[i].setOrigin(0);
             this.borders.strokeRect(50, this.romajiDisplay[i].y - 10, 580, this.romajiDisplay[i].height + 24);
@@ -64,8 +89,8 @@ class LogScene extends Phaser.Scene {
 
         this.cancelButton = new HiraButton(this, 720  - 60 - 30, 420, "Back", style, () => {
             // console.log('fuck go back');
-            this.scene.wake('JournalScene');
-            this.scene.stop('LogScene');
+            this.scene.wake('MainScene');
+            this.scene.stop('CutSceneV2');
         }, this);
         this.add.existing(this.cancelButton);
 
@@ -87,8 +112,8 @@ class LogScene extends Phaser.Scene {
         this.container.lineStyle(game.global.UI_THICKNESS + 2, game.global.UI_COLOR, 1);
 
         if(this.romajiDisplay.length > 0) {
-            this.container.fillRect(720/2 - 680/2, 0, 640, this.romajiDisplay[this.romajiDisplay.length - 1].y + this.romajiDisplay[this.romajiDisplay.length - 1].height + 36);
-            this.container.strokeRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + this.romajiDisplay[this.romajiDisplay.length - 1].height + 36);
+            this.container.fillRect(0, 0, 730, this.romajiDisplay[this.romajiDisplay.length - 1].y + this.romajiDisplay[this.romajiDisplay.length - 1].height + 36);
+            this.container.strokeRect(0, 0, 730,  this.romajiDisplay[this.romajiDisplay.length - 1].y + this.romajiDisplay[this.romajiDisplay.length - 1].height + 36);
             this.verticalCamera.setBounds(0, 0, 680, this.romajiDisplay[this.romajiDisplay.length - 1].y + this.romajiDisplay[this.romajiDisplay.length - 1].height + 36);
         } else {
             this.controls.stop();

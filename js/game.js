@@ -10,7 +10,7 @@ var config = {
             gravity: { y: 0 }
         }
     },
-    scene: [ BootScene, MainScene, BattleScene, ResultScene, DetailScene, DungeonScene, CutScene, CutLoaderScene, TrainScene, MultipleChoiceScene, MatchingTypeScene, HintScene, DialogBoxScene, WorldNavScene, MessageScene, JournalScene, LogScene ]
+    scene: [ BootScene, MainScene, BattleScene, ResultScene, DetailScene, DungeonScene, CutScene, CutLoaderScene, TrainScene, MultipleChoiceScene, MatchingTypeScene, HintScene, DialogBoxScene, WorldNavScene, MessageScene, JournalScene, LogScene, StatsScene, CutSceneV2 ]
 };
 
 var game = new Phaser.Game(config);
@@ -36,7 +36,9 @@ game.charset = [];
 game.token = '';
 game.showOKB = false;
 game.logged_out = false;
-
+game.roundOff = function (numba) {
+    return Math.round(numba*100 * 10)/10;
+}
 game.screenWipe = function (scene) {
     var blocks = scene.add.group({ key: 'black50', repeat: 191 });
 

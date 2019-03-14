@@ -32,7 +32,7 @@ class WorldNavScene extends Phaser.Scene {
 
         var style = { font: "16px manaspc", fill:  game.global.UI_TEXT_FILL, align: "left"};
         this.iterator = 0;
-        this.prevButton = new HiraButton(this, 60, 430 + 24, "Prev", style, () => {
+        this.prevButton = new HiraButton(this, 60, 430 + 20, "Prev", style, () => {
             if(this.navEnable === true){
                 this.navEnable = false;
                 if(this.iterator > 0){
@@ -48,7 +48,7 @@ class WorldNavScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.prevButton);
 
-        this.nextButton = new HiraButton(this, 60*11, 430 + 24, "Next", style, () => {
+        this.nextButton = new HiraButton(this, 60*11, 430 + 20, "Next", style, () => {
             if(this.navEnable === true){
                 this.navEnable = false;
                 if(this.iterator < 3){
@@ -68,20 +68,22 @@ class WorldNavScene extends Phaser.Scene {
             this.navEnable = true;
         }, this);
 
-        this.codexButton = new HiraButton(this, 60*8, 430 + 24, "Journal", style, () => {
+        this.codexButton = new HiraButton(this, 60*8, 430 + 20, "Journal", style, () => {
             this.scene.launch('JournalScene', {player: this.player});
             this.events.emit('disableLevels');
             this.scene.sleep('WorldNavScene');
         }, this);
         this.add.existing(this.codexButton);
 
-        this.questButton = new HiraButton(this, 60*6, 430 + 24, "Quest", style, () => {
+        this.questButton = new HiraButton(this, 60*6, 430 + 20, "Quest", style, () => {
             this.events.emit('quest');
         }, this);
         this.add.existing(this.questButton);
 
-        this.statsButton = new HiraButton(this, 60*4, 430 + 24, "Stats", style, () => {
-            this.scene.launch('DialogBoxScene', { story: this.player.story, title: 'testing aggre', message: 'must get ave', dataCapture: {}, api: 'api/stats'});
+        this.statsButton = new HiraButton(this, 60*4, 430 + 20, "Stats", style, () => {
+            this.scene.launch('StatsScene', { player: this.player} );
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
         }, this);
 
         this.add.existing(this.statsButton);
@@ -133,8 +135,8 @@ class WorldNavScene extends Phaser.Scene {
     }
 
     onSayName(data) {
-        this.levelTitle.fillRect(720/2 - data.name.length * 16, 2, data.name.length*32, 48);
-        this.levelTitle.strokeRect(720/2 - data.name.length * 16, 2, data.name.length*32, 48);
+        this.levelTitle.fillRect(720/2 - data.name.length * 12, 4, data.name.length*24, 48);
+        this.levelTitle.strokeRect(720/2 - data.name.length * 12, 4, data.name.length*24, 48);
         this.caveName.setTextUpper(data.name);
         this.caveName.visible = true;
         this.levelTitle.visible = true;

@@ -29,7 +29,7 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
 
         /* WorldNavScene handles name display */
 
-        this.setInteractive({ cursor: 'url(assets/images/cursor/help.cur), pointer' }).
+        this.setInteractive().
         on('pointerup', () => {
             scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
             if(this.enabled){
@@ -40,11 +40,14 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
             }
         }).
         on('pointerover', () => {
-
-            scene.sound.play('hover');
+            if(this.enabled){
+                scene.input.setDefaultCursor('url(assets/images/cursor/help.cur), pointer');
+                scene.sound.play('hover');
+            }
             scene.events.emit('sayName', {name: this.name});
         }).
         on('pointerout', () => {
+            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer')
             scene.events.emit('hoverOut');
         });
 

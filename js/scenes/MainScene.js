@@ -196,6 +196,8 @@ class MainScene extends Phaser.Scene {
         }
         console.log(this.player.logs);
         this.compareStoryLevels();
+        this.onQuest();
+
 
         /* emit events */
         let learn = this.scene.get('CutScene');

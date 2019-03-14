@@ -147,6 +147,7 @@ class MatchingTypeScene extends Phaser.Scene {
                 this.exitButton.visible = false;
 
                 var correct = 0;
+
                 for (let i = 0; i < this.ypos.length; i++){
                     this.ypos[i].disableInteractive();
                     this.tweens.add({
@@ -165,19 +166,22 @@ class MatchingTypeScene extends Phaser.Scene {
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
                           } else {
                               this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
-                              this.ypos[i].disable();
+
+                          }
+                          if(i === this.ypos.length - 1){
+                              if(correct > this.ypos.length/2) {
+                                  this.sound.play('success');
+                              } else {
+                                  this.sound.play('fail');
+                              }
+    
                           }
 
-                          if(correct > this.ypos.length/2) {
-                              this.sound.play('success');
-
-                          } else {
-                              this.sound.play('fail');
-                          }
 
                        }
                    });
                 }
+
 
                 this.dataCapture.total_time = this.time.now/1000 - this.timeStamp;
 

@@ -36,10 +36,10 @@ class DialogBoxScene extends Phaser.Scene {
         var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 180, useAdvancedWrap: true} };
 
 
-        this.dialogTitle = new HiraText(this, 90 + 30, 160 + 30, this.title, "header");
+        this.dialogTitle = new HiraText(this, 90 + 30, 160+ 10, this.title, "header");
         this.dialogTitle.setOrigin(0);
         this.add.existing(this.dialogTitle);
-        this.dialogMessage = new HiraText(this, 90 + 30, 160 + 80, this.message, "basic");
+        this.dialogMessage = new HiraText(this, 90 + 30, 160 + 60, this.message, "basic");
         this.dialogMessage.setOrigin(0);
         this.add.existing(this.dialogMessage);
 

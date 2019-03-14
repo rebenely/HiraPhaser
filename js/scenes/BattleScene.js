@@ -404,7 +404,7 @@ class BattleScene extends Phaser.Scene {
 
             }, this);
 
-            this.okbButton = new HiraButton(this, 700, 470, "OKB", style, () =>  {
+            this.okbButton = new HiraButton(this, 700, 460, "OKB", style, () =>  {
                 game.showOKB = game.showOKB ? false : true;
                 if(game.showOKB){
                     this.okbButton.setTint(game.global.UI_TEXT_HIGHLIGHT);

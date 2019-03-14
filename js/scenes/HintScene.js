@@ -76,11 +76,13 @@ class HintScene extends Phaser.Scene {
             this.move = 5;
         }, this, true);
         this.add.existing(this.downButton);
+        this.downButton.visible = false;
 
         this.upButton = new HiraPress(this, 90, 400, "Up", style, () => {
             this.move = -5;
         }, this);
         this.add.existing(this.upButton);
+        this.upButton.visible = false;
 
         // console.log(j* 100 + 5);
         this.cameras.main.ignore([this.characterDisplay, this.romajiDisplay, this.container, titleDisplay]);
@@ -94,6 +96,8 @@ class HintScene extends Phaser.Scene {
         } else {
             var warningDisplay = new HiraText(this,  720/2, 480/2, 'No data yet!', "header");
             this.add.existing(warningDisplay);
+            this.verticalCamera.ignore([warningDisplay]);
+
         }
 
         this.sound.play('next');

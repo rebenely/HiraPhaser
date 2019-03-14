@@ -168,29 +168,55 @@ var self = module.exports = {
             }
         )
     },
-    getStats (req, res) {
+    async getStats (req, res) {
         console.log('----------get stats------------');
         var stats = {};
         var succ = new MongoClient(url, { useNewUrlParser: true });
-        succ.connect(function(err, db) {
+        await succ.connect(async function(err, db) {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db(config.db_name);
-          self.getAccuracy(dbo, 'dungeon', res.locals.decoded.username, function(result) {
+          await self.getAccuracy(dbo, 'dungeon', res.locals.decoded.username, function(result) {
               succ.close();
               if(result.length){
                   stats.dungeon_ave = result[0].ave;
-                  console.log('i have this badboy here', result[0].ave);
+                  console.log('dungeon', stats);
               } else {
-                  console.log('empty');
+                  stats.dungeon_ave = null;
+                  console.log('dungeon empty');
               }
-          });
+          }, stats);
+          await self.getAccuracy(dbo, 'train', res.locals.decoded.username, function(result) {
+              succ.close();
+              if(result.length){
+                  stats.train_ave = result[0].ave;
+                  console.log('train', stats);
+              } else {
+                  stats.train_ave = null;
+                  console.log('train empty');
+              }
+          }, stats);
+          await self.getAccuracy(dbo, 'practice', res.locals.decoded.username, function(result) {
+              succ.close();
+              if(result.length){
+                  stats.practice_ave = result[0].ave;
+                  console.log('practice', stats);
+              } else {
+                  stats.practice_ave = null;
+                  console.log('practice empty');
+              }
+              return res.status(200).json({
+                success: true,
+                message: 'some data!',
+                stats: stats
+              });
 
-          return res.status(200).json({
-            success: true,
-            message: 'some data!'
-          });
-        });
+          }, stats);
+
+      }, stats);
+
+
+
         // console.log('ayyyy succ');
     }
 

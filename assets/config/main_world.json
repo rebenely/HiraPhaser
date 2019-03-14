@@ -10,9 +10,9 @@
             "sprites":    {
                 "x": 430, "y": 185, "name": "cave",
                 "dungeonBG": {
-                    "name": "v_dungeon", "path": "assets/images/v_dungeon/cave_pj.png"},
+                    "name": "v_dungeon", "path": "assets/images/globals/blurgeon.png"},
                     "battleBG": {
-                        "name": "v_wall", "path": "assets/images/v_dungeon/dungeon_wall.png"
+                        "name": "v_wall", "path": "assets/images/globals/bangeon.png"
                     }
             },
             "enemies": {
