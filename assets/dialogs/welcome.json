@@ -27,6 +27,11 @@
         "image": "npc_upset",
         "name" : "Ai",
         "message": "test lang to"
+    },
+    {
+        "image": "npc_upset",
+        "name" : "Ai",
+        "message": "test lang to, word wrap, baby iiyak ka na pucha naman yan ang haba ng text na ito. Kailangan ko ng next line"
     }
     ],
 

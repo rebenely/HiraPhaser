@@ -3,16 +3,16 @@ class HiraText extends Phaser.GameObjects.Text {
         var style = {};
         switch(type) {
             case "basic":
-                style = { font: "32px manaspc", fill:  game.global.UI_TEXT_FILL };
+                style = { font: "24px manaspc", fill:  game.global.UI_TEXT_FILL };
             break;
             case "header":
                 style = { font: "44px manaspc", fill: game.global.UI_TEXT_FILL, align: "center" };
             break;
             case "wordWrap":
-                style = { font: "32px manaspc", fill: game.global.UI_TEXT_FILL, align: "center", wordWrap: { width: wordWrapWidth, useAdvancedWrap: true} };
+                style = { font: "24px manaspc", fill: game.global.UI_TEXT_FILL, align: "center", wordWrap: { width: wordWrapWidth, useAdvancedWrap: true} };
             break;
             case "wordWrapL":
-                style = { font: "32px manaspc", fill: game.global.UI_TEXT_FILL, align: "left", wordWrap: { width: wordWrapWidth, useAdvancedWrap: true} };
+                style = { font: "24px manaspc", fill: game.global.UI_TEXT_FILL, align: "left", wordWrap: { width: wordWrapWidth, useAdvancedWrap: true} };
             break;
         }
         super(scene, x, y, text, style);

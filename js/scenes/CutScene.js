@@ -62,7 +62,7 @@ class CutScene extends Phaser.Scene {
         // this.nameBox.fillRect(10, 480 - 145, 100, 48);
         // this.nameBox.strokeRect(10, 480 - 145, 100, 48);
 
-        this.dialogName = new HiraText(this, 40, 480 - 115, this.jsonFile['dialog'][0]['name'], "basic");
+        this.dialogName = new HiraText(this, 30, 480 - 130, this.jsonFile['dialog'][0]['name'], "header");
         this.add.existing(this.dialogName);
 
         // console.log(this.jsonFile['dialog'][0]['message']);

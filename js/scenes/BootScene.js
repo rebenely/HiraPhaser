@@ -79,6 +79,7 @@ class BootScene extends Phaser.Scene {
         console.debug('failed: ', totalFailed);
     }
     create () {
+        this.sound.volume = 0.05;
 
         this.loaded = false;
         this.worldJson = this.cache.json.get('main_world');
