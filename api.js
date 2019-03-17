@@ -13,6 +13,8 @@ var self = module.exports = {
           var dbo = db.db(config.db_name);
           var myobj = req.body;
           myobj.session_id = res.locals.decoded.session;
+          var update_story = myobj.update_story;
+          delete myobj.update_story;
           var updateCharset = req.body.updateCharset;
           delete req.body.updateCharset;
           if(res.locals.decoded.username === myobj.username) {
@@ -22,7 +24,7 @@ var self = module.exports = {
                 db.close();
               });
 
-              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
+              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
                 if (err) throw err;
                 console.log(myobj.username + ": updated story");
                 db.close();
@@ -57,7 +59,9 @@ var self = module.exports = {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db(config.db_name);
-          var myobj = req.body
+          var myobj = req.body;
+          var update_story = myobj.update_story;
+          delete myobj.update_story;
           myobj.session_id = res.locals.decoded.session;
           if(res.locals.decoded.username === myobj.username) {
 
@@ -67,7 +71,7 @@ var self = module.exports = {
                 db.close();
               });
 
-              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
+              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
                 if (err) throw err;
                 console.log(myobj.username + ": updated story");
                 db.close();
@@ -93,6 +97,8 @@ var self = module.exports = {
           var announcement = {};
           var dbo = db.db(config.db_name);
           var myobj = req.body;
+          var update_story = myobj.update_story;
+          delete myobj.update_story;
           myobj.session_id = res.locals.decoded.session;
           if(res.locals.decoded.username === myobj.username) {
             dbo.collection("practice").insertOne(myobj, function(err, res) {
@@ -101,7 +107,7 @@ var self = module.exports = {
 
             });
 
-            dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
+            dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
               if (err) throw err;
               console.log(myobj.username + ": updated story");
               db.close();
@@ -129,6 +135,8 @@ var self = module.exports = {
           var announcement = {};
           var dbo = db.db(config.db_name);
           var myobj = req.body
+          var update_story = myobj.update_story;
+          delete myobj.update_story;
           myobj.session_id = res.locals.decoded.session;
 
           if(res.locals.decoded.username === myobj.username) {
@@ -138,7 +146,7 @@ var self = module.exports = {
 
               });
 
-              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: myobj.story } }, function(err, res) {
+              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
                 if (err) throw err;
                 console.log(myobj.username + ": updated story");
                 db.close();

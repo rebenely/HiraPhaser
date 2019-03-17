@@ -93,6 +93,9 @@ class HintScene extends Phaser.Scene {
             this.container.fillRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
             this.container.strokeRect(720/2 - 680/2, 0, 640,  this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
             this.verticalCamera.setBounds(0, 0, 680, this.romajiDisplay[this.romajiDisplay.length - 1].y + 50);
+
+            this.upButton.visible = true;
+            this.downButton.visible = true;
         } else {
             var warningDisplay = new HiraText(this,  720/2, 480/2, 'No data yet!', "header");
             this.add.existing(warningDisplay);

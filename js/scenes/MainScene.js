@@ -17,7 +17,7 @@ class MainScene extends Phaser.Scene {
     create () {
         this.nextStory = {};
 
-        this.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
+        this.input.setDefaultCursor('url(assets/images/cursor/normal.png), pointer');
 
         this.scene.launch('WorldNavScene', {camera: this.cameras.main, player: this.player});
         this.scene.sleep('WorldNavScene');
@@ -56,7 +56,7 @@ class MainScene extends Phaser.Scene {
             var x = Phaser.Math.RND.between(-2048, 2048);
             var y = Phaser.Math.RND.between(0, 981);
 
-            var newObj = this.clouds2.create(x, y, 'clouds').setScale(Phaser.Math.RND.between(3, 5));
+            var newObj = this.clouds3.create(x, y, 'clouds').setScale(Phaser.Math.RND.between(3, 5));
             newObj.alpha = Math.random() + 0.2;
             newObj.setDepth(5);
         }
@@ -229,20 +229,20 @@ class MainScene extends Phaser.Scene {
             console.log(pointer.worldX, pointer.worldY);
         });
 
-        // var cursors = this.input.keyboard.createCursorKeys();
+        var cursors = this.input.keyboard.createCursorKeys();
 
-        // var controlConfig = {
-        //     camera: this.cameras.main,
-        //     left: cursors.left,
-        //     right: cursors.right,
-        //     up: cursors.up,
-        //     down: cursors.down,
-        //     acceleration: 0.02,
-        //   drag: 0.0005,
-        //   maxSpeed: 1.0
-        // };
-        //
-        // this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        var controlConfig = {
+            camera: this.cameras.main,
+            left: cursors.left,
+            right: cursors.right,
+            up: cursors.up,
+            down: cursors.down,
+            acceleration: 0.02,
+          drag: 0.0005,
+          maxSpeed: 1.0
+        };
+
+        this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
         /* ------------------------------------ */
 
@@ -255,37 +255,37 @@ class MainScene extends Phaser.Scene {
 
         /* para di tumagos ung pindot sa main kapag may nakabukas na iba */
         this.disableInteractiveLevels();
-
-        var style = { font: "16px manaspc", fill:  game.global.UI_TEXT_FILL, align: "center"}; /* itong style dapat ginlobal ko na lang eh hahaha */
-
-        /* for alpha, mga kagaguhan ko lang */
-        var nextArea0 = new HiraButton(this, 1000, 655, "Area not yet available!", style, () => {
-            this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Will be available for next versions."}});
-            this.events.emit('disableLevels');
-            this.scene.sleep('WorldNavScene');
-        }, this);
-        this.add.existing(nextArea0);
-
-        var nextArea1 = new HiraButton(this, 1565, 531, "Wala pa nga di ba?", style, () => {
-            this.scene.launch('MessageScene', {message: { title : "Kulit mo rin eh", body: "Isa pang next mo ..."}});
-            this.events.emit('disableLevels');
-            this.scene.sleep('WorldNavScene');
-        }, this);
-        this.add.existing(nextArea1);
-
-        var nextArea1 = new HiraButton(this, 1350, 100, "Ligma", style, () => {
-            this.scene.launch('MessageScene', {message: { title : "Pindot pa", body: "Type mo konami code"}});
-            this.events.emit('disableLevels');
-            this.scene.sleep('WorldNavScene');
-        }, this);
-        this.add.existing(nextArea1);
-
-        var secret = new HiraButton(this, 2035, 980, "Huli ka", style, () => {
-            this.scene.launch('MessageScene', {message: { title : "Tanong", body: "Bakit madaling utuin ang mga nakababatang kapatid na lalake ng mga hapon? Kasi otouto."}});
-            this.events.emit('disableLevels');
-            this.scene.sleep('WorldNavScene');
-        }, this);
-        this.add.existing(secret);
+        //
+        // var style = { font: "16px manaspc", fill:  game.global.UI_TEXT_FILL, align: "center"}; /* itong style dapat ginlobal ko na lang eh hahaha */
+        //
+        // /* for alpha, mga kagaguhan ko lang */
+        // var nextArea0 = new HiraButton(this, 1000, 655, "Area not yet available!", style, () => {
+        //     this.scene.launch('MessageScene', {message: { title : "Not yet implemented", body: "Will be available for next versions."}});
+        //     this.events.emit('disableLevels');
+        //     this.scene.sleep('WorldNavScene');
+        // }, this);
+        // this.add.existing(nextArea0);
+        //
+        // var nextArea1 = new HiraButton(this, 1565, 531, "Wala pa nga di ba?", style, () => {
+        //     this.scene.launch('MessageScene', {message: { title : "Kulit mo rin eh", body: "Isa pang next mo ..."}});
+        //     this.events.emit('disableLevels');
+        //     this.scene.sleep('WorldNavScene');
+        // }, this);
+        // this.add.existing(nextArea1);
+        //
+        // var nextArea1 = new HiraButton(this, 1350, 100, "Ligma", style, () => {
+        //     this.scene.launch('MessageScene', {message: { title : "Pindot pa", body: "Type mo konami code"}});
+        //     this.events.emit('disableLevels');
+        //     this.scene.sleep('WorldNavScene');
+        // }, this);
+        // this.add.existing(nextArea1);
+        //
+        // var secret = new HiraButton(this, 2035, 980, "Huli ka", style, () => {
+        //     this.scene.launch('MessageScene', {message: { title : "Tanong", body: "Bakit madaling utuin ang mga nakababatang kapatid na lalake ng mga hapon? Kasi otouto."}});
+        //     this.events.emit('disableLevels');
+        //     this.scene.sleep('WorldNavScene');
+        // }, this);
+        // this.add.existing(secret);
 
     }
 
@@ -295,7 +295,7 @@ class MainScene extends Phaser.Scene {
     }
 
     update (time, delta) {
-        // this.controls.update(delta);
+        this.controls.update(delta);
 
         this.clouds.getChildren().forEach(function (child) {﻿
             if(child.x > 2048 + child.width + 200) {
@@ -329,6 +329,7 @@ class MainScene extends Phaser.Scene {
     onLearnedNewCharacters(data){
          // console.log(data.story);
         var updateCharset = false;
+        var player_story_b4 = this.player.story;
         if(this.player.story <= data.story){
             this.player.insertLog(data.log, data.story);
         }
@@ -350,12 +351,13 @@ class MainScene extends Phaser.Scene {
         //     updateCharset = true;
         // }
 
-        this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, updateCharset: updateCharset, timestamp: data.timestamp, total_time: data.total_time}, api: 'api/learn'});
+        this.scene.launch('DialogBoxScene', { player_story: player_story_b4, story: data.story, update_story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, updateCharset: updateCharset, timestamp: data.timestamp, total_time: data.total_time}, api: 'api/learn'});
         // console.log('received', data);
     }
 
     /* emmitted event from dungeon */
     onFinishedDungeon(data){
+        var player_story_b4 = this.player.story;
         // console.log(data);
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
@@ -363,22 +365,24 @@ class MainScene extends Phaser.Scene {
             this.player.insertLog(data.log, data.story);
         }
 
-        this.scene.launch('DialogBoxScene', {story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/dungeon' });
+        this.scene.launch('DialogBoxScene', {player_story: player_story_b4, story: data.story, update_story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/dungeon' });
     }
 
     onTrainFinish(data){
+        var player_story_b4 = this.player.story;
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
             this.player.insertLog(data.log, data.story);
         }
         // console.log(data);
-        this.scene.launch('DialogBoxScene', { story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/train' });
+        this.scene.launch('DialogBoxScene', { player_story: player_story_b4, story: data.story, update_story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/train' });
         // console.log(data.success, this.player.story, data.story)
 
     }
 
     onPracticeFinish(data){
+        var player_story_b4 = this.player.story;
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
@@ -386,7 +390,7 @@ class MainScene extends Phaser.Scene {
         }
         // console.log(data);
         data.dataCapture.username = this.player.name;
-        this.scene.launch('DialogBoxScene', {story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/practice' });
+        this.scene.launch('DialogBoxScene', {player_story: player_story_b4, story: data.story, update_story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: data.dataCapture, api: 'api/practice' });
         // console.log(data.success, this.player.story, data.story)
 
     }

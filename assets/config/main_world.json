@@ -84,23 +84,192 @@
             "optionals" : {"sizeX": 133, "sizeY": 110},
             "log":"Dungeon log 3"
         }
+        ,
+        {
+            "name": "T-dungeon" ,
+            "level": 12,
+            "world": 0,
+            "description":  "T dungeon!",
+            "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "sprites":    {
+                "x": 713, "y": 770, "name": "cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "log":"Dungeon log 3"
+        },
+        {
+            "name": "N-dungeon" ,
+            "level": 12,
+            "world": 0,
+            "description":  "N dungeon!",
+            "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "sprites":    {
+                "x": 902, "y": 870, "name": "cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "log":"Dungeon log 3"
+        },
+        {
+            "name": "H-dungeon" ,
+            "level": 12,
+            "world": 0,
+            "description":  "H dungeon!",
+            "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "sprites":    {
+                "x": 1125, "y": 820, "name": "cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "log":"Dungeon log 3"
+        },
+        {
+            "name": "M-dungeon" ,
+            "level": 12,
+            "world": 0,
+            "description":  "M dungeon!",
+            "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "sprites":    {
+                "x": 1854, "y": 347, "name": "cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 125, "sizeY": 90},
+            "log":"Dungeon log 3"
+        },
+        {
+            "name": "Y-dungeon" ,
+            "level": 12,
+            "world": 0,
+            "description":  "Y dungeon!",
+            "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "sprites":    {
+                "x": 1635, "y": 405, "name": "cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 120, "sizeY": 85},
+            "log":"Dungeon log 3"
+        },
+        {
+            "name": "R-dungeon" ,
+            "level": 12,
+            "world": 0,
+            "description":  "R dungeon!",
+            "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "sprites":    {
+                "x": 1405, "y": 390, "name": "cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/k_dungeon/wall_texture.jpg"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/k_dungeon/battlebackground.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 140, "sizeY": 120},
+            "log":"Dungeon log 3"
+        }
     ],
 
     "storyLevels": [
         {
-            "name": "Hello, World!",
+            "name": "Dreams and Visions",
             "sprite": {"name": "message", "x": 190, "y": 165},
             "json": "welcome.json",
             "level": 0,
             "world": 0,
             "optionals" : {"sizeX": 133, "sizeY": 110},
             "details" : {
-                "title": "Pambati",
+                "title": "Story 0: Dreams and Visions",
                 "subtitle": "Yoikes",
-                "desc": "wwwww"
+                "desc": "This dream that I had. Is it really something I should follow? Or is it just my imagination running wild?"
             },
             "type":"CutScene",
-            "log":"Cutscene log 1. Word wrap test. Multiline ek ek. BASudbasod asdiabs asib aosdbiao sbdao da. He thought he fine, he aint."
+            "log":"Looks like there is more to this dream. At least that's what Gema is telling me. I guess I'll learn how to use spells just to be safe."
         },
         {
             "name": "V start",
@@ -145,8 +314,8 @@
             },
             "type":"BattleScene",
             "mentor" : {
-                "idle": "assets/spritesheets/teachers/jojo_idle.png",
-                "attack": "assets/spritesheets/teachers/jojo_attack.png"
+                "idle": "assets/spritesheets/teachers/mage_idle.png",
+                "attack": "assets/spritesheets/teachers/mage_attack.png"
             },
             "wordPool": ["A","I","U","E","O"],
             "log":"Cutscene log 4"
@@ -242,12 +411,42 @@
                 "desc": "This is a place holder!"
             },
             "mentor" : {
-                "idle": "assets/spritesheets/teachers/jojo_idle.png",
-                "attack": "assets/spritesheets/teachers/jojo_attack.png"
+                "idle": "assets/spritesheets/teachers/mage_idle.png",
+                "attack": "assets/spritesheets/teachers/mage_attack.png"
             },
             "type":"BattleScene",
             "wordPool": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "log":"Cutscene log 10"
+        },
+        {
+            "name": "Second Map!",
+            "sprite": {"name": "message", "x": 885, "y": 680},
+            "json": "welcome.json",
+            "level": 0,
+            "world": 0,
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "details" : {
+                "title": "Pambati",
+                "subtitle": "Yoikes",
+                "desc": "wwwww"
+            },
+            "type":"CutScene",
+            "log":"Cutscene log 1. Word wrap test. Multiline ek ek. BASudbasod asdiabs asib aosdbiao sbdao da. He thought he fine, he aint."
+        },
+        {
+            "name": "Third Map!",
+            "sprite": {"name": "message", "x": 1800, "y": 175},
+            "json": "welcome.json",
+            "level": 0,
+            "world": 0,
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "details" : {
+                "title": "Pambati",
+                "subtitle": "Yoikes",
+                "desc": "wwwww"
+            },
+            "type":"CutScene",
+            "log":"Cutscene log 1. Word wrap test. Multiline ek ek. BASudbasod asdiabs asib aosdbiao sbdao da. He thought he fine, he aint."
         }
     ]
 }

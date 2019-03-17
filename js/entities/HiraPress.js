@@ -5,9 +5,9 @@ class HiraPress extends Phaser.GameObjects.Text {
         this.clickable = true; // to prevent double clicking
         this.enabled = true; // enable / disable
         this.setStroke(game.global.UI_TEXT_STROKE,3);
-        this.setInteractive({ cursor: 'url(assets/images/cursor/link.cur), pointer' }).on('pointerdown', () => {
+        this.setInteractive({ cursor: 'url(assets/images/cursor/hover.png), pointer' }).on('pointerup', () => {
             // cursor changes
-            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
+            
 
             scene.sound.play('click');
             callback();

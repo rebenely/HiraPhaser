@@ -31,8 +31,8 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
 
         this.setInteractive().
         on('pointerup', () => {
-            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
             if(this.enabled){
+                scene.input.setDefaultCursor('url(assets/images/cursor/normal.png), pointer');
                 scene.sound.play('click');
                 callback();
             } else {
@@ -41,13 +41,15 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
         }).
         on('pointerover', () => {
             if(this.enabled){
-                scene.input.setDefaultCursor('url(assets/images/cursor/help.cur), pointer');
+                scene.input.setDefaultCursor('url(assets/images/cursor/hover.png), pointer');
                 scene.sound.play('hover');
+            } else {
+                scene.input.setDefaultCursor('url(assets/images/cursor/disabled.png), pointer');
             }
             scene.events.emit('sayName', {name: this.name});
         }).
         on('pointerout', () => {
-            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer')
+            scene.input.setDefaultCursor('url(assets/images/cursor/normal.png), pointer')
             scene.events.emit('hoverOut');
         });
 

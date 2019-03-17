@@ -8,9 +8,9 @@ class HiraButton extends Phaser.GameObjects.Text {
         this.longpress = false;
         this.strokeThiccness = 3;
         this.setStroke( game.global.UI_TEXT_STROKE, this.strokeThiccness);
-        this.setInteractive({ cursor: 'url(assets/images/cursor/link.cur), pointer' }).on('pointerup', () => {
+        this.setInteractive({ cursor: 'url(assets/images/cursor/hover.png), pointer' }).on('pointerup', () => {
             // cursor changes
-            scene.input.setDefaultCursor('url(assets/images/cursor/normal.cur), pointer');
+            scene.input.setDefaultCursor('url(assets/images/cursor/normal.png), pointer');
             if(this.enabled){
                 scene.sound.play('click');
                 this.clickable = false;
@@ -32,6 +32,7 @@ class HiraButton extends Phaser.GameObjects.Text {
 
         })
         .on('pointerout', function () {
+            scene.input.setDefaultCursor('url(assets/images/cursor/normal.png), pointer');
             if(this.enabled) {
                 this.clickable = true;
                 if(!this.longpress){

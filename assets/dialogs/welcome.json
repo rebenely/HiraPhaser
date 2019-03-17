@@ -1,44 +1,240 @@
 {
     "images" : {
-        "guild_bg": "assets/dialogs/images/guild_bg.png",
-        "npc_smile": "assets/dialogs/images/fm2happy.png",
-        "npc_sad": "assets/dialogs/images/fm2sad.png",
-        "npc_upset": "assets/dialogs/images/fm2upset.png",
-        "npc_surprised": "assets/dialogs/images/fm2surprised.png"
+        "dialog_bg": "assets/dialogs/images/dialog_bg.png",
+        "bleu_happy": "assets/dialogs/images/bleu_happy.png",
+        "bleu_angry": "assets/dialogs/images/bleu_angry.png",
+        "bleu_smug": "assets/dialogs/images/bleu_smug.png",
+        "bleu_shocked": "assets/dialogs/images/bleu_shocked.png",
+        "bleu_think": "assets/dialogs/images/bleu_think.png",
+        "warrior_happy": "assets/dialogs/images/warrior_happy.png",
+        "warrior_think": "assets/dialogs/images/warrior_think.png",
+        "warrior_angry": "assets/dialogs/images/warrior_angry.png",
+        "warrior_smug": "assets/dialogs/images/warrior_smug.png",
+        "rogue_happy": "assets/dialogs/images/rogue_happy.png",
+        "mage_happy": "assets/dialogs/images/mage_happy.png",
+        "mage_angry": "assets/dialogs/images/mage_angry.png",
+        "creator": "assets/dialogs/images/creator.png"
     },
 
     "dialog": [
     {
-        "image" : "npc_smile",
-        "name" : "Ai",
-        "message": "Hello! Welcome to the game."
+        "narrate" : true,
+        "name" : "You",
+        "message": "So this is the place, huh?"
     },
     {
-        "image": "npc_sad",
-        "name" : "Ai",
-        "message": "Di pa to tapos,"
+        "image" : "warrior_happy",
+        "name" : "???",
+        "message": "Hello there! Are you looking for a quest?",
+        "flip": true
     },
     {
-        "image": "npc_sad",
-        "name" : "Ai",
-        "message": "sana matapos na "
+        "image": "bleu_happy",
+        "name" : "You",
+        "message": "No. I am not an adventurer."
     },
     {
-        "image": "npc_upset",
-        "name" : "Ai",
-        "message": "test lang to"
+        "image": "warrior_think",
+        "name" : "???",
+        "message": "Oh. So are you applying for an adventurer's license?",
+        "flip": true
     },
     {
-        "image": "npc_upset",
-        "name" : "Ai",
-        "message": "test lang to, word wrap, baby iiyak ka na pucha naman yan ang haba ng text na ito. Kailangan ko ng next line"
+        "image": "bleu_happy",
+        "name" : "You",
+        "message": "No. I was actually sent here by someone."
+    },
+    {
+        "image": "bleu_think",
+        "name" : "You",
+        "message": "(If you could call \"that\", a someone.)"
+    },
+    {
+        "image": "warrior_think",
+        "name" : "???",
+        "message": "Someone? Who you might be talking about?",
+        "flip": true
+    },
+    {
+        "image": "bleu_angry",
+        "name" : "You",
+        "message": "The Creator."
+    },
+    {
+        "image": "warrior_angry",
+        "name" : "???",
+        "message": "The Creator, huh.",
+        "flip": true
+    },
+    {
+        "image": "warrior_angry",
+        "name" : "???",
+        "message": "Why would The Creator send someone here? Are you messing with me?",
+        "flip": true
+    },
+    {
+        "image": "bleu_angry",
+        "name" : "You",
+        "message": "Look. I am not messing with you. He speaked to me in my dreams."
+    },
+    {
+        "image": "warrior_smug",
+        "name" : "???",
+        "message": "Dreams, huh.",
+        "flip": true
+    },
+    {
+        "image": "bleu_angry",
+        "name" : "You",
+        "message": "If you don't believe me, then-"
+    },
+    {
+        "image": "warrior_smug",
+        "name" : "???",
+        "message": "Then, what? You're going to tell The Creator that I did not believe you?",
+        "flip": true
+    },
+    {
+        "image": "bleu_angry",
+        "name" : "You",
+        "message": "..."
+    },
+    {
+        "image": "bleu_angry",
+        "name" : "You",
+        "message": "(I knew I shouldn't have believed that dream. What was I thinking.)"
+    },
+    {
+        "image": "bleu_angry",
+        "name" : "You",
+        "message": "I-I-I'll just leave."
+    },
+    {
+        "narrate" : true,
+        "name" : "???",
+        "message": "Wait!"
+    },
+    {
+        "image": "mage_happy",
+        "name" : "???",
+        "message": "Are you the one?",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name" : "???",
+        "message": "Are you the one sent by The Creator?",
+        "flip": true
+    },
+    {
+        "image": "bleu_happy",
+        "name" : "You",
+        "message": "Yeah. I think so."
+    },
+    {
+        "image": "mage_angry",
+        "name" : "???",
+        "message": "Ryor. Lead him upstairs. I'll go get my things.",
+        "flip": true
+    },
+    {
+        "image": "warrior_think",
+        "name" : "Ryor",
+        "message": "O-okay.",
+        "flip": true
+    },
+    {
+        "image": "warrior_angry",
+        "name" : "Ryor",
+        "message": "Come with me.",
+        "flip": true
+    },
+    {
+        "narrate": true,
+        "name" : "You",
+        "message": "(So, is this dream real? I guess I'll have to find out myself.)",
+        "flip": true
+    },
+    {
+        "image" : "mage_happy",
+        "name" : "???",
+        "message": "Did The Creator tell you about the invasion?",
+        "flip": true
+    },
+    {
+        "image": "bleu_think",
+        "name" : "You",
+        "message": "Only that the goblin population are on the rise. And that they're invading nearby villages."
+    },
+    {
+        "image" : "mage_happy",
+        "name" : "???",
+        "message": "Well. That's most of it.",
+        "flip": true
+    },
+    {
+        "image": "mage_angry",
+        "name" : "???",
+        "message": "If it were normal goblins, we would have no problems dealing with them.",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name" : "???",
+        "message": "One person here would gladly slay all of them.",
+        "flip": true
+    },
+    {
+        "image": "mage_angry",
+        "name" : "???",
+        "message": "But the golbins are now using spells. And the only way to defeat them is to counter these spells.",
+        "flip": true
+    },
+    {
+        "image": "bleu_think",
+        "name": "You",
+        "message": "I understand that these goblins must be stopped."
+    },
+    {
+        "image": "bleu_think",
+        "name": "You",
+        "message": "But why me? I don't even know how spells work!"
+    },
+    {
+        "image": "mage_happy",
+        "name": "???",
+        "message": "That I don't know.",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name": "???",
+        "message": "But The Creator chose you. So there must be something within you.",
+        "flip": true
+    },
+    {
+        "image": "bleu_think",
+        "name": "You",
+        "message": "That's good and all. But I really don't know how spells work."
+    },
+    {
+        "image": "mage_happy",
+        "name": "Gema",
+        "message": "Do not worry about that. I, Gema, will ensure that The Creator's will be done.",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name": "Gema",
+        "message": "In fact, we can start now. Meet Ryor at the training field once you're ready to start.",
+        "flip": true
     }
     ],
 
     "image": {
-        "x": "320",
-        "y": "380",
-        "scale": "1"
+        "x": "360",
+        "y": "240",
+        "scale": "5"
     },
     "teach": [],
     "message": {

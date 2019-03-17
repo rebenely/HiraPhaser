@@ -55,6 +55,7 @@ game.screenWipe = function (scene) {
    var i = 0;
 
    blocks.children.iterate(function (child) {
+       child.setDepth(10);
 
        _this.tweens.add({
            targets: child,

@@ -16,6 +16,8 @@ class DialogBoxScene extends Phaser.Scene {
         if(data.dataCapture !== undefined){
             this.payload = data.dataCapture;
             this.payload.story = data.story;
+            this.payload.player_story = data.player_story;
+            this.payload.update_story = data.update_story;
             this.apiRequest = true;
         } else {
             this.apiRequest = false;

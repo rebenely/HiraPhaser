@@ -26,7 +26,7 @@ class WorldNavScene extends Phaser.Scene {
         this.levelTitle.visible = false;
 
         this.navEnable = false;
-        this.coordinates = [{x:350, y:300, z: 1.1}, {x: 1000, y: 655, z: 1}, {x: 1565, y: 531, z: 0.9}, {x:1350, y:100, z: 2}];
+        this.coordinates = [{x:350, y:300, z: 1.1}, {x: 920, y: 795, z: 1.2}, {x: 1635, y: 310, z: 0.9}, {x:1800, y:910, z: 1.8}];
         this.cam.pan(this.coordinates[0].x, this.coordinates[0].y, 2000, 'Sine.easeInOut');
         this.cam.zoomTo(this.coordinates[0].z, 2000);
 
