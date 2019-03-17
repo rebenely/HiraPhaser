@@ -1,0 +1,119 @@
+{
+    "images" : {
+        "dialog_bg": "assets/dialogs/images/dialog_bg.png",
+        "bleu_happy": "assets/dialogs/images/bleu_happy.png",
+        "bleu_angry": "assets/dialogs/images/bleu_angry.png",
+        "bleu_smug": "assets/dialogs/images/bleu_smug.png",
+        "bleu_shocked": "assets/dialogs/images/bleu_shocked.png",
+        "bleu_think": "assets/dialogs/images/bleu_think.png",
+        "warrior_happy": "assets/dialogs/images/warrior_happy.png",
+        "warrior_think": "assets/dialogs/images/warrior_think.png",
+        "warrior_angry": "assets/dialogs/images/warrior_angry.png",
+        "warrior_smug": "assets/dialogs/images/warrior_smug.png",
+        "rogue_happy": "assets/dialogs/images/rogue_happy.png",
+        "rogue_smug": "assets/dialogs/images/rogue_smug.png",
+        "rogue_think": "assets/dialogs/images/rogue_think.png",
+        "mage_happy": "assets/dialogs/images/mage_happy.png",
+        "mage_angry": "assets/dialogs/images/mage_angry.png",
+        "mage_think": "assets/dialogs/images/mage_think.png",
+        "creator": "assets/dialogs/images/creator.png"
+    },
+
+    "dialog": [
+    {
+        "image" : "mage_happy",
+        "name" : "Gema",
+        "message": "I had a dream.",
+        "flip": true
+    },
+    {
+        "image": "warrior_smug",
+        "name" : "Ryor",
+        "message": "A song to sing?"
+    },
+    {
+        "image": "mage_happy",
+        "name" : "Gema",
+        "message": "...",
+        "flip": true
+    },
+    {
+        "image": "warrior_smug",
+        "name" : "Ryor",
+        "message": "Sorry. I had to."
+    },
+    {
+        "image": "bleu_think",
+        "name" : "You",
+        "message": "What was that dream about?"
+    },
+    {
+        "image": "mage_happy",
+        "name" : "Gema",
+        "message": "The Creator told me about your dream.",
+        "flip": true
+    },
+    {
+        "image": "bleu_happy",
+        "name" : "You",
+        "message": "Really? Did he tell you what the other part of my dream was about?"
+    },
+    {
+        "image": "mage_happy",
+        "name" : "Gema",
+        "message": "It's about the Goblin King.",
+        "flip": true
+    },
+    {
+        "image": "bleu_think",
+        "name" : "You",
+        "message": "What about him?"
+
+    },
+    {
+        "image": "mage_angry",
+        "name" : "Gema",
+        "message": "The sudden influx of high level goblins is due to the Goblin King's aura attracting them. This Goblin King dares to challenge The Creator!",
+        "flip": true
+    },
+    {
+        "image": "bleu_shocked",
+        "name" : "You",
+        "message": "Challenge the creator!?!"
+    },
+    {
+        "image": "mage_angry",
+        "name" : "Gema",
+        "message": "Yes. We have to stop it by defeating the goblins that are offering sacrifices to the Goblin King. This way it will not get too strong.",
+        "flip": true
+    },
+    {
+        "image": "warrior_happy",
+        "name" : "Ryor",
+        "message": "So, we'll continue defeating the goblins?"
+
+    },
+    {
+        "image": "mage_happy",
+        "name" : "Gema",
+        "message": "Yes. We'll continue our attacks until the herd is thinned.",
+        "flip": true
+    },
+    {
+        "image": "bleu_think",
+        "name" : "You",
+        "message": "(Was it about the Goblin King? Or was it only about the Goblin King? Something tells me its not the whole story.)"
+    }
+    ],
+
+    "image": {
+        "x": "360",
+        "y": "240",
+        "scale": "5"
+    },
+    "teach": [],
+    "message": {
+        "title":"Second Area Unlocked",
+        "message": "Thin the herd!"
+    }
+}

@@ -25,6 +25,7 @@ class DungeonScene extends Phaser.Scene {
     }
 
     create () {
+        // console.log('dungeon log is', this.log);
         this.enemyCleared = [];
         this.dataCapture = {
             username: this.player.name,
@@ -132,7 +133,7 @@ class DungeonScene extends Phaser.Scene {
         this.events.removeListener('camerafadeoutcomplete');
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
             this.scene.stop();
-            this.scene.start('ResultScene', {player: this.player, enemy: this.enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture, story: this.dungeon.story});
+            this.scene.start('ResultScene', {player: this.player, enemy: this.enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture, story: this.dungeon.story, log: this.log});
         }, this);
 
         this.events.removeListener('closeScreen');

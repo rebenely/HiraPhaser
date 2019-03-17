@@ -16,47 +16,119 @@
     },
 
     "dialog": [
+        {
+            "image" : "warrior_happy",
+            "name" : "Ryor",
+            "message": "I'm sorry about earlier. I didn't know anything about that.",
+            "flip": true
+        },
+        {
+            "image" : "warrior_think",
+            "name" : "Ryor",
+            "message": "The only one I know who can talk to The Creator is Gema.",
+            "flip": true
+        },
+        {
+            "image": "bleu_happy",
+            "name" : "You",
+            "message": "It's alright. So, you have something to teach me?"
+        },
+        {
+            "image" : "warrior_happy",
+            "name" : "Ryor",
+            "message": "Yes. I'll teach how to read the spells that the goblins use.",
+            "flip": true
+        },
+        {
+            "image" : "warrior_think",
+            "name" : "Ryor",
+            "message": "They are using Hiragana characters. There are 46 basic hiragana syllables that we will teach you.",
+            "flip": true
+        },
+        {
+            "image": "warrior_happy",
+            "name" : "Ryor",
+            "message": "Once you learned these, you can easily transcribe all of the sounds that the spells use and counter them!",
+            "flip": true
+        },
+        {
+            "image": "warrior_happy",
+            "name" : "Ryor",
+            "message": "We'll start with the vowels.",
+            "flip": true
+        },
+        {
+            "text": "A",
+            "name": "Ryor",
+            "message": "This is read as 'a'."
+        },
+        {
+            "text": "I",
+            "name": "Ryor",
+            "message": "This is read as 'i'."
+        },
+        {
+            "text": "U",
+            "name": "Ryor",
+            "message": "This is read as 'u'."
+        },
+        {
+            "text": "E",
+            "name": "Ryor",
+            "message": "This is read as 'e'."
+        },
+        {
+            "text": "O",
+            "name": "Ryor",
+            "message": "This is read as 'o'."
+        },
     {
-        "text": "A",
-        "name": "Ai",
-        "message": "This is read as 'a'."
+        "image": "warrior_happy",
+        "name": "Ryor",
+        "message": "Don't worry if you can't remember all of them right now. You could always check your Journal.",
+        "flip": true
     },
     {
-        "text": "I",
-        "name": "Ai",
-        "message": "This is read as 'i'."
+        "image": "warrior_happy",
+        "name": "Ryor",
+        "message": "Once you were taught how a syllable is read, that journal will magically learn it too.",
+        "flip": true
     },
     {
-        "text": "U",
-        "name": "Ai",
-        "message": "This is read as 'u'."
+        "image": "warrior_happy",
+        "name": "Ryor",
+        "message": "But a better way to memorize them is to train!",
+        "flip": true
     },
     {
-        "text": "E",
-        "name": "Ai",
-        "message": "This is read as 'e'."
+        "image": "warrior_happy",
+        "name": "Ryor",
+        "message": "Go to the reading room so you can Train by yourself.",
+        "flip": true
     },
     {
-        "text": "O",
-        "name": "Ai",
-        "message": "This is read as 'o'."
+        "image": "warrior_happy",
+        "name": "Ryor",
+        "message": "After that, I will be willing to Practice with you!",
+        "flip": true
     },
     {
-        "image": "npc_surprised",
-        "name": "Ai",
-        "message": "Can you remember them all?"
+        "image": "bleu_think",
+        "name" : "You",
+        "message": "I gotta say. That's a lot of things you told me."
     },
     {
-        "image": "npc_upset",
-        "name": "You",
-        "message": "No."
+        "image": "warrior_happy",
+        "name": "Ryor",
+        "message": "Don't worry. Once you get the hang of it, it will be a breeze.",
+        "flip": true
     }
     ],
 
     "image": {
-        "x": "320",
-        "y": "380",
-        "scale": "1"
+        "x": "360",
+        "y": "240",
+        "scale": "5"
     },
     "teach": ["A", "I", "U", "E", "O"],
     "message": {

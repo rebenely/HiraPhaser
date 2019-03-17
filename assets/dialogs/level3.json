@@ -26,7 +26,7 @@
         {
             "image": "bleu_happy",
             "name" : "You",
-            "message": "About that dream, how can you help me remember it? I have this nagging feeling that that dream is really important."
+            "message": "About that dream, can you help me fully remember it? I have this nagging feeling that that dream is really important."
         },
         {
             "image" : "mage_think",
@@ -46,29 +46,29 @@
             "flip": true
         },
         {
-            "text": "SA",
+            "text": "TA",
             "name": "Gema",
-            "message": "This is read as 'Sa'."
+            "message": "This is read as 'Ta'."
         },
         {
-            "text": "SI",
+            "text": "CHI",
             "name": "Gema",
-            "message": "This is read as 'Si'."
+            "message": "This is read as 'Chi'."
         },
         {
-            "text": "SU",
+            "text": "TSU",
             "name": "Gema",
-            "message": "This is read as 'Su'."
+            "message": "This is read as 'Tsu'."
         },
         {
-            "text": "SE",
+            "text": "TE",
             "name": "Gema",
-            "message": "This is read as 'Se'."
+            "message": "This is read as 'Te'."
         },
         {
-            "text": "SO",
+            "text": "TO",
             "name": "Gema",
-            "message": "This is read as 'So'."
+            "message": "This is read as 'To'."
         },
         {
             "image" : "mage_happy",
@@ -80,12 +80,12 @@
 
     "image": {
         "x": "360",
-        "y": "480",
+        "y": "240",
         "scale": "5"
     },
-    "teach": ["SA", "SHI", "SU", "SE", "SO"],
+    "teach": ["TA", "CHI", "TSU", "TE", "TO"],
     "message": {
-        "title":"S Family!",
-        "message": "You learned SA,SI,SU,SE,SO!"
+        "title":"T Family!",
+        "message": "You learned T Family!"
     }
 }

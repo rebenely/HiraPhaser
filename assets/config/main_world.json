@@ -1,10 +1,10 @@
 {
     "dungeons" : [
         {
-            "name": "V-dungeon REE" ,
+            "name": "Vowel Dungeon",
             "level": 4,
             "world": 0,
-            "description":  "Test for loop!",
+            "description":  "This is my first dungeon! Time to put my training in to work.",
             "charSet": ["A","I","U","E","O"],
             "wordPool": ["A","I","U","E","O"],
             "sprites":    {
@@ -26,13 +26,13 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Dungeon log"
+            "log":"Finished my first dungeon! I'm starting to get the hang of this."
         },
         {
             "name": "K-dungeon" ,
             "level": 8,
             "world": 0,
-            "description":  "This dungeon is the first dungeon ever made in this game! Easter egg dungeons will be added later. I just need to test the word wrap on this.",
+            "description":  "My second dungeon! I just need to keep calm and remember my training.",
             "charSet": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["A-KA", "KO-A", "KA-KI", "KU-O-KE", "KI-KU", "KO-O", "KE-KE", "KO-KO", "KI-KU"],
             "sprites":    {
@@ -54,13 +54,13 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Dungeon log 2"
+            "log":"Dungeons are starting to get difficult but I can handle this. For I have the power of hiragana and The Creator on my side!"
         },
         {
             "name": "S-dungeon" ,
             "level": 12,
             "world": 0,
-            "description":  "S dungeon!",
+            "description":  "This is the last dungeon for this area. Gema told me that after this, she'll tell me more about my dream.",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
             "sprites":    {
@@ -82,14 +82,14 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Dungeon log 3"
+            "log":"After S-Dungeon, Gema told me that she had a dream regarding The Creator and me."
         }
         ,
         {
             "name": "T-dungeon" ,
-            "level": 12,
-            "world": 0,
-            "description":  "T dungeon!",
+            "level": 17,
+            "world": 1,
+            "description":  "T dungeon! This is the first dungeon of the second area. I wonder what type of goblins reside here.",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
             "sprites":    {
@@ -111,13 +111,13 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Dungeon log 3"
+            "log":"The goblins look the same but they have a larger vocabulary than the others. I am starting to think that all these goblins look the same."
         },
         {
             "name": "N-dungeon" ,
-            "level": 12,
-            "world": 0,
-            "description":  "N dungeon!",
+            "level": 21,
+            "world": 1,
+            "description":  "Grou said that he will give me my N-family pass if I finish this dungeon. I have to get that pass!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
             "sprites":    {
@@ -139,13 +139,13 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Dungeon log 3"
+            "log":"N-family pass acquired!"
         },
         {
             "name": "H-dungeon" ,
-            "level": 12,
-            "world": 0,
-            "description":  "H dungeon!",
+            "level": 25,
+            "world": 1,
+            "description":  "The last dungeon of this area. I feel a presence watching me, but it doesn't matter. I have to finish this dungeon no matter what.",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
             "sprites":    {
@@ -167,13 +167,13 @@
                 }
             },
             "optionals" : {"sizeX": 133, "sizeY": 110},
-            "log":"Dungeon log 3"
+            "log":"The dungeon was the same with others. But I wonder. What was that presence I keep on feeling?"
         },
         {
             "name": "M-dungeon" ,
             "level": 12,
             "world": 0,
-            "description":  "M dungeon!",
+            "description":  "This is the last area. Two more dungeons then my quest will be done!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
             "sprites":    {
@@ -195,13 +195,13 @@
                 }
             },
             "optionals" : {"sizeX": 125, "sizeY": 90},
-            "log":"Dungeon log 3"
+            "log":"Two more dungeons remaining. This is getting easier!"
         },
         {
             "name": "Y-dungeon" ,
             "level": 12,
             "world": 0,
-            "description":  "Y dungeon!",
+            "description":  "Why not?",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
             "sprites":    {
@@ -223,13 +223,13 @@
                 }
             },
             "optionals" : {"sizeX": 120, "sizeY": 85},
-            "log":"Dungeon log 3"
+            "log":"Second to the last. The end is near!"
         },
         {
             "name": "R-dungeon" ,
             "level": 12,
             "world": 0,
-            "description":  "R dungeon!",
+            "description":  "The last dungeon. Hopefully, I'll get my answers now!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
             "sprites":    {
@@ -251,7 +251,7 @@
                 }
             },
             "optionals" : {"sizeX": 140, "sizeY": 120},
-            "log":"Dungeon log 3"
+            "log":"The next area seems suspiciously different from the others. I wonder what's in there."
         }
     ],
 
@@ -272,143 +272,143 @@
             "log":"Looks like there is more to this dream. At least that's what Gema is telling me. I guess I'll learn how to use spells just to be safe."
         },
         {
-            "name": "V start",
+            "name": "Vowels",
             "sprite": {"name": "learn", "x": 210, "y": 230},
             "json": "level0.json",
             "level": 1,
             "world": 0,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
-                "title": "Chapter 0: Vowels 4 u",
+                "title": "Vowels",
                 "subtitle": "You will learn vowels.",
-                "desc": "This is a place holder!"
+                "desc": "Gema told me to go to Ryor. He'll teach me the basics of what I should know."
             },
             "type":"CutScene",
-            "log":"Cutscene log 2. OwO what's this?"
+            "log":"Ryor taught me the vowels. He also taught me that my Journal contains the syllables that I learned so I can read them easily. The next step is to train by myself. Then after that, I can practice with him."
         },
         {
-            "name": "V start: Training",
+            "name": "Vowels: Training",
             "sprite": {"name": "train",  "x": 280, "y": 260},
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 2,
             "world": 0,
             "details" : {
-                "title": "Chapter 0: Vowels 4 u",
+                "title": "Vowels: Training",
                 "subtitle": "You will learn vowels.",
-                "desc": "This is a place holder!"
+                "desc": "Time to train my vowels!"
             },
             "type":"TrainScene",
              "characterPool": ["A","I","U","E","O"],
-             "log":"Cutscene log 3"
+             "log":"I trained my vowels."
         },
         {
-            "name": "V start: Practice Battle",
+            "name": "Vowels: Practice Battle",
             "sprite": {"name": "practice",  "x": 360, "y": 260},
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 3,
             "world": 0,
             "details" : {
-                "title": "Chapter 0: Vowels 4 u",
+                "title": "Vowels: Practice Battle",
                 "subtitle": "You will learn vowels.",
-                "desc": "This is a place holder!"
+                "desc": "Ryor told me that a simulated battle is necessary before facing the goblins."
             },
             "type":"BattleScene",
             "mentor" : {
-                "idle": "assets/spritesheets/teachers/mage_idle.png",
-                "attack": "assets/spritesheets/teachers/mage_attack.png"
+                "idle": "assets/spritesheets/teachers/warrior_idle.png",
+                "attack": "assets/spritesheets/teachers/warrior_attack.png"
             },
             "wordPool": ["A","I","U","E","O"],
-            "log":"Cutscene log 4"
+            "log":"I practiced with Ryor. I think I am ready to face some low level-vowel-speaking goblins."
         },
         {
-            "name": "The K-invasion",
+            "name": "K Family",
             "sprite": {"name": "learn", "x": 505, "y": 240},
             "json": "level1.json",
             "level": 5,
             "world": 0,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
-                "title": "Chapter I: Wtf",
+                "title": "K Family",
                 "subtitle": "You will learn vowels.",
-                "desc": "This is a place holder!"
+                "desc": "Goblins won't stop after a single dungeon raid. I must continue to learn."
             },
             "type":"CutScene",
-            "log":"Cutscene log 5"
+            "log":"I learned the K family syllables."
         },
         {
-            "name": "The K-invasion: Training",
+            "name": "K Family: Training",
             "sprite": {"name": "train",  "x": 550, "y": 260},
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 6,
             "world": 0,
             "details" : {
-                "title": "Chapter I: Wtf",
+                "title": "K Family: Training",
                 "subtitle": "this should work",
-                "desc": "You will learn vowels."
+                "desc": "Time to train my newly learned syllables."
             },
             "type":"TrainScene",
              "characterPool": ["KA","KI","KU","KE","KO"],
-             "log":"Cutscene log 6"
+             "log":"I continued training."
         },
         {
-            "name": "The K-invasion: Practice Battle",
+            "name": "K Family: Practice Battle",
             "sprite": {"name": "practice",  "x": 490, "y": 300 },
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 7,
             "world": 0,
             "details" : {
-                "title": "Chapter I: Wtf",
+                "title": "K Family: Practice Battle",
                 "subtitle": "You will learn vowels.",
-                "desc": "yikes"
+                "desc": "Practice Battle"
             },
             "mentor" : {
-                "idle": "assets/spritesheets/teachers/jojo_idle.png",
-                "attack": "assets/spritesheets/teachers/jojo_attack.png"
+                "idle": "assets/spritesheets/teachers/warrior_idle.png",
+                "attack": "assets/spritesheets/teachers/warrior_attack.png"
             },
             "type":"BattleScene",
             "wordPool": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "log":"Cutscene log 7"
+            "log":"I continued the practice with Ryor."
         },
         {
-            "name": "S-cape the trap!",
+            "name": "S Family",
             "sprite": {"name": "learn", "x": 420, "y": 410},
             "json": "level2.json",
             "level": 9,
             "world": 0,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
-                "title": "Chapter II: S",
+                "title": "S Family",
                 "subtitle": "subtitles.",
-                "desc": "This is a place holder!"
+                "desc": "I continue to learn other syllables while I wait for the elixir. This time, it's the S Family."
             },
             "type":"CutScene",
-            "log":"Cutscene log 8"
+            "log":"I continue to learn other syllables. This time, it's the S Family."
         },
         {
-            "name": "S-cape: Train",
+            "name": "S Family: Train",
             "sprite": {"name": "train",  "x": 370, "y": 420},
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 10,
             "world": 0,
             "details" : {
-                "title": "Chapter II: S",
+                "title": "S Family: Train",
                 "subtitle": "subtitles.",
-                "desc": "This is a place holder!"
+                "desc": "Training by myself is important."
             },
             "type":"TrainScene",
              "characterPool": ["SA","SHI","SU","SE","SO"],
              "log":"Cutscene log 9"
         },
         {
-            "name": "S-cape: Practice",
+            "name": "S Family: Practice",
             "sprite": {"name": "practice",  "x": 315, "y": 415 },
             "optionals" : {"sizeX": 64, "sizeY":58},
             "level": 11,
             "world": 0,
             "details" : {
-                "title": "Chapter II: S",
+                "title": "S Family: Practice",
                 "subtitle": "subtitles.",
-                "desc": "This is a place holder!"
+                "desc": "Practicing with others is important too."
             },
             "mentor" : {
                 "idle": "assets/spritesheets/teachers/mage_idle.png",
@@ -419,10 +419,172 @@
             "log":"Cutscene log 10"
         },
         {
-            "name": "Second Map!",
+            "name": "Dream Continues",
             "sprite": {"name": "message", "x": 885, "y": 680},
+            "json": "secondmap.json",
+            "level": 13,
+            "world": 1,
+            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "details" : {
+                "title": "Dream Continues",
+                "subtitle": "Yoikes",
+                "desc": "Do I fully understand my dreams?"
+            },
+            "type":"CutScene",
+            "log":"Gema told me about her dream. I feel like there were more to my dream than what she told me."
+        },
+        {
+            "name": "T Family",
+            "sprite": {"name": "learn", "x": 873, "y": 740},
+            "json": "level3.json",
+            "level": 14,
+            "world": 1,
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "details" : {
+                "title": "T Family",
+                "subtitle": "subtitles.",
+                "desc": "I continue to learn other syllables. This time, it's the T Family."
+            },
+            "type":"CutScene",
+            "log":"I continue to learn other syllables. This time, it's the S Family."
+        },
+        {
+            "name": "T Family: Train",
+            "sprite": {"name": "train",  "x": 830, "y": 750},
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 15,
+            "world": 1,
+            "details" : {
+                "title": "T Family: Train",
+                "subtitle": "subtitles.",
+                "desc": "Training by myself is important."
+            },
+            "type":"TrainScene",
+             "characterPool": ["TA","CHI","TSU","TE","TO"],
+             "log":"Cutscene log 9"
+        },
+        {
+            "name": "T Family: Practice",
+            "sprite": {"name": "practice",  "x": 785, "y": 765 },
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 16,
+            "world": 1,
+            "details" : {
+                "title": "T Family: Practice",
+                "subtitle": "subtitles.",
+                "desc": "Practicing with others is important too."
+            },
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/mage_idle.png",
+                "attack": "assets/spritesheets/teachers/mage_attack.png"
+            },
+            "type":"BattleScene",
+            "wordPool": ["TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "log":"Cutscene log 10"
+        },
+        {
+            "name": "N Family",
+            "sprite": {"name": "learn", "x": 689, "y": 834},
+            "json": "level4.json",
+            "level": 18,
+            "world": 1,
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "details" : {
+                "title": "N Family",
+                "subtitle": "subtitles.",
+                "desc": "I continue to learn other syllables. This time, it's the N Family."
+            },
+            "type":"CutScene",
+            "log":"This Grou guy is kind of creepy. But he teaches well so I think it's fine."
+        },
+        {
+            "name": "N Family: Train",
+            "sprite": {"name": "train",  "x": 745, "y": 850},
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 19,
+            "world": 1,
+            "details" : {
+                "title": "N Family: Train",
+                "subtitle": "subtitles.",
+                "desc": "Training by myself is important."
+            },
+            "type":"TrainScene",
+             "characterPool": ["NA","NI","NU","NE","NO", "N"],
+             "log":"Cutscene log 9"
+        },
+        {
+            "name": "N Family: Practice",
+            "sprite": {"name": "practice",  "x": 800, "y": 870 },
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 20,
+            "world": 1,
+            "details" : {
+                "title": "N Family: Practice",
+                "subtitle": "subtitles.",
+                "desc": "Practicing with others is important too."
+            },
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/rogue_idle.png",
+                "attack": "assets/spritesheets/teachers/rogue_attack.png"
+            },
+            "type":"BattleScene",
+            "wordPool": ["NA","NI","NU","NE","NO", "N","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "log":"Cutscene log 10"
+        },
+        {
+            "name": "H Family",
+            "sprite": {"name": "learn", "x": 975, "y": 860},
+            "json": "level4.json",
+            "level": 22,
+            "world": 1,
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "details" : {
+                "title": "H Family",
+                "subtitle": "subtitles.",
+                "desc": "I continue to learn other syllables. This time, it's the H Family."
+            },
+            "type":"CutScene",
+            "log":"Ryor is back. Time to finish this second area."
+        },
+        {
+            "name": "H Family: Train",
+            "sprite": {"name": "train",  "x": 1025, "y": 880},
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 23,
+            "world": 1,
+            "details" : {
+                "title": "H Family: Train",
+                "subtitle": "subtitles.",
+                "desc": "Training by myself is important."
+            },
+            "type":"TrainScene",
+             "characterPool": ["HA","HI","FU","HE","HO"],
+             "log":"Cutscene log 9"
+        },
+        {
+            "name": "H Family: Practice",
+            "sprite": {"name": "practice",  "x": 1070, "y": 860 },
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 24,
+            "world": 1,
+            "details" : {
+                "title": "H Family: Practice",
+                "subtitle": "subtitles.",
+                "desc": "Practicing with others is important too."
+            },
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/warrior_idle.png",
+                "attack": "assets/spritesheets/teachers/warrior_attack.png"
+            },
+            "type":"BattleScene",
+            "wordPool": ["HA","HI","FU","HE","HO","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "log":"Cutscene log 10"
+        },
+        {
+            "name": "Third Area!",
+            "sprite": {"name": "message", "x": 1800, "y": 175},
             "json": "welcome.json",
-            "level": 0,
+            "level": 26,
             "world": 0,
             "optionals" : {"sizeX": 133, "sizeY": 110},
             "details" : {
@@ -434,19 +596,151 @@
             "log":"Cutscene log 1. Word wrap test. Multiline ek ek. BASudbasod asdiabs asib aosdbiao sbdao da. He thought he fine, he aint."
         },
         {
-            "name": "Third Map!",
-            "sprite": {"name": "message", "x": 1800, "y": 175},
-            "json": "welcome.json",
-            "level": 0,
-            "world": 0,
-            "optionals" : {"sizeX": 133, "sizeY": 110},
+            "name": "M Family",
+            "sprite": {"name": "learn", "x": 1874, "y": 200},
+            "json": "level3.json",
+            "level": 14,
+            "world": 1,
+            "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
-                "title": "Pambati",
-                "subtitle": "Yoikes",
-                "desc": "wwwww"
+                "title": "M Family",
+                "subtitle": "subtitles.",
+                "desc": "I continue to learn other syllables. This time, it's the M Family."
             },
             "type":"CutScene",
-            "log":"Cutscene log 1. Word wrap test. Multiline ek ek. BASudbasod asdiabs asib aosdbiao sbdao da. He thought he fine, he aint."
+            "log":"I continue to learn other syllables. This time, it's the M Family."
+        },
+        {
+            "name": "M Family: Train",
+            "sprite": {"name": "train",  "x": 1910, "y": 245},
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 15,
+            "world": 1,
+            "details" : {
+                "title": "M Family: Train",
+                "subtitle": "subtitles.",
+                "desc": "Training by myself is important."
+            },
+            "type":"TrainScene",
+             "characterPool": ["MA","MI","MU","ME","MO"],
+             "log":"Cutscene log 9"
+        },
+        {
+            "name": "M Family: Practice",
+            "sprite": {"name": "practice",  "x": 1863, "y": 275 },
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 16,
+            "world": 1,
+            "details" : {
+                "title": "T Family: Practice",
+                "subtitle": "subtitles.",
+                "desc": "Practicing with others is important too."
+            },
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/mage_idle.png",
+                "attack": "assets/spritesheets/teachers/mage_attack.png"
+            },
+            "type":"BattleScene",
+            "wordPool": ["MA","MI","MU","ME","MO","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "log":"Cutscene log 10"
+        },
+        {
+            "name": "Y & W Families",
+            "sprite": {"name": "learn", "x": 1788, "y": 373},
+            "json": "level4.json",
+            "level": 18,
+            "world": 1,
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "details" : {
+                "title": "Y & W Families",
+                "subtitle": "subtitles.",
+                "desc": "I continue to learn other syllables. This time, it's the Y & W Families."
+            },
+            "type":"CutScene",
+            "log":"This Grou guy is kind of creepy. But he teaches well so I think it's fine."
+        },
+        {
+            "name": "Y & W Families",
+            "sprite": {"name": "train",  "x": 1745, "y": 390},
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 19,
+            "world": 1,
+            "details" : {
+                "title": "N Family: Train",
+                "subtitle": "subtitles.",
+                "desc": "Training by myself is important."
+            },
+            "type":"TrainScene",
+             "characterPool": ["NA","NI","NU","NE","NO", "N"],
+             "log":"Cutscene log 9"
+        },
+        {
+            "name": "Y & W Families: Practice",
+            "sprite": {"name": "practice",  "x": 1700, "y": 395 },
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 20,
+            "world": 1,
+            "details" : {
+                "title": "Y & W Families: Practice",
+                "subtitle": "subtitles.",
+                "desc": "Practicing with others is important too."
+            },
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/rogue_idle.png",
+                "attack": "assets/spritesheets/teachers/rogue_attack.png"
+            },
+            "type":"BattleScene",
+            "wordPool": ["NA","NI","NU","NE","NO", "N","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "log":"Cutscene log 10"
+        },
+        {
+            "name": "R Family",
+            "sprite": {"name": "learn", "x": 1575, "y": 428},
+            "json": "level4.json",
+            "level": 22,
+            "world": 1,
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "details" : {
+                "title": "R Family",
+                "subtitle": "subtitles.",
+                "desc": "I continue to learn other syllables. This time, it's the R Family."
+            },
+            "type":"CutScene",
+            "log":"Ryor is back. Time to finish this second area."
+        },
+        {
+            "name": "R Family: Train",
+            "sprite": {"name": "train",  "x": 1532, "y": 410},
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 23,
+            "world": 1,
+            "details" : {
+                "title": "R Family: Train",
+                "subtitle": "subtitles.",
+                "desc": "Training by myself is important."
+            },
+            "type":"TrainScene",
+             "characterPool": ["HA","HI","FU","HE","HO"],
+             "log":"Cutscene log 9"
+        },
+        {
+            "name": "R Family: Practice",
+            "sprite": {"name": "practice",  "x": 1486, "y": 390 },
+            "optionals" : {"sizeX": 64, "sizeY":58},
+            "level": 24,
+            "world": 1,
+            "details" : {
+                "title": "R Family: Practice",
+                "subtitle": "subtitles.",
+                "desc": "Practicing with others is important too."
+            },
+            "mentor" : {
+                "idle": "assets/spritesheets/teachers/warrior_idle.png",
+                "attack": "assets/spritesheets/teachers/warrior_attack.png"
+            },
+            "type":"BattleScene",
+            "wordPool": ["HA","HI","FU","HE","HO","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "log":"Cutscene log 10"
         }
     ]
 }

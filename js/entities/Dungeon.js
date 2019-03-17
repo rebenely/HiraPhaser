@@ -85,7 +85,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
             scene.input.setDefaultCursor('url(assets/images/cursor/normal.png), pointer');
             scene.events.emit('hoverOut');
         });
-
+        this.input.hitArea.setTo(10, 0, 60, 35);
         this.enabled = false;
     }
 

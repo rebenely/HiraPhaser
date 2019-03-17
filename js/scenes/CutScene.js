@@ -42,6 +42,9 @@ class CutScene extends Phaser.Scene {
         this.npc.setScale(Number(this.jsonFile.image.scale));
         this.npc.setOrigin(0.5);
         this.npc.setDepth(3);
+        if(this.jsonFile['dialog'][0].flip !== undefined) {
+            this.npc.setFlipX(true);
+        }
 
         var style = { font: "16px manaspc", fill: game.global.UI_TEXT_FILL, align: "left", wordWrap: { width: 660, useAdvancedWrap: true} };
         var titleStyle = { font: "32px manaspc", fill:  game.global.UI_TEXT_FILL, align: "center" };
@@ -114,16 +117,18 @@ class CutScene extends Phaser.Scene {
     parseInput(keyCode, key){
          if (keyCode === 13 || keyCode === 32) { //enter
             if(this.dialogIterator < this.maxIterator) {
+                // console.log('start ', this.messageArray[this.dialogIterator]);
                 this.dialogName.setTextUpper(this.messageArray[this.dialogIterator].name);
                 this.dialogText.setTextUpper(this.messageArray[this.dialogIterator].message);
                 if (this.messageArray[this.dialogIterator].narrate !== undefined) {
                     this.npc.visible = false;
                     this.hiraText.visible = false;
                 } else if (this.messageArray[this.dialogIterator].image !== undefined) {
+
                     if(this.npc.flipX){
                         this.npc.setFlipX(false);
                     }
-                    // console.log('start ', this.messageArray[this.dialogIterator].image);
+
                     if(this.messageArray[this.dialogIterator].flip !== undefined) {
                         this.npc.setFlipX(true);
                     }

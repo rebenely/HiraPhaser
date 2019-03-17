@@ -52,6 +52,11 @@ class StoryLevel extends Phaser.GameObjects.Sprite {
             scene.input.setDefaultCursor('url(assets/images/cursor/normal.png), pointer')
             scene.events.emit('hoverOut');
         });
+        if(sprite.name === 'learn' || sprite.name === 'practice' || sprite.name === 'train') {
+            this.input.hitArea.setTo(0, 0, 20, 20);
+        } else {
+            this.input.hitArea.setTo(0, 0, 60, 35);
+        }
 
         this.enabled = false;
     }

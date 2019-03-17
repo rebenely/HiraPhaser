@@ -51,17 +51,33 @@ class HintScene extends Phaser.Scene {
         // console.log(this.player.characterPool);
         var j = 0;
         var column = 0;
+        var markN = false;
         for ( let i = 0; i < this.player.characterPool.length; i++ ) {
 
-            if(i % 5 == 0) {
-                j++;
-                column = 0;
-            }
-            this.characterDisplay.push(this.add.bitmapText(680/(6) + column * 680/(6), 30+100*j, 'hira', Projectile.convertToHiragana(this.player.characterPool[i]), 48).setOrigin(0.5));
-            this.romajiDisplay.push(new HiraText(this, 680/(6) + column * 680/(6), 70 + 100*j, this.player.characterPool[i], "basic"));
 
-            this.add.existing(this.romajiDisplay[i]);
-            column++;
+            console.log(this.player.characterPool[i]);
+            if(this.player.characterPool[i] !== "N"){
+                if(column % 5 == 0) {
+                    j++;
+                    column = 0;
+                }
+                this.characterDisplay.push(this.add.bitmapText(680/(6) + column * 680/(6), 30+100*j, 'hira', Projectile.convertToHiragana(this.player.characterPool[i]), 48).setOrigin(0.5));
+                this.romajiDisplay.push(new HiraText(this, 680/(6) + column * 680/(6), 70 + 100*j, this.player.characterPool[i], "basic"));
+
+                this.add.existing(this.romajiDisplay[this.romajiDisplay.length - 1]);
+                column++;
+            } else {
+                markN = true;
+            }
+
+        }
+        if(markN) {
+            column = 0;
+            j++;
+            this.characterDisplay.push(this.add.bitmapText(680/(6) + column * 680/(6), 30+100*j, 'hira', Projectile.convertToHiragana("N"), 48).setOrigin(0.5));
+            this.romajiDisplay.push(new HiraText(this, 680/(6) + column * 680/(6), 70 + 100*j, "N", "basic"));
+
+            this.add.existing(this.romajiDisplay[this.romajiDisplay.length - 1]);
         }
 
         this.cancelButton = new HiraButton(this, 720  - 60 - 30, 420, "Back", style, () => {

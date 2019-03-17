@@ -24,6 +24,7 @@ class ResultScene extends Phaser.Scene {
 
     create () {
         // console.log(this.dataCapture);
+        // console.log('rsult scene log', this.log);
         this.scene.bringToTop();
 
         this.container = this.add.graphics();

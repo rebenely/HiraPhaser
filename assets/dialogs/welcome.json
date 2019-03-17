@@ -13,6 +13,7 @@
         "rogue_happy": "assets/dialogs/images/rogue_happy.png",
         "mage_happy": "assets/dialogs/images/mage_happy.png",
         "mage_angry": "assets/dialogs/images/mage_angry.png",
+        "mage_think": "assets/dialogs/images/mage_think.png",
         "creator": "assets/dialogs/images/creator.png"
     },
 
@@ -228,6 +229,28 @@
         "name": "Gema",
         "message": "In fact, we can start now. Meet Ryor at the training field once you're ready to start.",
         "flip": true
+    },
+    {
+        "image": "bleu_think",
+        "name": "You",
+        "message": "One more thing. I know he told me something more than this invasion but I can't seem to remember it."
+    },
+    {
+        "image": "bleu_think",
+        "name": "You",
+        "message": "That's one of the reason that I went to this place that he told me in my dream."
+    },
+    {
+        "image": "mage_think",
+        "name": "Gema",
+        "message": "I'll be happy to help you remember it. But we'll have to handle this goblin invasion first.",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name": "Gema",
+        "message": "Take this Journal with you. It will be helpful in you journey.",
+        "flip": true
     }
     ],
 
@@ -238,7 +261,7 @@
     },
     "teach": [],
     "message": {
-        "title":"Uwi na boi!",
-        "message": "You learned nothing!"
+        "title":"Dreams and Visions",
+        "message": "Story started!"
     }
 }
