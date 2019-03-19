@@ -78,3 +78,21 @@ game.timestamp = function (){
     console.log(manilaTime.toLocaleString());
     return manilaTime.toLocaleString();
 }
+game.distracted = 0;
+var stamp = null;
+game.events.on('blur',
+    function() {
+        if(game.loaded){
+            stamp = new Date(game.timestamp());
+        }
+    }
+, game);
+game.events.on('focus',
+    function() {
+        if(stamp !== null && game.loaded) {
+            var end = new Date(game.timestamp());
+            game.distracted += (end - stamp) / 1000;
+        }
+        console.log('distracted for', game.distracted," seconds.");
+    }
+, game);

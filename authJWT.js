@@ -175,6 +175,7 @@ module.exports  = {
         var username = res.locals.decoded.username;
         var session = res.locals.decoded.session;
         var start = res.locals.decoded.start;
+        var payload = req.body;
         var dbo = db.db(config.db_name);
         var query = {username: username};
         dbo.collection("players").findOne(query, function(err, result) {
@@ -196,7 +197,7 @@ module.exports  = {
               var startDate = new Date(start);
               var playTime = (end - startDate) / 1000;
 
-              dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime } }, function(err, res) {
+              dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime, distracted: payload.distracted } }, function(err, res) {
                 if (err) throw err;
                 console.log( username + ": ended session", session);
                 db.close();
