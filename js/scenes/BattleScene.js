@@ -26,11 +26,13 @@ class BattleScene extends Phaser.Scene {
     }
 
     init (data) {
-        // console.log(data);
+         console.log(data);
         if(data.dungeon !== undefined) {
             this.dungeon = data.dungeon;
             this.boss = data.boss;
             this.difficulty = data.difficulty;
+            this.skips = data.skips;
+            this.extends = data.extends;
         } else if (data.simulate) {
             this.dungeon = {
                 minionName: 'Mentor',
@@ -75,12 +77,19 @@ class BattleScene extends Phaser.Scene {
             {
 
                 this.sound.play('next');
+                this.timeExtendButton.visible = false;
                 this.skipButton.visible = false;
                 let stats = {
                     word: this.projectile.currentChar,
                     answer: this.inputText,
-                    time: parseFloat(this.timerDisplay.text)
+                    time: this.timeStopped ? Math.round((parseFloat(this.timerDisplay.text) + parseFloat(this.extraTime.text))*100)/100 : parseFloat(this.timerDisplay.text)
                 };
+
+                if(this.timeStopped) {
+                    this.timeStopped = false;
+                    this.extension.remove(this.ugokidasu());
+                }
+
 
                 if(this.inputText === this.projectile.currentChar)
                 {
@@ -106,6 +115,7 @@ class BattleScene extends Phaser.Scene {
     }
 
     create () {
+        this.timeStopped = false;
         this.battleCapture = {
             difficulty: this.difficulty,
             enemy_health: this.boss ? 4 : 2 + this.difficulty,
@@ -174,26 +184,71 @@ class BattleScene extends Phaser.Scene {
         this.add.existing(this.attackButton);
 
         /* add attack button */
-        this.skipButton = new HiraButton(this, 720/2, 480/2 - 30, "Skip", style, () =>  {
+        this.skipButton = new HiraButton(this, 2*720/4, 480/2 - 30, "Skip " + "(x" + (3-this.skips) + ")", style, () =>  {
             if(this.state === this.STATE_VALUE.attack) {
+                if(this.skips < 3){
+                    let stats = {
+                        word: this.projectile.currentChar,
+                        answer: '$SKIP$',
+                        time: parseFloat(this.timerDisplay.text)
+                    };
 
-                let stats = {
-                    word: this.projectile.currentChar,
-                    answer: '$SKIP$',
-                    time: parseFloat(this.timerDisplay.text)
-                };
+                    stats.correct = false;
+                    this.cameras.main.flash(100);
+                    this.state = this.STATE_VALUE.idle;
 
-                stats.correct = false;
-                this.cameras.main.flash(100);
-                this.state = this.STATE_VALUE.idle;
+                    this.timedEvent.remove(false);
 
-                this.timedEvent.remove(false);
-
-                this.battleCapture.questions.push(stats);
+                    this.battleCapture.questions.push(stats);
+                    this.skips++;
+                    this.skipButton.setText("Skip " + "(x" + (3-this.skips) + ")");
+                    if(this.skips >= 3) {
+                        this.skipButton.disable();
+                    }
+                }
 
             }
         }, this);
         this.add.existing(this.skipButton);
+
+        if(this.skips >= 3) {
+            this.skipButton.disable();
+        }
+
+        this.timeExtendButton = new HiraButton(this, 1*720/4, 480/2 - 30, "Extend Time " + "(x" + (1-this.extends) + ")", style, () =>  {
+            if(this.state === this.STATE_VALUE.attack) {
+                if(this.extends < 1){
+                    this.timeStopped = true;
+                    this.zawarudo.visible = true;
+                    this.timedEvent.paused = true;
+                    this.anims.pauseAll();
+                    this.sound.play('zawarudo');
+                    this.extension = this.time.addEvent({ delay: 5000, callback: this.ugokidasu, callbackScope: this }, this);
+                    this.extraTime.visible = true;
+
+                    this.tokiyotomare = this.tweens.add({
+                         targets: this.zawarudo,
+                         radius: 1000,
+                         x: 0,
+                         y: 0,
+                         duration: 500,
+                         ease: 'Sine.easeInOut',
+                         paused: false,
+                         yoyo: true
+                     });
+                    this.extends++;
+                    this.timeExtendButton.setText("Extend Time " + "(x" + (1-this.extends) + ")");
+                    if(this.extends >= 1) {
+                        this.timeExtendButton.disable();
+                    }
+                }
+
+            }
+        }, this);
+        this.add.existing(this.timeExtendButton);
+        if(this.extends >= 1) {
+            this.timeExtendButton.disable();
+        }
 
         /* create anims */
         this.anims.create({
@@ -269,6 +324,11 @@ class BattleScene extends Phaser.Scene {
         this.timerDisplay = new HiraText(this,720/2, 10, 'ayy lmao', "basic" );
         this.add.existing(this.timerDisplay);
         this.timerDisplay.visible = false;
+        this.extraTime = new HiraText(this,720/2, 25, 'ayy lmao', "basic" );
+        this.add.existing(this.extraTime);
+        this.extraTime.visible = false;
+
+        // this.timerDisplay.visible = false;
 
         /* projectile path */
         this.path = this.add.path();
@@ -302,7 +362,7 @@ class BattleScene extends Phaser.Scene {
             // console.log('yow');
             this.packData();
             if(!this.simulate){
-                this.events.emit('battleFinish', {success: this.player.hp > 0, dataCapture: this.battleCapture});
+                this.events.emit('battleFinish', {success: this.player.hp > 0, dataCapture: this.battleCapture, skips: this.skips, extends: this.extends});
                 this.scene.stop('BattleScene');
                 this.scene.wake('DungeonScene');
             }
@@ -423,6 +483,18 @@ class BattleScene extends Phaser.Scene {
                 this.okbButton.clearTint();
             }
             game.screenWipe(this);
+
+            this.zawarudo = this.add.circle(this.player.sprite.x, this.player.sprite.y, 1, 0x0000ff);
+            this.zawarudo.alpha = 0.2;
+            this.zawarudo.visible = false;
+            this.zawarudo.setOrigin(0.5);
+
+
+    }
+    ugokidasu() {
+        this.timedEvent.paused = false;
+        this.anims.resumeAll();
+        this.extraTime.visible = false;
     }
     toggleOKB(on) {
         this.okboverlay.visible = on;
@@ -655,6 +727,7 @@ class BattleScene extends Phaser.Scene {
             this.projectile.visible = false;
             this.timerDisplay.visible = false;
             this.skipButton.visible = false;
+            this.timeExtendButton.visible = false;
             this.follower.t = 0;
             this.follower.vec.x = 720/2;
             this.follower.vec.y = 480/3 - 50;
@@ -667,6 +740,7 @@ class BattleScene extends Phaser.Scene {
             this.inputTextDisplay.visible = true;
             this.projectile.visible = true;
             this.backButton.visible = false;
+            this.timeExtendButton.visible = true;
             this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
 
             if(!this.simulate){
@@ -675,7 +749,9 @@ class BattleScene extends Phaser.Scene {
             this.attackButton.visible = false;
             this.timerDisplay.visible = true;
             this.timerDisplay.setTextUpper(this.timedEvent.getElapsedSeconds().toString().substr(0, 4));
-
+            if(this.extraTime.visible == true){
+                this.extraTime.setTextUpper(this.extension.getElapsedSeconds().toString().substr(0, 4));
+            }
 
             this.toggleOKB(game.showOKB);
 

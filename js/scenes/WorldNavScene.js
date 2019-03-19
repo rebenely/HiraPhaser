@@ -75,7 +75,7 @@ class WorldNavScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.codexButton);
 
-        this.questButton = new HiraButton(this, 60*6, 430 + 20, "Quest", style, () => {
+        this.questButton = new HiraButton(this, 60*6, 430 + 20, "Story", style, () => {
             this.events.emit('quest');
         }, this);
         this.add.existing(this.questButton);

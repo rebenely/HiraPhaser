@@ -39,7 +39,7 @@ class JournalScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.okayButton);
 
-        this.charactersLearned = new HiraButton(this, 720/3, 480/2, "Hiragana\nLearned", style, () => {
+        this.charactersLearned = new HiraButton(this, 720/3, 480/2, "Review\nHiragana", style, () => {
             // console.log('fuck go back');
             this.scene.launch('HintScene', {player: this.player});
             this.scene.pause('JournalScene');

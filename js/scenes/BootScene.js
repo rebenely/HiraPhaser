@@ -39,6 +39,7 @@ class BootScene extends Phaser.Scene {
         /* load sfx */
         this.load.audio('hover', ['assets/sounds/sfx/sfx_coin_double1.wav']);
         this.load.audio('click', ['assets/sounds/sfx/sfx_coin_double3.wav']);
+        this.load.audio('zawarudo', ['assets/sounds/sfx/sfx_exp_odd5.wav']);
         this.load.audio('disabled', ['assets/sounds/sfx/sfx_sounds_error7.wav']);
         this.load.audio('shake', ['assets/sounds/sfx/sfx_sounds_impact6.wav']);
         this.load.audio('ugh', ['assets/sounds/sfx/sfx_deathscream_human2.wav']);

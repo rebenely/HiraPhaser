@@ -26,6 +26,8 @@ class DungeonScene extends Phaser.Scene {
 
     create () {
         // console.log('dungeon log is', this.log);
+        this.skips = 0;
+        this.extends = 0;
         this.enemyCleared = [];
         this.dataCapture = {
             username: this.player.name,
@@ -75,7 +77,7 @@ class DungeonScene extends Phaser.Scene {
             this.scene.sleep('DungeonScene');
             this.sound.play('start');
 
-            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3, simulate: false });
+            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3, simulate: false, skips: this.skips, extends: this.extends });
         }, this);
         this.add.existing(this.battleButton);
 
@@ -123,10 +125,14 @@ class DungeonScene extends Phaser.Scene {
             this.hardButton.setStroke(game.global.UI_TEXT_STROKE_HIGHLIGHT, 3);
         }
 
-        this.hintButton = new HiraButton(this, 720/2 , 420, 'Hint!', style, () => {
-            this.hintChecked = true;
-            this.scene.pause('DungeonScene');
-            this.scene.launch('HintScene', {player: this.player, characterPool: this.player.characterPool});
+        this.hintButton = new HiraButton(this, 720/2 , 420, 'Review! (x1)', style, () => {
+            if(!this.hintChecked) {
+                this.hintChecked = true;
+                this.scene.pause('DungeonScene');
+                this.scene.launch('HintScene', {player: this.player, characterPool: this.player.characterPool});
+                this.hintButton.setText('Review! (x0)')
+                this.hintButton.disable();
+            }
         }, this);
         this.add.existing(this.hintButton);
 
@@ -210,6 +216,8 @@ class DungeonScene extends Phaser.Scene {
             this.cleared += 1;
             // console.log('tapos ', this.cleared);
         }
+        this.skips = data.skips;
+        this.extends = data.extends;
         data.dataCapture.hint_checked = this.hintChecked;
         this.dataCapture.battles.push(data.dataCapture);
         this.hintChecked = false;
@@ -217,7 +225,8 @@ class DungeonScene extends Phaser.Scene {
 
     packCapturedData(success, flee){
         this.dataCapture.success = success;
-
+        this.dataCapture.skips = this.skips;
+        this.dataCapture.extends = this.extends;
         this.dataCapture.flee = flee;
         this.dataCapture.total_time = (new Date() - this.dataCapture.total_time)/1000;
 
