@@ -81,15 +81,15 @@ class StatsScene extends Phaser.Scene {
             success: function (responseData) {
                 this.loader.visible = false;
                 this.accuracyDisplay.visible = true;
-                if(responseData.stats.train_ave){
+                if(responseData.stats.train_ave != undefined){
                     this.trainDisplay.setText('Train ' + game.roundOff(responseData.stats.train_ave).toString() + '%');
                 }
                 this.trainDisplay.visible = true;
-                if(responseData.stats.practice_ave){
+                if(responseData.stats.practice_ave != undefined){
                     this.practiceDisplay.setText('Practice ' + game.roundOff(responseData.stats.practice_ave).toString() + '%');
                 }
                 this.practiceDisplay.visible = true;
-                if(responseData.stats.dungeon_ave){
+                if(responseData.stats.dungeon_ave != undefined){
                     this.dungeonDisplay.setText('Dungeon ' + game.roundOff(responseData.stats.dungeon_ave).toString() + '%');
                 }
                 this.dungeonDisplay.visible = true;

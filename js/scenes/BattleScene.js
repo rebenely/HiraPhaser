@@ -88,11 +88,11 @@ class BattleScene extends Phaser.Scene {
                 if(this.timeStopped) {
                     this.timeStopped = false;
                     this.extension.remove(this.ugokidasu());
+                    stats.time_stopped = true;
                 }
 
 
-                if(this.inputText === this.projectile.currentChar)
-                {
+                if (this.inputText === this.projectile.currentChar) {
                     stats.correct = true;
                     this.state = this.STATE_VALUE.idle;
 
@@ -101,9 +101,7 @@ class BattleScene extends Phaser.Scene {
                     this.playerAttack();
                     this.state = this.STATE_VALUE.animate;
 
-                }
-                else
-                {
+                } else {
                     stats.correct = false;
                     this.enemy.sprite.play('enemy_attack', false);
                     this.timedEvent.remove(this.answerFailed(true));
@@ -189,15 +187,24 @@ class BattleScene extends Phaser.Scene {
                 if(this.skips < 3){
                     let stats = {
                         word: this.projectile.currentChar,
-                        answer: '$SKIP$',
+                        answer: this.inputText,
+                        skip: true,
                         time: parseFloat(this.timerDisplay.text)
                     };
+                    if(this.timeStopped) {
+                        this.timeStopped = false;
+                        stats.time_stopped = true;
+                    }
+
 
                     stats.correct = false;
                     this.cameras.main.flash(100);
                     this.state = this.STATE_VALUE.idle;
 
                     this.timedEvent.remove(false);
+                    this.extension.remove(this.ugokidasu());
+                    this.timeStopped = false;
+
 
                     this.battleCapture.questions.push(stats);
                     this.skips++;
@@ -740,10 +747,10 @@ class BattleScene extends Phaser.Scene {
             this.inputTextDisplay.visible = true;
             this.projectile.visible = true;
             this.backButton.visible = false;
-            this.timeExtendButton.visible = true;
             this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
 
             if(!this.simulate){
+                this.timeExtendButton.visible = true;
                 this.skipButton.visible = true;
             }
             this.attackButton.visible = false;
@@ -772,8 +779,13 @@ class BattleScene extends Phaser.Scene {
             let stats = {
                 word: this.projectile.currentChar,
                 answer: this.inputText,
-                time: parseFloat(5.0)
+                time: parseFloat(5.0),
+                timed_out: true
             };
+            if(this.timeStopped) {
+                this.timeStopped = false;
+                stats.time_stopped = true;
+            }
             this.battleCapture.questions.push(stats);
         } else {
             this.timerDisplay.setTextUpper('Wrong!');

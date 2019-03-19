@@ -69,7 +69,7 @@ class DungeonScene extends Phaser.Scene {
             }
             this.scene.stop();
             this.sound.play('fail');
-            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true, dataCapture: this.dataCapture, log: this.log});
+            this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true, dataCapture: this.dataCapture, story: this.dungeon.story, log: this.log});
         }, this);
         this.add.existing(this.cancelButton);
 

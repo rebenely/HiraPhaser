@@ -304,6 +304,7 @@ function toggleFullScreen() {
 }
 
 $(window).on("beforeunload unload", function(e) {
+    var payload = {distracted: game.distracted};
     if(game.player_name !== '' && !game.logged_out){
         /* end session */
         logged_out = true;
@@ -312,7 +313,8 @@ $(window).on("beforeunload unload", function(e) {
             url: window.location.href + "logout",
             headers: {"Authorization": "Bearer " + game.token },
             type: "POST",
-            contentType: "application/json"
+            contentType: "application/json",
+            data: JSON.stringify(payload)
         });
     }
 });
