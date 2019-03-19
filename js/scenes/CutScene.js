@@ -8,6 +8,7 @@ class CutScene extends Phaser.Scene {
         this.jsonFile = data.jsonFile;
         this.story = data.story;
         this.log = data.log;
+        this.world = data.world;
     }
 
     preload () {
@@ -152,7 +153,7 @@ class CutScene extends Phaser.Scene {
 
             } else {
                 // console.log(this.jsonFile);
-                this.events.emit('learnedNewCharacters', {charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});
+                this.events.emit('learnedNewCharacters', {world: this.world, charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});
                 this.scene.stop('CutScene');
                 this.scene.wake('MainScene');
             }

@@ -11,7 +11,6 @@
         "warrior_angry": "assets/dialogs/images/warrior_angry.png",
         "warrior_smug": "assets/dialogs/images/warrior_smug.png",
         "rogue_happy": "assets/dialogs/images/rogue_happy.png",
-        "rogue_attack": "assets/dialogs/images/rogue_attack.png",
         "mage_happy": "assets/dialogs/images/mage_happy.png",
         "mage_angry": "assets/dialogs/images/mage_happy.png",
         "mage_think": "assets/dialogs/images/mage_think.png"
@@ -21,75 +20,37 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "The spirit elemental Grou wants to talk to you!",
+            "message": "I'll tell you if I got my hands on one of those elixirs.",
             "flip": true
         },
         {
-            "image": "bleu_think",
-            "name" : "You",
-            "message": "Who?"
-        },
-        {
-            "image" : "rogue_happy",
-            "name" : "Grou",
-            "message": "Me.",
-            "flip": true
-        },
-        {
-            "image": "bleu_shocked",
-            "name" : "You",
-            "message": "What the-. You look just like me!"
-        },
-        {
-            "image" : "mage_think",
-            "name" : "Gema",
-            "message": "Grou copies the likeness of the person who sees him. In your case, he looks like you. But for me, he looks just like me.",
-            "flip": true
-        },
-        {
-            "image" : "rogue_attack",
-            "name" : "Grou",
-            "message": "I will be the one to grant you your N-Family pass. But before that, you must learn the N-Family first!",
-            "flip": true
-        },
-        {
-            "image": "bleu_think",
-            "name" : "You",
-            "message": "N-Family pass? I don't get what you mean but sure."
-        },
-        {
-            "text": "NA",
-            "name": "Grou",
+            "text": "HA",
+            "name": "Gema",
             "message": "This is read as 'Ha'."
         },
         {
-            "text": "NI",
-            "name": "Grou",
+            "text": "HI",
+            "name": "Gema",
             "message": "This is read as 'Hi'."
         },
         {
-            "text": "NU",
-            "name": "Grou",
+            "text": "FU",
+            "name": "Gema",
             "message": "This is read as 'Fu'."
         },
         {
-            "text": "NE",
-            "name": "Grou",
+            "text": "HE",
+            "name": "Gema",
             "message": "This is read as 'He'."
         },
         {
-            "text": "NO",
-            "name": "Grou",
+            "text": "HO",
+            "name": "Gema",
             "message": "This is read as 'Ho'."
         },
         {
-            "text": "N",
-            "name": "Grou",
-            "message": "This is read as 'N'. Remember that this one is read as a syllable and not a character!"
-        },
-        {
             "image" : "mage_happy",
-            "name" : "Grou",
+            "name" : "Gema",
             "message": "I'll tell you if I got my hands on one of those elixirs.",
             "flip": true
         }
@@ -100,7 +61,7 @@
         "y": "240",
         "scale": "5"
     },
-    "teach": ["NA", "NI", "NU", "NE", "NO", "N"],
+    "teach": ["HA", "HI", "FU", "HE", "HO"],
     "message": {
         "title":"N Family!",
         "message": "You learned N Family!"

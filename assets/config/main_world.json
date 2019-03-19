@@ -6,7 +6,7 @@
             "world": 0,
             "description":  "This is my first dungeon! Time to put my training in to work.",
             "charSet": ["A","I","U","E","O"],
-            "wordPool": ["A","I","U","E","O"],
+            "wordPool": ["A-I","A-U","A-O-I","I-I-E","I-I-A-U", "U-E", "E-I", "O-U", "O-O-U", "O-O-I", "I-O-U", "I", "U", "E", "O"],
             "sprites":    {
                 "x": 430, "y": 185, "name": "cave",
                 "dungeonBG": {
@@ -34,7 +34,7 @@
             "world": 0,
             "description":  "My second dungeon! I just need to keep calm and remember my training.",
             "charSet": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["A-KA", "KO-A", "KA-KI", "KU-O-KE", "KI-KU", "KO-O", "KE-KE", "KO-KO", "KI-KU"],
+            "wordPool": ["A-KA", "KA-O", "E-KI", "KO-E", "KI", "KO-I", "I-KE", "KA-KU", "KO", "KE", "KA", "KU", "I-KU", "I-KE", "KO-U-KA"],
             "sprites":    {
                 "x": 475, "y": 374, "name": "cave",
                 "dungeonBG": {
@@ -62,7 +62,7 @@
             "world": 0,
             "description":  "This is the last dungeon for this area. Gema told me that after this, she'll tell me more about my dream.",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "wordPool": ["SA-KE", "A-SHI", "SU-SHI", "A-SA", "U-SO", "SHI-KA", "SE-KA-I", "SHI-SHI", "KU-SA", "SHI-O", "I-SU"],
             "sprites":    {
                 "x": 236, "y": 420, "name": "cave",
                 "dungeonBG": {
@@ -91,7 +91,7 @@
             "world": 1,
             "description":  "T dungeon! This is the first dungeon of the second area. I wonder what type of goblins reside here.",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "wordPool": ["TA-TSU", "TA-I", "A-TA-SHI", "KA-TA", "TA-KA", "KI-TA", "SHI-CHI", "CHI-I-SA-I", "KU-CHI", "TSU-KI", "TSU-CHI", "O-TO-KO", "O-TO-U-TO", "KA-TSU-O", "SA-TO-U"],
             "sprites":    {
                 "x": 713, "y": 770, "name": "cave",
                 "dungeonBG": {
@@ -119,7 +119,7 @@
             "world": 1,
             "description":  "Grou said that he will give me my N-family pass if I finish this dungeon. I have to get that pass!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "wordPool": ["NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SHI-YO-U-NE-N", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I"],
             "sprites":    {
                 "x": 902, "y": 870, "name": "cave",
                 "dungeonBG": {
@@ -147,7 +147,7 @@
             "world": 1,
             "description":  "The last dungeon of this area. I feel a presence watching me, but it doesn't matter. I have to finish this dungeon no matter what.",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "wordPool": ["HA-CHI", "HA-NA-SU", "HI-TO", "HO-NE", "HO-HO", "HA-HA", "HA-I", "HU", "HE", "FU-TA-TSU", "FU-TO-I", "FU-KU"],
             "sprites":    {
                 "x": 1125, "y": 820, "name": "cave",
                 "dungeonBG": {
@@ -171,11 +171,11 @@
         },
         {
             "name": "M-dungeon" ,
-            "level": 12,
-            "world": 0,
+            "level": 30,
+            "world": 2,
             "description":  "This is the last area. Two more dungeons then my quest will be done!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "wordPool": ["MU-NE", "SHI-MA-I", "TSU-MA", "U-MA", "SA-N-MA", "KU-MA", "MI-SO", "NO-MI-MO-NO", "MI-NA-MI", "MI-SE", "HI-MO", "KI-MO-NO", "SA-MU-I", "U-MU"],
             "sprites":    {
                 "x": 1854, "y": 347, "name": "cave",
                 "dungeonBG": {
@@ -198,12 +198,12 @@
             "log":"Two more dungeons remaining. This is getting easier!"
         },
         {
-            "name": "Y-dungeon" ,
-            "level": 12,
-            "world": 0,
+            "name": "Y & W dungeon" ,
+            "level": 35,
+            "world": 2,
             "description":  "Why not?",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "wordPool": ["YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "YA-KU-SHO", "KO-YO-MI", "YU"],
             "sprites":    {
                 "x": 1635, "y": 405, "name": "cave",
                 "dungeonBG": {
@@ -227,11 +227,11 @@
         },
         {
             "name": "R-dungeon" ,
-            "level": 12,
-            "world": 0,
+            "level": 38,
+            "world": 2,
             "description":  "The last dungeon. Hopefully, I'll get my answers now!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["SA-KA", "KO-SA", "SU-SHI", "KU-SO-KE", "KI-SU", "KO-SE", "SE-SE", "SO-KO", "KI-SU"],
+            "wordPool": ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "MI-DO-RI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I"],
             "sprites":    {
                 "x": 1405, "y": 390, "name": "cave",
                 "dungeonBG": {
@@ -251,7 +251,7 @@
                 }
             },
             "optionals" : {"sizeX": 140, "sizeY": 120},
-            "log":"The next area seems suspiciously different from the others. I wonder what's in there."
+            "log":"This is the end!"
         }
     ],
 
@@ -534,7 +534,7 @@
         {
             "name": "H Family",
             "sprite": {"name": "learn", "x": 975, "y": 860},
-            "json": "level4.json",
+            "json": "level5.json",
             "level": 22,
             "world": 1,
             "optionals" : {"sizeX": 64, "sizeY":58},
@@ -577,45 +577,45 @@
                 "attack": "assets/spritesheets/teachers/warrior_attack.png"
             },
             "type":"BattleScene",
-            "wordPool": ["HA","HI","FU","HE","HO","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["HA","HI","FU","HE","HO","NA","NI","NU","NE","NO", "N","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "log":"Cutscene log 10"
         },
         {
-            "name": "Third Area!",
+            "name": "Final Arc",
             "sprite": {"name": "message", "x": 1800, "y": 175},
             "json": "welcome.json",
             "level": 26,
-            "world": 0,
+            "world": 2,
             "optionals" : {"sizeX": 133, "sizeY": 110},
             "details" : {
-                "title": "Pambati",
+                "title": "Final Arc",
                 "subtitle": "Yoikes",
-                "desc": "wwwww"
+                "desc": "I have to stop the goblins from creating a Goblin King."
             },
             "type":"CutScene",
-            "log":"Cutscene log 1. Word wrap test. Multiline ek ek. BASudbasod asdiabs asib aosdbiao sbdao da. He thought he fine, he aint."
+            "log":"Gema is not gonna create a Goblin King! So that was the meaning of that dream. I have to stop her!"
         },
         {
             "name": "M Family",
             "sprite": {"name": "learn", "x": 1874, "y": 200},
-            "json": "level3.json",
-            "level": 14,
-            "world": 1,
+            "json": "level6.json",
+            "level": 27,
+            "world": 2,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "M Family",
                 "subtitle": "subtitles.",
-                "desc": "I continue to learn other syllables. This time, it's the M Family."
+                "desc": "I continue my journey even though this time my goals are different."
             },
             "type":"CutScene",
-            "log":"I continue to learn other syllables. This time, it's the M Family."
+            "log":"I have to defeat Gema. She was the one who dares challenge The Creator!"
         },
         {
             "name": "M Family: Train",
             "sprite": {"name": "train",  "x": 1910, "y": 245},
             "optionals" : {"sizeX": 64, "sizeY":58},
-            "level": 15,
-            "world": 1,
+            "level": 28,
+            "world": 2,
             "details" : {
                 "title": "M Family: Train",
                 "subtitle": "subtitles.",
@@ -629,8 +629,8 @@
             "name": "M Family: Practice",
             "sprite": {"name": "practice",  "x": 1863, "y": 275 },
             "optionals" : {"sizeX": 64, "sizeY":58},
-            "level": 16,
-            "world": 1,
+            "level": 29,
+            "world": 2,
             "details" : {
                 "title": "T Family: Practice",
                 "subtitle": "subtitles.",
@@ -641,29 +641,29 @@
                 "attack": "assets/spritesheets/teachers/mage_attack.png"
             },
             "type":"BattleScene",
-            "wordPool": ["MA","MI","MU","ME","MO","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["MA","MI","MU","ME","MO","HA","HI","FU","HE","HO","NA","NI","NU","NE","NO", "N","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "log":"Cutscene log 10"
         },
         {
             "name": "Y & W Families",
             "sprite": {"name": "learn", "x": 1788, "y": 373},
-            "json": "level4.json",
-            "level": 18,
+            "json": "level7.json",
+            "level": 31,
             "world": 1,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "Y & W Families",
                 "subtitle": "subtitles.",
-                "desc": "I continue to learn other syllables. This time, it's the Y & W Families."
+                "desc": "It's a good thing I still have Ryor and Grou on my side. We must stop the revival of the Goblin King!"
             },
             "type":"CutScene",
-            "log":"This Grou guy is kind of creepy. But he teaches well so I think it's fine."
+            "log":"Ryor and Grou are with me. We must stop Gema."
         },
         {
             "name": "Y & W Families",
             "sprite": {"name": "train",  "x": 1745, "y": 390},
             "optionals" : {"sizeX": 64, "sizeY":58},
-            "level": 19,
+            "level": 32,
             "world": 1,
             "details" : {
                 "title": "N Family: Train",
@@ -671,14 +671,14 @@
                 "desc": "Training by myself is important."
             },
             "type":"TrainScene",
-             "characterPool": ["NA","NI","NU","NE","NO", "N"],
+             "characterPool": ["YA","WA","YU","WO","YO"],
              "log":"Cutscene log 9"
         },
         {
             "name": "Y & W Families: Practice",
             "sprite": {"name": "practice",  "x": 1700, "y": 395 },
             "optionals" : {"sizeX": 64, "sizeY":58},
-            "level": 20,
+            "level": 33,
             "world": 1,
             "details" : {
                 "title": "Y & W Families: Practice",
@@ -690,29 +690,29 @@
                 "attack": "assets/spritesheets/teachers/rogue_attack.png"
             },
             "type":"BattleScene",
-            "wordPool": ["NA","NI","NU","NE","NO", "N","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["YA","WA","YU","WO","YO","MA","MI","MU","ME","MO","HA","HI","FU","HE","HO","NA","NI","NU","NE","NO", "N","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "log":"Cutscene log 10"
         },
         {
             "name": "R Family",
             "sprite": {"name": "learn", "x": 1575, "y": 428},
-            "json": "level4.json",
-            "level": 22,
+            "json": "level8.json",
+            "level": 35,
             "world": 1,
             "optionals" : {"sizeX": 64, "sizeY":58},
             "details" : {
                 "title": "R Family",
                 "subtitle": "subtitles.",
-                "desc": "I continue to learn other syllables. This time, it's the R Family."
+                "desc": "This is the final battle. She must be stopped!"
             },
             "type":"CutScene",
-            "log":"Ryor is back. Time to finish this second area."
+            "log":"This is my final dungeon. She must be stopped no matter what!"
         },
         {
             "name": "R Family: Train",
             "sprite": {"name": "train",  "x": 1532, "y": 410},
             "optionals" : {"sizeX": 64, "sizeY":58},
-            "level": 23,
+            "level": 36,
             "world": 1,
             "details" : {
                 "title": "R Family: Train",
@@ -720,14 +720,14 @@
                 "desc": "Training by myself is important."
             },
             "type":"TrainScene",
-             "characterPool": ["HA","HI","FU","HE","HO"],
+             "characterPool": ["RA","RI","RU","RE","RO"],
              "log":"Cutscene log 9"
         },
         {
             "name": "R Family: Practice",
             "sprite": {"name": "practice",  "x": 1486, "y": 390 },
             "optionals" : {"sizeX": 64, "sizeY":58},
-            "level": 24,
+            "level": 37,
             "world": 1,
             "details" : {
                 "title": "R Family: Practice",
@@ -739,7 +739,7 @@
                 "attack": "assets/spritesheets/teachers/warrior_attack.png"
             },
             "type":"BattleScene",
-            "wordPool": ["HA","HI","FU","HE","HO","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool": ["RA","RI","RU","RE","RO","YA","WA","YU","WO","YO","MA","MI","MU","ME","MO","HA","HI","FU","HE","HO","NA","NI","NU","NE","NO", "N","TA","CHI","TSU","TE","TO", "SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
             "log":"Cutscene log 10"
         }
     ]

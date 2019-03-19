@@ -105,10 +105,15 @@ class WorldNavScene extends Phaser.Scene {
         this.caveName = new HiraText(this, 720/2, 25, "", "header");
         this.add.existing(this.caveName);
         this.caveName.visible = false;
+        // this.onUpdateNextStory({level: { story_hack: this.player.story }});
     }
 
     onUpdateNextStory(data) {
+        if(data.level.story_hack !== undefined) {
+            data.level.world = Math.floor(data.level.story_hack/12);
+        }
         console.log(data.level.world, 'vs', this.iterator)
+
         if(this.iterator !== data.level.world) {
             this.iterator = data.level.world;
             this.navEnable = false;

@@ -10,7 +10,7 @@ class Unit  {
         this.x = x;
         this.y = y;
         this.exp = 0;
-        this.story = this.level = 0;
+        this.story = this.level = this.world = 0;
         this.maxExp = 100;
         this.characterPool = [];
         this.logs = [];

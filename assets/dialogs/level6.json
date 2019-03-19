@@ -1,0 +1,69 @@
+{
+    "images" : {
+        "dialog_bg": "assets/dialogs/images/dialog_bg.png",
+        "bleu_happy": "assets/dialogs/images/bleu_happy.png",
+        "bleu_angry": "assets/dialogs/images/bleu_angry.png",
+        "bleu_smug": "assets/dialogs/images/bleu_smug.png",
+        "bleu_shocked": "assets/dialogs/images/bleu_shocked.png",
+        "bleu_think": "assets/dialogs/images/bleu_think.png",
+        "warrior_happy": "assets/dialogs/images/warrior_happy.png",
+        "warrior_think": "assets/dialogs/images/warrior_think.png",
+        "warrior_angry": "assets/dialogs/images/warrior_angry.png",
+        "warrior_smug": "assets/dialogs/images/warrior_smug.png",
+        "rogue_happy": "assets/dialogs/images/rogue_happy.png",
+        "mage_happy": "assets/dialogs/images/mage_happy.png",
+        "mage_angry": "assets/dialogs/images/mage_happy.png",
+        "mage_think": "assets/dialogs/images/mage_think.png"
+    },
+
+    "dialog": [
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "flip": true
+        },
+        {
+            "text": "MA",
+            "name": "Gema",
+            "message": "This is read as 'Ma'."
+        },
+        {
+            "text": "MI",
+            "name": "Gema",
+            "message": "This is read as 'Mi'."
+        },
+        {
+            "text": "MU",
+            "name": "Gema",
+            "message": "This is read as 'Mu'."
+        },
+        {
+            "text": "ME",
+            "name": "Gema",
+            "message": "This is read as 'Me'."
+        },
+        {
+            "text": "MO",
+            "name": "Gema",
+            "message": "This is read as 'Mo'."
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "flip": true
+        }
+    ],
+
+    "image": {
+        "x": "360",
+        "y": "240",
+        "scale": "5"
+    },
+    "teach": ["MA", "MI", "MU", "ME", "MO"],
+    "message": {
+        "title":"M Family!",
+        "message": "You learned M Family!"
+    }
+}

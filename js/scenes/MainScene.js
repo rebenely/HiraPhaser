@@ -117,7 +117,7 @@ class MainScene extends Phaser.Scene {
                              title: currentLevel.details.title,
                              subtitle:  currentLevel.details.subtitle,
                              desc:  currentLevel.details.desc
-                         }, startScene: 'CutLoaderScene', passData: {jsonFile: currentLevel.json, story: currentLevel.level, log: currentLevel.log}});
+                         }, startScene: 'CutLoaderScene', passData: {jsonFile: currentLevel.json, story: currentLevel.level, log: currentLevel.log, world: currentLevel.world}});
                      },
                      currentLevel.log, currentLevel.world));
                  this.add.existing(this.cutSceneLevels[this.cutSceneLevels.length - 1]);
@@ -140,7 +140,7 @@ class MainScene extends Phaser.Scene {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
-                     }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool, title: currentLevel.name, level: currentLevel.level, log: currentLevel.log} });
+                     }, startScene: 'TrainScene', passData: {player: this.player, characterPool: currentLevel.characterPool, title: currentLevel.name, level: currentLevel.level, log: currentLevel.log, world: currentLevel.world} });
                  }, currentLevel.log, currentLevel.world));
                  this.add.existing(this.trainLevels[this.trainLevels.length - 1]);
                  this.trainLevels[this.trainLevels.length - 1].comparePlayerLevel(this.player.story);
@@ -161,7 +161,7 @@ class MainScene extends Phaser.Scene {
                          title: currentLevel.details.title,
                          subtitle:  currentLevel.details.subtitle,
                          desc:  currentLevel.details.desc
-                     },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool, mentor: currentLevel.mentor, level: currentLevel.level, log: currentLevel.log}});
+                     },startScene: 'BattleScene', passData: {player: this.player, simulate: true, wordPool: currentLevel.wordPool, mentor: currentLevel.mentor, level: currentLevel.level, log: currentLevel.log, world: currentLevel.world}});
                     },
                     currentLevel.log, currentLevel.world
                  ));
@@ -196,7 +196,7 @@ class MainScene extends Phaser.Scene {
         }
         console.log(this.player.logs);
         this.compareStoryLevels();
-        this.onQuest();
+        // this.onQuest();
 
 
         /* emit events */

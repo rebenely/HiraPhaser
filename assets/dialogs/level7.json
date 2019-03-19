@@ -1,0 +1,63 @@
+{
+    "images" : {
+        "dialog_bg": "assets/dialogs/images/dialog_bg.png",
+        "bleu_happy": "assets/dialogs/images/bleu_happy.png",
+        "bleu_angry": "assets/dialogs/images/bleu_angry.png",
+        "bleu_smug": "assets/dialogs/images/bleu_smug.png",
+        "bleu_shocked": "assets/dialogs/images/bleu_shocked.png",
+        "bleu_think": "assets/dialogs/images/bleu_think.png",
+        "warrior_happy": "assets/dialogs/images/warrior_happy.png",
+        "warrior_think": "assets/dialogs/images/warrior_think.png",
+        "warrior_angry": "assets/dialogs/images/warrior_angry.png",
+        "warrior_smug": "assets/dialogs/images/warrior_smug.png",
+        "rogue_happy": "assets/dialogs/images/rogue_happy.png",
+        "mage_happy": "assets/dialogs/images/mage_happy.png",
+        "mage_angry": "assets/dialogs/images/mage_happy.png",
+        "mage_think": "assets/dialogs/images/mage_think.png"
+    },
+
+    "dialog": [
+        {
+            "text": "YA",
+            "name": "Gema",
+            "message": "This is read as 'Ya'."
+        },
+        {
+            "text": "WA",
+            "name": "Gema",
+            "message": "This is read as 'Wa'."
+        },
+        {
+            "text": "YU",
+            "name": "Gema",
+            "message": "This is read as 'Yu'."
+        },
+        {
+            "text": "WO",
+            "name": "Gema",
+            "message": "This is read as 'Wo'."
+        },
+        {
+            "text": "YO",
+            "name": "Gema",
+            "message": "This is read as 'Yo'."
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "flip": true
+        }
+    ],
+
+    "image": {
+        "x": "360",
+        "y": "240",
+        "scale": "5"
+    },
+    "teach": ["WA", "YA", "YU", "WO", "YO"],
+    "message": {
+        "title":"Y & W Families!",
+        "message": "You learned Y & W Families!"
+    }
+}
