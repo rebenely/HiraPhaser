@@ -6,11 +6,13 @@ class HintScene extends Phaser.Scene {
     init (data) {
         this.player = data.player;
         this.characterPool = data.characterPool;
+        this.inDungeon = data.inDungeon;
     }
 
     create () {
         this.scene.bringToTop();
         this.move = 0;
+        this.api = "api/review";
 
         this.graphics = this.add.graphics();
 
@@ -43,8 +45,8 @@ class HintScene extends Phaser.Scene {
 
         var titleStyle = { font: "32px manaspc", fill: "#ffffff", align: "left" };
         var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 90, useAdvancedWrap: true} };
-        var titleDisplay = new HiraText(this,  640/2 + 20, 50, 'Cheat Sheet', "header");
-        this.add.existing(titleDisplay);
+        this.titleDisplay = new HiraText(this,  640/2 + 20, 50, 'Cheat Sheet', "header");
+        this.add.existing(this.titleDisplay);
 
         this.characterDisplay = [];
         this.romajiDisplay = [];
@@ -80,13 +82,17 @@ class HintScene extends Phaser.Scene {
             this.add.existing(this.romajiDisplay[this.romajiDisplay.length - 1]);
         }
 
-        this.cancelButton = new HiraButton(this, 720  - 60 - 30, 420, "Back", style, () => {
+        this.cancelButton = new HiraButton(this, 720  - 60 - 30, 420, "Loading", style, () => {
             // console.log('fuck go back');
-            this.scene.wake('DungeonScene');
-            this.scene.wake('JournalScene');
+            if(this.inDungeon){
+                this.scene.wake('DungeonScene');
+            } else {
+                this.scene.wake('MainScene');
+            }
             this.scene.stop('HintScene');
         }, this);
         this.add.existing(this.cancelButton);
+        this.cancelButton.disable();
 
         this.downButton = new HiraPress(this, 90, 430, "Down", style, () => {
             this.move = 5;
@@ -101,7 +107,7 @@ class HintScene extends Phaser.Scene {
         this.upButton.visible = false;
 
         // console.log(j* 100 + 5);
-        this.cameras.main.ignore([this.characterDisplay, this.romajiDisplay, this.container, titleDisplay]);
+        this.cameras.main.ignore([this.characterDisplay, this.romajiDisplay, this.container, this.titleDisplay]);
         this.verticalCamera.ignore([this.cancelButton, this.downButton, this.upButton, this.graphics]);
         this.container.fillGradientStyle(game.global.UI_FILL_B, game.global.UI_FILL_A, game.global.UI_FILL_A, game.global.UI_FILL_B, 1);
         this.container.lineStyle(game.global.UI_THICKNESS + 2, game.global.UI_COLOR, 1);
@@ -120,6 +126,7 @@ class HintScene extends Phaser.Scene {
         }
 
         this.sound.play('next');
+        this.postData();
 
         // console.log(this.world);
     }
@@ -134,5 +141,29 @@ class HintScene extends Phaser.Scene {
             this.verticalCamera.scrollY -= 5;
             this.move += 1;
         }
+    }
+
+    postData() {
+        $.ajax({
+            url: game.global.URL + this.api,
+            type: "POST",
+            async: true,
+            contentType: "application/json",
+            headers: {"Authorization": "Bearer " + game.token },
+            context: this,
+            retryLimit: 3,
+            success: function (responseData) {
+                this.sound.play('success');
+                this.cancelButton.enable();
+                this.cancelButton.setText("Back");
+            },
+            error: function (xhr) {
+                setTimeout(() => {
+                    this.titleDisplay.setTextUpper("Contacting server...");
+                    this.postData();
+                }, 5000);
+
+            }
+        });
     }
 }

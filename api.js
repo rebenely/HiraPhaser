@@ -259,9 +259,39 @@ var self = module.exports = {
 
       }, stats);
 
-
-
         // console.log('ayyyy succ');
-    }
+    },
+    postReview (req, res) {
+        console.log('----------post train------------');
+
+        var succ = {};
+        MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
+          if (err) throw err;
+          var announcement = {};
+          var dbo = db.db(config.db_name);
+          var myobj = req.body;
+
+          myobj.session_id = res.locals.decoded.session;
+          if(res.locals.decoded.username) {
+
+              dbo.collection("players").updateOne({username: res.locals.decoded.username}, { $inc: { review_count: 1 } }, function(err, res) {
+                if (err) throw err;
+                console.log(myobj.username + ": updated review count");
+                db.close();
+              });
+
+              return res.json({
+                success: true
+              });
+          } else {
+              return res.status(403).json({
+                success: false,
+                message: 'Cannot find user!'
+              });
+          }
+
+        });
+        // console.log('ayyyy succ');
+    },
 
 }

@@ -68,8 +68,8 @@ class WorldNavScene extends Phaser.Scene {
             this.navEnable = true;
         }, this);
 
-        this.codexButton = new HiraButton(this, 60*8, 430 + 20, "Journal", style, () => {
-            this.scene.launch('JournalScene', {player: this.player});
+        this.codexButton = new HiraButton(this, 60*8, 430 + 20, "Review", style, () => {
+            this.scene.launch('HintScene', {player: this.player, characterPool: this.player.characterPool, inDungeon: false});
             this.events.emit('disableLevels');
             this.scene.sleep('WorldNavScene');
         }, this);

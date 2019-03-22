@@ -134,7 +134,7 @@ class DungeonScene extends Phaser.Scene {
             if(!this.hintChecked) {
                 this.hintChecked = true;
                 this.scene.pause('DungeonScene');
-                this.scene.launch('HintScene', {player: this.player, characterPool: this.player.characterPool});
+                this.scene.launch('HintScene', {player: this.player, characterPool: this.player.characterPool, inDungeon: true});
                 this.hintButton.setText('Review! (x0)')
                 this.hintButton.disable();
             }

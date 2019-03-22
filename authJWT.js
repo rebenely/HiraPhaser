@@ -126,7 +126,8 @@ module.exports  = {
                   encounters: [],
                   total_items: 0,
                   total_correct: 0,
-                  total_possible_correct: 0
+                  total_possible_correct: 0,
+                  review_count: 0
               }
               dbo.collection("players").insertOne(myobj, function(err, result) {
                   if (err) {
