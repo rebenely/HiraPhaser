@@ -73,14 +73,14 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "About that elixir, I think the next area's dungeons drop those. Maybe you can find one.",
             "flip": true
         }
     ],
 
     "image": {
         "x": "360",
-        "y": "480",
+        "y": "240",
         "scale": "5"
     },
     "teach": ["SA", "SHI", "SU", "SE", "SO"],

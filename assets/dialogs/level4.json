@@ -90,7 +90,13 @@
         {
             "image" : "mage_happy",
             "name" : "Grou",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "N is not usually taught along with the other Ns. But I'll make an exception for you.",
+            "flip": true
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Grou",
+            "message": "Now go and do you thing!",
             "flip": true
         }
     ],

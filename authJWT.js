@@ -122,7 +122,8 @@ module.exports  = {
                   story: 0,
                   session: 0,
                   total_playtime: 0,
-                  charset: []
+                  charset: [],
+                  encounters: [],
               }
               dbo.collection("players").insertOne(myobj, function(err, result) {
                   if (err) {

@@ -28,6 +28,7 @@ class DungeonScene extends Phaser.Scene {
         // console.log('dungeon log is', this.log);
         this.skips = 0;
         this.extends = 0;
+        this.mulcho = 0;
         this.enemyCleared = [];
         this.dataCapture = {
             username: this.player.name,
@@ -35,7 +36,8 @@ class DungeonScene extends Phaser.Scene {
             timestamp: game.timestamp(),
             total_time: new Date(),
             accuracy: 0,
-            battles: []
+            battles: [],
+            encounters: []
         }
         this.hintChecked = false;
         // console.log('recreate boii', this.dungeon);
@@ -77,7 +79,7 @@ class DungeonScene extends Phaser.Scene {
             this.scene.sleep('DungeonScene');
             this.sound.play('start');
 
-            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3, simulate: false, skips: this.skips, extends: this.extends });
+            this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3, simulate: false, skips: this.skips, extends: this.extends, mulcho: this.mulcho });
         }, this);
         this.add.existing(this.battleButton);
 
@@ -218,9 +220,38 @@ class DungeonScene extends Phaser.Scene {
         }
         this.skips = data.skips;
         this.extends = data.extends;
+        this.mulcho = data.mulcho;
         data.dataCapture.hint_checked = this.hintChecked;
+
+        for (let i = 0; i < data.dataCapture.questions.length; i++) {
+            var j = this.checkWordExistence(data.dataCapture.questions[i].word);
+            if(j != -1){
+                this.dataCapture.encounters[j].total++;
+                this.dataCapture.encounters[j].correct += data.dataCapture.questions[i].correct ? 1 : 0;
+                this.dataCapture.encounters[j].accuracy =  this.dataCapture.encounters[j].correct / this.dataCapture.encounters[j].total;
+            } else {
+                this.dataCapture.encounters.push({
+                    word: data.dataCapture.questions[i].word,
+                    total: 1,
+                    correct: data.dataCapture.questions[i].correct ? 1 : 0,
+                    accuracy:  data.dataCapture.questions[i].correct ? 1 : 0
+                });
+            }
+        }
         this.dataCapture.battles.push(data.dataCapture);
+
         this.hintChecked = false;
+    }
+
+    checkWordExistence(word) {
+
+        for(let i = 0; i < this.dataCapture.encounters.length; i++) {
+            // console.log(this.dataCapture.encounters[i].word, 'vs', word, this.dataCapture.encounters[i].word === word);
+            if(this.dataCapture.encounters[i].word === word) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     packCapturedData(success, flee){

@@ -32,6 +32,7 @@ class BattleScene extends Phaser.Scene {
             this.boss = data.boss;
             this.difficulty = data.difficulty;
             this.skips = data.skips;
+            this.mulcho = data.mulcho;
             this.extends = data.extends;
         } else if (data.simulate) {
             this.dungeon = {
@@ -79,6 +80,7 @@ class BattleScene extends Phaser.Scene {
                 this.sound.play('next');
                 this.timeExtendButton.visible = false;
                 this.skipButton.visible = false;
+                this.mulchoButton.visible = false;
                 let stats = {
                     word: this.projectile.currentChar,
                     answer: this.inputText,
@@ -90,7 +92,7 @@ class BattleScene extends Phaser.Scene {
                     this.extension.remove(this.ugokidasu());
                     stats.time_stopped = true;
                 }
-
+                // this.battleCapture.encounters.push(this.projectile.comparePerChar(this.inputText));
 
                 if (this.inputText === this.projectile.currentChar) {
                     stats.correct = true;
@@ -256,6 +258,37 @@ class BattleScene extends Phaser.Scene {
         if(this.extends >= 1) {
             this.timeExtendButton.disable();
         }
+        this.mulchoOptions = new HiraText(this, 720/2, 400, '', "header" );
+        this.add.existing(this.mulchoOptions);
+        this.mulchoOptions.visible = false;
+        this.mulchoButton = new HiraButton(this, 3*720/4, 480/2 - 30, "Options" + "(x" + (1 - this.mulcho) + ")", style, () =>  {
+            if(this.state === this.STATE_VALUE.attack) {
+                    this.mulchoOptions.visible = true;
+                    this.mulchoOptions.text = "";
+                    var correct = Math.floor(Math.random() * Math.floor(2));
+                    for( let i = 0; i < 3; i++ ){
+                        if(correct == i) {
+                            this.mulchoOptions.text += " " + this.projectile.currentChar + " ";
+                        } else {
+                            this.mulchoOptions.text += " " + this.projectile.getMultipleChoice() + " ";
+                        }
+                    }
+                    this.mulcho++;
+                    this.mulchoButton.setText("Options" + "(x" + (1-this.mulcho) + ")");
+                    if(this.mulcho >= 1) {
+                        this.mulchoButton.disable();
+                    }
+
+            }
+
+
+        }, this);
+        this.mulchoButton.visible = false;
+        this.add.existing(this.mulchoButton);
+
+        if(this.mulcho >= 1) {
+            this.mulchoButton.disable();
+        }
 
         /* create anims */
         this.anims.create({
@@ -317,7 +350,7 @@ class BattleScene extends Phaser.Scene {
 
 
         /* projectile */
-        this.projectile = new Projectile(this, 720/2, 480/2, 'hira', this.dungeon.wordPool);
+        this.projectile = new Projectile(this, 720/2, 480/2, 'hira', this.dungeon.wordPool, this.player.characterPool);
         this.add.existing(this.projectile);
 
         this.input.keyboard.on('keydown', this.typedKeys, this);
@@ -369,7 +402,7 @@ class BattleScene extends Phaser.Scene {
             // console.log('yow');
             this.packData();
             if(!this.simulate){
-                this.events.emit('battleFinish', {success: this.player.hp > 0, dataCapture: this.battleCapture, skips: this.skips, extends: this.extends});
+                this.events.emit('battleFinish', {success: this.player.hp > 0, dataCapture: this.battleCapture, skips: this.skips, extends: this.extends, mulcho: this.mulcho});
                 this.scene.stop('BattleScene');
                 this.scene.wake('DungeonScene');
             }
@@ -734,6 +767,8 @@ class BattleScene extends Phaser.Scene {
             this.projectile.visible = false;
             this.timerDisplay.visible = false;
             this.skipButton.visible = false;
+            this.mulchoOptions.visible = false;
+            this.mulchoButton.visible = false;
             this.timeExtendButton.visible = false;
             this.follower.t = 0;
             this.follower.vec.x = 720/2;
@@ -747,11 +782,13 @@ class BattleScene extends Phaser.Scene {
             this.inputTextDisplay.visible = true;
             this.projectile.visible = true;
             this.backButton.visible = false;
+
             this.projectile.setPosition(this.follower.vec.x, this.follower.vec.y);
 
             if(!this.simulate){
                 this.timeExtendButton.visible = true;
                 this.skipButton.visible = true;
+                this.mulchoButton.visible = true;
             }
             this.attackButton.visible = false;
             this.timerDisplay.visible = true;
@@ -775,7 +812,7 @@ class BattleScene extends Phaser.Scene {
         this.timedEvent.remove(false);
         this.enemyAttack();
         if(!wrong){
-            this.timerDisplay.setTextUpper('Times up!');
+            this.timerDisplay.setTextUpper('Time\'s up!');
             let stats = {
                 word: this.projectile.currentChar,
                 answer: this.inputText,
@@ -786,6 +823,7 @@ class BattleScene extends Phaser.Scene {
                 this.timeStopped = false;
                 stats.time_stopped = true;
             }
+            // this.battleCapture.encounters.push(this.projectile.comparePerChar(this.inputText));
             this.battleCapture.questions.push(stats);
         } else {
             this.timerDisplay.setTextUpper('Wrong!');

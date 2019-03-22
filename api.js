@@ -126,11 +126,11 @@ var self = module.exports = {
         });
         // console.log('ayyyy succ');
     },
-    postDungeon (req, res) {
+    async postDungeon (req, res) {
         console.log('----------post dungeon------------');
 
         var succ = {};
-        MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
+        MongoClient.connect(url, { useNewUrlParser: true }, async function(err, db) {
           if (err) throw err;
           var announcement = {};
           var dbo = db.db(config.db_name);
@@ -140,20 +140,46 @@ var self = module.exports = {
           myobj.session_id = res.locals.decoded.session;
 
           if(res.locals.decoded.username === myobj.username) {
-              dbo.collection("dungeon").insertOne(myobj, function(err, res) {
+              await dbo.collection("dungeon").insertOne(myobj, function(err, res) {
                 if (err) throw err;
                 console.log(myobj.username + ": added dungeon document");
 
               });
-
-              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
+              var updatedEncounters;
+              await dbo.collection("players").findOne({username: myobj.username }, async function(err, result) {
                 if (err) throw err;
-                console.log(myobj.username + ": updated story");
-                db.close();
+                succ = result;
+
+                updatedEncounters = succ.encounters;
+                for (let i = 0; i < myobj.encounters.length; i++) {
+                    var j = self.checkWordExistence(myobj.encounters[i].word, updatedEncounters);
+
+                    if(j != -1){
+                        updatedEncounters[j].total++;
+                        updatedEncounters[j].correct += myobj.encounters[i].correct ? 1 : 0;
+                        updatedEncounters[j].accuracy =  updatedEncounters[j].correct / updatedEncounters[j].total;
+                    } else {
+                        updatedEncounters.push({
+                            word: myobj.encounters[i].word,
+                            total: myobj.encounters[i].total,
+                            correct: myobj.encounters[i].correct,
+                            accuracy:  myobj.encounters[i].accuracy
+                        });
+                    }
+                }
+                console.log(updatedEncounters, 'updated from', myobj.encounters);
+
+                await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters } }, function(err, res) {
+                  if (err) throw err;
+                  console.log(myobj.username + ": updated story and encounters");
+                  db.close();
+                });
+                return res.json({
+                  success: true
+                });
               });
-              return res.json({
-                success: true
-              });
+
+
           } else {
               return res.status(403).json({
                 success: false,
@@ -163,6 +189,16 @@ var self = module.exports = {
 
         });
         // console.log('ayyyy succ');
+    },
+    checkWordExistence(word, array) {
+
+        for(let i = 0; i < array.length; i++) {
+            // console.log(this.dataCapture.encounters[i].word, 'vs', word, this.dataCapture.encounters[i].word === word);
+            if(array[i].word === word) {
+                return i;
+            }
+        }
+        return -1;
     },
     getAccuracy(db, collection, username, callback) {
         db.collection(collection).aggregate(

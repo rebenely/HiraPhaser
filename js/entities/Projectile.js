@@ -1,6 +1,6 @@
 class Projectile extends Phaser.GameObjects.BitmapText {
 
-    constructor(scene, x, y, font, characterPool) {
+    constructor(scene, x, y, font, characterPool, characters) {
         super(scene, x, y, font, '');
 
         // console.log('created!');
@@ -12,8 +12,10 @@ class Projectile extends Phaser.GameObjects.BitmapText {
         this.setOrigin(0.5);
         this.visible = false;
         this.characterPool = this.shuffle(characterPool);
+        this.characters = characters;
         this.iterator = 0;
-        // console.log('char pool length', this.characterPool.length)
+        this.result = [];
+        console.log('char pool indiv', this.characters);
     }
 
     say(text) {
@@ -25,11 +27,12 @@ class Projectile extends Phaser.GameObjects.BitmapText {
     }
 
     getRandomCharacter () {
+        this.result = [];
         // console.log('iterator ', this.iterator, this.characterPool);
         this.currentChar = this.characterPool[this.iterator];
         this.chars = this.currentChar.split('-');
         this.currentChar = this.currentChar.replace(/-/g, '');
-        // console.log('new char', this.currentChar);
+        console.log('new char', this.chars);
         this.setText(this.getHiragana());
         if(this.iterator < this.characterPool.length - 1) {
             this.iterator++;
@@ -39,6 +42,95 @@ class Projectile extends Phaser.GameObjects.BitmapText {
             this.iterator = 0;
         }
 
+    }
+
+    isAVowel(input) {
+        switch(input) {
+            case 'A':
+            case 'I':
+            case 'O':
+            case 'U':
+            case 'E':
+            return true;
+            break;
+            default:
+            return false;
+            break;
+        }
+    }
+
+    comparePerChar(input) {
+        /* incomplete function, store per word */
+        var iterator = 0;
+        var inputChar = "";
+        var correct = true;
+        var skipItem = false;
+        for(let i = 0; i < this.chars.length && iterator < input.length; i++) {
+            skipItem = false;
+            for(let j = 0; j<this.chars[i].length  && iterator < input.length && !skipItem; j++){
+                // console.log(input[iterator],'vs',this.chars[i][j])
+                if(j == 0 && (this.isAVowel(input[iterator]) || this.isAVowel(this.chars[i][j]))) {
+                    skipItem = true;
+                    if(!this.isAVowel(input[iterator])){
+                        inputChar += input[iterator];
+                        iterator++;
+                    }
+                }
+                console.log(this.chars[i] === 'N');
+                if(this.chars[i] === 'N' && !this.isAVowel(input[iterator]) || (input[iterator] === 'N' && this.isAVowel(input[iterator + 1]))) {
+                    skipItem = true;
+                    if(!this.isAVowel(input[iterator])){
+                        inputChar += input[iterator];
+                        iterator++;
+                    }
+                }
+                if(input[iterator] != this.chars[i][j]){
+                    correct = false;
+                }
+                inputChar += input[iterator];
+                iterator++;
+            }
+            this.result.push({
+                word: this.chars[i],
+                answer: inputChar,
+                correct: correct
+            });
+            inputChar = "";
+        }
+        if(input.length == 0) {
+            for(let i = 0; i < this.chars.length; i++){
+                this.result.push({
+                    word: this.chars[i],
+                    answer: input,
+                    correct: false
+                });
+            }
+
+        } else if (input.length != this.currentChar.length){
+            console.log(input, iterator);
+            this.result.push({
+                answer: input.slice(iterator),
+                extra: true
+            });
+        }
+        console.log(this.result);
+        return this.result;
+    }
+
+    getMultipleChoice() {
+        var imitation = "";
+        var i = 0;
+        var randIndex = 0;
+        while(i != this.chars.length){
+            randIndex = Math.floor(Math.random() * Math.floor(this.characters.length - 1));
+
+            while(this.chars[i] === this.characters[randIndex]){
+                randIndex = Math.floor(Math.random() * Math.floor(this.characters.length - 1));
+            }
+            i++;
+            imitation += this.characters[randIndex];
+        }
+        return imitation;
     }
 
     getHiragana () {

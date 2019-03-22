@@ -119,7 +119,7 @@
             "world": 1,
             "description":  "Grou said that he will give me my N-family pass if I finish this dungeon. I have to get that pass!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SHI-YO-U-NE-N", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I"],
+            "wordPool": ["NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SHI-YO-U-NE-N", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I", "BA-N-KA-I"],
             "sprites":    {
                 "x": 902, "y": 870, "name": "cave",
                 "dungeonBG": {

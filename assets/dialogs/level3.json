@@ -20,29 +20,30 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "Ryor is doing dungeons right now. I will be the one teaching you the S Family.",
+            "message": "Welcome to the second area!",
+            "flip": true
+        },
+        {
+            "image" : "mage_think",
+            "name" : "Gema",
+            "message": "Did you find the elixir?",
             "flip": true
         },
         {
             "image": "bleu_happy",
             "name" : "You",
-            "message": "About that dream, can you help me fully remember it? I have this nagging feeling that that dream is really important."
+            "message": "Not really. I don't think these dungeons drop anything."
         },
         {
             "image" : "mage_think",
             "name" : "Gema",
-            "message": "There is this elixir that can help you see your unconscious thoughts. Maybe we'll find it there.",
+            "message": "Well, these goblins are pretty smart. Maybe they won't bring something so valuable on their person.",
             "flip": true
         },
         {
-            "image": "bleu_happy",
-            "name" : "You",
-            "message": "Really! Where can I find that elixir?"
-        },
-        {
             "image" : "mage_think",
             "name" : "Gema",
-            "message": "It's a pretty rare elixir. I'll try looking for it in the capital. But for the meantime, let's continue the training.",
+            "message": "Anyway let's continue the training..",
             "flip": true
         },
         {
@@ -73,7 +74,7 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "You've come a long way sa fast. The Creator really made the right decision choosing you.",
             "flip": true
         }
     ],
