@@ -80,7 +80,7 @@ class BattleScene extends Phaser.Scene {
                 this.sound.play('next');
                 this.timeExtendButton.visible = false;
                 this.skipButton.visible = false;
-                this.mulchoButton.visible = false;
+
                 let stats = {
                     word: this.projectile.currentChar,
                     answer: this.inputText,
@@ -92,6 +92,13 @@ class BattleScene extends Phaser.Scene {
                     this.extension.remove(this.ugokidasu());
                     stats.time_stopped = true;
                 }
+
+                if(this.mulchoClicked) {
+                    this.mulchoClicked = false;
+                    stats.options = true;
+                }
+                this.mulchoButton.visible = false;
+
                 // this.battleCapture.encounters.push(this.projectile.comparePerChar(this.inputText));
 
                 if (this.inputText === this.projectile.currentChar) {
@@ -105,6 +112,9 @@ class BattleScene extends Phaser.Scene {
 
                 } else {
                     stats.correct = false;
+                    if(this.mulcho == 0 || this.timeStopped == 0) {
+                        stats.possible_correct = true;
+                    }
                     this.enemy.sprite.play('enemy_attack', false);
                     this.timedEvent.remove(this.answerFailed(true));
 
@@ -115,6 +125,7 @@ class BattleScene extends Phaser.Scene {
     }
 
     create () {
+        this.mulchoClicked = false;
         this.timeStopped = false;
         this.battleCapture = {
             difficulty: this.difficulty,
@@ -264,6 +275,7 @@ class BattleScene extends Phaser.Scene {
         this.mulchoButton = new HiraButton(this, 3*720/4, 480/2 - 30, "Options" + "(x" + (1 - this.mulcho) + ")", style, () =>  {
             if(this.state === this.STATE_VALUE.attack) {
                     this.mulchoOptions.visible = true;
+                    this.mulchoClicked = true;
                     this.mulchoOptions.text = "";
                     var correct = Math.floor(Math.random() * Math.floor(2));
                     for( let i = 0; i < 3; i++ ){
@@ -822,6 +834,13 @@ class BattleScene extends Phaser.Scene {
             if(this.timeStopped) {
                 this.timeStopped = false;
                 stats.time_stopped = true;
+            }
+            if(this.mulchoClicked) {
+                this.mulchoClicked = false;
+                stats.options = true;
+            }
+            if(this.mulcho == 0 || this.timeStopped == 0) {
+                stats.possible_correct = true;
             }
             // this.battleCapture.encounters.push(this.projectile.comparePerChar(this.inputText));
             this.battleCapture.questions.push(stats);

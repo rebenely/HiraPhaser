@@ -37,7 +37,10 @@ class DungeonScene extends Phaser.Scene {
             total_time: new Date(),
             accuracy: 0,
             battles: [],
-            encounters: []
+            encounters: [],
+            total_items: 0,
+            total_correct: 0,
+            possible_correct: 0
         }
         this.hintChecked = false;
         // console.log('recreate boii', this.dungeon);
@@ -224,6 +227,7 @@ class DungeonScene extends Phaser.Scene {
         data.dataCapture.hint_checked = this.hintChecked;
 
         for (let i = 0; i < data.dataCapture.questions.length; i++) {
+            /* accuracy per word */
             var j = this.checkWordExistence(data.dataCapture.questions[i].word);
             if(j != -1){
                 this.dataCapture.encounters[j].total++;
@@ -237,6 +241,17 @@ class DungeonScene extends Phaser.Scene {
                     accuracy:  data.dataCapture.questions[i].correct ? 1 : 0
                 });
             }
+
+            /* total battle items */
+            this.dataCapture.total_items++;
+            if(data.dataCapture.questions[i].correct){
+                this.dataCapture.total_correct++;
+            }
+
+            if(data.dataCapture.questions[i].hasOwnProperty('possible_correct')) {
+                this.dataCapture.possible_correct++;
+            }
+
         }
         this.dataCapture.battles.push(data.dataCapture);
 
@@ -258,6 +273,7 @@ class DungeonScene extends Phaser.Scene {
         this.dataCapture.success = success;
         this.dataCapture.skips = this.skips;
         this.dataCapture.extends = this.extends;
+        this.dataCapture.multiple_choice = this.mulcho;
         this.dataCapture.flee = flee;
         this.dataCapture.total_time = (new Date() - this.dataCapture.total_time)/1000;
 

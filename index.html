@@ -172,6 +172,12 @@
     var asiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
     asiaTime = new Date(asiaTime);
     console.log('Asia time: ' + asiaTime);
+    console.log(window.location);
+    var game_url = "";
+$(function () {
+    game_url = window.location.origin + '/';
+    console.log(game_url);
+});
 
 $('#myModal').on('click', '#chooseLogin',function() {
     var loginContent = "<div class='modal-content'><div id='loginForm' style='font-family:\"manaspc\";padding:20px;text-align:center;'><h2 id='message'>Welcome!</h2><form ><label for='username'>Username</label><input type='text' id='username' name='Username' placeholder='Username' style='font-family:\"manaspc\"'><label for='lname'>Password</label><input type='password' id='password' name='Password' placeholder='Password' ><button type='button' style='font-family:\"manaspc\"' id='loginButton' >Login</button></form></div></div>";
@@ -188,7 +194,7 @@ $('#logout').click(function() {
         /* end session */
         console.log(game.player_name);
         $.ajax({
-            url: window.location.href + "logout",
+            url: game_url + "logout",
             headers: {"Authorization": "Bearer " + game.token },
             type: "POST",
             async: true,
@@ -222,7 +228,7 @@ $('#myModal').on('click', '#loginButton', function(){
     $( '#loginButton' ).prop('disabled', true);
     $(this).css('background-color', 'gray');
     $.ajax({
-        url: window.location.href + "login",
+        url: game_url + "login",
         type: "POST",
         data: JSON.stringify(data),
         contentType: "application/json",
@@ -255,7 +261,7 @@ $('#myModal').on('click', '#signUpButton', function(){
     $( '#signUpButton' ).prop('disabled', true);
     $(this).css('background-color', 'gray');
     $.ajax({
-        url: window.location.href + "signup",
+        url: game_url + "signup",
         type: "POST",
         data: JSON.stringify(data),
         contentType: "application/json",
@@ -310,7 +316,7 @@ $(window).on("beforeunload unload", function(e) {
         logged_out = true;
         console.log(game.player_name);
         $.ajax({
-            url: window.location.href + "logout",
+            url: game_url + "logout",
             headers: {"Authorization": "Bearer " + game.token },
             type: "POST",
             contentType: "application/json",

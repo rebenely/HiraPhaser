@@ -124,6 +124,9 @@ module.exports  = {
                   total_playtime: 0,
                   charset: [],
                   encounters: [],
+                  total_items: 0,
+                  total_correct: 0,
+                  total_possible_correct: 0
               }
               dbo.collection("players").insertOne(myobj, function(err, result) {
                   if (err) {

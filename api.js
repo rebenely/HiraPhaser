@@ -169,7 +169,7 @@ var self = module.exports = {
                 }
                 console.log(updatedEncounters, 'updated from', myobj.encounters);
 
-                await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters } }, function(err, res) {
+                await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters }, $inc: {total_items: myobj.total_items, total_correct: myobj.total_correct, total_possible_correct: myobj.possible_correct} }, function(err, res) {
                   if (err) throw err;
                   console.log(myobj.username + ": updated story and encounters");
                   db.close();
