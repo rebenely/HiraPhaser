@@ -63,7 +63,8 @@
     },
     "teach": ["HA", "HI", "FU", "HE", "HO"],
     "message": {
-        "title":"N Family!",
-        "message": "You learned N Family!"
-    }
+        "title":"H Family!",
+        "message": "You learned H Family!"
+    },
+    "dungeon": "H-Dungeon"
 }

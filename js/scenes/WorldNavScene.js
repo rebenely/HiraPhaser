@@ -7,6 +7,7 @@ class WorldNavScene extends Phaser.Scene {
     init(data) {
         this.cam = data.camera;
         this.player = data.player;
+
     }
     create () {
 
@@ -87,6 +88,14 @@ class WorldNavScene extends Phaser.Scene {
         }, this);
 
         this.add.existing(this.statsButton);
+
+        // this.sched = new HiraButton(this, 100, 430 + 20, "scheduler", style, () => {
+        //     this.scene.launch('SchedulerScene', { player: this.player} );
+        //     this.events.emit('disableLevels');
+        //     this.scene.sleep('WorldNavScene');
+        // }, this);
+        //
+        // this.add.existing(this.sched);
         this.saveButton = new HiraButton(this, 60*11, 26, "Log out", style, () => {
             this.scene.launch('DialogBoxScene', { title: "Logging out", message: "Saving data", dataCapture: {distracted: game.distracted}, api: 'logout' });
             this.events.emit('disableLevels');
@@ -104,7 +113,10 @@ class WorldNavScene extends Phaser.Scene {
 
         this.caveName = new HiraText(this, 720/2, 25, "", "header");
         this.add.existing(this.caveName);
-        this.caveName.visible = false;
+
+        this.subtitle = new HiraText(this, 720/2, 55, "", "basic");
+        this.add.existing(this.subtitle);
+        this.subtitle.visible = false;
         // this.onUpdateNextStory({level: { story_hack: this.player.story }});
     }
 
@@ -140,17 +152,49 @@ class WorldNavScene extends Phaser.Scene {
     }
 
     onSayName(data) {
-        this.levelTitle.fillRect(720/2 - data.name.length * 12, 4, data.name.length*24, 48);
-        this.levelTitle.strokeRect(720/2 - data.name.length * 12, 4, data.name.length*24, 48);
-        this.caveName.setTextUpper(data.name);
-        this.caveName.visible = true;
-        this.levelTitle.visible = true;
+        data.deadline = data.deadline != undefined ? data.deadline : false;
+        if(!data.deadline){
+            this.levelTitle.fillRect(720/2 - data.name.length * 12, 4, data.name.length*24, 48);
+            this.levelTitle.strokeRect(720/2 - data.name.length * 12, 4, data.name.length*24, 48);
+            this.caveName.setTextUpper(data.name);
+            this.caveName.visible = true;
+            this.levelTitle.visible = true;
+        } else {
+
+
+            var found = -1;
+            for(let i = 0; i < this.player.schedule.length && found == -1; i++) {
+                console.log(data.name, 'vs', this.player.schedule[i]);
+
+                if(this.player.schedule[i].dungeon === data.name) {
+                    found = i;
+                }
+            }
+            if(found != -1) {
+                this.levelTitle.fillRect(720/2 - data.name.length * 12, 4, data.name.length*24, 70);
+                this.levelTitle.strokeRect(720/2 - data.name.length * 12, 4, data.name.length*24, 70);
+                this.caveName.setTextUpper(data.name);
+                this.subtitle.setTextUpper(this.player.schedule[found].deadline);
+                this.caveName.visible = true;
+                this.levelTitle.visible = true;
+                this.subtitle.visible = true;
+            } else {
+                this.levelTitle.fillRect(720/2 - data.name.length * 12, 4, data.name.length*24, 48);
+                this.levelTitle.strokeRect(720/2 - data.name.length * 12, 4, data.name.length*24, 48);
+                this.caveName.setTextUpper(data.name);
+                this.caveName.visible = true;
+                this.levelTitle.visible = true;
+            }
+
+        }
+
     }
 
     onHoverOut(data) {
         this.levelTitle.clear();
         this.caveName.visible = false;
         this.levelTitle.visible = false;
+        this.subtitle.visible = false;
     }
 
     update () {

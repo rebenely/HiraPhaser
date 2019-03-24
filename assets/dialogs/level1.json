@@ -75,5 +75,6 @@
     "message": {
         "title":"K-Family!",
         "message": "You learned the K-family!"
-    }
+    },
+    "dungeon": "K-Dungeon"
 }

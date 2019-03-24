@@ -14,6 +14,7 @@ class Unit  {
         this.maxExp = 100;
         this.characterPool = [];
         this.logs = [];
+        this.schedule = [];
     }
 
     levelUp () {

@@ -10,7 +10,7 @@ var config = {
             gravity: { y: 0 }
         }
     },
-    scene: [ BootScene, MainScene, BattleScene, ResultScene, DetailScene, DungeonScene, CutScene, CutLoaderScene, TrainScene, MultipleChoiceScene, MatchingTypeScene, HintScene, DialogBoxScene, WorldNavScene, MessageScene, JournalScene, LogScene, StatsScene, CutSceneV2 ]
+    scene: [ BootScene, MainScene, BattleScene, ResultScene, DetailScene, DungeonScene, CutScene, CutLoaderScene, TrainScene, MultipleChoiceScene, MatchingTypeScene, HintScene, DialogBoxScene, WorldNavScene, MessageScene, JournalScene, LogScene, StatsScene, CutSceneV2, SchedulerScene ]
 };
 
 var game = new Phaser.Game(config);
@@ -33,6 +33,7 @@ game.loaded = false;
 game.story = 0;
 game.player_name = '';
 game.charset = [];
+game.sched = [];
 game.token = '';
 game.showOKB = false;
 game.logged_out = false;

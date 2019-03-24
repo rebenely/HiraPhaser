@@ -9,6 +9,7 @@ class CutScene extends Phaser.Scene {
         this.story = data.story;
         this.log = data.log;
         this.world = data.world;
+        this.player = data.player;
     }
 
     preload () {
@@ -37,6 +38,7 @@ class CutScene extends Phaser.Scene {
     }
 
     create() {
+        console.log(this.player);
         // var bg = this.add.sprite(720/2, 480/2, this.bgKey);
         // console.log('image resize', this.jsonFile.image.x, this.jsonFile.image.y, this.jsonFile.image.scale);
         this.npc = this.add.sprite(parseInt(this.jsonFile.image.x, 10), parseInt(this.jsonFile.image.y, 10), this.jsonFile['dialog'][0].image);
@@ -104,7 +106,25 @@ class CutScene extends Phaser.Scene {
 
         game.screenWipe(this);
         this.loading.visible = false;
+
+
+        this.skipButton = new HiraButton(this, 60*11, 26, "Skip", style, () => {
+
+            if(this.jsonFile.dungeon != undefined) {
+                this.scene.sleep('CutScene');
+                this.scene.launch('SchedulerScene', {dungeon: this.jsonFile.dungeon, player: this.player});
+            } else {
+                this.exitScene(null);
+            }
+        }, this);
+        this.add.existing(this.skipButton);
+
+        let gameUI = this.scene.get('SchedulerScene');
+        gameUI.events.removeListener('ScheduleMe');
+        gameUI.events.on('ScheduleMe', this.exitScene, this);
     }
+
+
 
     typedKeys (e) {
         e.preventDefault();
@@ -153,9 +173,19 @@ class CutScene extends Phaser.Scene {
 
             } else {
                 // console.log(this.jsonFile);
-                this.events.emit('learnedNewCharacters', {world: this.world, charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});
-                this.scene.stop('CutScene');
-                this.scene.wake('MainScene');
+                // launch scheduler, pause This, pass this player and dungeon name
+                // emit from scheduler to This
+                // from here emit learnedNewCharacters plus schedule
+                // store sched to this.player and db player
+                // when dungeon is posted complete schedule
+
+                if(this.jsonFile.dungeon != undefined) {
+                    this.scene.sleep('CutScene');
+                    this.scene.launch('SchedulerScene', {dungeon: this.jsonFile.dungeon, player: this.player});
+                } else {
+                    this.exitScene(null);
+                }
+
             }
         }
     }
@@ -171,5 +201,18 @@ class CutScene extends Phaser.Scene {
 
         });
     }
+
+    exitScene(data){
+        if(this.jsonFile.dungeon){
+            this.events.emit('learnedNewCharacters', {sched: {deadline: data.deadline, dungeon: this.jsonFile.dungeon}, world: this.world, charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});
+        } else {
+            this.events.emit('learnedNewCharacters', { world: this.world, charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});
+
+        }
+        this.scene.stop('CutScene');
+        this.scene.wake('MainScene');
+    }
+
+
 
 }

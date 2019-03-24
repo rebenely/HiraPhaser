@@ -110,5 +110,6 @@
     "message": {
         "title":"N Family!",
         "message": "You learned N Family!"
-    }
+    },
+    "dungeon": "N-Dungeon"
 }

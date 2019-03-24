@@ -29,7 +29,7 @@
             "log":"Finished my first dungeon! I'm starting to get the hang of this."
         },
         {
-            "name": "K-dungeon" ,
+            "name": "K-Dungeon" ,
             "level": 8,
             "world": 0,
             "description":  "My second dungeon! I just need to keep calm and remember my training.",
@@ -57,7 +57,7 @@
             "log":"Dungeons are starting to get difficult but I can handle this. For I have the power of hiragana and The Creator on my side!"
         },
         {
-            "name": "S-dungeon" ,
+            "name": "S-Dungeon" ,
             "level": 12,
             "world": 0,
             "description":  "This is the last dungeon for this area. Gema told me that after this, she'll tell me more about my dream.",
@@ -86,7 +86,7 @@
         }
         ,
         {
-            "name": "T-dungeon" ,
+            "name": "T-Dungeon" ,
             "level": 17,
             "world": 1,
             "description":  "T dungeon! This is the first dungeon of the second area. I wonder what type of goblins reside here.",
@@ -114,7 +114,7 @@
             "log":"The goblins look the same but they have a larger vocabulary than the others. I am starting to think that all these goblins look the same."
         },
         {
-            "name": "N-dungeon" ,
+            "name": "N-Dungeon" ,
             "level": 21,
             "world": 1,
             "description":  "Grou said that he will give me my N-family pass if I finish this dungeon. I have to get that pass!",
@@ -142,7 +142,7 @@
             "log":"N-family pass acquired!"
         },
         {
-            "name": "H-dungeon" ,
+            "name": "H-Dungeon" ,
             "level": 25,
             "world": 1,
             "description":  "The last dungeon of this area. I feel a presence watching me, but it doesn't matter. I have to finish this dungeon no matter what.",
@@ -170,7 +170,7 @@
             "log":"The dungeon was the same with others. But I wonder. What was that presence I keep on feeling?"
         },
         {
-            "name": "M-dungeon" ,
+            "name": "M-Dungeon" ,
             "level": 30,
             "world": 2,
             "description":  "This is the last area. Two more dungeons then my quest will be done!",
@@ -198,7 +198,7 @@
             "log":"Two more dungeons remaining. This is getting easier!"
         },
         {
-            "name": "Y & W dungeon" ,
+            "name": "Y & W-Dungeon" ,
             "level": 35,
             "world": 2,
             "description":  "Why not?",
@@ -226,7 +226,7 @@
             "log":"Second to the last. The end is near!"
         },
         {
-            "name": "R-dungeon" ,
+            "name": "R-Dungeon" ,
             "level": 38,
             "world": 2,
             "description":  "The last dungeon. Hopefully, I'll get my answers now!",

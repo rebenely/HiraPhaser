@@ -69,7 +69,8 @@ module.exports  = {
                               token: token,
                               username: result.username,
                               story: result.story,
-                              charset: result.charset
+                              charset: result.charset,
+                              sched: result.schedule
                             });
                         });
                     } else {
@@ -127,7 +128,8 @@ module.exports  = {
                   total_items: 0,
                   total_correct: 0,
                   total_possible_correct: 0,
-                  review_count: 0
+                  review_count: 0,
+                  schedule: []
               }
               dbo.collection("players").insertOne(myobj, function(err, result) {
                   if (err) {

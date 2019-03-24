@@ -117,7 +117,7 @@ class MainScene extends Phaser.Scene {
                              title: currentLevel.details.title,
                              subtitle:  currentLevel.details.subtitle,
                              desc:  currentLevel.details.desc
-                         }, startScene: 'CutLoaderScene', passData: {jsonFile: currentLevel.json, story: currentLevel.level, log: currentLevel.log, world: currentLevel.world}});
+                         }, startScene: 'CutLoaderScene', passData: {player: this.player, jsonFile: currentLevel.json, story: currentLevel.level, log: currentLevel.log, world: currentLevel.world}});
                      },
                      currentLevel.log, currentLevel.world));
                  this.add.existing(this.cutSceneLevels[this.cutSceneLevels.length - 1]);
@@ -350,8 +350,13 @@ class MainScene extends Phaser.Scene {
         //     this.compareStoryLevels();
         //     updateCharset = true;
         // }
+        console.log(data);
+        if(data.sched != undefined) {
 
-        this.scene.launch('DialogBoxScene', { player_story: player_story_b4, story: data.story, update_story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, updateCharset: updateCharset, timestamp: data.timestamp, total_time: data.total_time}, api: 'api/learn'});
+            this.scene.launch('DialogBoxScene', { sched: data.sched, player_story: player_story_b4, story: data.story, update_story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, updateCharset: updateCharset, timestamp: data.timestamp, total_time: data.total_time, sched: data.sched}, api: 'api/learn'});
+        } else {
+            this.scene.launch('DialogBoxScene', { player_story: player_story_b4, story: data.story, update_story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, updateCharset: updateCharset, timestamp: data.timestamp, total_time: data.total_time}, api: 'api/learn'});
+        }
         // console.log('received', data);
     }
 

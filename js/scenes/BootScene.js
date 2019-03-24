@@ -118,8 +118,10 @@ class BootScene extends Phaser.Scene {
                     this.player.characterPool.push(game.charset[i][j]);
                 }
             }
+            this.player.schedule = game.sched;
             // console.log(this.player.characterPool, game.charset);
             this.resize();
+            console.log(this.player);
             this.scene.start("MainScene", {player: this.player, world: this.worldJson, announcement: this.announcement});
         }
     }

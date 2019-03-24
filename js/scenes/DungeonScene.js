@@ -74,6 +74,7 @@ class DungeonScene extends Phaser.Scene {
             }
             this.scene.stop();
             this.sound.play('fail');
+            this.dataCapture.timestamp_end = game.timestamp();
             this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true, dataCapture: this.dataCapture, story: this.dungeon.story, log: this.log});
         }, this);
         this.add.existing(this.cancelButton);
@@ -144,6 +145,7 @@ class DungeonScene extends Phaser.Scene {
         this.events.removeListener('camerafadeoutcomplete');
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
             this.scene.stop();
+            this.dataCapture.timestamp_end = game.timestamp();
             this.scene.start('ResultScene', {player: this.player, enemy: this.enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture, story: this.dungeon.story, log: this.log});
         }, this);
 

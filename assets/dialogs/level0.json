@@ -134,5 +134,6 @@
     "message": {
         "title":"Vowels!",
         "message": "You learned A,I,U,E,O!"
-    }
+    },
+    "dungeon": "Vowel Dungeon"
 }

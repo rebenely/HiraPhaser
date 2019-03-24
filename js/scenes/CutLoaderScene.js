@@ -8,6 +8,7 @@ class CutLoaderScene extends Phaser.Scene {
         this.fileName = data.jsonFile;
         this.story = data.story;
         this.log = data.log;
+        this.player = data.player;
     }
 
     preload () {
@@ -22,7 +23,7 @@ class CutLoaderScene extends Phaser.Scene {
     create() {
         var dialogJson = this.cache.json.get('dialog');
         // console.log(dialogJson);
-        this.scene.start('CutScene', {jsonFile: dialogJson, story: this.story, log: this.log});
+        this.scene.start('CutScene', {jsonFile: dialogJson, story: this.story, log: this.log, player: this.player});
     }
 
 }

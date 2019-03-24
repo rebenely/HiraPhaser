@@ -65,5 +65,6 @@
     "message": {
         "title":"M Family!",
         "message": "You learned M Family!"
-    }
+    },
+    "dungeon": "M-Dungeon"
 }

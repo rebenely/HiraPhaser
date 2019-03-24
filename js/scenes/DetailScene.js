@@ -17,6 +17,9 @@ class DetailScene extends Phaser.Scene {
             }
         } else {
             this.content = data.content;
+            if(data.dungeon != null) {
+                this.dungeon.name = data.dungeon.name;
+            }
         }
         this.startScene = data.startScene;
         this.passData = data.passData;
@@ -41,6 +44,18 @@ class DetailScene extends Phaser.Scene {
         this.add.existing(caveName);
         var caveDesc = new HiraText(this, 720/2, 480/2, this.content.desc, "wordWrap", 680 - 90);
         this.add.existing(caveDesc);
+        if(this.startScene === 'DungeonScene') {
+            var found = -1;
+            for(let i = 0; i < this.player.schedule.length && found == -1; i++) {
+                if(this.player.schedule[i].dungeon === this.dungeon.name) {
+                    found = i;
+                }
+            }
+            if(found != -1) {
+                var deadline = new HiraText(this, 720/2, 120,"Deadline: " + this.player.schedule[found].deadline, "wordWrap", 680 - 90);
+                this.add.existing(deadline);
+            }
+        }
         // var caveDesc = this.add.text(60, 130, this.content.desc, style);
         // var charSetDisplay = this.add.text(60, 90, this.content.subtitle, style);
 

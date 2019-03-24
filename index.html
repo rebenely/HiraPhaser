@@ -34,6 +34,7 @@
         <script src="js/scenes/MatchingTypeScene.js"></script>
         <script src="js/scenes/JournalScene.js"></script>
         <script src="js/scenes/LogScene.js"></script>
+        <script src="js/scenes/SchedulerScene.js"></script>
         <script src="js/scenes/MainScene.js"></script>
         <script src="js/game.js"></script>
 
@@ -239,6 +240,7 @@ $('#myModal').on('click', '#loginButton', function(){
             game.story = responseData['story'];
             game.charset = responseData['charset'];
             game.token = responseData['token'];
+            game.sched = responseData['sched'];
             game.loaded = true;
         },
         error: function (xhr) {

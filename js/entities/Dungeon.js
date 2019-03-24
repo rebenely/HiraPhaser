@@ -79,7 +79,7 @@ class Dungeon extends Phaser.GameObjects.Sprite {
             } else {
                 scene.input.setDefaultCursor('url(assets/images/cursor/disabled.png), pointer');
             }
-            scene.events.emit('sayName', {name: this.name});
+            scene.events.emit('sayName', {name: this.name, deadline: true});
         }).
         on('pointerout', () => {
             scene.input.setDefaultCursor('url(assets/images/cursor/normal.png), pointer');

@@ -88,5 +88,6 @@
     "message": {
         "title":"T Family!",
         "message": "You learned T Family!"
-    }
+    },
+    "dungeon": "T-Dungeon"
 }
