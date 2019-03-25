@@ -26,24 +26,19 @@
         {
             "image" : "mage_think",
             "name" : "Gema",
-            "message": "Did you find the elixir?",
-            "flip": true
-        },
-        {
-            "image": "bleu_happy",
-            "name" : "You",
-            "message": "Not really. I don't think these dungeons drop anything."
-        },
-        {
-            "image" : "mage_think",
-            "name" : "Gema",
-            "message": "Well, these goblins are pretty smart. Maybe they won't bring something so valuable on their person.",
+            "message": "You've been doing well so far.",
             "flip": true
         },
         {
             "image" : "mage_think",
             "name" : "Gema",
-            "message": "Anyway let's continue the training..",
+            "message": "I hope you still remember your other hiragana characters.",
+            "flip": true
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Because I'll be teaching you the next family.",
             "flip": true
         },
         {
@@ -74,7 +69,38 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "You've come a long way sa fast. The Creator really made the right decision choosing you.",
+            "message": "This is the T Family. Once more, they are :",
+            "flip": true
+        },
+        {
+            "text": "TA",
+            "name": "Gema",
+            "message": "This is read as 'Ta'."
+        },
+        {
+            "text": "CHI",
+            "name": "Gema",
+            "message": "This is read as 'Chi'."
+        },
+        {
+            "text": "TSU",
+            "name": "Gema",
+            "message": "This is read as 'Tsu'."
+        },
+        {
+            "text": "TE",
+            "name": "Gema",
+            "message": "This is read as 'Te'."
+        },
+        {
+            "text": "TO",
+            "name": "Gema",
+            "message": "This is read as 'To'."
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Goodluck!",
             "flip": true
         }
     ],

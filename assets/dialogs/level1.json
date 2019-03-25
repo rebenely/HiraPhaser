@@ -23,14 +23,40 @@
             "flip": true
         },
         {
-            "image": "bleu_happy",
-            "name" : "You",
-            "message": "Thank you. You've been a great help."
+            "image" : "warrior_happy",
+            "name" : "Ryor",
+            "message": "But we still have much to learn. So I'll teach you now the K Family.",
+            "flip": true
+        },
+        {
+            "text": "KA",
+            "name": "Ryor",
+            "message": "This is read as 'Ka'."
+        },
+        {
+            "text": "KI",
+            "name": "Ryor",
+            "message": "This is read as 'Ki'."
+        },
+        {
+            "text": "KU",
+            "name": "Ryor",
+            "message": "This is read as 'Ku'."
+        },
+        {
+            "text": "KE",
+            "name": "Ryor",
+            "message": "This is read as 'Ke'."
+        },
+        {
+            "text": "KO",
+            "name": "Ryor",
+            "message": "This is read as 'Ko'."
         },
         {
             "image" : "warrior_happy",
             "name" : "Ryor",
-            "message": "You're welcome. But we still have much to learn. So I'll teach you now the K Family.",
+            "message": "Let's go over them again.",
             "flip": true
         },
         {

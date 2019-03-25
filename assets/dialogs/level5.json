@@ -20,40 +20,102 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "You might be wondering how those assists work.",
+            "flip": true
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "I handle the options. I summon the multiple choices that you can type.",
+            "flip": true
+        },
+        {
+            "image" : "warrior_happy",
+            "name" : "Ryor",
+            "message": "I handle the skips. I swing my great sword to cut the word into pieces.",
+            "flip": true
+        },
+        {
+            "image" : "rogue_happy",
+            "name" : "Grou",
+            "message": "No. I am not the one doing the time stop.",
+            "flip": true
+        },
+        {
+            "image" : "rogue_happy",
+            "name" : "Grou",
+            "message": "He's not here now, but he'll be the one practicing with you.",
+            "flip": true
+        },
+        {
+            "image" : "rogue_happy",
+            "name" : "Grou",
+            "message": "Anyways. Here are the H Family:",
             "flip": true
         },
         {
             "text": "HA",
-            "name": "Gema",
+            "name": "Grou",
             "message": "This is read as 'Ha'."
         },
         {
             "text": "HI",
-            "name": "Gema",
+            "name": "Grou",
             "message": "This is read as 'Hi'."
         },
         {
             "text": "FU",
-            "name": "Gema",
+            "name": "Grou",
             "message": "This is read as 'Fu'."
         },
         {
             "text": "HE",
-            "name": "Gema",
+            "name": "Grou",
             "message": "This is read as 'He'."
         },
         {
             "text": "HO",
-            "name": "Gema",
+            "name": "Grou",
             "message": "This is read as 'Ho'."
         },
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "Again.",
+            "flip": true
+        },
+        {
+            "text": "HA",
+            "name": "Grou",
+            "message": "This is read as 'Ha'."
+        },
+        {
+            "text": "HI",
+            "name": "Grou",
+            "message": "This is read as 'Hi'."
+        },
+        {
+            "text": "FU",
+            "name": "Grou",
+            "message": "This is read as 'Fu'."
+        },
+        {
+            "text": "HE",
+            "name": "Grou",
+            "message": "This is read as 'He'."
+        },
+        {
+            "text": "HO",
+            "name": "Grou",
+            "message": "This is read as 'Ho'."
+        },
+        {
+            "image" : "rogue_happy",
+            "name" : "Grou",
+            "message": "He'll be waiting for you in the practice area.",
             "flip": true
         }
+
     ],
 
     "image": {

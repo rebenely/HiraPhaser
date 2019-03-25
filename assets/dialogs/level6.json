@@ -20,7 +20,13 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "Congratulations on reaching here! Few more families and you'll be finishing our learning course.",
+            "flip": true
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Without further ado, let's read the M Family.",
             "flip": true
         },
         {
@@ -51,7 +57,38 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "Once more.",
+            "flip": true
+        },
+        {
+            "text": "MA",
+            "name": "Gema",
+            "message": "This is read as 'Ma'."
+        },
+        {
+            "text": "MI",
+            "name": "Gema",
+            "message": "This is read as 'Mi'."
+        },
+        {
+            "text": "MU",
+            "name": "Gema",
+            "message": "This is read as 'Mu'."
+        },
+        {
+            "text": "ME",
+            "name": "Gema",
+            "message": "This is read as 'Me'."
+        },
+        {
+            "text": "MO",
+            "name": "Gema",
+            "message": "This is read as 'Mo'."
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Only three more dungeons left. Let's go!",
             "flip": true
         }
     ],

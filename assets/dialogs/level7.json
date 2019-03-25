@@ -18,34 +18,71 @@
 
     "dialog": [
         {
+            "image" : "warrior_happy",
+            "name" : "Ryor",
+            "message": "Two more left. Let's keep on going. This are the Y and W families.",
+            "flip": true
+        },
+        {
             "text": "YA",
-            "name": "Gema",
+            "name": "Ryor",
             "message": "This is read as 'Ya'."
         },
         {
             "text": "WA",
-            "name": "Gema",
+            "name": "Ryor",
             "message": "This is read as 'Wa'."
         },
         {
             "text": "YU",
-            "name": "Gema",
+            "name": "Ryor",
             "message": "This is read as 'Yu'."
         },
         {
             "text": "WO",
-            "name": "Gema",
+            "name": "Ryor",
             "message": "This is read as 'Wo'."
         },
         {
             "text": "YO",
-            "name": "Gema",
+            "name": "Ryor",
             "message": "This is read as 'Yo'."
         },
         {
-            "image" : "mage_happy",
-            "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "image" : "warrior_happy",
+            "name" : "Ryor",
+            "message": "Once more.",
+            "flip": true
+        },
+        {
+            "text": "YA",
+            "name": "Ryor",
+            "message": "This is read as 'Ya'."
+        },
+        {
+            "text": "WA",
+            "name": "Ryor",
+            "message": "This is read as 'Wa'."
+        },
+        {
+            "text": "YU",
+            "name": "Ryor",
+            "message": "This is read as 'Yu'."
+        },
+        {
+            "text": "WO",
+            "name": "Ryor",
+            "message": "This is read as 'Wo'."
+        },
+        {
+            "text": "YO",
+            "name": "Ryor",
+            "message": "This is read as 'Yo'."
+        },
+        {
+            "image" : "warrior_happy",
+            "name" : "Ryor",
+            "message": "Good luck!",
             "flip": true
         }
     ],

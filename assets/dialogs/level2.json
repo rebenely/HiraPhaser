@@ -20,29 +20,13 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "Ryor is doing dungeons right now. I will be the one teaching you the S Family.",
+            "message": "I will be the one teaching you the S Family.",
             "flip": true
-        },
-        {
-            "image": "bleu_happy",
-            "name" : "You",
-            "message": "About that dream, how can you help me remember it? I have this nagging feeling that that dream is really important."
         },
         {
             "image" : "mage_think",
             "name" : "Gema",
-            "message": "There is this elixir that can help you see your unconscious thoughts. Maybe we'll find it there.",
-            "flip": true
-        },
-        {
-            "image": "bleu_happy",
-            "name" : "You",
-            "message": "Really! Where can I find that elixir?"
-        },
-        {
-            "image" : "mage_think",
-            "name" : "Gema",
-            "message": "It's a pretty rare elixir. I'll try looking for it in the capital. But for the meantime, let's continue the training.",
+            "message": "Okay, so here are the syllables:.",
             "flip": true
         },
         {
@@ -73,9 +57,41 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "About that elixir, I think the next area's dungeons drop those. Maybe you can find one.",
+            "message": "Let's go over them again..",
+            "flip": true
+        },
+        {
+            "text": "SA",
+            "name": "Gema",
+            "message": "This is read as 'Sa'."
+        },
+        {
+            "text": "SI",
+            "name": "Gema",
+            "message": "This is read as 'Si'."
+        },
+        {
+            "text": "SU",
+            "name": "Gema",
+            "message": "This is read as 'Su'."
+        },
+        {
+            "text": "SE",
+            "name": "Gema",
+            "message": "This is read as 'Se'."
+        },
+        {
+            "text": "SO",
+            "name": "Gema",
+            "message": "This is read as 'So'."
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Do your best! Good luck!",
             "flip": true
         }
+
     ],
 
     "image": {

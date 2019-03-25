@@ -49,13 +49,13 @@ class StatsScene extends Phaser.Scene {
         this.add.existing(this.progressDisplay);
         this.progressDisplay.visible = false;
 
-        this.completionDisplay = new HiraText(this, 720/3, 340, "Completion --", "basic");
+        this.completionDisplay = new HiraText(this, 720/2, 340, "Completion --", "basic");
         this.add.existing(this.completionDisplay);
         this.completionDisplay.visible = false;
 
-        this.scoreDisplay = new HiraText(this, 2*720/3, 340, "Score 100", "basic");
-        this.add.existing(this.scoreDisplay);
-        this.scoreDisplay.visible = false;
+        // this.scoreDisplay = new HiraText(this, 2*720/3, 340, "Score 100", "basic");
+        // this.add.existing(this.scoreDisplay);
+        // this.scoreDisplay.visible = false;
 
         // var caveDesc = this.add.text(60, 130, this.content.desc, style);
         // var charSetDisplay = this.add.text(60, 90, this.content.subtitle, style);
@@ -93,10 +93,10 @@ class StatsScene extends Phaser.Scene {
                     this.dungeonDisplay.setText('Dungeon ' + game.roundOff(responseData.stats.dungeon_ave).toString() + '%');
                 }
                 this.dungeonDisplay.visible = true;
-                this.completionDisplay.setText('Completion ' + game.roundOff(this.player.story / 10).toString() + '%');
+                this.completionDisplay.setText('Completion ' + game.roundOff(this.player.story / 40).toString() + '%');
                 this.progressDisplay.visible = true;
                 this.completionDisplay.visible = true;
-                this.scoreDisplay.visible = true;
+
                 console.log('success', responseData);
                 this.okayButton.visible = true;
             },

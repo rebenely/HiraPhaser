@@ -121,14 +121,14 @@ var self = module.exports = {
               dbo.collection("train").insertOne(myobj, function(err, res) {
                 if (err) throw err;
                 console.log(myobj.username + ": added train document");
-                db.close();
+                dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
+                  if (err) throw err;
+                  console.log(myobj.username + ": updated story");
+                  db.close();
+                });
               });
 
-              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
-                if (err) throw err;
-                console.log(myobj.username + ": updated story");
-                db.close();
-              });
+
 
               return res.json({
                 success: true
@@ -157,14 +157,14 @@ var self = module.exports = {
             dbo.collection("practice").insertOne(myobj, function(err, res) {
               if (err) throw err;
               console.log(myobj.username + ": added practice document");
-
+              dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
+                if (err) throw err;
+                console.log(myobj.username + ": updated story");
+                db.close();
+              });
             });
 
-            dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story } }, function(err, res) {
-              if (err) throw err;
-              console.log(myobj.username + ": updated story");
-              db.close();
-            });
+
 
             return res.json({
               success: true
@@ -193,58 +193,58 @@ var self = module.exports = {
           myobj.session_id = res.locals.decoded.session;
 
           if(res.locals.decoded.username === myobj.username) {
-              await dbo.collection("dungeon").insertOne(myobj, function(err, res) {
+              await dbo.collection("dungeon").insertOne(myobj, async function(err, res) {
                 if (err) throw err;
                 console.log(myobj.username + ": added dungeon document");
-
-              });
-              var updatedEncounters;
-              await dbo.collection("players").findOne({username: myobj.username }, async function(err, result) {
-                if (err) throw err;
-                succ = result;
-
-                updatedEncounters = succ.encounters;
-                for (let i = 0; i < myobj.encounters.length; i++) {
-                    var j = self.checkWordExistence(myobj.encounters[i].word, updatedEncounters);
-
-                    if(j != -1){
-                        updatedEncounters[j].total++;
-                        updatedEncounters[j].correct += myobj.encounters[i].correct ? 1 : 0;
-                        updatedEncounters[j].accuracy =  updatedEncounters[j].correct / updatedEncounters[j].total;
-                    } else {
-                        updatedEncounters.push({
-                            word: myobj.encounters[i].word,
-                            total: myobj.encounters[i].total,
-                            correct: myobj.encounters[i].correct,
-                            accuracy:  myobj.encounters[i].accuracy
-                        });
-                    }
-                }
-                console.log(updatedEncounters, 'updated from', myobj.encounters);
-
-                var sched = succ.schedule;
-                var found = -1;
-                for (let i = 0; i < sched.length; i++) {
-                    // console.log(sched[i].dungeon, 'vs', myobj.name);
-                    if(sched[i].dungeon === myobj.name) {
-                        found = i;
-                    }
-                }
-
-                if(found != -1 && sched[found].submitted == undefined && myobj.success) {
-                    sched[found].submitted = myobj.timestamp_end;
-                }
-
-                await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters, schedule: sched }, $inc: {total_items: myobj.total_items, total_correct: myobj.total_correct, total_possible_correct: myobj.possible_correct, total_skips: myobj.skips, total_pattern_A: myobj.total_pattern_A, total_pattern_B: myobj.total_pattern_B, total_pattern_C: myobj.total_pattern_C, total_pattern_D: myobj.total_pattern_D } }, function(err, res) {
+                var updatedEncounters;
+                await dbo.collection("players").findOne({username: myobj.username }, async function(err, result) {
                   if (err) throw err;
-                  console.log(myobj.username + ": updated story and encounters");
-                  db.close();
-                });
-                return res.json({
-                  success: true
+                  succ = result;
+
+                  updatedEncounters = succ.encounters;
+                  for (let i = 0; i < myobj.encounters.length; i++) {
+                      var j = self.checkWordExistence(myobj.encounters[i].word, updatedEncounters);
+
+                      if(j != -1){
+                          updatedEncounters[j].total++;
+                          updatedEncounters[j].correct += myobj.encounters[i].correct ? 1 : 0;
+                          updatedEncounters[j].accuracy =  updatedEncounters[j].correct / updatedEncounters[j].total;
+                      } else {
+                          updatedEncounters.push({
+                              word: myobj.encounters[i].word,
+                              total: myobj.encounters[i].total,
+                              correct: myobj.encounters[i].correct,
+                              accuracy:  myobj.encounters[i].accuracy
+                          });
+                      }
+                  }
+                  console.log(updatedEncounters, 'updated from', myobj.encounters);
+
+                  var sched = succ.schedule;
+                  var found = -1;
+                  for (let i = 0; i < sched.length; i++) {
+                      // console.log(sched[i].dungeon, 'vs', myobj.name);
+                      if(sched[i].dungeon === myobj.name) {
+                          found = i;
+                      }
+                  }
+
+                  if(found != -1 && sched[found].submitted == undefined && myobj.success) {
+                      sched[found].submitted = myobj.timestamp_end;
+                  }
+
+                  await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters, schedule: sched }, $inc: {total_items: myobj.total_items, total_correct: myobj.total_correct, total_possible_correct: myobj.possible_correct, total_skips: myobj.skips, total_pattern_A: myobj.total_pattern_A, total_pattern_B: myobj.total_pattern_B, total_pattern_C: myobj.total_pattern_C, total_pattern_D: myobj.total_pattern_D } }, function(err, res) {
+                    if (err) throw err;
+                    console.log(myobj.username + ": updated story and encounters");
+                    db.close();
+                  });
+
                 });
               });
 
+              return res.json({
+                success: true
+              });
 
           } else {
               return res.status(403).json({

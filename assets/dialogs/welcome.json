@@ -19,237 +19,162 @@
 
     "dialog": [
     {
-        "narrate" : true,
-        "name" : "You",
-        "message": "So this is the place, huh?"
+        "image" : "warrior_happy",
+        "name" : "???",
+        "message": "Hello there! Welcome to Hira!",
+        "flip": true
+    },
+    {
+        "image": "warrior_happy",
+        "name" : "???",
+        "message": "Thank you for accepting our request.",
+        "flip": true
+    },
+    {
+        "image": "warrior_happy",
+        "name" : "???",
+        "message": "My name is Ryor. And I am one of your teachers for this game.",
+        "flip": true
+    },
+    {
+        "image": "warrior_happy",
+        "name" : "Ryor",
+        "message": "But before teaching you about hiragana, we'll give you an idea how this game works.",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name" : "???",
+        "message": "Hello! I am Gema. Also one of your teachers.",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name" : "Gema",
+        "message": "The first part of the game is the training phase.",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name" : "Gema",
+        "message": "The first part of the training phase is the learning area. The learning area is the one on the map with the plus sign on it. Here, we will teach you the romaji for the hiragana characters.",
+        "flip": true
+    },
+    {
+        "image": "warrior_happy",
+        "name" : "Ryor",
+        "message": "After teaching you, we will ask you when you can finish the whole level. Meaning from here to the next areas! Don't worry, it doesn't have much bearing anyways.",
+        "flip": true
+    },
+    {
+        "image": "warrior_happy",
+        "name" : "Ryor",
+        "message": "We just want to learn how much time it will take for you to learn best. You could also change it by entering the learning area again.",
+        "flip": true
+    },
+    {
+        "image": "warrior_think",
+        "name" : "Ryor",
+        "message": "You have to train to be able to move to the next area. The training area is the one with the pencil on it. The training area helps you memorize the syllables that you recently learned.",
+        "flip": true
+    },
+    {
+        "image": "warrior_happy",
+        "name" : "Ryor",
+        "message": "There are multiple choice and matching type traning. You have to at least finish one to get to the next level.",
+        "flip": true
+    },
+    {
+        "image" : "mage_happy",
+        "name" : "Gema",
+        "message": "The next part is the practice area. It is the one with the up arrow on it. There, you can practice all the syllables that you learned.",
+        "flip": true
+    },
+    {
+        "image" : "mage_happy",
+        "name" : "Gema",
+        "message": "We will be showing you a character, then you have to type its romaji that we taught you. It is very similar to what you will be doing in dungeons.",
+        "flip": true
+    },
+    {
+        "image" : "warrior_smug",
+        "name" : "Ryor",
+        "message": "Don't worry. We'll be holding back as to not hurt you. We'll only show one hiragana character at a time.",
+        "flip": true
     },
     {
         "image" : "warrior_happy",
-        "name" : "???",
-        "message": "Hello there! Are you looking for a quest?",
-        "flip": true
-    },
-    {
-        "image": "bleu_happy",
-        "name" : "You",
-        "message": "No. I am not an adventurer."
-    },
-    {
-        "image": "warrior_think",
-        "name" : "???",
-        "message": "Oh. So are you applying for an adventurer's license?",
-        "flip": true
-    },
-    {
-        "image": "bleu_happy",
-        "name" : "You",
-        "message": "No. I was actually sent here by someone."
-    },
-    {
-        "image": "bleu_think",
-        "name" : "You",
-        "message": "(If you could call \"that\", a someone.)"
-    },
-    {
-        "image": "warrior_think",
-        "name" : "???",
-        "message": "Someone? Who you might be talking about?",
-        "flip": true
-    },
-    {
-        "image": "bleu_angry",
-        "name" : "You",
-        "message": "The Creator."
-    },
-    {
-        "image": "warrior_angry",
-        "name" : "???",
-        "message": "The Creator, huh.",
-        "flip": true
-    },
-    {
-        "image": "warrior_angry",
-        "name" : "???",
-        "message": "Why would The Creator send someone here? Are you messing with me?",
-        "flip": true
-    },
-    {
-        "image": "bleu_angry",
-        "name" : "You",
-        "message": "Look. I am not messing with you. He speaked to me in my dreams."
-    },
-    {
-        "image": "warrior_smug",
-        "name" : "???",
-        "message": "Dreams, huh.",
-        "flip": true
-    },
-    {
-        "image": "bleu_angry",
-        "name" : "You",
-        "message": "If you don't believe me, then-"
-    },
-    {
-        "image": "warrior_smug",
-        "name" : "???",
-        "message": "Then, what? You're going to tell The Creator that I did not believe you?",
-        "flip": true
-    },
-    {
-        "image": "bleu_angry",
-        "name" : "You",
-        "message": "..."
-    },
-    {
-        "image": "bleu_angry",
-        "name" : "You",
-        "message": "(I knew I shouldn't have believed that dream. What was I thinking.)"
-    },
-    {
-        "image": "bleu_angry",
-        "name" : "You",
-        "message": "I-I-I'll just leave."
-    },
-    {
-        "narrate" : true,
-        "name" : "???",
-        "message": "Wait!"
-    },
-    {
-        "image": "mage_happy",
-        "name" : "???",
-        "message": "Are you the one?",
-        "flip": true
-    },
-    {
-        "image": "mage_happy",
-        "name" : "???",
-        "message": "Are you the one sent by The Creator?",
-        "flip": true
-    },
-    {
-        "image": "bleu_happy",
-        "name" : "You",
-        "message": "Yeah. I think so."
-    },
-    {
-        "image": "mage_angry",
-        "name" : "???",
-        "message": "Ryor. Lead him upstairs. I'll go get my things.",
-        "flip": true
-    },
-    {
-        "image": "warrior_think",
         "name" : "Ryor",
-        "message": "O-okay.",
+        "message": "But we will be asking every syllable that you know. So the more syllables you learned, the harder it will be.",
+        "flip": true
+    },
+    {
+        "image": "mage_angry",
+        "name" : "Gema",
+        "message": "This is to prepare you for the next phase. The testing phase or the dungeon!",
+        "flip": true
+    },
+    {
+        "image": "mage_happy",
+        "name" : "Gema",
+        "message": "Here, we'll be doing actual battles where you can win or lose!",
         "flip": true
     },
     {
         "image": "warrior_angry",
-        "name" : "Ryor",
-        "message": "Come with me.",
-        "flip": true
-    },
-    {
-        "narrate": true,
-        "name" : "You",
-        "message": "(So, is this dream real? I guess I'll have to find out myself.)",
-        "flip": true
-    },
-    {
-        "image" : "mage_happy",
-        "name" : "???",
-        "message": "Did The Creator tell you about the invasion?",
-        "flip": true
-    },
-    {
-        "image": "bleu_think",
-        "name" : "You",
-        "message": "Only that the goblin population are on the rise. And that they're invading nearby villages."
-    },
-    {
-        "image" : "mage_happy",
-        "name" : "???",
-        "message": "Well. That's most of it.",
+        "name" : "Gema",
+        "message": "You will be battling goblins. It is similar to our practice but these goblins are ruthless!",
         "flip": true
     },
     {
         "image": "mage_angry",
-        "name" : "???",
-        "message": "If it were normal goblins, we would have no problems dealing with them.",
+        "name" : "Gema",
+        "message": "They will be showing words instead of just a single hiragana character. Words that may contain every syllable we taught you.",
         "flip": true
     },
     {
-        "image": "mage_happy",
-        "name" : "???",
-        "message": "One person here would gladly slay all of them.",
-        "flip": true
-    },
-    {
-        "image": "mage_angry",
-        "name" : "???",
-        "message": "But the golbins are now using spells. And the only way to defeat them is to counter these spells.",
-        "flip": true
-    },
-    {
-        "image": "bleu_think",
-        "name": "You",
-        "message": "I understand that these goblins must be stopped."
-    },
-    {
-        "image": "bleu_think",
-        "name": "You",
-        "message": "But why me? I don't even know how spells work!"
-    },
-    {
-        "image": "mage_happy",
-        "name": "???",
-        "message": "That I don't know.",
+        "image": "warrior_think",
+        "name": "Ryor",
+        "message": "But in here, there are a few assists that you can use.",
         "flip": true
     },
     {
         "image": "mage_happy",
         "name": "???",
-        "message": "But The Creator chose you. So there must be something within you.",
-        "flip": true
-    },
-    {
-        "image": "bleu_think",
-        "name": "You",
-        "message": "That's good and all. But I really don't know how spells work."
-    },
-    {
-        "image": "mage_happy",
-        "name": "Gema",
-        "message": "Do not worry about that. I, Gema, will ensure that The Creator's will be done.",
+        "message": "You can skip, extend time, or even ask for some choices for your answer.",
         "flip": true
     },
     {
         "image": "mage_happy",
         "name": "Gema",
-        "message": "In fact, we can start now. Meet Ryor at the training field once you're ready to start.",
-        "flip": true
-    },
-    {
-        "image": "bleu_think",
-        "name": "You",
-        "message": "One more thing. I know he told me something more than this invasion but I can't seem to remember it."
-    },
-    {
-        "image": "bleu_think",
-        "name": "You",
-        "message": "That's one of the reason that I went to this place that he told me in my dream."
-    },
-    {
-        "image": "mage_think",
-        "name": "Gema",
-        "message": "I'll be happy to help you remember it. But we'll have to handle this goblin invasion first.",
+        "message": "We'll be tracking most of your progress here! So don't rush it and do your best!",
         "flip": true
     },
     {
         "image": "mage_happy",
         "name": "Gema",
-        "message": "Take this Journal with you. It will be helpful in you journey.",
+        "message": "After the dungeon, you will unlock the next character family. And you'll be training and testing for it again.",
+        "flip": true
+    },
+    {
+        "image": "warrior_think",
+        "name": "Ryor",
+        "message": "It gets pretty difficult on later levels so be sure to review your characters! Train, Practice, or even just look at them in the Review screen!."
+    },
+    {
+        "image": "warrior_happy",
+        "name": "Ryor",
+        "message": "If you are confused on which level you should be playing, you can click the Story button in the main menu."
+    },
+    {
+        "image": "warrior_happy",
+        "name": "Ryor",
+        "message": "The latest level will be flashing red!"
+    },
+    {
+        "image": "mage_happy",
+        "name": "Gema",
+        "message": "That's all for now. We'll see you around. We hope you enjot your stay!",
         "flip": true
     }
     ],
@@ -261,7 +186,7 @@
     },
     "teach": [],
     "message": {
-        "title":"Dreams and Visions",
-        "message": "Story started!"
+        "title":"Welcome!",
+        "message": "Game begins!"
     }
 }

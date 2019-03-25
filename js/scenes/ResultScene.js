@@ -147,7 +147,7 @@ class ResultScene extends Phaser.Scene {
             this.sound.play('next');
             // console.log('gising na bata');
 
-            this.events.emit('finishedDungeon', {success: this.success, dataCapture: this.dataCapture, story: this.story, message : {title:  this.success ? "#1 Victory Royale!" : "Mission Failed", message: this.success ? "You have successfully finished this dungeon!" : "We'll get 'em next time."}, log: this.log});
+            this.events.emit('finishedDungeon', {success: this.success, dataCapture: this.dataCapture, story: this.story, message : {title:  this.success ? "Dungeon Complete!" : "Dungeon Failed!", message: this.success ? "You have successfully finished this dungeon!" : "Just a little more training will fix this."}, log: this.log});
 
             this.scene.wake('MainScene', {player: this.player});
             this.scene.stop('ResultScene');

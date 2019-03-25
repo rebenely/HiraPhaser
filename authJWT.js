@@ -54,18 +54,18 @@ module.exports  = {
                                 distracted: 0,
                                 play_time: 0
                             }
-                            dbo.collection("players").updateOne({username: username}, { $set: {session: result.session + 1} }, function(err, res) {
+                            dbo.collection("players").updateOne({username: username}, { $set: {session: result.session + 1} }, async function(err, res) {
                               if (err) throw err;
                               console.log( username + ": updated session id", result.session + 1);
-                              db.close();
+                              await dbo.collection("sessions").insertOne(currentSesh, function(errx, res) {
+                                if (errx) {throw errx;}
+                                console.log(username + ": added a session with id", result.session + 1);
+                                db.close();
+                              });
                             });
 
 
-                            await dbo.collection("sessions").insertOne(currentSesh, function(errx, res) {
-                              if (errx) {throw errx;}
-                              console.log(username + ": added a session with id", result.session + 1);
-                              db.close();
-                            });
+
                             // return the JWT token for the future API calls
                             return res.json({
                               success: true,

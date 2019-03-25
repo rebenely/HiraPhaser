@@ -11,7 +11,7 @@
         "warrior_angry": "assets/dialogs/images/warrior_angry.png",
         "warrior_smug": "assets/dialogs/images/warrior_smug.png",
         "rogue_happy": "assets/dialogs/images/rogue_happy.png",
-        "rogue_attack": "assets/dialogs/images/rogue_attack.png",
+        "rogue_attack": "assets/dialogs/images/rogue_angry.png",
         "mage_happy": "assets/dialogs/images/mage_happy.png",
         "mage_angry": "assets/dialogs/images/mage_happy.png",
         "mage_think": "assets/dialogs/images/mage_think.png"
@@ -21,66 +21,51 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "The spirit elemental Grou wants to talk to you!",
+            "message": "Good job reaching this far!",
             "flip": true
         },
         {
-            "image": "bleu_think",
-            "name" : "You",
-            "message": "Who?"
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Grou will be teaching you now. He's one of the teachers here.",
+            "flip": true
         },
         {
             "image" : "rogue_happy",
             "name" : "Grou",
-            "message": "Me.",
-            "flip": true
-        },
-        {
-            "image": "bleu_shocked",
-            "name" : "You",
-            "message": "What the-. You look just like me!"
-        },
-        {
-            "image" : "mage_think",
-            "name" : "Gema",
-            "message": "Grou copies the likeness of the person who sees him. In your case, he looks like you. But for me, he looks just like me.",
+            "message": "Hello. I am the earth elemental Grou. I'll be giving you your N-family pass.",
             "flip": true
         },
         {
             "image" : "rogue_attack",
             "name" : "Grou",
-            "message": "I will be the one to grant you your N-Family pass. But before that, you must learn the N-Family first!",
+            "message": "Are you ready?",
             "flip": true
-        },
-        {
-            "image": "bleu_think",
-            "name" : "You",
-            "message": "N-Family pass? I don't get what you mean but sure."
         },
         {
             "text": "NA",
             "name": "Grou",
-            "message": "This is read as 'Ha'."
+            "message": "This is read as 'Na'."
         },
         {
             "text": "NI",
             "name": "Grou",
-            "message": "This is read as 'Hi'."
+            "message": "This is read as 'Ni'."
         },
         {
             "text": "NU",
             "name": "Grou",
-            "message": "This is read as 'Fu'."
+            "message": "This is read as 'Nu'."
         },
         {
             "text": "NE",
             "name": "Grou",
-            "message": "This is read as 'He'."
+            "message": "This is read as 'Ne'."
         },
         {
             "text": "NO",
             "name": "Grou",
-            "message": "This is read as 'Ho'."
+            "message": "This is read as 'No'."
         },
         {
             "text": "N",
@@ -90,8 +75,38 @@
         {
             "image" : "mage_happy",
             "name" : "Grou",
-            "message": "N is not usually taught along with the other Ns. But I'll make an exception for you.",
+            "message": "Yes. There are six of them. Let's read them again.",
             "flip": true
+        },
+        {
+            "text": "NA",
+            "name": "Grou",
+            "message": "This is read as 'Na'."
+        },
+        {
+            "text": "NI",
+            "name": "Grou",
+            "message": "This is read as 'Ni'."
+        },
+        {
+            "text": "NU",
+            "name": "Grou",
+            "message": "This is read as 'Nu'."
+        },
+        {
+            "text": "NE",
+            "name": "Grou",
+            "message": "This is read as 'Ne'."
+        },
+        {
+            "text": "NO",
+            "name": "Grou",
+            "message": "This is read as 'No'."
+        },
+        {
+            "text": "N",
+            "name": "Grou",
+            "message": "This is read as 'N'. Don't forget that this is a syllable!"
         },
         {
             "image" : "mage_happy",

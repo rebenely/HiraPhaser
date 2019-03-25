@@ -19,36 +19,25 @@
         {
             "image" : "warrior_happy",
             "name" : "Ryor",
-            "message": "I'm sorry about earlier. I didn't know anything about that.",
+            "message": "Hello! I'll be teaching you the vowels!",
             "flip": true
         },
         {
             "image" : "warrior_think",
             "name" : "Ryor",
-            "message": "The only one I know who can talk to The Creator is Gema.",
+            "message": "Before anything, you must remember that each hiragana character is a syllable.",
             "flip": true
-        },
-        {
-            "image": "bleu_happy",
-            "name" : "You",
-            "message": "It's alright. So, you have something to teach me?"
         },
         {
             "image" : "warrior_happy",
             "name" : "Ryor",
-            "message": "Yes. I'll teach how to read the spells that the goblins use.",
+            "message": "In their romanization or romaji, they are usually represented by more than one letter.",
             "flip": true
         },
         {
             "image" : "warrior_think",
             "name" : "Ryor",
-            "message": "They are using Hiragana characters. There are 46 basic hiragana syllables that we will teach you.",
-            "flip": true
-        },
-        {
-            "image": "warrior_happy",
-            "name" : "Ryor",
-            "message": "Once you learned these, you can easily transcribe all of the sounds that the spells use and counter them!",
+            "message": "In this game, we will be teaching you the 46 basic hiragana syllables.",
             "flip": true
         },
         {
@@ -82,16 +71,42 @@
             "name": "Ryor",
             "message": "This is read as 'o'."
         },
+
     {
         "image": "warrior_happy",
         "name": "Ryor",
-        "message": "Don't worry if you can't remember all of them right now. You could always check your Journal.",
+        "message": "Let's go over them again.",
         "flip": true
+    },
+    {
+        "text": "A",
+        "name": "Ryor",
+        "message": "This is read as 'a'."
+    },
+    {
+        "text": "I",
+        "name": "Ryor",
+        "message": "This is read as 'i'."
+    },
+    {
+        "text": "U",
+        "name": "Ryor",
+        "message": "This is read as 'u'."
+    },
+    {
+        "text": "E",
+        "name": "Ryor",
+        "message": "This is read as 'e'."
+    },
+    {
+        "text": "O",
+        "name": "Ryor",
+        "message": "This is read as 'o'."
     },
     {
         "image": "warrior_happy",
         "name": "Ryor",
-        "message": "Once you were taught how a syllable is read, that journal will magically learn it too.",
+        "message": "Don't worry if you can't remember all of them right now. You could always click review on the world map screen.",
         "flip": true
     },
     {
@@ -110,17 +125,6 @@
         "image": "warrior_happy",
         "name": "Ryor",
         "message": "After that, I will be willing to Practice with you!",
-        "flip": true
-    },
-    {
-        "image": "bleu_think",
-        "name" : "You",
-        "message": "I gotta say. That's a lot of things you told me."
-    },
-    {
-        "image": "warrior_happy",
-        "name": "Ryor",
-        "message": "Don't worry. Once you get the hang of it, it will be a breeze.",
         "flip": true
     }
     ],

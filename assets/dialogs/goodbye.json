@@ -22,37 +22,54 @@
     "dialog": [    {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "Welcome to the final area!",
+            "message": "Congratulations!",
             "flip": true
         },
         {
             "image": "warrior_happy",
             "name" : "Ryor",
-            "message": "Again, thank you for sticking with us."
+            "message": "Thank you for sticking with us."
         },
         {
             "image": "rogue_happy",
             "name" : "Grou",
-            "message": "We hope you learned well from us. And that you still remember the characters.",
+            "message": "We hope you learned well from us.",
             "flip": true
         },
         {
             "image": "mage_happy",
             "name" : "Gema",
-            "message": "Let's keep on going!",
+            "message": "You can still play the game, but there won't be more content.",
             "flip": true
         },
         {
             "image": "warrior_happy",
             "name" : "Ryor",
-            "message": "You're close to finishing the game.",
+            "message": "Rest assured that the data that we collected will remain anonymous and will only be used for thesis purposes.",
             "flip": true
         },
         {
             "image": "warrior_happy",
             "name" : "All",
-            "message": "We thank you once again for your participation!"
+            "message": "If you have questions, you can contact us through e-mail or directly."
+        },
+        {
+            "image": "warrior_happy",
+            "name" : "Ryor",
+            "message": "E-mail me at rebenely@gmail.com"
+        },
+        {
+            "image": "rogue_happy",
+            "name" : "Grou",
+            "message": "Thanks for playing!",
+            "flip": true
+        },
+        {
+            "narrate": true,
+            "name" : "All",
+            "message": "Goodbye!"
         }
+
     ],
 
     "image": {

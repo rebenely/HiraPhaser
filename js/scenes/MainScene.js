@@ -280,12 +280,13 @@ class MainScene extends Phaser.Scene {
         // }, this);
         // this.add.existing(nextArea1);
         //
-        // var secret = new HiraButton(this, 2035, 980, "Huli ka", style, () => {
-        //     this.scene.launch('MessageScene', {message: { title : "Tanong", body: "Bakit madaling utuin ang mga nakababatang kapatid na lalake ng mga hapon? Kasi otouto."}});
-        //     this.events.emit('disableLevels');
-        //     this.scene.sleep('WorldNavScene');
-        // }, this);
-        // this.add.existing(secret);
+        var style = { font: "24px manaspc", fill: game.global.UI_TEXT_FILL, align: "left", wordWrap: { width: 400, useAdvancedWrap: true} };
+        var secret = new HiraButton(this, 1790, 860, "Credits", style, () => {
+            this.scene.launch('MessageScene', {message: { title : "Credits", body: "Sounds by Juhani Junkala. Sprites by me (that's why they're bad lol). Font by TheJman0205."}});
+            this.events.emit('disableLevels');
+            this.scene.sleep('WorldNavScene');
+        }, this);
+        this.add.existing(secret);
 
     }
 

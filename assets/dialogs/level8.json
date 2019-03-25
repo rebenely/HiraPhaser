@@ -20,7 +20,13 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "This is the last level! The dungeon here will be testing your vowels up to the R Family.",
+            "flip": true
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Here's the R Family.",
             "flip": true
         },
         {
@@ -51,7 +57,38 @@
         {
             "image" : "mage_happy",
             "name" : "Gema",
-            "message": "I'll tell you if I got my hands on one of those elixirs.",
+            "message": "For one last time, here are the R Family.",
+            "flip": true
+        },
+        {
+            "text": "RA",
+            "name": "Gema",
+            "message": "This is read as 'Ra'."
+        },
+        {
+            "text": "RI",
+            "name": "Gema",
+            "message": "This is read as 'Ri'."
+        },
+        {
+            "text": "RU",
+            "name": "Gema",
+            "message": "This is read as 'Ru'."
+        },
+        {
+            "text": "RE",
+            "name": "Gema",
+            "message": "This is read as 'Re'."
+        },
+        {
+            "text": "RO",
+            "name": "Gema",
+            "message": "This is read as 'Ro'."
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Congratulations! You've learned all the 46 basic hiragana syllables. Now go train and finish the last dungeon!",
             "flip": true
         }
     ],
