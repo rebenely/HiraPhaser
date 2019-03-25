@@ -124,12 +124,12 @@ class WorldNavScene extends Phaser.Scene {
         if(data.level.story_hack !== undefined) {
             data.level.world = Math.floor(data.level.story_hack/12);
         }
-        console.log(data.level.world, 'vs', this.iterator)
+        // console.log(data.level.world, 'vs', this.iterator)
 
         if(this.iterator !== data.level.world) {
             this.iterator = data.level.world;
             this.navEnable = false;
-            console.log('iterator is ', this.iterator);
+            // console.log('iterator is ', this.iterator);
 
             if (this.iterator === 3) {
                 this.nextButton.disable();
@@ -164,7 +164,7 @@ class WorldNavScene extends Phaser.Scene {
 
             var found = -1;
             for(let i = 0; i < this.player.schedule.length && found == -1; i++) {
-                console.log(data.name, 'vs', this.player.schedule[i]);
+                // console.log(data.name, 'vs', this.player.schedule[i]);
 
                 if(this.player.schedule[i].dungeon === data.name) {
                     found = i;

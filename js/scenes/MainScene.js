@@ -194,7 +194,7 @@ class MainScene extends Phaser.Scene {
                 // console.log(this.dungeons[i].log);
             }
         }
-        console.log(this.player.logs);
+        // console.log(this.player.logs);
         this.compareStoryLevels();
         // this.onQuest();
 
@@ -296,7 +296,7 @@ class MainScene extends Phaser.Scene {
     }
 
     update (time, delta) {
-        this.controls.update(delta);
+        // this.controls.update(delta);
 
         this.clouds.getChildren().forEach(function (child) {﻿
             if(child.x > 2048 + child.width + 200) {
@@ -351,7 +351,7 @@ class MainScene extends Phaser.Scene {
         //     this.compareStoryLevels();
         //     updateCharset = true;
         // }
-        console.log(data);
+        // console.log(data);
         if(data.sched != undefined) {
 
             this.scene.launch('DialogBoxScene', { sched: data.sched, player_story: player_story_b4, story: data.story, update_story: this.player.story, title: data.message.title, message: data.message.message, dataCapture: {'username' : this.player.name, characters: data.charSet, updateCharset: updateCharset, timestamp: data.timestamp, total_time: data.total_time, sched: data.sched}, api: 'api/learn'});
@@ -364,7 +364,7 @@ class MainScene extends Phaser.Scene {
     /* emmitted event from dungeon */
     onFinishedDungeon(data){
         var player_story_b4 = this.player.story;
-        console.log(data);
+        // console.log(data);
         if(data.success && this.player.story <= data.story) { // check if player story is lower than dungeon story level
             this.player.story++;
             this.compareStoryLevels();
@@ -431,7 +431,7 @@ class MainScene extends Phaser.Scene {
         }
         this.nextStory = nextStory;
 
-        console.log(nextStory.name, 'world', this.nextStory.world);
+        // console.log(nextStory.name, 'world', this.nextStory.world);
     }
 
     disableInteractiveLevels(tint){

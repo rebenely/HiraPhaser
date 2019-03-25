@@ -39,7 +39,7 @@ class CutScene extends Phaser.Scene {
 
     create() {
         game.playing = true;
-        console.log(this.player);
+        // console.log(this.player);
         // var bg = this.add.sprite(720/2, 480/2, this.bgKey);
         // console.log('image resize', this.jsonFile.image.x, this.jsonFile.image.y, this.jsonFile.image.scale);
         this.npc = this.add.sprite(parseInt(this.jsonFile.image.x, 10), parseInt(this.jsonFile.image.y, 10), this.jsonFile['dialog'][0].image);
@@ -111,7 +111,14 @@ class CutScene extends Phaser.Scene {
 
         this.skipButton = new HiraButton(this, 60*11, 26, "Skip", style, () => {
 
-            if(this.jsonFile.dungeon != undefined) {
+            var played_already = false;
+            var i = this.checkSchedExistence();
+            if(i != -1){
+                played_already = this.player.schedule[i].submitted != undefined;
+                // console.log('alread played?', played_already);
+            }
+
+            if(this.jsonFile.dungeon != undefined && !played_already) {
                 this.scene.sleep('CutScene');
                 this.scene.launch('SchedulerScene', {dungeon: this.jsonFile.dungeon, player: this.player});
             } else {
@@ -179,8 +186,14 @@ class CutScene extends Phaser.Scene {
                 // from here emit learnedNewCharacters plus schedule
                 // store sched to this.player and db player
                 // when dungeon is posted complete schedule
+                var played_already = false;
+                var i = this.checkSchedExistence();
+                if(i != -1){
+                    played_already = this.player.schedule[i].submitted != undefined;
+                    // console.log('alread played?', played_already);
+                }
 
-                if(this.jsonFile.dungeon != undefined) {
+                if(this.jsonFile.dungeon != undefined && !played_already) {
                     this.scene.sleep('CutScene');
                     this.scene.launch('SchedulerScene', {dungeon: this.jsonFile.dungeon, player: this.player});
                 } else {
@@ -189,6 +202,17 @@ class CutScene extends Phaser.Scene {
 
             }
         }
+    }
+
+    checkSchedExistence() {
+
+        for(let i = 0; i < this.player.schedule.length; i++) {
+            // console.log(this.player.schedule[i], 'vs', this.jsonFile.dungeon);
+            if(this.player.schedule[i].dungeon === this.jsonFile.dungeon) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     update () {
@@ -204,7 +228,7 @@ class CutScene extends Phaser.Scene {
     }
 
     exitScene(data){
-        if(this.jsonFile.dungeon){
+        if(this.jsonFile.dungeon && data != null){
             this.events.emit('learnedNewCharacters', {sched: {deadline: data.deadline, dungeon: this.jsonFile.dungeon}, world: this.world, charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});
         } else {
             this.events.emit('learnedNewCharacters', { world: this.world, charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});

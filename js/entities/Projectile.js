@@ -15,7 +15,7 @@ class Projectile extends Phaser.GameObjects.BitmapText {
         this.characters = characters;
         this.iterator = 0;
         this.result = [];
-        console.log('char pool indiv', this.characters);
+        // console.log('char pool indiv', this.characters);
     }
 
     say(text) {
@@ -32,7 +32,7 @@ class Projectile extends Phaser.GameObjects.BitmapText {
         this.currentChar = this.characterPool[this.iterator];
         this.chars = this.currentChar.split('-');
         this.currentChar = this.currentChar.replace(/-/g, '');
-        console.log('new char', this.chars);
+        // console.log('new char', this.chars);
         this.setText(this.getHiragana());
         if(this.iterator < this.characterPool.length - 1) {
             this.iterator++;
@@ -76,7 +76,7 @@ class Projectile extends Phaser.GameObjects.BitmapText {
                         iterator++;
                     }
                 }
-                console.log(this.chars[i] === 'N');
+                // console.log(this.chars[i] === 'N');
                 if(this.chars[i] === 'N' && !this.isAVowel(input[iterator]) || (input[iterator] === 'N' && this.isAVowel(input[iterator + 1]))) {
                     skipItem = true;
                     if(!this.isAVowel(input[iterator])){
@@ -107,13 +107,13 @@ class Projectile extends Phaser.GameObjects.BitmapText {
             }
 
         } else if (input.length != this.currentChar.length){
-            console.log(input, iterator);
+            // console.log(input, iterator);
             this.result.push({
                 answer: input.slice(iterator),
                 extra: true
             });
         }
-        console.log(this.result);
+        // console.log(this.result);
         return this.result;
     }
 

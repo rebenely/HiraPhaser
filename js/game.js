@@ -78,7 +78,7 @@ game.screenWipe = function (scene) {
 game.timestamp = function (){
     var asiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
     var manilaTime = new Date(asiaTime);
-    console.log(manilaTime.toLocaleString());
+    // console.log(manilaTime.toLocaleString());
     return manilaTime.toLocaleString();
 }
 game.distracted = 0;

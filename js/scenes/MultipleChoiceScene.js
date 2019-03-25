@@ -121,7 +121,7 @@ class MultipleChoiceScene extends Phaser.Scene {
 
         this.closeButton = new HiraButton(this, 720/2, 2*480/3 + 50, "Back", style, () => {
             this.dataCapture.accuracy = this.dataCapture.accuracy / this.dataCapture.questions.length;
-            console.log('yoman', this.dataCapture);
+            // console.log('yoman', this.dataCapture);
             this.events.emit('mulchoFinish', {dataCapture: this.dataCapture, played: this.played});
             this.scene.stop('MultipleChoiceScene');
             this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});

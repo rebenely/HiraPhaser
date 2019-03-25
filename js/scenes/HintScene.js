@@ -61,7 +61,7 @@ class HintScene extends Phaser.Scene {
         for ( let i = 0; i < this.player.characterPool.length; i++ ) {
 
 
-            console.log(this.player.characterPool[i]);
+            // console.log(this.player.characterPool[i]);
             if(this.player.characterPool[i] !== "N"){
                 if(column % 5 == 0) {
                     j++;

@@ -129,7 +129,7 @@ class MatchingTypeScene extends Phaser.Scene {
         // });
 
         this.exitButton = new HiraButton(this, 720/3, 5*480/6, "Back", this.style, () => {
-            console.log('yeman', this.dataCapture);
+            // console.log('yeman', this.dataCapture);
             this.dataCapture.accuracy = this.dataCapture.accuracy / this.ypos.length;
             this.events.emit('matchFinish', {dataCapture: this.dataCapture, played: this.played});
             this.scene.stop('MatchingTypeScene');

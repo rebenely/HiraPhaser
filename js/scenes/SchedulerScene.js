@@ -43,14 +43,14 @@ class SchedulerScene extends Phaser.Scene {
         this.enterButton = new HiraButton(this, 720  - 60 - 30, 420, "Confirm", style, () => {
             var sched = new Date(game.timestamp());
             sched.setHours(sched.getHours() + parseInt(this.inputText));
-            console.log(sched.toLocaleString("en-US", {timeZone: "Asia/Manila"}));
+            // console.log(sched.toLocaleString("en-US", {timeZone: "Asia/Manila"}));
             var i = this.checkSchedExistence();
             if(i != -1){
                 this.player.schedule[i].deadline = sched.toLocaleString("en-US", {timeZone: "Asia/Manila"});
             } else {
                 this.player.schedule.push({deadline: sched.toLocaleString("en-US", {timeZone: "Asia/Manila"}), dungeon: this.dungeon});
             }
-            console.log(this.player.schedule);
+            // console.log(this.player.schedule);
             this.events.emit('ScheduleMe', {deadline: sched.toLocaleString("en-US", {timeZone: "Asia/Manila"})});
             this.scene.stop('SchedulerScene');
         }, this);

@@ -26,7 +26,7 @@ class BattleScene extends Phaser.Scene {
     }
 
     init (data) {
-         console.log(data);
+         // console.log(data);
         if(data.dungeon !== undefined) {
             this.dungeon = data.dungeon;
             this.boss = data.boss;
@@ -218,7 +218,7 @@ class BattleScene extends Phaser.Scene {
                     this.state = this.STATE_VALUE.idle;
 
                     this.timedEvent.remove(false);
-            
+
                     this.timeStopped = false;
 
 
@@ -512,7 +512,7 @@ class BattleScene extends Phaser.Scene {
 
             this.okb.on('pointerup', function (pointer, x, y) {
                 var char = this.getEquivalentX(x, y);
-                console.log(x, y, this.getEquivalentX(x, y));
+                // console.log(x, y, this.getEquivalentX(x, y));
                 if(this.getEquivalentX(x,y) === '^') {
                     this.parseText(13, this.getEquivalentX(x, y));
                 } else if (this.getEquivalentX(x, y) === '-') {
