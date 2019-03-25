@@ -136,6 +136,7 @@ class BattleScene extends Phaser.Scene {
         };
 
         if(this.simulate) {
+            game.playing = true;
             this.battleCapture.timestamp = game.timestamp();
         }
         /* onscreen keyboard */
@@ -206,6 +207,8 @@ class BattleScene extends Phaser.Scene {
                     };
                     if(this.timeStopped) {
                         this.timeStopped = false;
+                        this.extension.remove(this.ugokidasu());
+
                         stats.time_stopped = true;
                     }
 
@@ -215,7 +218,7 @@ class BattleScene extends Phaser.Scene {
                     this.state = this.STATE_VALUE.idle;
 
                     this.timedEvent.remove(false);
-                    this.extension.remove(this.ugokidasu());
+            
                     this.timeStopped = false;
 
 
@@ -393,6 +396,7 @@ class BattleScene extends Phaser.Scene {
             if(this.state === this.STATE_VALUE.idle) {
                 if(this.simulate){
                     this.packData();
+                    game.playing = false;
                     // console.log(this.battleCapture);
                     if(this.battleCapture.questions.length > 0){
                         this.events.emit('finishedPractice', {success: true, dataCapture: this.battleCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level, log: this.log } );

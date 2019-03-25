@@ -38,6 +38,7 @@ class CutScene extends Phaser.Scene {
     }
 
     create() {
+        game.playing = true;
         console.log(this.player);
         // var bg = this.add.sprite(720/2, 480/2, this.bgKey);
         // console.log('image resize', this.jsonFile.image.x, this.jsonFile.image.y, this.jsonFile.image.scale);
@@ -209,6 +210,7 @@ class CutScene extends Phaser.Scene {
             this.events.emit('learnedNewCharacters', { world: this.world, charSet: this.jsonFile.teach, message: this.jsonFile.message, story: this.story, log: this.log, timestamp: this.timestampIn, total_time: (new Date() - this.timeIn)/1000});
 
         }
+        game.playing = false;
         this.scene.stop('CutScene');
         this.scene.wake('MainScene');
     }

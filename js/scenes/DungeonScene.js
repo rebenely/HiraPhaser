@@ -25,6 +25,7 @@ class DungeonScene extends Phaser.Scene {
     }
 
     create () {
+        game.playing = true;
         // console.log('dungeon log is', this.log);
         this.skips = 0;
         this.extends = 0;
@@ -40,7 +41,11 @@ class DungeonScene extends Phaser.Scene {
             encounters: [],
             total_items: 0,
             total_correct: 0,
-            possible_correct: 0
+            possible_correct: 0,
+            total_pattern_A: 0,
+            total_pattern_B: 0,
+            total_pattern_C: 0,
+            total_pattern_D: 0
         }
         this.hintChecked = false;
         // console.log('recreate boii', this.dungeon);
@@ -72,6 +77,7 @@ class DungeonScene extends Phaser.Scene {
                     enemyCleared.push({name: this.dungeon.minionName, exp: 10});
                 }
             }
+            game.playing = false;
             this.scene.stop();
             this.sound.play('fail');
             this.dataCapture.timestamp_end = game.timestamp();
@@ -144,6 +150,7 @@ class DungeonScene extends Phaser.Scene {
 
         this.events.removeListener('camerafadeoutcomplete');
         this.cameras.main.once('camerafadeoutcomplete', function (camera) {
+            game.playing = false;
             this.scene.stop();
             this.dataCapture.timestamp_end = game.timestamp();
             this.scene.start('ResultScene', {player: this.player, enemy: this.enemyCleared, success: this.cleared === 4, dataCapture: this.dataCapture, story: this.dungeon.story, log: this.log});
@@ -254,6 +261,23 @@ class DungeonScene extends Phaser.Scene {
                 this.dataCapture.possible_correct++;
             }
 
+            if(data.dataCapture.questions[i].correct) {
+                if(data.dataCapture.questions[i].time < 2.5) {
+                    data.dataCapture.questions[i].pattern = 'A';
+                    this.dataCapture.total_pattern_A++;
+                } else {
+                    data.dataCapture.questions[i].pattern = 'B';
+                    this.dataCapture.total_pattern_B++;
+                }
+            } else {
+                if(data.dataCapture.questions[i].time < 2.5) {
+                    data.dataCapture.questions[i].pattern = 'D';
+                    this.dataCapture.total_pattern_D++;
+                } else {
+                    data.dataCapture.questions[i].pattern = 'C';
+                    this.dataCapture.total_pattern_C++;
+                }
+            }
         }
         this.dataCapture.battles.push(data.dataCapture);
 

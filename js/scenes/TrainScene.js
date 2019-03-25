@@ -18,6 +18,7 @@ class TrainScene extends Phaser.Scene {
     }
 
     create () {
+        game.playing = true;
         this.first = true;
         this.dataCapture = {
             name: this.title,
@@ -65,6 +66,7 @@ class TrainScene extends Phaser.Scene {
             }
 
             // console.log('yeman');
+            game.playing = false;
             this.scene.stop('TrainScene');
             this.scene.wake('MainScene', {player: this.player});
         }, this);

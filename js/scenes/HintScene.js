@@ -10,9 +10,13 @@ class HintScene extends Phaser.Scene {
     }
 
     create () {
+        this.isAlreadyPlaying = game.playing;
+        game.playing = true;
         this.scene.bringToTop();
         this.move = 0;
         this.api = "api/review";
+        this.payload = {total_time: new Date()};
+
 
         this.graphics = this.add.graphics();
 
@@ -82,17 +86,20 @@ class HintScene extends Phaser.Scene {
             this.add.existing(this.romajiDisplay[this.romajiDisplay.length - 1]);
         }
 
-        this.cancelButton = new HiraButton(this, 720  - 60 - 30, 420, "Loading", style, () => {
-            // console.log('fuck go back');
-            if(this.inDungeon){
-                this.scene.wake('DungeonScene');
-            } else {
-                this.scene.wake('MainScene');
+        this.cancelButton = new HiraButton(this, 720  - 60 - 30, 420, "Exit", style, () => {
+
+            this.cancelButton.setText('Syncing');
+            this.cancelButton.disable();
+
+            if(!this.inDungeon){
+                this.payload.total_time = (new Date() - this.payload.total_time)/1000;
             }
-            this.scene.stop('HintScene');
+            this.postData();
+
+
         }, this);
         this.add.existing(this.cancelButton);
-        this.cancelButton.disable();
+
 
         this.downButton = new HiraPress(this, 90, 430, "Down", style, () => {
             this.move = 5;
@@ -126,7 +133,7 @@ class HintScene extends Phaser.Scene {
         }
 
         this.sound.play('next');
-        this.postData();
+
 
         // console.log(this.world);
     }
@@ -144,26 +151,70 @@ class HintScene extends Phaser.Scene {
     }
 
     postData() {
-        $.ajax({
-            url: game.global.URL + this.api,
-            type: "POST",
-            async: true,
-            contentType: "application/json",
-            headers: {"Authorization": "Bearer " + game.token },
-            context: this,
-            retryLimit: 3,
-            success: function (responseData) {
-                this.sound.play('success');
-                this.cancelButton.enable();
-                this.cancelButton.setText("Back");
-            },
-            error: function (xhr) {
-                setTimeout(() => {
-                    this.titleDisplay.setTextUpper("Contacting server...");
-                    this.postData();
-                }, 5000);
+        if(this.inDungeon){
+            $.ajax({
+                url: game.global.URL + this.api,
+                type: "POST",
+                async: true,
+                contentType: "application/json",
+                headers: {"Authorization": "Bearer " + game.token },
+                context: this,
+                retryLimit: 3,
+                success: function (responseData) {
+                    this.sound.play('success');
 
-            }
-        });
+                    if(!this.isAlreadyPlaying) {
+                        game.playing = false;
+                    }
+                    // console.log('fuck go back');
+                    if(this.inDungeon){
+                        this.scene.wake('DungeonScene');
+                    } else {
+                        this.scene.wake('MainScene');
+                    }
+                    this.scene.stop('HintScene');
+                },
+                error: function (xhr) {
+                    setTimeout(() => {
+                        this.titleDisplay.setTextUpper("Contacting server...");
+                        this.postData();
+                    }, 5000);
+
+                }
+            });
+        } else {
+            $.ajax({
+                url: game.global.URL + this.api,
+                type: "POST",
+                async: true,
+                contentType: "application/json",
+                data: JSON.stringify(this.payload),
+                headers: {"Authorization": "Bearer " + game.token },
+                context: this,
+                retryLimit: 3,
+                success: function (responseData) {
+                    this.sound.play('success');
+
+                    if(!this.isAlreadyPlaying) {
+                        game.playing = false;
+                    }
+                    // console.log('fuck go back');
+                    if(this.inDungeon){
+                        this.scene.wake('DungeonScene');
+                    } else {
+                        this.scene.wake('MainScene');
+                    }
+                    this.scene.stop('HintScene');
+                },
+                error: function (xhr) {
+                    setTimeout(() => {
+                        this.titleDisplay.setTextUpper("Contacting server...");
+                        this.postData();
+                    }, 5000);
+
+                }
+            });
+        }
+
     }
 }

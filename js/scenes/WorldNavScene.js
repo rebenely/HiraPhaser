@@ -97,7 +97,7 @@ class WorldNavScene extends Phaser.Scene {
         //
         // this.add.existing(this.sched);
         this.saveButton = new HiraButton(this, 60*11, 26, "Log out", style, () => {
-            this.scene.launch('DialogBoxScene', { title: "Logging out", message: "Saving data", dataCapture: {distracted: game.distracted}, api: 'logout' });
+            this.scene.launch('DialogBoxScene', { title: "Logging out", message: "Saving data", dataCapture: {distracted: game.distracted, idle: game.idle}, api: 'logout' });
             this.events.emit('disableLevels');
             this.scene.sleep('WorldNavScene');
 

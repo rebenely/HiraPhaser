@@ -48,7 +48,11 @@ module.exports  = {
                                 username: username,
                                 session_id: result.session + 1,
                                 start: stringTime,
-                                end: ''
+                                end: '',
+                                battle_time: 0,
+                                idle: 0,
+                                distracted: 0,
+                                play_time: 0
                             }
                             dbo.collection("players").updateOne({username: username}, { $set: {session: result.session + 1} }, function(err, res) {
                               if (err) throw err;
@@ -129,7 +133,14 @@ module.exports  = {
                   total_correct: 0,
                   total_possible_correct: 0,
                   review_count: 0,
-                  schedule: []
+                  schedule: [],
+                  total_idle: 0,
+                  total_distracted: 0,
+                  total_pattern_A: 0,
+                  total_pattern_B: 0,
+                  total_pattern_C: 0,
+                  total_pattern_D: 0,
+                  total_battle_time: 0
               }
               dbo.collection("players").insertOne(myobj, function(err, result) {
                   if (err) {
@@ -185,7 +196,7 @@ module.exports  = {
         var payload = req.body;
         var dbo = db.db(config.db_name);
         var query = {username: username};
-        dbo.collection("players").findOne(query, function(err, result) {
+        dbo.collection("players").findOne(query, async function(err, result) {
             if (err) {
                 return res.status(503).send({
                   success: false,
@@ -203,18 +214,26 @@ module.exports  = {
               end = new Date(end);
               var startDate = new Date(start);
               var playTime = (end - startDate) / 1000;
-
-              dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime, distracted: payload.distracted } }, function(err, res) {
+              if(payload.idle == undefined || payload.idle == null) {
+                  payload.idle = 0;
+              }
+              await dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime, distracted: payload.distracted, idle: payload.idle } }, async function(err, res) {
                 if (err) throw err;
                 console.log( username + ": ended session", session);
-                db.close();
+                await dbo.collection("sessions").findOne({username: username, session_id: session}, async function(err, result) {
+                    if (err) throw err;
+                    var sesh = result;
+                    console.log('ses',sesh);
+                    await dbo.collection("players").updateOne({username: username}, { $inc: {total_playtime: playTime, total_distracted: payload.distracted, total_idle: payload.idle, total_battle_time: sesh.battle_time} }, function(err, res) {
+                      if (err) throw err;
+                      console.log( username + ": updated playtime to", playTime);
+                      db.close();
+                    });
+                });
+
               });
 
-              dbo.collection("players").updateOne({username: username}, { $inc: {total_playtime: playTime} }, function(err, res) {
-                if (err) throw err;
-                console.log( username + ": updated playtime to", playTime);
-                db.close();
-              });
+
 
               return res.status(200).send({
                 success: true,
@@ -222,7 +241,6 @@ module.exports  = {
               });
           }
 
-          db.close();
         });
       });
   },

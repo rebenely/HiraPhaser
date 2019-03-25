@@ -45,17 +45,27 @@ let updateSession = (req, res, next) => {
     var session = res.locals.decoded.session;
     var start = res.locals.decoded.start;
     var dbo = db.db(config.db_name);
+    var myobj = req.body;
+    console.log(myobj.total_time);
 
     var end = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
     end = new Date(end);
     var startDate = new Date(start);
     var playTime = (end - startDate) / 1000;
+    if(myobj.total_time != undefined){
+        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime }, $inc: { battle_time: myobj.total_time } }, function(err, res) {
+          if (err) throw err;
+          console.log( username + ": updated end time of session ", session);
+          db.close();
+        });
+    } else {
+        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime } }, function(err, res) {
+          if (err) throw err;
+          console.log( username + ": updated end time of session ", session);
+          db.close();
+        });
+    }
 
-  dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime } }, function(err, res) {
-    if (err) throw err;
-    console.log( username + ": updated end time of session ", session);
-    db.close();
-  });
 
   // dbo.collection("players").updateOne({username: username}, { $inc: {total_playtime: playTime} }, function(err, res) {
   //   if (err) throw err;

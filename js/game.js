@@ -34,9 +34,11 @@ game.story = 0;
 game.player_name = '';
 game.charset = [];
 game.sched = [];
+game.idle = 0;
 game.token = '';
 game.showOKB = false;
 game.logged_out = false;
+game.playing = false;
 game.roundOff = function (numba) {
     return Math.round(numba*100 * 10)/10;
 }
@@ -90,10 +92,44 @@ game.events.on('blur',
 , game);
 game.events.on('focus',
     function() {
-        if(stamp !== null && game.loaded) {
+        if(stamp !== null && game.loaded && !game.playing) {
             var end = new Date(game.timestamp());
             game.distracted += (end - stamp) / 1000;
         }
         console.log('distracted for', game.distracted," seconds.");
     }
 , game);
+
+var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeypress = resetTimer;
+
+    var counter;
+
+    function computeIdle() {
+        counter = window.setInterval(CheckIdleTime, 1000);
+        //location.href = 'logout.html'
+    }
+
+
+    function CheckIdleTime() {
+         if(game.loaded && !game.playing){
+             game.idle++;
+             console.log(game.idle);
+         } else {
+             console.log('go concentrate');
+         }
+    }
+
+    function resetTimer() {
+        clearTimeout(time);
+        clearTimeout(counter);
+        time = setTimeout(computeIdle, 5000);
+        // 1000 milliseconds = 1 second
+    }
+};
+
+inactivityTime();
