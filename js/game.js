@@ -82,10 +82,12 @@ game.timestamp = function (){
     return manilaTime.toLocaleString();
 }
 game.distracted = 0;
+game.outOfFocus = false;
 var stamp = null;
 game.events.on('blur',
     function() {
         if(game.loaded){
+            game.outOfFocus = true;
             stamp = new Date(game.timestamp());
         }
     }
@@ -95,6 +97,7 @@ game.events.on('focus',
         if(stamp !== null && game.loaded && !game.playing) {
             var end = new Date(game.timestamp());
             game.distracted += (end - stamp) / 1000;
+            game.outOfFocus = false;
         }
         console.log('distracted for', game.distracted," seconds.");
     }
@@ -116,7 +119,7 @@ var inactivityTime = function () {
 
 
     function CheckIdleTime() {
-         if(game.loaded && !game.playing){
+         if(game.loaded && !game.playing && !game.outOfFocus){
              game.idle++;
              console.log(game.idle);
          } else {
@@ -131,5 +134,19 @@ var inactivityTime = function () {
         // 1000 milliseconds = 1 second
     }
 };
+game.isVowel = function (input) {
+    switch(input) {
+        case 'A':
+        case 'I':
+        case 'O':
+        case 'U':
+        case 'E':
+        return true;
+        break;
+        default:
+        return false;
+        break;
+    }
+}
 
 inactivityTime();

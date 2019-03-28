@@ -229,20 +229,20 @@ class MainScene extends Phaser.Scene {
             console.log(pointer.worldX, pointer.worldY);
         });
 
-        var cursors = this.input.keyboard.createCursorKeys();
-
-        var controlConfig = {
-            camera: this.cameras.main,
-            left: cursors.left,
-            right: cursors.right,
-            up: cursors.up,
-            down: cursors.down,
-            acceleration: 0.02,
-          drag: 0.0005,
-          maxSpeed: 1.0
-        };
-
-        this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        // var cursors = this.input.keyboard.createCursorKeys();
+        //
+        // var controlConfig = {
+        //     camera: this.cameras.main,
+        //     left: cursors.left,
+        //     right: cursors.right,
+        //     up: cursors.up,
+        //     down: cursors.down,
+        //     acceleration: 0.02,
+        //   drag: 0.0005,
+        //   maxSpeed: 1.0
+        // };
+        //
+        // this.controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
 
         /* ------------------------------------ */
 

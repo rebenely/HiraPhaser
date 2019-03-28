@@ -180,6 +180,10 @@ class BattleScene extends Phaser.Scene {
         this.inputTextDisplay =  new HiraText(this,720/2, 480/2, this.inputText, "header");
         this.add.existing(this.inputTextDisplay);
 
+        this.prompt =  new HiraText(this,720/2, 480/2, "[type now!]", "header");
+        this.add.existing(this.prompt);
+        this.prompt.visible = false;
+
         /* add attack button */
         this.attackButton = new HiraButton(this, 720/2, 480/2, "Attack!", style, () =>  {
             if(this.state === this.STATE_VALUE.idle) {
@@ -792,8 +796,15 @@ class BattleScene extends Phaser.Scene {
             if(this.simulate){
                 this.backButton.visible = true;
             }
+            this.prompt.visible = false;
             this.toggleOKB(false);
         } else if (this.state === this.STATE_VALUE.attack) {
+            if(this.inputText.length == 0) {
+                this.prompt.visible = true;
+            } else {
+                this.prompt.visible = false;
+            }
+
             this.inputTextDisplay.setTextUpper(this.inputText);
             this.inputTextDisplay.visible = true;
             this.projectile.visible = true;

@@ -15,12 +15,14 @@ class Projectile extends Phaser.GameObjects.BitmapText {
         this.characters = characters;
         this.iterator = 0;
         this.result = [];
+        this.syllables = '';
         // console.log('char pool indiv', this.characters);
     }
 
     say(text) {
         this.currentChar = text;
         this.chars = this.currentChar.split('-');
+        this.syllables = text;
         this.currentChar = this.currentChar.replace(/-/g, '');
         // console.log('new char', this.currentChar);
         this.setText(this.getHiragana());
@@ -44,7 +46,7 @@ class Projectile extends Phaser.GameObjects.BitmapText {
 
     }
 
-    isAVowel(input) {
+    static isAVowel(input) {
         switch(input) {
             case 'A':
             case 'I':

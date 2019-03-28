@@ -225,6 +225,42 @@ class DungeonScene extends Phaser.Scene {
         }
     }
 
+    syllabicateMe(text){
+        var syllab = '';
+        var def = '';
+        for(let i = 0; i < text.length; i++){
+            if(game.isVowel(text[i]) || (text[i] === 'N' && !game.isVowel(text[i+1]))) {
+
+                syllab += text[i] + '-';
+            } else if (text[i] === 'S' && text[i+1] === 'H' && text[i+2] === 'I') {
+                syllab += 'SHI-';
+                i+=2;
+            } else if (text[i] === 'C' && text[i+1] === 'H' && text[i+2] === 'I') {
+                syllab += 'CHI-';
+                i+=2;
+            } else if (text[i] === 'T' && text[i+1] === 'S' && text[i+2] === 'U') {
+                syllab += 'TSU-';
+                i+=2;
+            } else if (!game.isVowel(text[i]) && game.isVowel(text[i+1])) {
+                if(def.length > 0 && game.isVowel(text[i+1])) {
+                    syllab += def + text[i+1] + '-';
+                    def = '';
+                } else {
+                    syllab += text[i] + text[i+1] + '-';
+                }
+
+                i++;
+            } else {
+                def += text[i];
+            }
+            // console.log('def', def, 'syllab', syllab);
+        }
+        if(def.length > 0) {
+            syllab += def + '-';
+        }
+        return syllab.slice(0, -1);
+    }
+
     onBattleFinish (data) {
         if(data.success){
             this.cleared += 1;
@@ -236,20 +272,31 @@ class DungeonScene extends Phaser.Scene {
         data.dataCapture.hint_checked = this.hintChecked;
 
         for (let i = 0; i < data.dataCapture.questions.length; i++) {
-            /* accuracy per word */
-            var j = this.checkWordExistence(data.dataCapture.questions[i].word);
-            if(j != -1){
-                this.dataCapture.encounters[j].total++;
-                this.dataCapture.encounters[j].correct += data.dataCapture.questions[i].correct ? 1 : 0;
-                this.dataCapture.encounters[j].accuracy =  this.dataCapture.encounters[j].correct / this.dataCapture.encounters[j].total;
+
+
+            var syb = this.syllabicateMe(data.dataCapture.questions[i].word);
+            var chars = syb.split('-');
+            if(data.dataCapture.questions[i].correct) {
+                for (let c = 0; c < chars.length; c++){
+                    this.addToEncounters(chars[c], true);
+                }
             } else {
-                this.dataCapture.encounters.push({
-                    word: data.dataCapture.questions[i].word,
-                    total: 1,
-                    correct: data.dataCapture.questions[i].correct ? 1 : 0,
-                    accuracy:  data.dataCapture.questions[i].correct ? 1 : 0
-                });
+                var ans = this.syllabicateMe(data.dataCapture.questions[i].answer);
+                console.log(ans);
+                var ansarr = ans.split('-');
+                for (let c = 0; c < chars.length; c++) {
+                    this.addToEncounters(chars[c], ansarr[c] === chars[c]);
+                }
             }
+
+
+
+
+
+
+
+            /* accuracy per word */
+
 
             /* total battle items */
             this.dataCapture.total_items++;
@@ -284,11 +331,28 @@ class DungeonScene extends Phaser.Scene {
         this.hintChecked = false;
     }
 
-    checkWordExistence(word) {
+    addToEncounters(input, result){
+        var j = this.checkWordExistence(input);
+        if(j != -1){
+            this.dataCapture.encounters[j].total++;
+            this.dataCapture.encounters[j].correct += result ? 1 : 0;
+            this.dataCapture.encounters[j].accuracy =  this.dataCapture.encounters[j].correct / this.dataCapture.encounters[j].total;
+        } else {
+            this.dataCapture.encounters.push({
+                character: input,
+                total: 1,
+                correct: result ? 1 : 0,
+                accuracy:  result ? 1 : 0
+            });
+        }
+    }
+
+
+    checkWordExistence(input) {
 
         for(let i = 0; i < this.dataCapture.encounters.length; i++) {
             // console.log(this.dataCapture.encounters[i].word, 'vs', word, this.dataCapture.encounters[i].word === word);
-            if(this.dataCapture.encounters[i].word === word) {
+            if(this.dataCapture.encounters[i].character === input) {
                 return i;
             }
         }

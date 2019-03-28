@@ -203,7 +203,7 @@ var self = module.exports = {
 
                   updatedEncounters = succ.encounters;
                   for (let i = 0; i < myobj.encounters.length; i++) {
-                      var j = self.checkWordExistence(myobj.encounters[i].word, updatedEncounters);
+                      var j = self.checkWordExistence(myobj.encounters[i].character, updatedEncounters);
 
                       if(j != -1){
                           updatedEncounters[j].total++;
@@ -211,7 +211,7 @@ var self = module.exports = {
                           updatedEncounters[j].accuracy =  updatedEncounters[j].correct / updatedEncounters[j].total;
                       } else {
                           updatedEncounters.push({
-                              word: myobj.encounters[i].word,
+                              character: myobj.encounters[i].character,
                               total: myobj.encounters[i].total,
                               correct: myobj.encounters[i].correct,
                               accuracy:  myobj.encounters[i].accuracy
@@ -260,7 +260,7 @@ var self = module.exports = {
 
         for(let i = 0; i < array.length; i++) {
             // console.log(this.dataCapture.encounters[i].word, 'vs', word, this.dataCapture.encounters[i].word === word);
-            if(array[i].word === word) {
+            if(array[i].character === word) {
                 return i;
             }
         }
