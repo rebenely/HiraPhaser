@@ -42,6 +42,11 @@ class MessageScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.okayButton);
 
+        this.input.keyboard.on('keydown_ENTER', function (event) {
+            this.scene.wake('MainScene');
+            this.scene.stop('MessageScene');
+            this.sound.play('click');
+        }, this);
 
     }
 }

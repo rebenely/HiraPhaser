@@ -119,7 +119,7 @@ var inactivityTime = function () {
 
 
     function CheckIdleTime() {
-         if(game.loaded && !game.playing && !game.outOfFocus){
+         if(game.loaded && !game.outOfFocus){
              game.idle++;
              console.log(game.idle);
          } else {
@@ -130,7 +130,14 @@ var inactivityTime = function () {
     function resetTimer() {
         clearTimeout(time);
         clearTimeout(counter);
-        time = setTimeout(computeIdle, 5000);
+        if(game.playing) {
+            console.log('start 30 seconds countdown');
+            time = setTimeout(computeIdle, 10000);
+        } else {
+            console.log('start 15 seconds countdown');
+            time = setTimeout(computeIdle, 5000);
+        }
+
         // 1000 milliseconds = 1 second
     }
 };

@@ -100,6 +100,22 @@ class HintScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.cancelButton);
 
+        this.input.keyboard.on('keydown_ESC', function (event) {
+            if(this.cancelButton.enabled){
+                this.cancelButton.setText('Syncing');
+                this.cancelButton.disable();
+
+                if(!this.inDungeon){
+                    this.payload.total_time = (new Date() - this.payload.total_time)/1000;
+                }
+                this.postData();
+                this.sound.play('click');
+
+            }
+
+        }, this);
+
+
 
         this.downButton = new HiraPress(this, 90, 430, "Down", style, () => {
             this.move = 5;

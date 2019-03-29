@@ -7,6 +7,7 @@ class HiraButton extends Phaser.GameObjects.Text {
         this.enabled = true; // enable / disable
         this.longpress = false;
         this.strokeThiccness = 3;
+        this.setShadow(1, 1, '#333333', 2, true, false);
         this.setStroke( game.global.UI_TEXT_STROKE, this.strokeThiccness);
         this.setInteractive({ cursor: 'url(assets/images/cursor/hover.png), pointer' }).on('pointerup', () => {
             // cursor changes

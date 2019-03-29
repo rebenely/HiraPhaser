@@ -85,6 +85,39 @@ class DungeonScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.cancelButton);
 
+        this.input.keyboard.on('keydown_ESC', function (event) {
+            if(this.cancelButton.visible) {
+                this.packCapturedData(false, true);
+                var enemyCleared = [];
+                for(var i = 0; i < this.cleared; i++) {
+                    if(i === 3) {
+                        enemyCleared.push({name: this.dungeon.bossName, exp: 50});
+                    } else {
+                        enemyCleared.push({name: this.dungeon.minionName, exp: 10});
+                    }
+                }
+                game.playing = false;
+                this.scene.stop();
+                this.sound.play('fail');
+                this.dataCapture.timestamp_end = game.timestamp();
+                this.scene.start('ResultScene', {player: this.player, enemy: enemyCleared, success: this.cleared >= 4, flee: true, dataCapture: this.dataCapture, story: this.dungeon.story, log: this.log});
+                this.sound.play('click');
+            }
+
+        }, this);
+
+        this.input.keyboard.on('keydown_ENTER', function (event) {
+            if(this.battleButton.visible) {
+                this.scene.sleep('DungeonScene');
+                this.sound.play('start');
+
+                this.scene.launch('BattleScene', {player: this.player, dungeon: this.dungeon, difficulty: this.difficulty, boss: this.cleared === 3, simulate: false, skips: this.skips, extends: this.extends, mulcho: this.mulcho });
+                this.sound.play('click');
+            }
+
+        }, this);
+
+
         this.battleButton = new HiraButton(this, 720 - 60 - 30 , 420, "To Battle!", style, () => {
             this.scene.sleep('DungeonScene');
             this.sound.play('start');

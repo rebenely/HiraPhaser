@@ -145,6 +145,34 @@ class MultipleChoiceScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.startButton);
 
+        this.input.keyboard.on('keydown_ENTER', function (event) {
+            if(this.startButton.visible) {
+                this.timeDisplay.visible = true;
+                this.display.visible = true;
+                this.startButton.visible = false;
+                this.targetChar.visible = true;
+                this.helpMessage.visible = false;
+                this.startTime = this.time.now/1000;
+                this.charTime =  this.time.now/1000;
+                this.dataCapture.total_time = this.startTime;
+                this.closeButton.visible = false;
+                this.sound.play('start');
+                this.played = true;
+            }
+            // console.log(this.time.now/1000);
+        }, this);
+
+        this.input.keyboard.on('keydown_ESC', function (event) {
+            if(this.closeButton.visible) {
+                this.dataCapture.accuracy = this.dataCapture.accuracy / this.dataCapture.questions.length;
+                // console.log('yoman', this.dataCapture);
+                this.events.emit('mulchoFinish', {dataCapture: this.dataCapture, played: this.played});
+                this.scene.stop('MultipleChoiceScene');
+                this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});
+                this.sound.play('click');
+            }
+
+        }, this);
 
     }
 

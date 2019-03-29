@@ -66,6 +66,10 @@ class StatsScene extends Phaser.Scene {
             this.scene.stop('StatsScene');
 
         }, this);
+        this.input.keyboard.on('keydown_ESC', function (event) {
+            this.scene.wake('MainScene');
+            this.scene.stop('StatsScene');
+        }, this);
         this.add.existing(this.okayButton);
         this.okayButton.visible = false;
     }

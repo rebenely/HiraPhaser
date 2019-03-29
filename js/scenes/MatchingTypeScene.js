@@ -138,70 +138,92 @@ class MatchingTypeScene extends Phaser.Scene {
         this.add.existing(this.exitButton);
         this.results = [];
         this.playButton = new HiraButton(this, 2*720/3, 5*480/6, "Play", this.style, () => {
-            // console.log('Play');
-
-            if(this.matchLines.visible === true){
-                this.played = true;
-
-                this.playButton.visible = false;
-                this.exitButton.visible = false;
-
-                var correct = 0;
-
-                for (let i = 0; i < this.ypos.length; i++){
-                    this.ypos[i].disableInteractive();
-                    this.tweens.add({
-                       targets: this.ypos[i],
-                       x: 550,
-                       duration: 1000,
-                       ease: 'Power2',
-                       onComplete: () => {
-                           this.exitButton.x = 720/2;
-                           this.exitButton.visible = true;
-                          // console.log(this.answer[i], 'vs', this.shuffled[i]);
-                          this.dataCapture.answers.push({target: this.shuffled[i], answer: this.answer[i]});
-                          if(this.answer[i] === this.shuffled[i]){
-                              correct++;
-                              this.dataCapture.accuracy++;
-                              this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
-                          } else {
-                              this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
-
-                          }
-                          if(i === this.ypos.length - 1){
-                              if(correct > this.ypos.length/2) {
-                                  this.sound.play('success');
-                              } else {
-                                  this.sound.play('fail');
-                              }
-
-                          }
-
-
-                       }
-                   });
-                }
-
-
-                this.dataCapture.total_time = (new Date() - this.timeStamp)/1000;
-
-            } else {
-                this.sound.play('start');
-                this.display.visible = false;
-                this.playButton.setText("Play!");
-                this.timeStamp = new Date();
-                // console.log(this.timeStamp);
-                for(let i = 0; i < this.ypos.length; i++) {
-                    this.ypos[i].visible = true;
-                    this.hiragana[i].visible = true;
-                }
-                this.matchLines.visible = true;
-                this.exitButton.visible = false;
-                this.playButton.x = 720/2;
-            }
+            this.playBaybe();
         }, this);
 
         this.add.existing(this.playButton);
+
+        this.input.keyboard.on('keydown_ENTER', function (event) {
+            if(this.playButton.visible) {
+                this.sound.play('click');
+
+                this.playBaybe();
+            }
+        }, this);
+        this.input.keyboard.on('keydown_ESC', function (event) {
+            if(this.exitButton.visible) {
+                this.sound.play('click');
+
+                this.dataCapture.accuracy = this.dataCapture.accuracy / this.ypos.length;
+                this.events.emit('matchFinish', {dataCapture: this.dataCapture, played: this.played});
+                this.scene.stop('MatchingTypeScene');
+                this.scene.wake('TrainScene', {player: this.player, characterPool: this.characterPool});
+            }
+        }, this);
+    }
+
+    playBaybe(){
+        // console.log('Play');
+
+        if(this.matchLines.visible === true){
+            this.played = true;
+
+            this.playButton.visible = false;
+            this.exitButton.visible = false;
+
+            var correct = 0;
+
+            for (let i = 0; i < this.ypos.length; i++){
+                this.ypos[i].disableInteractive();
+                this.tweens.add({
+                   targets: this.ypos[i],
+                   x: 550,
+                   duration: 1000,
+                   ease: 'Power2',
+                   onComplete: () => {
+                       this.exitButton.x = 720/2;
+                       this.exitButton.visible = true;
+                      // console.log(this.answer[i], 'vs', this.shuffled[i]);
+                      this.dataCapture.answers.push({target: this.shuffled[i], answer: this.answer[i]});
+                      if(this.answer[i] === this.shuffled[i]){
+                          correct++;
+                          this.dataCapture.accuracy++;
+                          this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Correct!" , "header")));
+                      } else {
+                          this.results.push(this.add.existing(new HiraText(this, 720/2, (460/this.characterPool.length + 2) +  i*460/(this.characterPool.length+2),  "Wrong!" , "header")));
+
+                      }
+                      if(i === this.ypos.length - 1){
+                          if(correct > this.ypos.length/2) {
+                              this.sound.play('success');
+                          } else {
+                              this.sound.play('fail');
+                          }
+
+                      }
+
+
+                   }
+               });
+            }
+
+
+            this.dataCapture.total_time = (new Date() - this.timeStamp)/1000;
+
+        } else {
+            this.sound.play('start');
+            this.display.visible = false;
+            this.playButton.setText("Play!");
+            this.timeStamp = new Date();
+            // console.log(this.timeStamp);
+            for(let i = 0; i < this.ypos.length; i++) {
+                this.ypos[i].visible = true;
+                this.hiragana[i].visible = true;
+            }
+            this.matchLines.visible = true;
+            this.exitButton.visible = false;
+            this.playButton.x = 720/2;
+        }
     }
 
     update () {

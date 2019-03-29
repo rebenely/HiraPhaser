@@ -59,16 +59,7 @@ class TrainScene extends Phaser.Scene {
         this.add.existing(matchingButton);
 
         var exitButton = new HiraButton(this, 720/2, 3*480/4, "Exit", style, () => {
-            this.dataCapture.total_time = (new Date() - this.dataCapture.total_time)/1000;
-            console.log(this.dataCapture.total_time);
-            if(this.dataCapture.mulcho.length > 0 || this.dataCapture.match.length > 0){
-                this.events.emit('finishedTraining', {success: true, dataCapture: this.dataCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level, log: this.log } );
-            }
-
-            // console.log('yeman');
-            game.playing = false;
-            this.scene.stop('TrainScene');
-            this.scene.wake('MainScene', {player: this.player});
+            this.packEveything();
         }, this);
         this.add.existing(exitButton);
 
@@ -79,6 +70,22 @@ class TrainScene extends Phaser.Scene {
         let match = this.scene.get('MatchingTypeScene');
         match.events.removeListener('matchFinish');
         match.events.on('matchFinish', this.onMatchFinish, this);
+
+        this.input.keyboard.on('keydown_ESC', function (event) {
+            this.packEveything();
+        }, this);
+    }
+    packEveything(){
+        this.dataCapture.total_time = (new Date() - this.dataCapture.total_time)/1000;
+        console.log(this.dataCapture.total_time);
+        if(this.dataCapture.mulcho.length > 0 || this.dataCapture.match.length > 0){
+            this.events.emit('finishedTraining', {success: true, dataCapture: this.dataCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level, log: this.log } );
+        }
+
+        // console.log('yeman');
+        game.playing = false;
+        this.scene.stop('TrainScene');
+        this.scene.wake('MainScene', {player: this.player});
     }
     update () {
 

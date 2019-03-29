@@ -56,6 +56,20 @@ class DetailScene extends Phaser.Scene {
                 this.add.existing(deadline);
             }
         }
+        this.input.keyboard.on('keydown_ESC', function (event) {
+            this.scene.wake('MainScene');
+            this.scene.stop('DetailScene');
+            this.sound.play('click');
+        }, this);
+        this.input.keyboard.on('keydown_ENTER', function (event) {
+            if(this.dungeon != null || this.content != null){
+                // console.log('upgrade');
+                this.sound.play('click');
+                this.scene.sleep('MainScene');
+                this.scene.stop('DetailScene');
+                this.scene.start(this.startScene, this.passData);
+            }
+        }, this);
         // var caveDesc = this.add.text(60, 130, this.content.desc, style);
         // var charSetDisplay = this.add.text(60, 90, this.content.subtitle, style);
 

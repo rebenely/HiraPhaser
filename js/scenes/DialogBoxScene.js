@@ -81,6 +81,11 @@ class DialogBoxScene extends Phaser.Scene {
                         this.scene.stop('DialogBoxScene');
                     }, this);
                     this.add.existing(this.okayButton);
+                    this.input.keyboard.on('keydown_ENTER', function (event) {
+                        this.scene.wake('MainScene');
+                        this.scene.stop('DialogBoxScene');
+                        this.sound.play('click');
+                    }, this);
                 } else {
                     game.logged_out = true;
                     this.dialogTitle.setTextUpper("Saved!");

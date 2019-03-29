@@ -185,9 +185,23 @@ class BattleScene extends Phaser.Scene {
         this.prompt.visible = false;
 
         /* add attack button */
+
+        this.input.keyboard.on('keydown_ENTER', function (event) {
+            if(this.state === this.STATE_VALUE.idle) {
+                this.timedEvent = this.time.addEvent({ delay: 10000, callback: this.answerFailed, callbackScope: this }, this);
+                // console.log('state has been changed');
+                this.projectile.getRandomCharacter();
+                // this.projectile.getHiragana();
+                // this.projectile.setText(this.projectile.getHiragana());
+                this.state = this.STATE_VALUE.attack;
+                // console.log(this.projectile);
+                this.battleCapture.asked++;
+                this.sound.play('click');
+            }
+        }, this);
         this.attackButton = new HiraButton(this, 720/2, 480/2, "Attack!", style, () =>  {
             if(this.state === this.STATE_VALUE.idle) {
-                this.timedEvent = this.time.addEvent({ delay: 5000, callback: this.answerFailed, callbackScope: this }, this);
+                this.timedEvent = this.time.addEvent({ delay: 10000, callback: this.answerFailed, callbackScope: this }, this);
                 // console.log('state has been changed');
                 this.projectile.getRandomCharacter();
                 // this.projectile.getHiragana();
@@ -375,8 +389,9 @@ class BattleScene extends Phaser.Scene {
         this.input.keyboard.on('keydown', this.typedKeys, this);
         this.input.keyboard.addKey(8);
         this.input.keyboard.on('keydown_ESC', function (event) {
-            this.scene.wake('MainScene');
-            this.scene.stop('BattleScene');
+            if(this.backButton.visible) {
+                this.backButt();
+            }
         }, this);
 
         this.timedEvent = null;
@@ -397,18 +412,7 @@ class BattleScene extends Phaser.Scene {
 
         /* back button */
         this.backButton = new HiraButton(this, 720/2, 480/2 + 100, "Back", style, () =>  {
-            if(this.state === this.STATE_VALUE.idle) {
-                if(this.simulate){
-                    this.packData();
-                    game.playing = false;
-                    // console.log(this.battleCapture);
-                    if(this.battleCapture.questions.length > 0){
-                        this.events.emit('finishedPractice', {success: true, dataCapture: this.battleCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level, log: this.log } );
-                    }
-                }
-                this.scene.wake('MainScene');
-                this.scene.stop('BattleScene');
-            }
+            this.backButt();
         }, this);
         this.backButton.visible = false;
         this.add.existing(this.backButton);
@@ -550,6 +554,21 @@ class BattleScene extends Phaser.Scene {
             this.zawarudo.setOrigin(0.5);
 
 
+    }
+
+    backButt(){
+        if(this.state === this.STATE_VALUE.idle) {
+            if(this.simulate){
+                this.packData();
+                game.playing = false;
+                // console.log(this.battleCapture);
+                if(this.battleCapture.questions.length > 0){
+                    this.events.emit('finishedPractice', {success: true, dataCapture: this.battleCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level, log: this.log } );
+                }
+            }
+            this.scene.wake('MainScene');
+            this.scene.stop('BattleScene');
+        }
     }
     ugokidasu() {
         this.timedEvent.paused = false;
