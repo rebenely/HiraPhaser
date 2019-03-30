@@ -5,7 +5,7 @@
         <title>HiraRPG</title>
         <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
         <script src="//cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <script src="js/entities/HiraButton.js"></script>
         <script src="js/entities/StoryLevel.js"></script>
@@ -148,7 +148,7 @@
             width: 100%;
             text-align:center;
             font-smooth:never;
-            cursor: url('assets/images/cursor/normal.png'),url('assets/images/cursor/disabled.png'),url('assets/images/cursor/press.png'),url('assets/images/cursor/hover.png'), auto;
+            cursor: url('assets/images/cursor/normal.png'),url('assets/images/cursor/disabled.png'),url('assets/images/cursor/hover.png'), auto;
         }
 
         h1 {
@@ -207,7 +207,7 @@ $(function () {
 });
 
 $('#myModal').on('click', '#chooseLogin',function() {
-    var loginContent = "<div class='modal-content'><div id='loginForm' style='font-family:\"manaspc\";text-align:center;'><h1 id='message'>Welcome!</h1><form ><label for='username'>Username</label><input type='text' id='username' name='Username' placeholder='Username' style='font-family:\"manaspc\"'><label for='lname'>Password</label><input type='password' id='password' name='Password' placeholder='Password' ><input type='submit' style='font-family:\"manaspc\"' id='loginButton' value=\"Login\"></form></div></div>";
+    var loginContent = "<div class='modal-content'><div id='loginForm' style='font-family:\"manaspc\";text-align:center;'><h1 id='message'>Welcome!</h1><form ><label for='username'>Username</label><input type='text' id='username' name='Username' placeholder='Username' style='font-family:\"manaspc\"'><label for='lname'>Password</label><input type='password' id='password' name='Password' placeholder='Password' ><button style='font-family:\"manaspc\"' id='loginButton' value=\"Login\">Login</button></form></div></div>";
     $('#myModal').html(loginContent);
 });
 
@@ -247,8 +247,8 @@ $('#logout').click(function() {
     }
 });
 
-$('#myModal').on('click', '#loginButton', function(){
-
+$('#myModal').on('click', '#loginButton', function(e){
+    e.preventDefault();
     toggleFullScreen();
     var data = { "username" : $( "#username" ).val(), "password": $( "#password" ).val()};
     $( "#message" ).text("Logging in...");

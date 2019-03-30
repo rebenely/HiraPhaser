@@ -65,6 +65,11 @@ class SchedulerScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.enterButton);
         this.enterButton.disable();
+
+        this.input.keyboard.addKey(8);
+        this.egg = new HiraText(this, 60, 428, "nice", "basic");
+        this.add.existing(this.egg);
+        this.egg.visible = false;
         // var caveDesc = this.add.text(60, 130, this.content.desc, style);
         // var charSetDisplay = this.add.text(60, 90, this.content.subtitle, style);
 
@@ -90,8 +95,10 @@ class SchedulerScene extends Phaser.Scene {
         return -1;
     }
     typedKeys (e) {
-        this.parseText(e.keyCode, e.key);
         e.preventDefault();
+        this.parseText(e.keyCode, e.key);
+        return false;
+
     }
     parseText(keyCode, key) {
         if (keyCode === 13) {
@@ -156,12 +163,23 @@ class SchedulerScene extends Phaser.Scene {
 
         if(parseInt(this.inputText) >= 0 && parseInt(this.inputText) <= 72) {
             if(parseInt(this.inputText1) > 0 && parseInt(this.inputText1) <= 59 || (parseInt(this.inputText1) == 0 && parseInt(this.inputText) != 0)) {
-                this.enterButton.enable();
-                this.sched = new Date(game.timestamp());
+                if(parseInt(this.inputText) == 72 && parseInt(this.inputText1) != 0) {
+                    this.enterButton.disable();
+                    this.compute.visible = false;
+                } else {
+                    this.enterButton.enable();
+                    this.sched = new Date(game.timestamp());
 
-                this.sched.setHours(this.sched.getHours() + parseInt(this.inputText), this.sched.getMinutes() + parseInt(this.inputText1));
-                this.compute.setText("from now would be on\n" + this.sched.toLocaleString("en-US", {timeZone: "Asia/Manila"}));
-                this.compute.visible = true;
+                    this.sched.setHours(this.sched.getHours() + parseInt(this.inputText), this.sched.getMinutes() + parseInt(this.inputText1));
+                    this.compute.setText("from now would be on\n" + this.sched.toLocaleString("en-US", {timeZone: "Asia/Manila"}));
+                    this.compute.visible = true;
+                    if((parseInt(this.inputText) == 4 && parseInt(this.inputText1) == 20 || (parseInt(this.inputText) == 6 && parseInt(this.inputText1) == 9))) {
+                        this.egg.visible = true;
+                    } else {
+                        this.egg.visible = false;
+                    }
+                }
+
             } else {
                 this.enterButton.disable();
                 this.compute.visible = false;

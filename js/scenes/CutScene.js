@@ -109,7 +109,7 @@ class CutScene extends Phaser.Scene {
         this.loading.visible = false;
 
 
-        this.skipButton = new HiraButton(this, 60*11, 26, "Skip", style, () => {
+        this.skipButton = new HiraButton(this, 60*11 + 20, 26, "Skip", style, () => {
 
             var played_already = false;
             var i = this.checkSchedExistence();
