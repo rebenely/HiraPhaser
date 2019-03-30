@@ -128,6 +128,7 @@ class ResultScene extends Phaser.Scene {
     }
 
     typedKeys (e) {
+        e.preventDefault();
         if (e.keyCode === 32 || e.keyCode === 13) {
             this.state+= 2;
         }
