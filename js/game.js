@@ -94,7 +94,7 @@ game.events.on('blur',
 , game);
 game.events.on('focus',
     function() {
-        if(stamp !== null && game.loaded && !game.playing) {
+        if(stamp !== null && game.loaded) {
             var end = new Date(game.timestamp());
             game.distracted += (end - stamp) / 1000;
             game.outOfFocus = false;

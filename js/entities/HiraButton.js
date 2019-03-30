@@ -43,6 +43,21 @@ class HiraButton extends Phaser.GameObjects.Text {
             }
         });
         this.setOrigin(0.5);
+        var tweenie = this;
+        this.alertMe = scene.tweens.addCounter({
+            from: 255,
+            to: 0,
+            duration: 1500,
+            repeat: -1,
+            yoyo: true,
+            paused: true,
+            ease: 'Sine.easeInOut',
+            onUpdate: function (tween)  {
+                var value = Math.floor(tween.getValue());
+
+                tweenie.setTint(Phaser.Display.Color.GetColor(255, 255, 255 - value));
+            }
+        });
     }
 
     getText() {
@@ -64,6 +79,10 @@ class HiraButton extends Phaser.GameObjects.Text {
 
     setTextUpper(string){
         this.setText(string.toUpperCase());
+    }
+
+    alertBoi(){
+        this.alertMe.restart();
     }
 
 }

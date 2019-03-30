@@ -80,6 +80,7 @@ class WorldNavScene extends Phaser.Scene {
             this.events.emit('quest');
         }, this);
         this.add.existing(this.questButton);
+        this.questButton.alertBoi();
 
         this.statsButton = new HiraButton(this, 60*4, 430 + 20, "Stats", style, () => {
             this.scene.launch('StatsScene', { player: this.player} );

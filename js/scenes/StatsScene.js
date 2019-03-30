@@ -97,7 +97,12 @@ class StatsScene extends Phaser.Scene {
                     this.dungeonDisplay.setText('Dungeon ' + game.roundOff(responseData.stats.dungeon_ave).toString() + '%');
                 }
                 this.dungeonDisplay.visible = true;
-                this.completionDisplay.setText('Completion ' + game.roundOff(this.player.story / 40).toString() + '%');
+                if(this.player.story / 40 < 1) {
+                    this.completionDisplay.setText('Completion ' +  game.roundOff(this.player.story / 40).toString() + '%');
+                } else {
+                    this.completionDisplay.setText('Completion 100%');
+
+                }
                 this.progressDisplay.visible = true;
                 this.completionDisplay.visible = true;
 

@@ -66,7 +66,7 @@
             "message": "This is read as 'Sa'."
         },
         {
-            "text": "SI",
+            "text": "SHI",
             "name": "Gema",
             "message": "This is read as 'Si'."
         },
@@ -102,7 +102,7 @@
     "teach": ["SA", "SHI", "SU", "SE", "SO"],
     "message": {
         "title":"S Family!",
-        "message": "You learned SA,SI,SU,SE,SO!"
+        "message": "You learned SA,SHI,SU,SE,SO!"
     },
     "dungeon": "S-Dungeon"
 }

@@ -119,7 +119,7 @@
             "world": 1,
             "description":  "Slay some goblins!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SHI-YO-U-NE-N", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I"],
+            "wordPool": ["NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I"],
             "sprites":    {
                 "x": 902, "y": 870, "name": "cave",
                 "dungeonBG": {
@@ -231,9 +231,37 @@
             "world": 2,
             "description":  "The last dungeon! Show them what you got!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "MI-DO-RI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I"],
+            "wordPool": ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I"],
             "sprites":    {
                 "x": 1405, "y": 390, "name": "cave",
+                "dungeonBG": {
+                    "name": "dungeon_wall", "path": "assets/images/globals/blurgeon.png"},
+                    "battleBG": {
+                        "name": "battleK", "path": "assets/images/globals/bangeon.png"
+                    }
+            },
+            "enemies": {
+                "minion": {
+                    "name": "goblin", "path": "assets/spritesheets/enemies/goblin_idle.png", "exp": 10, "attack": "assets/spritesheets/enemies/goblin_attack.png",
+                    "face": { "name": "goblinFace", "path": "assets/images/globals/goblinface.png"}
+                },
+                "boss": {
+                    "name":"goblinboss", "path": "assets/spritesheets/enemies/goblinboss_idle.png", "exp": 50, "attack": "assets/spritesheets/enemies/goblinboss_attack.png",
+                    "face": { "name": "goblinBossFace", "path": "assets/images/globals/goblinbossface.png"}
+                }
+            },
+            "optionals" : {"sizeX": 140, "sizeY": 120},
+            "log":"This is the end!"
+        },
+        {
+            "name": "All Dungeon" ,
+            "level": 40,
+            "world": 3,
+            "description":  "This dungeon contains all words the syllables you've encountered! Prove your mastery here!",
+            "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
+            "wordPool":  ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I", "YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU", "MU-NE", "SHI-MA-I", "TSU-MA", "U-MA", "SA-N-MA", "KU-MA", "MI-SO", "NO-MI-MO-NO", "MI-NA-MI", "MI-SE", "HI-MO", "KI-MO-NO", "SA-MU-I", "U-MU", "TA-TSU-MA-KI", "HA-CHI", "HA-NA-SU", "HI-TO", "HO-NE", "HO-HO", "HA-HA", "HA-I", "FU", "HE", "FU-TA-TSU", "FU-TO-I", "FU-KU", "NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I", "TA-TSU", "TA-I", "A-TA-SHI", "KA-TA", "TA-KA", "KI-TA", "SHI-CHI", "CHI-I-SA-I", "KU-CHI", "TSU-KI", "TSU-CHI", "O-TO-KO", "O-TO-U-TO", "KA-TSU-O", "SA-TO-U", "SA-KE", "A-SHI", "SU-SHI", "A-SA", "U-SO", "SHI-KA", "SE-KA-I", "SHI-SHI", "KU-SA", "SHI-O", "I-SU", "A-KA", "KA-O", "E-KI", "KO-E", "KI", "KO-I", "I-KE", "KA-KU", "KO", "KE", "KA", "KU", "I-KU", "I-KE", "KO-U-KA", "A-I","A-U","A-O-I","I-I-E","I-I-A-U", "U-E", "E-I", "O-U", "O-O-U", "O-O-I", "I-O-U", "I", "U", "E", "O" ],
+            "sprites":    {
+                "x": 1900, "y": 835, "name": "cave",
                 "dungeonBG": {
                     "name": "dungeon_wall", "path": "assets/images/globals/blurgeon.png"},
                     "battleBG": {
@@ -744,7 +772,7 @@
         },
         {
             "name": "Game End",
-            "sprite": {"name": "message", "x": 1790, "y": 835},
+            "sprite": {"name": "message", "x": 1710, "y": 835},
             "json": "goodbye.json",
             "level": 39,
             "world": 3,

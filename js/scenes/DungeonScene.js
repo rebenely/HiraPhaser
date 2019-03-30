@@ -342,7 +342,7 @@ class DungeonScene extends Phaser.Scene {
             }
 
             if(data.dataCapture.questions[i].correct) {
-                if(data.dataCapture.questions[i].time < 2.5) {
+                if(data.dataCapture.questions[i].time < 5.0) {
                     data.dataCapture.questions[i].pattern = 'A';
                     this.dataCapture.total_pattern_A++;
                 } else {
@@ -350,7 +350,7 @@ class DungeonScene extends Phaser.Scene {
                     this.dataCapture.total_pattern_B++;
                 }
             } else {
-                if(data.dataCapture.questions[i].time < 2.5) {
+                if(data.dataCapture.questions[i].time < 5.0) {
                     data.dataCapture.questions[i].pattern = 'D';
                     this.dataCapture.total_pattern_D++;
                 } else {
