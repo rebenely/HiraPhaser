@@ -6,7 +6,7 @@
             "world": 0,
             "description":  "Time to put your training in to work.",
             "charSet": ["A","I","U","E","O"],
-            "wordPool": ["A-I","A-U","A-O-I","I-I-E","I-I-A-U", "U-E", "E-I", "O-U", "O-O-U", "O-O-I", "I-O-U", "I", "U", "E", "O"],
+            "wordPool": ["A-I","A-U","A-O-I","I-I-E","I-I-A-U", "U-E", "E-I", "O-U", "O-O-U", "O-O-I", "I-O-U", "I", "U", "E", "O" ,"A-A", "A-A-I-U", "A-I", "A-I-O-I", "A-O-I", "A-U", "E-E", "I-E", "I-I", "I-I-E", "I-U", "O-E", "O-I", "O-I-O-I", "O-O-E", "O-O-U", "O-U", "U-E", "U-O"],
             "sprites":    {
                 "x": 430, "y": 185, "name": "cave",
                 "dungeonBG": {
@@ -34,7 +34,7 @@
             "world": 0,
             "description":  "Your second dungeon! Just need to keep calm and remember your training.",
             "charSet": ["KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["A-KA", "KA-O", "E-KI", "KO-E", "KI", "KO-I", "I-KE", "KA-KU", "KO", "KE", "KA", "KU", "I-KU", "I-KE", "KO-U-KA"],
+            "wordPool": ["A-KA", "KA-O", "E-KI", "KO-E", "KI", "KO-I", "I-KE", "KA-KU", "KO", "KE", "KA", "KU", "I-KU", "I-KE", "KO-U-KA", "KA-I", "KA-I-KU", "KA-U", "KA-KI-KO", "KU-KI", "A-KI", "O-KE-KE", "KI-KA", "E-KO", "KU-I", "KA-KO-U", "A-KU-E-KI", "KE-I-KI", "O-KA-KI", "I-KO-KU"],
             "sprites":    {
                 "x": 475, "y": 374, "name": "cave",
                 "dungeonBG": {
@@ -62,7 +62,7 @@
             "world": 0,
             "description":  "This is the last dungeon for this area. Goodluck!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["SA-KE", "A-SHI", "SU-SHI", "A-SA", "U-SO", "SHI-KA", "SE-KA-I", "SHI-SHI", "KU-SA", "SHI-O", "I-SU"],
+            "wordPool": ["SA-KE", "A-SHI", "SU-SHI", "A-SA", "U-SO", "SHI-KA", "SE-KA-I", "SHI-SHI", "KU-SA", "SHI-O", "I-SU", "A-SU-KA", "SA-I-U", "SA-KA-E", "SA-KE-I", "KA-SA", "KO-SO", "A-SO-KO", "SHI-KA", "U-SHI", "A-SHI", "SHI-KAI", "SU-I-KA", "SU-SHI", "SU-KA"],
             "sprites":    {
                 "x": 236, "y": 420, "name": "cave",
                 "dungeonBG": {
@@ -91,7 +91,7 @@
             "world": 1,
             "description":  "T dungeon! This is the first dungeon of the second area..",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["TA-TSU", "TA-I", "A-TA-SHI", "KA-TA", "TA-KA", "KI-TA", "SHI-CHI", "CHI-I-SA-I", "KU-CHI", "TSU-KI", "TSU-CHI", "O-TO-KO", "O-TO-U-TO", "KA-TSU-O", "SA-TO-U"],
+            "wordPool": ["TA-TSU", "TA-I", "A-TA-SHI", "KA-TA", "TA-KA", "KI-TA", "SHI-CHI", "CHI-I-SA-I", "KU-CHI", "TSU-KI", "TSU-CHI", "O-TO-KO", "O-TO-U-TO", "KA-TSU-O", "SA-TO-U", "SA-TSU", "TA-TSU", "KA-TSU-O", "TSU-KI", "TSU-KU-E", "TO-KI", "O-TO-KO", "TSU-CHI", "KI-TA", "TA-KO", "TE-TSU", "CHI-I-SA-I", "A-TA-SHI", "KU-O-CHI", "KU-TSU-SHI-TA", "SO-SHI-KI-TE-KI"],
             "sprites":    {
                 "x": 713, "y": 770, "name": "cave",
                 "dungeonBG": {
@@ -119,7 +119,7 @@
             "world": 1,
             "description":  "Slay some goblins!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I"],
+            "wordPool": ["NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I", "KI-NO-KO", "A-NI-KI", "NI-CHI", "NI-KU", "NA-NA-TSU", "NA-SHI", "SE-NA-KA", "KE-N-CHI-KU-KA", "KO-KO-NO-TSU", "TSU-NA", "SA-SU-KE-NE", "SA-KA-NA", "KA-I-KA-KE-KI-N", "KI-SO-SHI-KE-N", "O-NO-NO-KU", "TSU-NE-NI", "NE-E", "NE-SO-KO-NA-U"],
             "sprites":    {
                 "x": 902, "y": 870, "name": "cave",
                 "dungeonBG": {
@@ -147,7 +147,7 @@
             "world": 1,
             "description":  "The last dungeon of this area. Keep up the good work!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["HA-CHI", "HA-NA-SU", "HI-TO", "HO-NE", "HO-HO", "HA-HA", "HA-I", "FU", "HE", "FU-TA-TSU", "FU-TO-I", "FU-KU"],
+            "wordPool": ["HA-CHI", "HA-NA-SU", "HI-TO", "HO-NE", "HO-HO", "HA-HA", "HA-I", "FU", "HE", "FU-TA-TSU", "FU-TO-I", "FU-KU", "NO-NO-HA-NA", "SO-FU", "HE-I-SHI", "HO-SHI-I", "SA-SHI-HA", "HA-I-KE-I", "HI-KO-KU", "HI-KO-U-KI", "CHI-HI-TSU", "HI-NI-HI-NI", "SO-NO-HI", "TO-HI", "NU-HI", "TA-TE-HI-KU", "FU-TA", "SO-FU", "HO-FU-KU", "TO-FU-TSU", "TA-I-HEN", "HE-I-SE-I", "SO-NO-HE-N", "FU-HE-I", "FU-HE-N-KA", "CHI-HE-I-SE-N", "KA-HO-U-NI", "I-NA-HO", "HO-TO-HO-TO"],
             "sprites":    {
                 "x": 1125, "y": 820, "name": "cave",
                 "dungeonBG": {
@@ -175,7 +175,7 @@
             "world": 2,
             "description":  "You're getting closer to the end! Good job!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["MU-NE", "SHI-MA-I", "TSU-MA", "U-MA", "SA-N-MA", "KU-MA", "MI-SO", "NO-MI-MO-NO", "MI-NA-MI", "MI-SE", "HI-MO", "KI-MO-NO", "SA-MU-I", "U-MU", "TA-TSU-MA-KI"],
+            "wordPool": ["MU-NE", "SHI-MA-I", "TSU-MA", "U-MA", "SA-N-MA", "KU-MA", "MI-SO", "NO-MI-MO-NO", "MI-NA-MI", "MI-SE", "HI-MO", "KI-MO-NO", "SA-MU-I", "U-MU", "TA-TSU-MA-KI", "KI-MO-NO", "A-NI-ME", "HA-SA-MI", "SHI-MA-I", "MU-KU-TSU-KE-KI", "MI-E-KE-N", "NE-TA-MU", "MI-TA-MA", "MO-KU", "A-TA-MA", "NA-MA-E", "HI-MI-TSU", "MI-NA-MI", "FU-KU-MU", "TA-NO-MU", "MU-KA-SHI", "SA-MU-I", "ME-I-TO", "SHI-ME-SU", "MO-MI-A-I", "MO-ME-N"],
             "sprites":    {
                 "x": 1854, "y": 347, "name": "cave",
                 "dungeonBG": {
@@ -203,7 +203,7 @@
             "world": 2,
             "description":  "One more after this. Let's go!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU"],
+            "wordPool": ["YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU", "YA-WA", "YA-SU-I", "YA-SA-I", "KE-I-YO-U-SHI", "WA-TA-KU-SHI", "A-KI-WA", "YA-NE", "FU-YU", "TO-YO-U", "SE-KI-YU", "YU-SO-U", "YO-U-I", "HI-YO-U", "ME-I-YO", "SA-I-YO-U", "YO-WA-I", "KA-I-WA", "KO-U-WA", "WA-HE-I", "KA-WA-SA-KI", "KI-WO-TSU-KA-U", "SHI-KA-RU-WO", "MO-NO-WO", "WO-SHI-TE", "KU-WO-KI-RU", "I-WO-KU-MU", "KO-I-WO-SU-RU"],
             "sprites":    {
                 "x": 1635, "y": 405, "name": "cave",
                 "dungeonBG": {
@@ -231,7 +231,7 @@
             "world": 2,
             "description":  "The last dungeon! Show them what you got!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I"],
+            "wordPool": ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I", "HA-I-I-RO", "HO-TA-RU", "NA-RU-TO", "SA-KU-RA", "SO-CHI-RA", "SHI-RI", "SO-SHI-SE-I-RA-I", "O-E-RU", "KO-KE-RU", "RA-I-SE", "KA-RA-KU-RI", "KA-TA-KU-RI", "HO-KU-RI-KU", "SHI-ME-RI-KE", "KU-RU-MA", "A-KA-RU-I", "RU-I-WA", "RE-KI-SHI", "U-RE-SHI-I", "O-SO-RE", "RE-I-NE-N", "WA-KA-RE", "KI-RE-TSU", "U-KE-I-RE", "RO-U-HI", "RO-MEN", "RI-RO-N", "HI-RO-U", "MU-SHI-RO", "SE-N-RO"],
             "sprites":    {
                 "x": 1405, "y": 390, "name": "cave",
                 "dungeonBG": {
@@ -259,7 +259,7 @@
             "world": 3,
             "description":  "This dungeon contains all words the syllables you've encountered! Prove your mastery here!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool":  ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I", "YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU", "MU-NE", "SHI-MA-I", "TSU-MA", "U-MA", "SA-N-MA", "KU-MA", "MI-SO", "NO-MI-MO-NO", "MI-NA-MI", "MI-SE", "HI-MO", "KI-MO-NO", "SA-MU-I", "U-MU", "TA-TSU-MA-KI", "HA-CHI", "HA-NA-SU", "HI-TO", "HO-NE", "HO-HO", "HA-HA", "HA-I", "FU", "HE", "FU-TA-TSU", "FU-TO-I", "FU-KU", "NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I", "TA-TSU", "TA-I", "A-TA-SHI", "KA-TA", "TA-KA", "KI-TA", "SHI-CHI", "CHI-I-SA-I", "KU-CHI", "TSU-KI", "TSU-CHI", "O-TO-KO", "O-TO-U-TO", "KA-TSU-O", "SA-TO-U", "SA-KE", "A-SHI", "SU-SHI", "A-SA", "U-SO", "SHI-KA", "SE-KA-I", "SHI-SHI", "KU-SA", "SHI-O", "I-SU", "A-KA", "KA-O", "E-KI", "KO-E", "KI", "KO-I", "I-KE", "KA-KU", "KO", "KE", "KA", "KU", "I-KU", "I-KE", "KO-U-KA", "A-I","A-U","A-O-I","I-I-E","I-I-A-U", "U-E", "E-I", "O-U", "O-O-U", "O-O-I", "I-O-U", "I", "U", "E", "O" ],
+            "wordPool":  ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I", "YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU", "MU-NE", "SHI-MA-I", "TSU-MA", "U-MA", "SA-N-MA", "KU-MA", "MI-SO", "NO-MI-MO-NO", "MI-NA-MI", "MI-SE", "HI-MO", "KI-MO-NO", "SA-MU-I", "U-MU", "TA-TSU-MA-KI", "HA-CHI", "HA-NA-SU", "HI-TO", "HO-NE", "HO-HO", "HA-HA", "HA-I", "FU", "HE", "FU-TA-TSU", "FU-TO-I", "FU-KU", "NA-NA", "NA-NA-TSU", "NA-I-YO-U", "KA-NA-SHI-I", "NA-O-SU", "NA-KU", "SU-NE", "NE-KO", "NI-CHI","NI-SHI", "TA-NO-SHI-I", "TA-TSU", "TA-I", "A-TA-SHI", "KA-TA", "TA-KA", "KI-TA", "SHI-CHI", "CHI-I-SA-I", "KU-CHI", "TSU-KI", "TSU-CHI", "O-TO-KO", "O-TO-U-TO", "KA-TSU-O", "SA-TO-U", "SA-KE", "A-SHI", "SU-SHI", "A-SA", "U-SO", "SHI-KA", "SE-KA-I", "SHI-SHI", "KU-SA", "SHI-O", "I-SU", "A-KA", "KA-O", "E-KI", "KO-E", "KI", "KO-I", "I-KE", "KA-KU", "KO", "KE", "KA", "KU", "I-KU", "I-KE", "KO-U-KA", "A-I","A-U","A-O-I","I-I-E","I-I-A-U", "U-E", "E-I", "O-U", "O-O-U", "O-O-I", "I-O-U", "I", "U", "E", "O", "A-A", "A-A-I-U", "A-I", "A-I-O-I", "A-O-I", "A-U", "E-E", "I-E", "I-I", "I-I-E", "I-U", "O-E", "O-I", "O-I-O-I", "O-O-E", "O-O-U", "O-U", "U-E", "U-O", "KA-I", "KA-I-KU", "KA-U", "KA-KI-KO", "KU-KI", "A-KI", "O-KE-KE", "KI-KA", "E-KO", "KU-I", "KA-KO-U", "A-KU-E-KI", "KE-I-KI", "O-KA-KI", "I-KO-KU", "A-SU-KA", "SA-I-U", "SA-KA-E", "SA-KE-I", "KA-SA", "KO-SO", "A-SO-KO", "SHI-KA", "U-SHI", "A-SHI", "SHI-KAI", "SU-I-KA", "SU-SHI", "SU-KA", "SA-TSU", "TA-TSU", "KA-TSU-O", "TSU-KI", "TSU-KU-E", "TO-KI", "O-TO-KO", "TSU-CHI", "KI-TA", "TA-KO", "TE-TSU", "CHI-I-SA-I", "A-TA-SHI", "KU-O-CHI", "KU-TSU-SHI-TA", "SO-SHI-KI-TE-KI", "KI-NO-KO", "A-NI-KI", "NI-CHI", "NI-KU", "NA-NA-TSU", "NA-SHI", "SE-NA-KA", "KE-N-CHI-KU-KA", "KO-KO-NO-TSU", "TSU-NA", "SA-SU-KE-NE", "SA-KA-NA", "KA-I-KA-KE-KI-N", "KI-SO-SHI-KE-N", "O-NO-NO-KU", "TSU-NE-NI", "NE-E", "NE-SO-KO-NA-U", "NO-NO-HA-NA", "SO-FU", "HE-I-SHI", "HO-SHI-I", "SA-SHI-HA", "HA-I-KE-I", "HI-KO-KU", "HI-KO-U-KI", "CHI-HI-TSU", "HI-NI-HI-NI", "SO-NO-HI", "TO-HI", "NU-HI", "TA-TE-HI-KU", "FU-TA", "SO-FU", "HO-FU-KU", "TO-FU-TSU", "TA-I-HEN", "HE-I-SE-I", "SO-NO-HE-N", "FU-HE-I", "FU-HE-N-KA", "CHI-HE-I-SE-N", "KA-HO-U-NI", "I-NA-HO", "HO-TO-HO-TO", "KI-MO-NO", "A-NI-ME", "HA-SA-MI", "SHI-MA-I", "MU-KU-TSU-KE-KI", "MI-E-KE-N", "NE-TA-MU", "MI-TA-MA", "MO-KU", "A-TA-MA", "NA-MA-E", "HI-MI-TSU", "MI-NA-MI", "FU-KU-MU", "TA-NO-MU", "MU-KA-SHI", "SA-MU-I", "ME-I-TO", "SHI-ME-SU", "MO-MI-A-I", "MO-ME-N", "YA-WA", "YA-SU-I", "YA-SA-I", "KE-I-YO-U-SHI", "WA-TA-KU-SHI", "A-KI-WA", "YA-NE", "FU-YU", "TO-YO-U", "SE-KI-YU", "YU-SO-U", "YO-U-I", "HI-YO-U", "ME-I-YO", "SA-I-YO-U", "YO-WA-I", "KA-I-WA", "KO-U-WA", "WA-HE-I", "KA-WA-SA-KI", "KI-WO-TSU-KA-U", "SHI-KA-RU-WO", "MO-NO-WO", "WO-SHI-TE", "KU-WO-KI-RU", "I-WO-KU-MU", "KO-I-WO-SU-RU", "HA-I-I-RO", "HO-TA-RU", "NA-RU-TO", "SA-KU-RA", "SO-CHI-RA", "SHI-RI", "SO-SHI-SE-I-RA-I", "O-E-RU", "KO-KE-RU", "RA-I-SE", "KA-RA-KU-RI", "KA-TA-KU-RI", "HO-KU-RI-KU", "SHI-ME-RI-KE", "KU-RU-MA", "A-KA-RU-I", "RU-I-WA", "RE-KI-SHI", "U-RE-SHI-I", "O-SO-RE", "RE-I-NE-N", "WA-KA-RE", "KI-RE-TSU", "U-KE-I-RE", "RO-U-HI", "RO-MEN", "RI-RO-N", "HI-RO-U", "MU-SHI-RO", "SE-N-RO"],
             "sprites":    {
                 "x": 1900, "y": 835, "name": "cave",
                 "dungeonBG": {
