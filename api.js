@@ -231,6 +231,7 @@ var self = module.exports = {
 
                   if(found != -1 && sched[found].submitted == undefined && myobj.success) {
                       sched[found].submitted = myobj.timestamp_end;
+                      sched[found].accuracy = myobj.accuracy;
                   }
 
                   await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters, schedule: sched }, $inc: {total_items: myobj.total_items, total_correct: myobj.total_correct, total_possible_correct: myobj.possible_correct, total_skips: myobj.skips, total_pattern_A: myobj.total_pattern_A, total_pattern_B: myobj.total_pattern_B, total_pattern_C: myobj.total_pattern_C, total_pattern_D: myobj.total_pattern_D } }, function(err, res) {
