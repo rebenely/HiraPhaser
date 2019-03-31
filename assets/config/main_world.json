@@ -203,7 +203,7 @@
             "world": 2,
             "description":  "One more after this. Let's go!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU", "YA-WA", "YA-SU-I", "YA-SA-I", "KE-I-YO-U-SHI", "WA-TA-KU-SHI", "A-KI-WA", "YA-NE", "FU-YU", "TO-YO-U", "SE-KI-YU", "YU-SO-U", "YO-U-I", "HI-YO-U", "ME-I-YO", "SA-I-YO-U", "YO-WA-I", "KA-I-WA", "KO-U-WA", "WA-HE-I", "KA-WA-SA-KI", "KI-WO-TSU-KA-U", "SHI-KA-RU-WO", "MO-NO-WO", "WO-SHI-TE", "KU-WO-KI-RU", "I-WO-KU-MU", "KO-I-WO-SU-RU"],
+            "wordPool": ["YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU", "YA-WA", "YA-SU-I", "YA-SA-I", "KE-I-YO-U-SHI", "WA-TA-KU-SHI", "A-KI-WA", "YA-NE", "FU-YU", "TO-YO-U", "SE-KI-YU", "YU-SO-U", "YO-U-I", "HI-YO-U", "ME-I-YO", "SA-I-YO-U", "YO-WA-I", "KA-I-WA", "KO-U-WA", "WA-HE-I", "KA-WA-SA-KI", "KI-WO-TSU-KA-U",  "MO-NO-WO", "WO-SHI-TE", "I-WO-KU-MU", "KO-I-WO-SU-RU"],
             "sprites":    {
                 "x": 1635, "y": 405, "name": "cave",
                 "dungeonBG": {

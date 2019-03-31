@@ -218,20 +218,25 @@ var self = module.exports = {
                           });
                       }
                   }
-                  console.log(updatedEncounters, 'updated from', myobj.encounters);
+                  // console.log(updatedEncounters, 'updated from', myobj.encounters);
 
                   var sched = succ.schedule;
                   var found = -1;
+                  console.log('loop here', sched);
                   for (let i = 0; i < sched.length; i++) {
-                      // console.log(sched[i].dungeon, 'vs', myobj.name);
-                      if(sched[i].dungeon === myobj.name) {
+                      console.log('['+ sched[i].dungeon + '] vs [' +myobj.name + ']', sched[i].dungeon == myobj.name);
+                      if(sched[i].dungeon == myobj.name) {
                           found = i;
+                          console.log('found index', found)
                       }
                   }
 
                   if(found != -1 && sched[found].submitted == undefined && myobj.success) {
+                      console.log('submit it!');
                       sched[found].submitted = myobj.timestamp_end;
                       sched[found].accuracy = myobj.accuracy;
+                  } else {
+                      console.log('no chief');
                   }
 
                   await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters, schedule: sched }, $inc: {total_items: myobj.total_items, total_correct: myobj.total_correct, total_possible_correct: myobj.possible_correct, total_skips: myobj.skips, total_pattern_A: myobj.total_pattern_A, total_pattern_B: myobj.total_pattern_B, total_pattern_C: myobj.total_pattern_C, total_pattern_D: myobj.total_pattern_D } }, function(err, res) {
