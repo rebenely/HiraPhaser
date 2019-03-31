@@ -337,7 +337,7 @@ function toggleFullScreen() {
     }
 }
 
-$(window).on("beforeunload unload", function(e) {
+$(window).on("beforeunload", function(e) {
     var payload = {distracted: game.distracted};
     if(game.player_name !== '' && !game.logged_out){
         /* end session */

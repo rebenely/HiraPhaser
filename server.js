@@ -43,6 +43,7 @@ app.post('/api/practice', middleware.checkToken, middleware.updateSession, api.p
 app.post('/api/dungeon', middleware.checkToken, middleware.updateSession, api.postDungeon);
 app.get('/api/stats', middleware.checkToken, middleware.updateSession, api.getStats);
 app.post('/api/review', middleware.checkToken, middleware.updateSession, api.postReview);
+app.get('/api/players', api.getPlayers);
 
 app.get('/wtf', function(req, res) {
     console.log('ayy lmao');

@@ -359,5 +359,27 @@ var self = module.exports = {
         });
         // console.log('ayyyy succ');
     },
+    getPlayers(req, res) {
+        console.log('----------get players------------');
+        MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
+          if (err) throw err;
+          var announcement = {};
+          var dbo = db.db(config.db_name);
+
+
+          dbo.collection("players").find({}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            db.close();
+            return res.json({
+              players: result
+            });
+          });
+
+
+
+
+        });
+    }
 
 }
