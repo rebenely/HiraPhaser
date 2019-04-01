@@ -216,36 +216,36 @@ $('#chooseSignup').click(function() {
     $('#myModal').html(signupContent);
 });
 
-$('#logout').click(function() {
-    if(game.player_name !== '' && !game.logged_out){
-        /* end session */
-        console.log(game.player_name);
-        $.ajax({
-            url: game_url + "logout",
-            headers: {"Authorization": "Bearer " + game.token },
-            type: "POST",
-            async: true,
-            contentType: "application/json",
-            success: function (responseData) {
-                $('#myModal').show();
-                var logoutMessage = "<div class='modal-content'> <h1 style='font-family:\"manaspc\";padding:20px;text-align:center;'>Logged out and " + responseData['message'] + "</h1><h3 style='font-family:\"manaspc\";padding:20px;text-align:center;'>You can now safely exit.</h3></div>";
-                $('#myModal').html(logoutMessage);
-                logged_out = true;
-            },
-            error: function (xhr) {
-                // console.log(xhr.responseJSON.message);
-                if(xhr.responseJSON){
-                    $( "#message" ).text(xhr.responseJSON.message);
-                } else {
-                    $( "#message" ).text("Unable to contact server! Please refresh page.");
-
-                }
-                $( '#loginButton' ).prop('disabled', false);
-                $( "#loginButton" ).css('background-color', '#272744');
-            }
-        });
-    }
-});
+// $('#logout').click(function() {
+//     if(game.player_name !== '' && !game.logged_out){
+//         /* end session */
+//         console.log(game.player_name);
+//         $.ajax({
+//             url: game_url + "logout",
+//             headers: {"Authorization": "Bearer " + game.token },
+//             type: "POST",
+//             async: true,
+//             contentType: "application/json",
+//             success: function (responseData) {
+//                 $('#myModal').show();
+//                 var logoutMessage = "<div class='modal-content'> <h1 style='font-family:\"manaspc\";padding:20px;text-align:center;'>Logged out and " + responseData['message'] + "</h1><h3 style='font-family:\"manaspc\";padding:20px;text-align:center;'>You can now safely exit.</h3></div>";
+//                 $('#myModal').html(logoutMessage);
+//                 logged_out = true;
+//             },
+//             error: function (xhr) {
+//                 // console.log(xhr.responseJSON.message);
+//                 if(xhr.responseJSON){
+//                     $( "#message" ).text(xhr.responseJSON.message);
+//                 } else {
+//                     $( "#message" ).text("Unable to contact server! Please refresh page.");
+//
+//                 }
+//                 $( '#loginButton' ).prop('disabled', false);
+//                 $( "#loginButton" ).css('background-color', '#272744');
+//             }
+//         });
+//     }
+// });
 
 $('#myModal').on('click', '#loginButton', function(e){
     e.preventDefault();
@@ -338,7 +338,7 @@ function toggleFullScreen() {
 }
 
 $(window).on("beforeunload", function(e) {
-    var payload = {distracted: game.distracted};
+    var payload = {distracted: game.distracted, idle: game.idle};
     if(game.player_name !== '' && !game.logged_out){
         /* end session */
         logged_out = true;
@@ -350,6 +350,7 @@ $(window).on("beforeunload", function(e) {
             contentType: "application/json",
             data: JSON.stringify(payload)
         });
+
     }
 });
 

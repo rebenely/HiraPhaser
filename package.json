@@ -21,10 +21,10 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
+    "moment": "^2.24.0",
     "mongodb": "^3.1.13"
-},
+  },
   "engines": {
     "node": "11.9.0"
   }
-
 }

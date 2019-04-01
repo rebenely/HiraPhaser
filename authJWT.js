@@ -217,6 +217,9 @@ module.exports  = {
               if(payload.idle == undefined || payload.idle == null) {
                   payload.idle = 0;
               }
+              if(payload.distracted == undefined || payload.distracted == null) {
+                  payload.distracted = 0;
+              }
               await dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime, distracted: payload.distracted, idle: payload.idle } }, async function(err, res) {
                 if (err) throw err;
                 console.log( username + ": ended session", session);
