@@ -35,7 +35,7 @@ class DungeonScene extends Phaser.Scene {
             username: this.player.name,
             name: this.dungeon.name,
             timestamp: game.timestamp(),
-            total_time: new Date(),
+            total_time: moment(),
             accuracy: 0,
             battles: [],
             encounters: [],
@@ -398,7 +398,7 @@ class DungeonScene extends Phaser.Scene {
         this.dataCapture.extends = this.extends;
         this.dataCapture.multiple_choice = this.mulcho;
         this.dataCapture.flee = flee;
-        this.dataCapture.total_time = (new Date() - this.dataCapture.total_time)/1000;
+        this.dataCapture.total_time = moment().diff(this.dataCapture.total_time, 'seconds');
 
         // console.log('tapos na', this.dataCapture);
         for(let i = 0; i < this.dataCapture.battles.length; i++){

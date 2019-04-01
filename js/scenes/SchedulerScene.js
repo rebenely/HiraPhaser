@@ -168,10 +168,9 @@ class SchedulerScene extends Phaser.Scene {
                     this.compute.visible = false;
                 } else {
                     this.enterButton.enable();
-                    this.sched = new Date(game.timestamp());
+                    this.sched = moment().add(parseInt(this.inputText), 'hours').add(parseInt(this.inputText1), 'minutes');
 
-                    this.sched.setHours(this.sched.getHours() + parseInt(this.inputText), this.sched.getMinutes() + parseInt(this.inputText1));
-                    this.compute.setText("from now would be on\n" + this.sched.toLocaleString("en-US", {timeZone: "Asia/Manila"}));
+                    this.compute.setText("from now would be on\n" + this.sched.format('MM/DD/YYYY, hh:mm:ss a'));
                     this.compute.visible = true;
                     if((parseInt(this.inputText) == 4 && parseInt(this.inputText1) == 20 || (parseInt(this.inputText) == 6 && parseInt(this.inputText1) == 9))) {
                         this.egg.visible = true;

@@ -208,13 +208,13 @@ class MatchingTypeScene extends Phaser.Scene {
             }
 
 
-            this.dataCapture.total_time = (new Date() - this.timeStamp)/1000;
+            this.dataCapture.total_time = moment().diff(this.timeStamp, 'seconds');
 
         } else {
             this.sound.play('start');
             this.display.visible = false;
             this.playButton.setText("Play!");
-            this.timeStamp = new Date();
+            this.timeStamp = moment();
             // console.log(this.timeStamp);
             for(let i = 0; i < this.ypos.length; i++) {
                 this.ypos[i].visible = true;

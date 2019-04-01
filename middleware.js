@@ -1,4 +1,5 @@
 let jwt = require('jsonwebtoken');
+var moment = require('moment');
 const config = require('./config.js');
 var MongoClient = require('mongodb').MongoClient;
 
@@ -48,18 +49,17 @@ let updateSession = (req, res, next) => {
     var myobj = req.body;
     console.log(myobj.total_time);
 
-    var end = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
-    end = new Date(end);
-    var startDate = new Date(start);
-    var playTime = (end - startDate) / 1000;
+    var end = moment();
+    var startDate = moment(start, 'MM/DD/YYYY, hh:mm:ss a');
+    var playTime = end.diff(startDate, 'seconds');
     if(myobj.total_time != undefined){
-        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime }, $inc: { battle_time: myobj.total_time } }, function(err, res) {
+        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, hh:mm:ss a'), play_time: playTime }, $inc: { battle_time: myobj.total_time } }, function(err, res) {
           if (err) throw err;
           console.log( username + ": updated end time of session ", session);
           db.close();
         });
     } else {
-        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  JSON.stringify(end.toLocaleString()).replace(/\"/g, ""), play_time: playTime } }, function(err, res) {
+        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, hh:mm:ss a'), play_time: playTime } }, function(err, res) {
           if (err) throw err;
           console.log( username + ": updated end time of session ", session);
           db.close();

@@ -24,7 +24,7 @@ class TrainScene extends Phaser.Scene {
             name: this.title,
             accuracy: 0,
             timestamp: game.timestamp(),
-            total_time: new Date(),
+            total_time: moment(),
             mulcho: [],
             match: [],
             username: this.player.name
@@ -76,7 +76,7 @@ class TrainScene extends Phaser.Scene {
         }, this);
     }
     packEveything(){
-        this.dataCapture.total_time = (new Date() - this.dataCapture.total_time)/1000;
+        this.dataCapture.total_time = moment().diff(this.dataCapture.total_time, 'seconds');
         console.log(this.dataCapture.total_time);
         if(this.dataCapture.mulcho.length > 0 || this.dataCapture.match.length > 0){
             this.events.emit('finishedTraining', {success: true, dataCapture: this.dataCapture, message: { title: "Saving progress", message : "Please do not exit."}, story: this.level, log: this.log } );

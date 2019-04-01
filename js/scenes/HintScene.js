@@ -15,7 +15,7 @@ class HintScene extends Phaser.Scene {
         this.scene.bringToTop();
         this.move = 0;
         this.api = "api/review";
-        this.payload = {total_time: new Date()};
+        this.payload = {total_time: moment()};
 
 
         this.graphics = this.add.graphics();
@@ -92,7 +92,7 @@ class HintScene extends Phaser.Scene {
             this.cancelButton.disable();
 
             if(!this.inDungeon){
-                this.payload.total_time = (new Date() - this.payload.total_time)/1000;
+                this.payload.total_time = moment().diff(this.payload.total_time, 'seconds');
             }
             this.postData();
 
@@ -106,7 +106,7 @@ class HintScene extends Phaser.Scene {
                 this.cancelButton.disable();
 
                 if(!this.inDungeon){
-                    this.payload.total_time = (new Date() - this.payload.total_time)/1000;
+                    this.payload.total_time = moment().diff(this.payload.total_time, 'seconds');
                 }
                 this.postData();
                 this.sound.play('click');

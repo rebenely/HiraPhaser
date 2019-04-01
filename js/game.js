@@ -76,10 +76,7 @@ game.screenWipe = function (scene) {
    });
 }
 game.timestamp = function (){
-    var asiaTime = new Date().toLocaleString("en-US", {timeZone: "Asia/Manila"});
-    var manilaTime = new Date(asiaTime);
-    // console.log(manilaTime.toLocaleString());
-    return manilaTime.toLocaleString();
+    return moment().format('MM/DD/YYYY, hh:mm:ss a');
 }
 game.distracted = 0;
 game.outOfFocus = false;
@@ -88,14 +85,14 @@ game.events.on('blur',
     function() {
         if(game.loaded){
             game.outOfFocus = true;
-            stamp = new Date(game.timestamp());
+            stamp = moment();
         }
     }
 , game);
 game.events.on('focus',
     function() {
         if(stamp !== null && game.loaded) {
-            var end = new Date(game.timestamp());
+            var end = moment();
             game.distracted += (end - stamp) / 1000;
             game.outOfFocus = false;
         }
@@ -157,3 +154,4 @@ game.isVowel = function (input) {
 }
 
 inactivityTime();
+console.log(moment("3/31/2019, 8:40:14 PM", 'MM/DD/YYYY, hh:mm:ss a'))
