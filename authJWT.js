@@ -38,7 +38,7 @@ module.exports  = {
             } else {
                 bcrypt.compare(password, result.password, function(err, hashResult) {
                     if (hashResult) {
-                        var stringTime = moment().format('MM/DD/YYYY, hh:mm:ss a');
+                        var stringTime = moment().utc().utcOffset(8).format('MM/DD/YYYY, LTS');
                       jwt.sign({username: username, session: result.session + 1, start: stringTime},config.secret,
                         { expiresIn: '12h' }, async function(err, token) {
                             /* create session */
@@ -209,7 +209,7 @@ module.exports  = {
                 message: 'User does not exist!'
               });
           } else {
-              var end = moment();
+              var end = moment().utc().utcOffset(8);
               var startDate = moment(start, 'MM/DD/YYYY, hh:mm:ss a');
               var playTime = end.diff(startDate, 'seconds');
               if(payload.idle == undefined || payload.idle == null) {

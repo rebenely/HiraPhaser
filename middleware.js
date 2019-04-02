@@ -49,7 +49,7 @@ let updateSession = (req, res, next) => {
     var myobj = req.body;
     console.log(myobj.total_time);
 
-    var end = moment();
+    var end = moment().utc().utcOffset(8);
     var startDate = moment(start, 'MM/DD/YYYY, hh:mm:ss a');
     var playTime = end.diff(startDate, 'seconds');
     if(myobj.total_time != undefined){

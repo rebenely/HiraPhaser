@@ -52,13 +52,14 @@ var self = module.exports = {
                                 console.log(myobj.username + ": updated schedule");
                                 db.close();
                               });
-                              return res.json({
-                                success: true
-                              });
+
                             });
                         } else {
                             db.close();
                         }
+                      });
+                      return res.json({
+                        success: true
                       });
                   } else {
                       if(myobj.sched){
