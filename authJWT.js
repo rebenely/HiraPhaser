@@ -209,8 +209,8 @@ module.exports  = {
                 message: 'User does not exist!'
               });
           } else {
-              var end = moment().utc();
-              var startDate = moment(start, 'MM/DD/YYYY, LTS').utc()
+              var end = moment();
+              var startDate = moment(start, 'MM/DD/YYYY, LTS');
               // var startDate = moment().tz(start, 'MM/DD/YYYY, LTS', 'Asia/Manila');
               var playTime = end.diff(startDate, 'seconds');
               // console.log(moment().utc().utcOffset(8).add(24, 'hours').add(1, 'minutes'));
