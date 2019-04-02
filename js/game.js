@@ -93,7 +93,7 @@ game.events.on('focus',
     function() {
         if(stamp !== null && game.loaded) {
             var end = moment();
-            game.distracted += (end - stamp) / 1000;
+            game.distracted += end.diff(stamp, 'seconds');
             game.outOfFocus = false;
         }
         console.log('distracted for', game.distracted," seconds.");
