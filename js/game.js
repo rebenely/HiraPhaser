@@ -76,7 +76,7 @@ game.screenWipe = function (scene) {
    });
 }
 game.timestamp = function (){
-    return moment().utc().utcOffset(8).format('MM/DD/YYYY, LTS');
+    return moment().utc().utcOffset(8).format('MM/DD/YYYY, hh:mm:ss A');
 }
 game.distracted = 0;
 game.outOfFocus = false;

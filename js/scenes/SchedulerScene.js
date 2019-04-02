@@ -77,12 +77,12 @@ class SchedulerScene extends Phaser.Scene {
     submitConfirm () {
         var i = this.checkSchedExistence();
         if(i != -1){
-            this.player.schedule[i].deadline = this.sched.toLocaleString("en-US", {timeZone: "Asia/Manila"});
+            this.player.schedule[i].deadline = this.sched.format('MM/DD/YYYY, hh:mm:ss A');
         } else {
-            this.player.schedule.push({deadline: this.sched.toLocaleString("en-US", {timeZone: "Asia/Manila"}), dungeon: this.dungeon});
+            this.player.schedule.push({deadline: this.sched.format('MM/DD/YYYY, hh:mm:ss A')});
         }
         // console.log(this.player.schedule);
-        this.events.emit('ScheduleMe', {deadline: this.sched.toLocaleString("en-US", {timeZone: "Asia/Manila"})});
+        this.events.emit('ScheduleMe', {deadline: this.sched.format('MM/DD/YYYY, hh:mm:ss A')});
         this.scene.stop('SchedulerScene');
     }
     checkSchedExistence() {
@@ -170,7 +170,7 @@ class SchedulerScene extends Phaser.Scene {
                     this.enterButton.enable();
                     this.sched = moment().add(parseInt(this.inputText), 'hours').add(parseInt(this.inputText1), 'minutes');
 
-                    this.compute.setText("from now would be on\n" + this.sched.format('MM/DD/YYYY, hh:mm:ss a'));
+                    this.compute.setText("from now would be on\n" + this.sched.format('MM/DD/YYYY, hh:mm:ss A'));
                     this.compute.visible = true;
                     if((parseInt(this.inputText) == 4 && parseInt(this.inputText1) == 20 || (parseInt(this.inputText) == 6 && parseInt(this.inputText1) == 9))) {
                         this.egg.visible = true;

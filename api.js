@@ -58,9 +58,7 @@ var self = module.exports = {
                             db.close();
                         }
                       });
-                      return res.json({
-                        success: true
-                      });
+    
                   } else {
                       if(myobj.sched){
                           dbo.collection("players").findOne({username: myobj.username }, async function(err, result) {
