@@ -210,7 +210,8 @@ module.exports  = {
               });
           } else {
               var end = moment().utc().utcOffset(8);
-              var startDate = moment(start, 'MM/DD/YYYY, LTS').utc().utcOffset(8);
+              var startDate = moment(start, 'MM/DD/YYYY, LTS').utc()
+              // var startDate = moment().tz(start, 'MM/DD/YYYY, LTS', 'Asia/Manila');
               var playTime = end.diff(startDate, 'seconds');
               // console.log(moment().utc().utcOffset(8).add(24, 'hours').add(1, 'minutes'));
               console.log(startDate.format('MM/DD/YYYY, LTS'), 'end', end.format('MM/DD/YYYY, LTS'), 'diff', typeof playTime, ':', playTime);
