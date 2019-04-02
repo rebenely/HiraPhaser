@@ -211,7 +211,7 @@ module.exports  = {
           } else {
               var end = moment().utc().utcOffset(8);
               var startDate = moment(start, 'MM/DD/YYYY, LTS');
-              var playTime = end.diff(startDate, 'seconds');
+              var playTime = Math.round((end - startDate)/1000);
               console.log(startDate.format('MM/DD/YYYY, LTS'), 'end', end.format('MM/DD/YYYY, LTS'), 'diff', typeof playTime, ':', playTime);
               if(payload.idle == undefined || payload.idle == null) {
                   payload.idle = 0;
