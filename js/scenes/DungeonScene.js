@@ -45,7 +45,9 @@ class DungeonScene extends Phaser.Scene {
             total_pattern_A: 0,
             total_pattern_B: 0,
             total_pattern_C: 0,
-            total_pattern_D: 0
+            total_pattern_D: 0,
+            total_no_answer: 0,
+            total_timed_out: 0
         }
         this.hintChecked = false;
         // console.log('recreate boii', this.dungeon);
@@ -322,13 +324,16 @@ class DungeonScene extends Phaser.Scene {
                 }
             }
 
+            /* no answer */
+            if(data.dataCapture.questions[i].answer == '' && !data.dataCapture.questions[i].skip) {
+                this.dataCapture.total_no_answer++;
+            }
 
+            /* timed out */
+            if(data.dataCapture.questions[i].timed_out) {
+                this.dataCapture.total_timed_out++;
+            }
 
-
-
-
-
-            /* accuracy per word */
 
 
             /* total battle items */

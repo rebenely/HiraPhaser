@@ -139,7 +139,9 @@ module.exports  = {
                   total_pattern_B: 0,
                   total_pattern_C: 0,
                   total_pattern_D: 0,
-                  total_battle_time: 0
+                  total_battle_time: 0,
+                  total_no_answer: 0,
+                  total_timed_out: 0,
               }
               dbo.collection("players").insertOne(myobj, function(err, result) {
                   if (err) {

@@ -58,7 +58,7 @@ var self = module.exports = {
                             db.close();
                         }
                       });
-    
+
                   } else {
                       if(myobj.sched){
                           dbo.collection("players").findOne({username: myobj.username }, async function(err, result) {
@@ -238,7 +238,7 @@ var self = module.exports = {
                       console.log('no chief');
                   }
 
-                  await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters, schedule: sched }, $inc: {total_items: myobj.total_items, total_correct: myobj.total_correct, total_possible_correct: myobj.possible_correct, total_skips: myobj.skips, total_pattern_A: myobj.total_pattern_A, total_pattern_B: myobj.total_pattern_B, total_pattern_C: myobj.total_pattern_C, total_pattern_D: myobj.total_pattern_D } }, function(err, res) {
+                  await dbo.collection("players").updateOne({username: myobj.username}, { $set: { story: update_story, encounters: updatedEncounters, schedule: sched }, $inc: {total_items: myobj.total_items, total_correct: myobj.total_correct, total_possible_correct: myobj.possible_correct, total_skips: myobj.skips, total_no_answer: myobj.total_no_answer, total_timed_out: myobj.total_timed_out, total_pattern_A: myobj.total_pattern_A, total_pattern_B: myobj.total_pattern_B, total_pattern_C: myobj.total_pattern_C, total_pattern_D: myobj.total_pattern_D } }, function(err, res) {
                     if (err) throw err;
                     console.log(myobj.username + ": updated story and encounters");
                     db.close();
