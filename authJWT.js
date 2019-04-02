@@ -210,9 +210,9 @@ module.exports  = {
               });
           } else {
               var end = moment().utc().utcOffset(8);
-              var startDate = moment(start, 'MM/DD/YYYY, LTS');
-              var playTime = Math.round((end - startDate)/1000);
-              console.log(moment().utc().utcOffset(8).add(24, 'hours').add(1, 'minutes'));
+              var startDate = moment(start, 'MM/DD/YYYY, LTS').utc().utcOffset(8);
+              var playTime = end.diff(startDate, 'seconds');
+              // console.log(moment().utc().utcOffset(8).add(24, 'hours').add(1, 'minutes'));
               console.log(startDate.format('MM/DD/YYYY, LTS'), 'end', end.format('MM/DD/YYYY, LTS'), 'diff', typeof playTime, ':', playTime);
               if(payload.idle == undefined || payload.idle == null) {
                   payload.idle = 0;
