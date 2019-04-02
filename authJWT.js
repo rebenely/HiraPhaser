@@ -1,6 +1,6 @@
 let jwt = require('jsonwebtoken');
 let config = require('./config');
-var moment = require('moment');
+var moment = require('moment-timezone');
 var MongoClient = require('mongodb').MongoClient;
 const url = config.db_url;
 var bcrypt = require('bcryptjs');
@@ -38,7 +38,7 @@ module.exports  = {
             } else {
                 bcrypt.compare(password, result.password, function(err, hashResult) {
                     if (hashResult) {
-                        var stringTime = moment().utc().utcOffset(8).format('MM/DD/YYYY, LTS');
+                        var stringTime = moment().tz('Asia/Manila').format('MM/DD/YYYY, LTS');
                       jwt.sign({username: username, session: result.session + 1, start: stringTime},config.secret,
                         { expiresIn: '12h' }, async function(err, token) {
                             /* create session */
@@ -209,10 +209,10 @@ module.exports  = {
                 message: 'User does not exist!'
               });
           } else {
-              var end = moment().utc();
-              var startDate = moment(start, 'MM/DD/YYYY, LTS');
+              var end = moment().tz('Asia/Manila');
+              var startDate = moment(start, 'MM/DD/YYYY, LTS').tz('Asia/Manila');
               // var startDate = moment().tz(start, 'MM/DD/YYYY, LTS', 'Asia/Manila');
-              var playTime = end.diff(startDate.utc(), 'seconds');
+              var playTime = end.diff(startDate, 'seconds');
               // console.log(moment().utc().utcOffset(8).add(24, 'hours').add(1, 'minutes'));
               console.log(startDate.format('MM/DD/YYYY, LTS'), 'end', end.format('MM/DD/YYYY, LTS'), 'diff', typeof playTime, ':', playTime);
               if(payload.idle == undefined || payload.idle == null) {
@@ -221,7 +221,7 @@ module.exports  = {
               if(payload.distracted == undefined || payload.distracted == null) {
                   payload.distracted = 0;
               }
-              await dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.utcOffset(8).format('MM/DD/YYYY, LTS'), play_time: playTime, distracted: payload.distracted, idle: payload.idle } }, async function(err, res) {
+              await dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, LTS'), play_time: playTime, distracted: payload.distracted, idle: payload.idle } }, async function(err, res) {
                 if (err) throw err;
                 console.log( username + ": ended session", session);
                 await dbo.collection("sessions").findOne({username: username, session_id: session}, async function(err, result) {
