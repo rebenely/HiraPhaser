@@ -210,9 +210,9 @@ module.exports  = {
               });
           } else {
               var end = moment().tz('Asia/Manila');
-              var startDate = moment(start, 'MM/DD/YYYY, LTS');
+              var startDate = moment.tz(start, 'MM/DD/YYYY, LTS', 'Asia/Manila');
               // var startDate = moment().tz(start, 'MM/DD/YYYY, LTS', 'Asia/Manila');
-              var playTime = end.diff(startDate, 'seconds');
+              var playTime =  end.diff(startDate, 'seconds');
               // console.log(moment().utc().utcOffset(8).add(24, 'hours').add(1, 'minutes'));
               console.log(startDate.format('MM/DD/YYYY, LTS'), 'end', end.format('MM/DD/YYYY, LTS'), 'diff', typeof playTime, ':', playTime);
               if(payload.idle == undefined || payload.idle == null) {
