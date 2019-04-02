@@ -49,18 +49,18 @@ let updateSession = (req, res, next) => {
     var myobj = req.body;
     console.log(myobj.total_time);
 
-    var end = moment().utc().utcOffset(8);
-    var startDate = moment(start, 'MM/DD/YYYY, LTS').utc()
+    var end = moment().utc();
+    var startDate = moment(start, 'MM/DD/YYYY, LTS').utc();
     // var startDate = moment().tz(start, 'MM/DD/YYYY, LTS', 'Asia/Manila');
     var playTime =  end.diff(startDate, 'seconds');
     if(myobj.total_time != undefined){
-        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, LTS'), play_time: playTime }, $inc: { battle_time: myobj.total_time } }, function(err, res) {
+        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.utcOffset(8).format('MM/DD/YYYY, LTS'), play_time: playTime }, $inc: { battle_time: myobj.total_time } }, function(err, res) {
           if (err) throw err;
           console.log( username + ": updated end time of session ", session);
           db.close();
         });
     } else {
-        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, LTS'), play_time: playTime } }, function(err, res) {
+        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.utcOffset(8).format('MM/DD/YYYY, LTS'), play_time: playTime } }, function(err, res) {
           if (err) throw err;
           console.log( username + ": updated end time of session ", session);
           db.close();

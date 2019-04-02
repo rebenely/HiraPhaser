@@ -209,19 +209,19 @@ module.exports  = {
                 message: 'User does not exist!'
               });
           } else {
-              var end = moment().utc().utcOffset(8);
+              var end = moment().utc();
               var startDate = moment(start, 'MM/DD/YYYY, LTS').utc()
               // var startDate = moment().tz(start, 'MM/DD/YYYY, LTS', 'Asia/Manila');
               var playTime = end.diff(startDate, 'seconds');
               // console.log(moment().utc().utcOffset(8).add(24, 'hours').add(1, 'minutes'));
-              console.log(startDate.format('MM/DD/YYYY, LTS'), 'end', end.format('MM/DD/YYYY, LTS'), 'diff', typeof playTime, ':', playTime);
+              console.log(startDate.format('MM/DD/YYYY, LTS'), 'end', end.utcOffset(8).format('MM/DD/YYYY, LTS'), 'diff', typeof playTime, ':', playTime);
               if(payload.idle == undefined || payload.idle == null) {
                   payload.idle = 0;
               }
               if(payload.distracted == undefined || payload.distracted == null) {
                   payload.distracted = 0;
               }
-              await dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, LTS'), play_time: playTime, distracted: payload.distracted, idle: payload.idle } }, async function(err, res) {
+              await dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.utcOffset(8).format('MM/DD/YYYY, LTS'), play_time: playTime, distracted: payload.distracted, idle: payload.idle } }, async function(err, res) {
                 if (err) throw err;
                 console.log( username + ": ended session", session);
                 await dbo.collection("sessions").findOne({username: username, session_id: session}, async function(err, result) {
