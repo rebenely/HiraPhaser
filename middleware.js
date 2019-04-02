@@ -50,7 +50,8 @@ let updateSession = (req, res, next) => {
     console.log(myobj.total_time);
 
     var end = moment().utc().utcOffset(8);
-    var startDate = moment(start, 'MM/DD/YYYY, hh:mm:ss a');
+    var startDate = moment(start, 'MM/DD/YYYY, LTS');
+    console.log(startDate, 'end', end);
     var playTime = end.diff(startDate, 'seconds');
     if(myobj.total_time != undefined){
         dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, hh:mm:ss a'), play_time: playTime }, $inc: { battle_time: myobj.total_time } }, function(err, res) {

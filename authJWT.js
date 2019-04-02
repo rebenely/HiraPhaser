@@ -210,7 +210,7 @@ module.exports  = {
               });
           } else {
               var end = moment().utc().utcOffset(8);
-              var startDate = moment(start, 'MM/DD/YYYY, hh:mm:ss a');
+              var startDate = moment(start, 'MM/DD/YYYY, LTS');
               var playTime = end.diff(startDate, 'seconds');
               if(payload.idle == undefined || payload.idle == null) {
                   payload.idle = 0;
