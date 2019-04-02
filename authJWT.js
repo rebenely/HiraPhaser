@@ -219,7 +219,7 @@ module.exports  = {
               if(payload.distracted == undefined || payload.distracted == null) {
                   payload.distracted = 0;
               }
-              await dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, hh:mm:ss a'), play_time: playTime, distracted: payload.distracted, idle: payload.idle } }, async function(err, res) {
+              await dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.format('MM/DD/YYYY, LTS'), play_time: playTime, distracted: payload.distracted, idle: payload.idle } }, async function(err, res) {
                 if (err) throw err;
                 console.log( username + ": ended session", session);
                 await dbo.collection("sessions").findOne({username: username, session_id: session}, async function(err, result) {
