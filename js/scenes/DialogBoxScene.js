@@ -94,8 +94,12 @@ class DialogBoxScene extends Phaser.Scene {
                     game.logged_out = true;
                     this.dialogTitle.setTextUpper("Saved!");
                     this.dialogTitle.setOrigin(0);
-                    this.dialogMessage.setTextUpper("You can now exit the game.");
+                    this.dialogMessage.setTextUpper("You can now exit the game and/or open the dashboard.");
                     this.dialogMessage.setOrigin(0);
+                    this.okayButton = new HiraButton(this, 90 + 430, 160 + 150 - 30, "Open Dashboard", style, () => {
+                        window.open('https://www.december.com', '_blank');
+                    }, this);
+                    this.add.existing(this.okayButton);
                 }
 
             },

@@ -81,9 +81,13 @@ class WorldNavScene extends Phaser.Scene {
         }, this);
         this.add.existing(this.questButton);
         this.questButton.alertBoi();
+        var loggerOut = {
+            title: 'Dashboard',
+            desc: 'You have to be logged out before checking the dashboard.\nDo you want to logout?'
+        };
 
         this.statsButton = new HiraButton(this, 60*4, 430 + 20, "Stats", style, () => {
-            this.scene.launch('StatsScene', { player: this.player} );
+            this.scene.launch('DetailScene', {player: this.player, content: loggerOut, startScene: 'DialogBoxScene', passData: { title: "Logging out", message: "Saving data", dataCapture: {distracted: game.distracted, idle: game.idle}, api: 'logout' }});
             this.events.emit('disableLevels');
             this.scene.sleep('WorldNavScene');
         }, this);
@@ -104,6 +108,7 @@ class WorldNavScene extends Phaser.Scene {
 
         }, this);
         this.add.existing(this.saveButton);
+
 
         this.prevButton.disable();
 

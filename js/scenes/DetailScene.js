@@ -17,9 +17,8 @@ class DetailScene extends Phaser.Scene {
             }
         } else {
             this.content = data.content;
-            if(data.dungeon != null) {
-                this.dungeon.name = data.dungeon.name;
-            }
+            console.log(data.dungeon);
+
         }
         this.startScene = data.startScene;
         this.passData = data.passData;
