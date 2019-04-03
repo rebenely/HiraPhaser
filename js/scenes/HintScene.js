@@ -94,6 +94,8 @@ class HintScene extends Phaser.Scene {
             if(!this.inDungeon){
                 this.payload.total_time = moment().diff(this.payload.total_time, 'seconds');
             }
+            this.payload.idle = game.idle;
+            this.payload.distracted = game.distracted;
             this.postData();
 
 
@@ -108,6 +110,8 @@ class HintScene extends Phaser.Scene {
                 if(!this.inDungeon){
                     this.payload.total_time = moment().diff(this.payload.total_time, 'seconds');
                 }
+                this.payload.idle = game.idle;
+                this.payload.distracted = game.distracted;
                 this.postData();
                 this.sound.play('click');
 

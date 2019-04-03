@@ -19,6 +19,10 @@ class DialogBoxScene extends Phaser.Scene {
             this.payload.player_story = data.player_story;
             this.payload.update_story = data.update_story;
             this.apiRequest = true;
+            if(this.api != 'logout') {
+                this.payload.distracted = game.distracted;
+                this.payload.idle = game.idle;
+            }
         } else {
             this.apiRequest = false;
         }

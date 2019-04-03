@@ -47,14 +47,18 @@ let updateSession = (req, res, next) => {
     var start = res.locals.decoded.start;
     var dbo = db.db(config.db_name);
     var myobj = req.body;
+    var idleTime = myobj.idle;
+    var distractedTime = myobj.distracted;
+    delete req.body.idle;
+    delete req.body.distracted;
     console.log(myobj.total_time);
 
     var end = moment().tz('Asia/Manila');
     var startDate = moment.tz(start, 'MM/DD/YYYY, hh:mm:ss A', 'Asia/Manila');
     // var startDate = moment().tz(start, 'MM/DD/YYYY, LTS', 'Asia/Manila');
     var playTime = end.diff(startDate, 'seconds');
-    if(myobj.total_time != undefined){
-        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.utcOffset(8).format('MM/DD/YYYY, hh:mm:ss A'), play_time: playTime }, $inc: { battle_time: myobj.total_time } }, function(err, res) {
+    if(myobj.total_time != undefined && idleTime != undefined && distractedTime != undefined){
+        dbo.collection("sessions").updateOne({username: username, session_id: session}, { $set: { end:  end.utcOffset(8).format('MM/DD/YYYY, hh:mm:ss A'), play_time: playTime, idle: idleTime, distracted: distractedTime }, $inc: { battle_time: myobj.total_time } }, function(err, res) {
           if (err) throw err;
           console.log( username + ": updated end time of session ", session);
           db.close();
