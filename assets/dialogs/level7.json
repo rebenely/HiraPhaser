@@ -92,7 +92,7 @@
         "y": "240",
         "scale": "5"
     },
-    "teach": ["WA", "YA", "YU", "WO", "YO"],
+    "teach": ["YA", "WA", "YU", "WO", "YO"],
     "message": {
         "title":"Y & W Families!",
         "message": "You learned Y & W Families!"

@@ -76,6 +76,8 @@ class BattleScene extends Phaser.Scene {
             }
             else if (keyCode === 13) //enter
             {
+                this.correctAns.setText("Answer: "+ this.projectile.currentChar);
+                this.correctAns.visible = true;
 
                 this.sound.play('next');
                 this.timeExtendButton.visible = false;
@@ -182,7 +184,10 @@ class BattleScene extends Phaser.Scene {
 
         this.prompt =  new HiraText(this,720/2, 480/2, "[type now!]", "header");
         this.add.existing(this.prompt);
-        this.prompt.visible = false;
+
+        this.correctAns =  new HiraText(this, 720/2, 480/2 + 50, "", "header");
+        this.add.existing(this.correctAns);
+        this.correctAns.visible = false;
 
         /* add attack button */
 
@@ -229,7 +234,8 @@ class BattleScene extends Phaser.Scene {
 
                         stats.time_stopped = true;
                     }
-
+                    this.correctAns.setText("Answer: "+ this.projectile.currentChar);
+                    this.correctAns.visible = true;
 
                     stats.correct = false;
                     this.cameras.main.flash(100);
@@ -823,6 +829,7 @@ class BattleScene extends Phaser.Scene {
             } else {
                 this.prompt.visible = false;
             }
+            this.correctAns.visible = false;
 
             this.inputTextDisplay.setTextUpper(this.inputText);
             this.inputTextDisplay.visible = true;
@@ -857,6 +864,8 @@ class BattleScene extends Phaser.Scene {
         // console.log('time ends');
         this.timedEvent.remove(false);
         this.enemyAttack();
+        this.correctAns.setText("Answer: "+ this.projectile.currentChar);
+        this.correctAns.visible = true;
         if(!wrong){
             this.timerDisplay.setTextUpper('Time\'s up!');
             let stats = {
