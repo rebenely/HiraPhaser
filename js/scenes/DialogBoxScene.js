@@ -130,7 +130,7 @@ class DialogBoxScene extends Phaser.Scene {
             success: function (responseData) {
                 this.sound.play('success');
                 this.okayButton.enable();
-                window.open('https://www.december.com', '_blank');
+                window.location.replace('https://google.com');
             },
             error: function (xhr) {
                 setTimeout(() => {
