@@ -14,7 +14,7 @@
         "rogue_smug": "assets/dialogs/images/rogue_smug.png",
         "rogue_think": "assets/dialogs/images/rogue_think.png",
         "mage_happy": "assets/dialogs/images/mage_happy.png",
-        "mage_angry": "assets/dialogs/images/mage_angry.png",
+        "mage_angry": "assets/dialogfs/images/mage_angry.png",
         "mage_think": "assets/dialogs/images/mage_think.png",
         "creator": "assets/dialogs/images/creator.png"
     },
@@ -69,7 +69,7 @@
     },
     "teach": [],
     "message": {
-        "title":"Second Area Unlocked",
+        "title":"Second World Unlocked",
         "message": "Thin the herd!"
     }
 }

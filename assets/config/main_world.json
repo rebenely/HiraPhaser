@@ -203,7 +203,7 @@
             "world": 2,
             "description":  "One more after this. Let's go!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU", "YA-WA", "YA-SU-I", "YA-SA-I", "KE-I-YO-U-SHI", "WA-TA-KU-SHI", "A-KI-WA", "YA-NE", "FU-YU", "TO-YO-U", "SE-KI-YU", "YU-SO-U", "YO-U-I", "HI-YO-U", "ME-I-YO", "SA-I-YO-U", "YO-WA-I", "KA-I-WA", "KO-U-WA", "WA-HE-I", "KA-WA-SA-KI", "KI-WO-TSU-KA-U",  "MO-NO-WO", "WO-SHI-TE", "I-WO-KU-MU", "KO-I-WO-SU-RU"],
+            "wordPool": ["YA-SA-I", "O-YA-TSU", "YA-SU-I", "YO-MU", "YU-KI", "YU-KA-TA", "NA-WA", "WA-FU-KU", "WA-KA-I", "KO-WA-I", "KO-YO-MI", "YU", "YA-WA", "YA-SU-I", "YA-SA-I", "KE-I-YO-U-SHI", "WA-TA-KU-SHI", "A-KI-WA", "YA-NE", "FU-YU", "TO-YO-U", "SE-KI-YU", "YU-SO-U", "YO-U-I", "HI-YO-U", "ME-I-YO", "SA-I-YO-U", "YO-WA-I", "KA-I-WA", "KO-U-WA", "WA-HE-I", "KA-WA-SA-KI", "KI-WO-TSU-KA-U",  "MO-NO-WO", "WO-SHI-TE", "I-WO-KU-MU"],
             "sprites":    {
                 "x": 1635, "y": 405, "name": "cave",
                 "dungeonBG": {
@@ -231,7 +231,7 @@
             "world": 2,
             "description":  "The last dungeon! Show them what you got!",
             "charSet": ["SA","SHI","SU","SE","SO","KA","KI","KU","KE","KO","A","I","U","E","O"],
-            "wordPool": ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I", "HA-I-I-RO", "HO-TA-RU", "NA-RU-TO", "SA-KU-RA", "SO-CHI-RA", "SHI-RI", "SO-SHI-SE-I-RA-I", "O-E-RU", "KO-KE-RU", "RA-I-SE", "KA-RA-KU-RI", "KA-TA-KU-RI", "HO-KU-RI-KU", "SHI-ME-RI-KE", "KU-RU-MA", "A-KA-RU-I", "RU-I-WA", "RE-KI-SHI", "U-RE-SHI-I", "O-SO-RE", "RE-I-NE-N", "WA-KA-RE", "KI-RE-TSU", "U-KE-I-RE", "RO-U-HI", "RO-ME-N", "RI-RO-N", "HI-RO-U", "MU-SHI-RO", "SE-N-RO"],
+            "wordPool": ["A-RA-SHI", "SO-RA", "MU-RA-SA-KI", "KU-RO", "RI-KA", "YO-RI", "SA-RU", "KA-E-RU","HI-RU", "RE-KI-SHI", "RE-I", "KO-KO-RO", "YO-RU", "WA-RU-I", "HA-I-I-RO", "HO-TA-RU", "NA-RU-TO", "SA-KU-RA", "SO-CHI-RA", "SHI-RI", "SO-SHI-SE-I-RA-I", "O-E-RU", "KO-KE-RU", "RA-I-SE", "KA-RA-KU-RI", "KA-TA-KU-RI", "HO-KU-RI-KU", "SHI-ME-RI-KE", "KU-RU-MA", "A-KA-RU-I", "RU-I-WA", "RE-KI-SHI", "U-RE-SHI-I", "O-SO-RE", "RE-I-NE-N", "WA-KA-RE", "KI-RE-TSU", "U-KE-I-RE", "RO-U-HI", "RO-ME-N", "RI-RO-N", "HI-RO-U", "MU-SHI-RO", "SE-N-RO", "KO-I-WO-SU-RU"],
             "sprites":    {
                 "x": 1405, "y": 390, "name": "cave",
                 "dungeonBG": {

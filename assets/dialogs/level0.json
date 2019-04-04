@@ -37,13 +37,25 @@
         {
             "image" : "warrior_think",
             "name" : "Ryor",
-            "message": "In this game, we will be teaching you the 46 basic hiragana syllables.",
+            "message": "In this game, we will be teaching you the 46 basic hiragana syllables. They are divided in to 9 families.",
             "flip": true
         },
         {
             "image": "warrior_happy",
             "name" : "Ryor",
-            "message": "We'll start with the vowels.",
+            "message": "And a world contains three families.",
+            "flip": true
+        },
+        {
+            "image": "warrior_happy",
+            "name" : "Ryor",
+            "message": "You can click next on the main menu to look at the next worlds, but you won't be able to enter them yet.",
+            "flip": true
+        },
+        {
+            "image": "warrior_happy",
+            "name" : "Ryor",
+            "message": "Anyways, we'll start with the first family: the vowels.",
             "flip": true
         },
         {

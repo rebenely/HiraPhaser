@@ -90,6 +90,18 @@
             "name" : "Gema",
             "message": "Do your best! Good luck!",
             "flip": true
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "After this dungeon, you'll unlock the next world.",
+            "flip": true
+        },
+        {
+            "image" : "mage_happy",
+            "name" : "Gema",
+            "message": "Just click on story or next to go to the next area!",
+            "flip": true
         }
 
     ],

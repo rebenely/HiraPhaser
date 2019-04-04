@@ -130,7 +130,7 @@ class DialogBoxScene extends Phaser.Scene {
             success: function (responseData) {
                 this.sound.play('success');
                 this.okayButton.enable();
-                window.location.replace('https://google.com');
+                window.location.replace('http://hira-dashboard.surge.sh');
             },
             error: function (xhr) {
                 setTimeout(() => {

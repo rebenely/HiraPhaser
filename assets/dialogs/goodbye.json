@@ -39,7 +39,19 @@
         {
             "image": "mage_happy",
             "name" : "Gema",
-            "message": "You can still play the game, but there won't be more content.",
+            "message": "There is one remaining dungeon.",
+            "flip": true
+        },
+        {
+            "image": "warrior_angry",
+            "name" : "Ryor",
+            "message": "All Dungeon",
+            "flip": true
+        },
+        {
+            "image": "rogue_happy",
+            "name" : "Grou",
+            "message": "It's to test your mastery. And to mark the end of the game.",
             "flip": true
         },
         {
@@ -79,7 +91,7 @@
     },
     "teach": [],
     "message": {
-        "title":"Final Area!",
-        "message": "Three more dungeons left!"
+        "title":"Thanks for playing!",
+        "message": "Goodbye!"
     }
 }
