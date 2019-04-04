@@ -142,6 +142,8 @@ module.exports  = {
                   total_battle_time: 0,
                   total_no_answer: 0,
                   total_timed_out: 0,
+                  total_skips: 0,
+                  total_perks: 0
               }
               dbo.collection("players").insertOne(myobj, function(err, result) {
                   if (err) {

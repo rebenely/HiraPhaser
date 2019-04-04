@@ -47,7 +47,8 @@ class DungeonScene extends Phaser.Scene {
             total_pattern_C: 0,
             total_pattern_D: 0,
             total_no_answer: 0,
-            total_timed_out: 0
+            total_timed_out: 0,
+            total_perks: 0
         }
         this.hintChecked = false;
         // console.log('recreate boii', this.dungeon);
@@ -332,6 +333,13 @@ class DungeonScene extends Phaser.Scene {
             /* timed out */
             if(data.dataCapture.questions[i].timed_out) {
                 this.dataCapture.total_timed_out++;
+            }
+
+            if(data.dataCapture.questions[i].hasOwnProperty('time_stopped')) {
+                this.dataCapture.total_perks++;
+            }
+            if(data.dataCapture.questions[i].hasOwnProperty('options')) {
+                this.dataCapture.total_perks++;
             }
 
 

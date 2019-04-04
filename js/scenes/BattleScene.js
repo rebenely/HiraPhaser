@@ -293,7 +293,7 @@ class BattleScene extends Phaser.Scene {
         this.mulchoOptions = new HiraText(this, 720/2, 400, '', "header" );
         this.add.existing(this.mulchoOptions);
         this.mulchoOptions.visible = false;
-        this.mulchoButton = new HiraButton(this, 3*720/4, 480/2 - 30, "Options" + "(x" + (1 - this.mulcho) + ")", style, () =>  {
+        this.mulchoButton = new HiraButton(this, 3*720/4, 480/2 - 30, "Mulcho" + "(x" + (1 - this.mulcho) + ")", style, () =>  {
             if(this.state === this.STATE_VALUE.attack) {
                     this.mulchoOptions.visible = true;
                     this.mulchoClicked = true;
