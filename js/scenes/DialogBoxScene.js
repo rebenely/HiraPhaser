@@ -97,7 +97,9 @@ class DialogBoxScene extends Phaser.Scene {
                     this.dialogMessage.setTextUpper("You can now exit the game and/or open the dashboard.");
                     this.dialogMessage.setOrigin(0);
                     this.okayButton = new HiraButton(this, 90 + 430, 160 + 150 - 30, "Open Dashboard", style, () => {
-                        window.open('https://www.december.com', '_blank');
+                        this.openedDashboard();
+                        this.okayButton.setText('Opening dashboard');
+                        this.okayButton.disable();
                     }, this);
                     this.add.existing(this.okayButton);
                 }
@@ -114,5 +116,30 @@ class DialogBoxScene extends Phaser.Scene {
 
             }
         });
+    }
+    openedDashboard() {
+
+        $.ajax({
+            url: game.global.URL + 'api/dashboard',
+            type: "POST",
+            async: true,
+            contentType: "application/json",
+            headers: {"Authorization": "Bearer " + game.token },
+            context: this,
+            retryLimit: 3,
+            success: function (responseData) {
+                this.sound.play('success');
+                this.okayButton.enable();
+                window.open('https://www.december.com', '_blank');
+            },
+            error: function (xhr) {
+                setTimeout(() => {
+                    this.dialogMessage.setTextUpper("Contacting server...");
+                    this.postData();
+                }, 5000);
+            }
+        });
+
+
     }
 }
