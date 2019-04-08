@@ -51,7 +51,13 @@
         {
             "image": "rogue_happy",
             "name" : "Grou",
-            "message": "It's to test your mastery. And to mark the end of the game.",
+            "message": "It's to test your mastery and to mark the end of the game.",
+            "flip": true
+        },
+        {
+            "image": "warrior_happy",
+            "name" : "Ryor",
+            "message": "Once you finished All Dungeon, you have completed the game!",
             "flip": true
         },
         {
@@ -73,7 +79,7 @@
         {
             "image": "rogue_happy",
             "name" : "Grou",
-            "message": "Thanks for playing!",
+            "message": "Thanks for playing and good luck on your last dungeon!",
             "flip": true
         },
         {
