@@ -12,6 +12,7 @@ class HintScene extends Phaser.Scene {
     create () {
         this.isAlreadyPlaying = game.playing;
         game.playing = true;
+        this.noDisplay = false;
         this.scene.bringToTop();
         this.move = 0;
         this.api = "api/review";
@@ -149,6 +150,7 @@ class HintScene extends Phaser.Scene {
             var warningDisplay = new HiraText(this,  720/2, 480/2, 'No data yet!', "header");
             this.add.existing(warningDisplay);
             this.verticalCamera.ignore([warningDisplay]);
+            this.noDisplay = true;  
 
         }
 
@@ -171,70 +173,81 @@ class HintScene extends Phaser.Scene {
     }
 
     postData() {
-        if(this.inDungeon){
-            $.ajax({
-                url: game.global.URL + this.api,
-                type: "POST",
-                async: true,
-                contentType: "application/json",
-                headers: {"Authorization": "Bearer " + game.token },
-                context: this,
-                retryLimit: 3,
-                success: function (responseData) {
-                    this.sound.play('success');
+        if(!this.noDisplay){
+            if(this.inDungeon){
+                $.ajax({
+                    url: game.global.URL + this.api,
+                    type: "POST",
+                    async: true,
+                    contentType: "application/json",
+                    headers: {"Authorization": "Bearer " + game.token },
+                    context: this,
+                    retryLimit: 3,
+                    success: function (responseData) {
+                        this.sound.play('success');
 
-                    if(!this.isAlreadyPlaying) {
-                        game.playing = false;
-                    }
-                    // console.log('fuck go back');
-                    if(this.inDungeon){
-                        this.scene.wake('DungeonScene');
-                    } else {
-                        this.scene.wake('MainScene');
-                    }
-                    this.scene.stop('HintScene');
-                },
-                error: function (xhr) {
-                    setTimeout(() => {
-                        this.titleDisplay.setTextUpper("Contacting server...");
-                        this.postData();
-                    }, 5000);
+                        if(!this.isAlreadyPlaying) {
+                            game.playing = false;
+                        }
+                        // console.log('fuck go back');
+                        if(this.inDungeon){
+                            this.scene.wake('DungeonScene');
+                        } else {
+                            this.scene.wake('MainScene');
+                        }
+                        this.scene.stop('HintScene');
+                    },
+                    error: function (xhr) {
+                        setTimeout(() => {
+                            this.titleDisplay.setTextUpper("Contacting server...");
+                            this.postData();
+                        }, 5000);
 
-                }
-            });
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: game.global.URL + this.api,
+                    type: "POST",
+                    async: true,
+                    contentType: "application/json",
+                    data: JSON.stringify(this.payload),
+                    headers: {"Authorization": "Bearer " + game.token },
+                    context: this,
+                    retryLimit: 3,
+                    success: function (responseData) {
+                        this.sound.play('success');
+
+                        if(!this.isAlreadyPlaying) {
+                            game.playing = false;
+                        }
+                        // console.log('fuck go back');
+                        if(this.inDungeon){
+                            this.scene.wake('DungeonScene');
+                        } else {
+                            this.scene.wake('MainScene');
+                        }
+                        this.scene.stop('HintScene');
+                    },
+                    error: function (xhr) {
+                        setTimeout(() => {
+                            this.titleDisplay.setTextUpper("Contacting server...");
+                            this.postData();
+                        }, 5000);
+
+                    }
+                });
+            }
         } else {
-            $.ajax({
-                url: game.global.URL + this.api,
-                type: "POST",
-                async: true,
-                contentType: "application/json",
-                data: JSON.stringify(this.payload),
-                headers: {"Authorization": "Bearer " + game.token },
-                context: this,
-                retryLimit: 3,
-                success: function (responseData) {
-                    this.sound.play('success');
-
-                    if(!this.isAlreadyPlaying) {
-                        game.playing = false;
-                    }
-                    // console.log('fuck go back');
-                    if(this.inDungeon){
-                        this.scene.wake('DungeonScene');
-                    } else {
-                        this.scene.wake('MainScene');
-                    }
-                    this.scene.stop('HintScene');
-                },
-                error: function (xhr) {
-                    setTimeout(() => {
-                        this.titleDisplay.setTextUpper("Contacting server...");
-                        this.postData();
-                    }, 5000);
-
-                }
-            });
+            this.sound.play('success');
+            if(this.inDungeon){
+                this.scene.wake('DungeonScene');
+            } else {
+                this.scene.wake('MainScene');
+            }
+            this.scene.stop('HintScene');
         }
+
 
     }
 }

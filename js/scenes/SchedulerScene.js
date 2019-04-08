@@ -79,7 +79,7 @@ class SchedulerScene extends Phaser.Scene {
         if(i != -1){
             this.player.schedule[i].deadline = this.sched.format('MM/DD/YYYY, hh:mm:ss A');
         } else {
-            this.player.schedule.push({deadline: this.sched.format('MM/DD/YYYY, hh:mm:ss A')});
+            this.player.schedule.push({deadline: this.sched.format('MM/DD/YYYY, hh:mm:ss A'), dungeon: this.dungeon});
         }
         // console.log(this.player.schedule);
         this.events.emit('ScheduleMe', {deadline: this.sched.format('MM/DD/YYYY, hh:mm:ss A')});

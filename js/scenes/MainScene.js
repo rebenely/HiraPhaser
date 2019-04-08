@@ -282,7 +282,7 @@ class MainScene extends Phaser.Scene {
         //
         var style = { font: "24px manaspc", fill: game.global.UI_TEXT_FILL, align: "left", wordWrap: { width: 400, useAdvancedWrap: true} };
         var secret = new HiraButton(this, 1705, 860, "Credits", style, () => {
-            this.scene.launch('MessageScene', {message: { title : "Credits", body: "Sounds by Juhani Junkala. Sprites by me (that's why they're bad lol). Font by TheJman0205."}});
+            this.scene.launch('MessageScene', {message: { title : "Credits", body: "Sounds by Juhani Junkala. Sprites by me (that's why they're bad lol). Font by Hjort Nidudsson."}});
             this.events.emit('disableLevels');
             this.scene.sleep('WorldNavScene');
         }, this);

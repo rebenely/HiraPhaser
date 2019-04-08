@@ -43,7 +43,7 @@
         {
             "image": "warrior_happy",
             "name" : "Ryor",
-            "message": "And a world contains three families.",
+            "message": "Each game screen or worlds has 3 families.",
             "flip": true
         },
         {
@@ -118,7 +118,7 @@
     {
         "image": "warrior_happy",
         "name": "Ryor",
-        "message": "Don't worry if you can't remember all of them right now. You could always click review on the world map screen.",
+        "message": "Don't worry if you can't remember all of them right now. You can always click review on the world map screen.",
         "flip": true
     },
     {

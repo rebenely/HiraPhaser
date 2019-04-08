@@ -5,6 +5,7 @@ class DialogBoxScene extends Phaser.Scene {
     }
 
     init (data) {
+        this.openDash = data.openDash ? data.openDash : false;
         this.message = data.message;
         this.title = data.title;
         this.api = data.api;
@@ -42,7 +43,7 @@ class DialogBoxScene extends Phaser.Scene {
         var style = { font: "16px manaspc", fill: "#ffffff", align: "left", wordWrap: { width: 680 - 180, useAdvancedWrap: true} };
 
 
-        this.dialogTitle = new HiraText(this, 90 + 30, 160+ 10, this.title, "header");
+        this.dialogTitle = new HiraText(this, 90 + 30, 160+ 20, this.title, "header");
         this.dialogTitle.setOrigin(0);
         this.add.existing(this.dialogTitle);
         this.dialogMessage = new HiraText(this, 90 + 30, 160 + 70, this.message, "basic");
@@ -94,14 +95,21 @@ class DialogBoxScene extends Phaser.Scene {
                     game.logged_out = true;
                     this.dialogTitle.setTextUpper("Saved!");
                     this.dialogTitle.setOrigin(0);
-                    this.dialogMessage.setTextUpper("You can now exit the game and/or open the dashboard.");
-                    this.dialogMessage.setOrigin(0);
-                    this.okayButton = new HiraButton(this, 90 + 430, 160 + 150 - 30, "Open Dashboard", style, () => {
-                        this.openedDashboard();
-                        this.okayButton.setText('Opening dashboard');
-                        this.okayButton.disable();
-                    }, this);
-                    this.add.existing(this.okayButton);
+                    if(this.openDash) {
+                        this.dialogMessage.setTextUpper("You can now exit the game and/or open the dashboard.");
+                        this.dialogMessage.setOrigin(0);
+
+                        this.okayButton = new HiraButton(this, 90 + 430, 160 + 150 - 30, "Open Dashboard", style, () => {
+                            this.openedDashboard();
+                            this.okayButton.setText('Opening dashboard');
+                            this.okayButton.disable();
+                        }, this);
+                        this.add.existing(this.okayButton);
+                    } else {
+                        this.dialogMessage.setTextUpper("You can now exit the game");
+                        this.dialogMessage.setOrigin(0);
+                    }
+
                 }
 
             },

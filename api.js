@@ -238,7 +238,7 @@ var self = module.exports = {
                       console.log('no chief');
                   }
                   var allD = false;
-                  if(myobj.name == 'All Dungeon' && myobj.success) {
+                  if(myobj.name == 'All Dungeon' && myobj.success && succ.date_finished == undefined) {
                       allD = true;
                   }
                   if(allD){
