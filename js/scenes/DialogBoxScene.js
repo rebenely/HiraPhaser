@@ -99,7 +99,7 @@ class DialogBoxScene extends Phaser.Scene {
                         this.dialogMessage.setTextUpper("You can now exit the game and/or open the dashboard.");
                         this.dialogMessage.setOrigin(0);
 
-                        this.okayButton = new HiraButton(this, 90 + 430, 160 + 150 - 30, "Open Dashboard", style, () => {
+                        this.okayButton = new HiraButton(this, 90 + 420, 160 + 150 - 30, "Open Dashboard", style, () => {
                             this.openedDashboard();
                             this.okayButton.setText('Opening dashboard');
                             this.okayButton.disable();

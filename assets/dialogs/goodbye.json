@@ -51,13 +51,13 @@
         {
             "image": "rogue_happy",
             "name" : "Grou",
-            "message": "It's to test your mastery and to mark the end of the game.",
+            "message": "You haev to play it to test your mastery and to mark the end of the game.",
             "flip": true
         },
         {
             "image": "warrior_happy",
             "name" : "Ryor",
-            "message": "Once you finished All Dungeon, you have completed the game!",
+            "message": "You have to finish All Dungeon to successfully finish the game!",
             "flip": true
         },
         {
@@ -74,7 +74,7 @@
         {
             "image": "warrior_happy",
             "name" : "Ryor",
-            "message": "E-mail me at rebenely@gmail.com"
+            "message": "E-mail me at racruz13@up.edu.ph"
         },
         {
             "image": "rogue_happy",

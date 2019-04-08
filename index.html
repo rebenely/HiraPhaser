@@ -54,14 +54,14 @@
             font-weight:normal;
         }
          #warning-message { display: none; }
-         @media only screen and (orientation:portrait){
+         @media only screen and (max-width: 768px){
              #wrapper { display:none; }
              #warning-message { display:block; }
          }
-         @media only screen and (orientation:landscape){
-             #warning-message { display:none; }
-         }
-         @media only screen and (max-width: 760px) {
+         /* @media only screen and (orientation:landscape){
+             #warning-message { display:block; }
+         } */
+         @media only screen and (max-width: 768px) {
              #this-mobile { display: none; }
         }
         .center-div {
@@ -172,7 +172,7 @@
                 <div id="content" class="game-area"></div>
             </div>
             <h3 style="font-family:'manaspc';padding:20px;text-align:center;">Don't forget to logout to avoid losing data.</h3>
-            <h3 style="font-family:'manaspc';padding:20px;text-align:center;">Contact me: rebenely@gmail.com</h3>
+            <h3 style="font-family:'manaspc';padding:20px;text-align:center;">Contact me: racruz13@up.edu.ph</h3>
             <div id="myModal" class="modal">
 
               <!-- Modal content -->
@@ -184,7 +184,7 @@
             </div>
         </div>
         <div id="warning-message" style="font-family:'manaspc';text-align:center;">
-            <h1>This website is only viewable on desktop or mobile device with an external keyboard.</h1>
+            <h1>Hira is playable only on desktop.</h1>
                 <!-- <h2>Enable the onscreen keyboard while in battle by clicking the OKB button on the bottom right of the screen.</h2>
                     <h3>Also, don't forget to logout to avoid losing data.</h3> -->
 
